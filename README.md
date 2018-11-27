@@ -14,7 +14,7 @@ Installation:
 - Follow the GNU Guile instructions for installing libraries. On an Ubuntu
 system, you would copy everything using a command like this:
 
-- sudo cp qstdlib.scm /usr/share/guile/site/2.0/rsp
+- sudo cp g2q*.scm /usr/share/guile/site/2.0/g2q
 
 Note that you may need to create folders /site /2.0 and /rsp. also, if you use
 a more recent version of GNU Guile, you may want to create it instead of /2.0,

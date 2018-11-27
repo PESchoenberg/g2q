@@ -1,27 +1,31 @@
+; ==============================================================================
+;
 ; q2q2.scm
+;
 ; Structures made of fundamental gates.
 ;
 ; Sources:
+;
 ; - https://arxiv.org/abs/1707.03429 , arXiv:1707.03429v2 [quant-ph] , Open Quantum Assembly Language, Andrew W. Cross, Lev S. Bishop, John A. Smolin, Jay M. Gambetta.
 ;
-; Install:
-; - sudo cp g2q2.scm /usr/share/guile/site/2.0/g2q
+; ==============================================================================
 ;
 ; Copyright (C) 2018  Pablo Edronkin (pablo.edronkin at yahoo.com)
 ;
-;    This program is free software: you can redistribute it and/or modify
-;    it under the terms of the GNU Lesser General Public License as published by
-;    the Free Software Foundation, either version 3 of the License, or
-;    (at your option) any later version.
+;   This program is free software: you can redistribute it and/or modify
+;   it under the terms of the GNU Lesser General Public License as published by
+;   the Free Software Foundation, either version 3 of the License, or
+;   (at your option) any later version.
 ;
-;    This program is distributed in the hope that it will be useful,
-;    but WITHOUT ANY WARRANTY; without even the implied warranty of
-;    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-;    GNU Lesser General Public License for more details.
+;   This program is distributed in the hope that it will be useful,
+;   but WITHOUT ANY WARRANTY; without even the implied warranty of
+;   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+;   GNU Lesser General Public License for more details.
 ;
-;    You should have received a copy of the GNU Lesser General Public License
-;    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+;   You should have received a copy of the GNU Lesser General Public License
+;   along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ;
+; ==============================================================================
 
 
 (define-module (g2q g2q2)
@@ -29,6 +33,8 @@
   #:export (qconst
 	    g1y
 	    g1x
+	    g1xy
+	    qmeasy
 	    cx
 	    cz
 	    cy
@@ -90,6 +96,40 @@
 	       (loop (+ i 1))))))
 
 
+; Repeats placement of gate p_n1 and group p_l1 by repeating the use of qgate1
+; from qbit p_y1 to qbit p_y2 on y axis (vertically).
+;
+; Arguments:
+; - p_n1: gate name.
+; - p_l1: gate group identifier.
+; - p_y1: initial qbit.
+; - p_y2: last qbit.
+; - p_x1: number if iterations that g1y will be repeated along x.
+;
+(define (g1xy p_n1 p_l1 p_y1 p_y2 p_x1)
+  (let loop ((j 1))
+    (if (= j p_x1)
+	(g1y p_n1 p_l1 p_y1 p_y2)
+	(begin (g1y p_n1 p_l1 p_y1 p_y2)
+	       (loop (+ j 1))))))
+
+
+; Performs measurements on group p_l1 to group p_l2 from p_y1 to p_y2.
+;
+; Arguments:
+; - p_l1: quantum reginster group identifier.
+; - p_l2: conventional register group identifier.
+; - p_y1: initial qbit.
+; - p_y2: last qbit.
+;
+(define (qmeasy p_l1 p_l2 p_y1 p_y2)
+  (let loop ((i p_y1))
+    (if (= i p_y2)
+	(qmeas p_l1 p_y2 p_l2 p_y2)
+	(begin (qmeas p_l1 i p_l2 i)
+	       (loop (+ i 1))))))
+
+
 ; Gate cx.
 ;
 ; Arguments:
@@ -133,9 +173,9 @@
 ; Gate ch - controlled h.
 ;
 ; Arguments:
-; - p_l1: gate group indentifier 1
+; - p_l1: gate group indentifier 1.
 ; - p_y1: qbit 1 (dot).
-; - p_l1: gate group indentifier 1
+; - p_l2: gate group indentifier 2.
 ; - p_y2: qbit 2 (plus).
 ;
 (define (ch p_l1 p_y1 p_l2 p_y2)
@@ -253,6 +293,7 @@
 ;
 ; Arguments:
 ; - p_la: lambda angle.
+; - p_pa: 
 ; - p_l1: gate group indentifier 1.
 ; - p_y1: qbit 1.
 ; - p_l2: gate group indentifier 2.
@@ -266,7 +307,7 @@
   (u3 (* p_la 0.5) p_pa 0 p_l2 p_y2))
 
 
-; Dispplays character p_n p_m times in one line.
+; Displays character p_n p_m times in one line.
 ;
 ; Arguments:
 ; - p_n: character to display.

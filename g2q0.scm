@@ -1,7 +1,11 @@
+; ==============================================================================
+;
 ; g2q0.scm
+;
 ; Guile to QASM compiler.
 ;
 ; Sources:
+;
 ; - https://www.gnu.org/software/guile/manual/html_node/Writing-new-Modules.html
 ; - https://quantumexperience.ng.bluemix.net/qx/community
 ; - https://qiskit.org/documentation/				    
@@ -10,24 +14,24 @@
 ; - https://stackoverflow.com/questions/35191434/r5rs-scheme-input-output-how-to-write-append-text-to-an-output-file
 ; - https://stackoverflow.com/questions/43347366/how-to-write-to-a-file-in-append-mode-scheme-r5rs
 ;
-; Install:
-; - sudo cp g2q0.scm /usr/share/guile/site/2.0/g2q
+; ==============================================================================
 ;
 ; Copyright (C) 2018  Pablo Edronkin (pablo.edronkin at yahoo.com)
 ;
-;    This program is free software: you can redistribute it and/or modify
-;    it under the terms of the GNU Lesser General Public License as published by
-;    the Free Software Foundation, either version 3 of the License, or
-;    (at your option) any later version.
+;   This program is free software: you can redistribute it and/or modify
+;   it under the terms of the GNU Lesser General Public License as published by
+;   the Free Software Foundation, either version 3 of the License, or
+;   (at your option) any later version.
 ;
-;    This program is distributed in the hope that it will be useful,
-;    but WITHOUT ANY WARRANTY; without even the implied warranty of
-;    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-;    GNU Lesser General Public License for more details.
+;   This program is distributed in the hope that it will be useful,
+;   but WITHOUT ANY WARRANTY; without even the implied warranty of
+;   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+;   GNU Lesser General Public License for more details.
 ;
-;    You should have received a copy of the GNU Lesser General Public License
-;    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+;   You should have received a copy of the GNU Lesser General Public License
+;   along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ;
+; ==============================================================================
 
 
 ; Required modules.
