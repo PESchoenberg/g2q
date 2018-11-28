@@ -36,9 +36,10 @@ and that will do the trick.
 ## Usage:
 
 * Should be used as any other GNU Guile library; programs written with g2q
-should be written and compiled as ny regular Guile program.
+should be written and compiled as any regular Guile program.
 
-* See the examples contained in the /examples folder. These are self-explaining.
+* See the examples contained in the /examples folder. These are self-explaining
+and filled with comments.
 
 * As a general guide, in order to compile a g2q-based program - say example1.scm:
 
