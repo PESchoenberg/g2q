@@ -15,7 +15,7 @@
 ;
 ; - At the terminal, enter the following:
 ;
-;   guile example1.scm;
+;   guile example1.scm 
 ;
 ; ==============================================================================
 ;
