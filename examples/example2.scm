@@ -40,7 +40,7 @@
 (use-modules (g2q g2q2))
 
 
-; Vars and initial stuff.
+; Vars and initial stuff. 
 (define fname "example2.qasm")
 (define qver 2.0)
 (define q "q")
