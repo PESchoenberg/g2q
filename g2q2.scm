@@ -4,7 +4,7 @@
 ;
 ; Structures made of fundamental gates.
 ;
-; Sources:
+; Sources: 
 ;
 ; - https://arxiv.org/abs/1707.03429 , arXiv:1707.03429v2 [quant-ph] , Open Quantum Assembly Language, Andrew W. Cross, Lev S. Bishop, John A. Smolin, Jay M. Gambetta.
 ;
