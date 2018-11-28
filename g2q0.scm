@@ -4,7 +4,7 @@
 ;
 ; Guile to QASM compiler.
 ;
-; Sources:
+; Sources: 
 ;
 ; - https://www.gnu.org/software/guile/manual/html_node/Writing-new-Modules.html
 ; - https://quantumexperience.ng.bluemix.net/qx/community

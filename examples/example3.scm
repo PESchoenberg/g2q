@@ -5,7 +5,7 @@
 ;
 ; example3.scm
 ;
-; Implementation of Grover's algorithm for two qubits [1].
+; Implementation of Grover's algorithm for two qubits [1]. 
 ; 
 ;
 ; Sources:
@@ -20,7 +20,7 @@
 ;
 ; - At the terminal, enter the following:
 ;
-;   guile example3.scm;
+;   guile example3.scm
 ;
 ; ==============================================================================
 ;
