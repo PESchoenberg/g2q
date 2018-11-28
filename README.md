@@ -1,36 +1,69 @@
-g2q - A very simple Guile-to-QASM compiler.
-
-Description:
-- Lets you write programs for QASM-based quantum computers using GNU Guile.
+# g2q - Guile to QASM compiler.
 
 
-License:
-- LGPL-3.0-or-later.
+## Overview:
+
+A very simple Guile-to-OpenQASM 2.0 compiler based on a GNU Guile addon library
+that lets you write programs for QASM-based quantum computers using Scheme.
 
 
-Installation:
-- Unpack into a folder of your choice and cd into it.
+## Dependencies:
 
-- Follow the GNU Guile instructions for installing libraries. On an Ubuntu
-system, you would copy everything using a command like this:
-
-- sudo cp g2q*.scm /usr/share/guile/site/2.0/g2q
-
-Note that you may need to create folders /site /2.0 and /rsp. also, if you use
-a more recent version of GNU Guile, you may want to create it instead of /2.0,
-for example, /2.2
+* GNU Guile - ver 2.0. or newer ( https://www.gnu.org/software/guile/ )
 
 
-Use:
-- See the examples contained in the /examples folder and the introductory guide
-found also in that folder.
+## Installation:
+
+* Assuming you already have GNU Guile running on your system, get g2q, unpack it
+into a folder of your choice and cd into it.
+
+* g2q installs as a GNU Guile library. See GNU Guile's manual instructions for
+details concerning your OS and distribution, but as an example, on Ubuntu you
+would issue:
+
+    sudo cp *.scm -rv /usr/share/guile/site/2.0/g2q
+
+and that will do the trick.
 
 
-Compiling:
-- Assuming a given program, say test1.scm, you would write in your shell
+## Uninstall:
 
-- guile test1.scm
+* You just need to remove /usr/share/guile/site/2.0/g2q and its subfolders.
 
-- This will generate a test1.qasm file.
+* There are no other dependencies.
+
+
+## Usage:
+
+* Should be used as any other GNU Guile library; programs written with g2q
+should be written and compiled as ny regular Guile program.
+
+* See the examples contained in the /examples folder. These are self-explaining.
+
+* As a general guide, in order to compile a g2q-based program - say example1.scm:
+
+  * cd into the folder containing the program.
+
+  * enter
+
+    guile example1.scm
+
+    to run it just as any regular GNU Guile program.
+
+* If your code is correct, this will generate a full QASM file named
+example1.qasm on the same folder. You can then try that code on a quantum
+computer simulator or even a real one that is compatible with Opewn QASM 2.0.
+
+
+## Credits and Sources:
+
+* GNU Guile https://www.gnu.org/software/guile/
+
+* OpenQASM 2.0 specification - https://github.com/Qiskit/openqasm
+
+
+## License:
+
+* LGPL-3.0-or-later.
 
 
