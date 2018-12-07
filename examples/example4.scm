@@ -19,7 +19,9 @@
 ;
 ; Compilation:
 ;
-; - At the terminal, enter the following:
+; - cd to your /examples folder.
+;
+; - Enter the following:
 ;
 ;   guile example4.scm
 ;
@@ -96,7 +98,7 @@
 (g1xy "id" q 0 n qx)
 
 
-; And finally, we measure. Notice that we use qmeasy instead of qmeasl this 
+; And finally, we measure. Notice that we use qmeasy instead of qmeas this 
 ; provides us with as many measuring gates as n requires.
 (qcomm "Measuring")
 (qmeasy q c 0 n)
