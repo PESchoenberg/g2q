@@ -18,7 +18,9 @@
 ;
 ; Compilation:
 ;
-; - At the terminal, enter the following:
+; - cd to your /examples folder.
+;
+; - Enter the following:
 ;
 ;   guile example3.scm
 ;
@@ -45,19 +47,6 @@
 ; Modules. These two will be almost always required.
 (use-modules (g2q g2q0))
 (use-modules (g2q g2q2))
-
-
-; A local function.
-;
-; Arguments:
-; - p_q: qubit group (q).
-; - p_a: a value.
-; - p_b: b value.
-;
-(define (hcxh p_q p_a p_b)
-  (g1 "h" p_q p_b)
-  (cx q p_a p_q p_b)
-  (g1 "h" p_q p_b))
 
 
 ; Vars and initial stuff.
@@ -88,11 +77,11 @@
 ; Main stuff.
 (g1y "h" q b a)
 (g1y "s" q b a)
-(hcxh q a b)
+(g1cxg1 "h" q a b)
 (g1y "s" q b a)
 (g1y "h" q b a)
 (g1y "x" q b a)
-(hcxh q a b)
+(g1cxg1 "h" q a b)
 (g1y "x" q b a)
 (g1y "h" q b a)
 

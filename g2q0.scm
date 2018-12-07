@@ -60,7 +60,7 @@
 	    qcond))
 
 
-; Define program name
+; qhead - defines program name.
 ;
 ; Arguments:
 ; - p_prog: program name.
@@ -74,7 +74,7 @@
   (qstr "//"))
   
 
-; Writes a literal statement.
+; qstr - writes a literal statement.
 ;
 ; Arguments:
 ; - p_n: string containing the literal statement.
@@ -83,17 +83,17 @@
   (newline))
 
 
-; Write a comment.
+; qcomm - writes a comment.
 ;
 ; Arguments:
-; - p_s: String to write as a comment.
+; - p_s: string to write as a comment.
 ;
 (define (qcomm p_s)
   (qstr "// ")
   (qstr (string-append "// " p_s)))
 
 
-; Include initial QASM library.
+; qelib1 - includes initial QASM library.
 (define (qelib1)
   (display "include \"qelib1.inc\";")
   (newline))
@@ -150,13 +150,13 @@
   (newline))
 
 
-; qmeas - measure gate
+; qmeas - measurement gate.
 ;
 ; Arguments:
-; p_l1: gate group identifier.
-; p_x1: register number of p_l1.
-; p_l2: gate group identifier.
-; p_x2: register number of p_l2.
+; - p_l1: gate group identifier.
+; - p_x1: register number of p_l1.
+; - p_l2: gate group identifier.
+; - p_x2: register number of p_l2.
 ;
 (define (qmeas p_l1 p_x1 p_l2 p_x2)
   (display (string-append (string-append "measure " (string-append (qbgna p_l1 p_x1) (string-append " -> " (qbgna p_l2 p_x2)))) ";"))
@@ -166,18 +166,18 @@
 ; qcx - cx gate
 ;
 ; Arguments:
-; p_n1: item name.
-; p_l1: gate group identifier 1. 
-; p_y1: y position (dot).
-; p_l2: gate group identifier 2. 
-; p_y2: y position (plus) 
+; - p_n1: item name.
+; - p_l1: gate group identifier 1. 
+; - p_y1: y position (dot).
+; - p_l2: gate group identifier 2. 
+; - p_y2: y position (plus) 
 ;
 (define (qcx p_n1 p_l1 p_y1 p_l2 p_y2)
   (display (string-append (string-append "cx " (string-append (qbgna p_l1 p_y1) (string-append "," (qbgna p_l2 p_y2)))) ";"))
   (newline))
 
  
-; Register definitions
+; qregdef - register definitions.
 ;
 ; Arguments:
 ; - p_l1: q register group name (usually q).
@@ -190,7 +190,7 @@
   (qbgd "creg" p_l2 p_y2))
 
 
-; qin - Increment a variable
+; qin - Increment a variable.
 ;
 ; Arguments:
 ; - p_v: variable to increment
@@ -200,7 +200,7 @@
   (set! p_v (+ p_v p_t )))
 
 
-; Fundamental gate using one qbit.
+; g1 - fundamental gate using one qbit.
 ;
 ; Arguments:
 ; - p_n1: gate name.
@@ -211,7 +211,7 @@
   (qbgd p_n1 p_l1 p_y1))  
 
 
-; Fundamental quantum gates
+; g2 - fundamental quantum gates.
 ;
 ; Arguments:
 ; - p_n1: gate name.
@@ -226,46 +226,46 @@
 	(else (qcx p_n1 p_r1 p_y1 p_r2 p_y2))))
 
 
-; Gate u1
+; u1 - gate u1.
 ;
 ; Arguments:
 ; - p_y1: first rotation.
 ; - p_l1: gate group designator.
-; - p_y2: qbit number.
+; - p_y2: qubit number.
 ;
 (define (u1 p_y1 p_l1 p_y2)
   (display (string-append "u1(" (string-append (number->string p_y1) (string-append ") " (string-append (qbgna p_l1 p_y2) ";")))))
   (newline))
 
 
-; Gate u2
+; u2 - gate u2.
 ;
 ; Arguments:
 ; - p_y1: first rotation.
 ; - p_y2: second rotation.
 ; - p_l1: gate group designator.
-; - p_y3: qbit number.
+; - p_y3: qubit number.
 ;
 (define (u2 p_y1 p_y2 p_l1 p_y3)
   (display (string-append "u2(" (string-append (qbgnc p_y1) (string-append (number->string p_y2) (string-append ") " (string-append (qbgna p_l1 p_y3) ";"))))))
   (newline))
 
 
-; Gate u3
+; u3 - gate u3.
 ;
 ; Arguments:
 ; - p_y1: first rotation.
 ; - p_y2: second rotation.
 ; - p_y3: thirdd rotation.
 ; - p_l1: gate group designator.
-; - p_y4: qbit number.
+; - p_y4: qubit number.
 ;
 (define (u3 p_y1 p_y2 p_y3 p_l1 p_y4)
   (display (string-append "u3(" (string-append (qbgnc p_y1) (string-append (qbgnc p_y2) (string-append (number->string p_y3) (string-append ") " (string-append (qbgna p_l1 p_y4) ";")))))))
   (newline))
 
 
-; Quantum conditional
+; qcond - quantum conditional.
 ;
 ; Arguments:
 ; - p_c1: condition.
