@@ -5,7 +5,7 @@
 
 A very simple Guile-to-OpenQASM 2.0 compiler based on a GNU Guile addon library
 that lets you write programs for QASM-based quantum computers using Scheme.
- 
+
 
 ## Dependencies:
 
@@ -58,9 +58,11 @@ computer simulator or even a real one that is compatible with Opewn QASM 2.0.
 
 ## Credits and Sources:
 
-* GNU Guile https://www.gnu.org/software/guile/
+* GNU Guile - https://www.gnu.org/software/guile/
 
 * OpenQASM 2.0 specification - https://github.com/Qiskit/openqasm
+
+* URL of this project - https://github.com/PESchoenberg/g2q
 
 
 ## License:
