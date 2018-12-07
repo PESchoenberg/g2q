@@ -11,7 +11,9 @@
 ;
 ; Compilation:
 ;
-; - At the terminal, enter the following:
+; - cd to your /examples folder.
+;
+; - Enter the following:
 ;
 ;   guile example2.scm
 ;
