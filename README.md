@@ -1,5 +1,7 @@
 # g2q - Guile to QASM compiler.
 
+[![DOI](https://zenodo.org/badge/159570670.svg)](https://zenodo.org/badge/latestdoi/159570670)
+
 
 ## Overview:
 
