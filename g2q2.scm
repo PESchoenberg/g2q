@@ -46,7 +46,6 @@
 	    crz
 	    cu1
 	    cu3
-	    pline
 	    g1cxg1))
 
 
@@ -306,21 +305,6 @@
   (u3 (* (* p_la 0.5) -1.0) 0 (* (* (+ p_pa p_la) 0.5) -1.0) p_l2 p_y2)
   (cx p_l1 p_y1 p_l2 p_y2)
   (u3 (* p_la 0.5) p_pa 0 p_l2 p_y2))
-
-
-; pline - displays character p_n p_m times in one line.
-;
-; Arguments:
-; - p_n: character to display.
-; - p_m: line length.
-;
-(define (pline p_n p_m)
-  (let ((str ""))
-  (let loop ((i 0))
-    (if (= i p_m)
-	(begin (newline)(newline)(display str)(newline)(newline))
-	(begin (set! str (string-append str p_n))
-	       (loop (+ i 1)))))))
 
 
 ; Puts a set of gates in configuration g1 cx g1.
