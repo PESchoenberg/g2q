@@ -13,7 +13,7 @@
 ; - [1]: Quantum Algorithm Implementations for Beginners. Coles, Eidenbenz et al.
 ;   2018, https://arxiv.org/abs/1804.03719
 ;   - [1.1]: Donwloaded as https://arxiv.org/pdf/1804.03719.pdf
-;     - [1.1.1]: from [1.1], pag 26, fig 18.					;
+;     - [1.1.1]: from [1.1], pag 26, fig 18.
 ;
 ;
 ; Compilation:

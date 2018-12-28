@@ -337,5 +337,3 @@
   (g1 p_n1 p_l1 p_y2))
 
 
-; https://quantumexperience.ng.bluemix.net/qx/community/question?questionId=5b39e70fe16fc3003b613074
-
