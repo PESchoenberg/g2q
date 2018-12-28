@@ -1,5 +1,7 @@
 # g2q - Guile to QASM compiler.
 
+[![DOI](https://zenodo.org/badge/159570670.svg)](https://zenodo.org/badge/latestdoi/159570670)
+
 
 ## Overview:
 
@@ -11,11 +13,13 @@ that lets you write programs for QASM-based quantum computers using Scheme.
 
 * GNU Guile - ver 2.0. or newer ( https://www.gnu.org/software/guile/ )
 
+* grsp - https://github.com/PESchoenberg/grsp.git
+
 
 ## Installation:
 
-* Assuming you already have GNU Guile running on your system, get g2q, unpack it
-into a folder of your choice and cd into it.
+* Assuming you have all dependencies installed on your system, get g2q, unpack 
+it into a folder of your choice and cd into it.
 
 * g2q installs as a GNU Guile library. See GNU Guile's manual instructions for
 details concerning your OS and distribution, but as an example, on Ubuntu you
