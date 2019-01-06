@@ -30,6 +30,7 @@
 
 (define-module (g2q g2q2)
   #:use-module (g2q g2q0)
+  ;#:use-module (grsp grsp1)
   #:export (qconst
 	    g1y
 	    g1x
@@ -56,11 +57,11 @@
 ;
 (define (qconst p_n1)
   (let ((res 0))
-  (cond ((eq? p_n1 "Pi")(set! res 3.14159))
-	((eq? p_n1 "gr")(set! res 1.00))
+  (cond ((equal? p_n1 "Pi")(set! res 3.14159))
+	((equal? p_n1 "gr")(set! res 1.00))
 	(else (set! res 0)))
   res))
-
+  
 
 ; g1y - repeats placement of gate p_n1 and group p_l1 by repeating the use of qgate1
 ; from qbit p_y1 to qbit p_y2 on y axis (vertically).
