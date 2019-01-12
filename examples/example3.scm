@@ -96,4 +96,5 @@
 ; compilation is error free or you have some bugs to kill.
 (set-current-output-port port1)
 (close port2)
+(qendc)
 

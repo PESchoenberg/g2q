@@ -279,3 +279,6 @@
     (cond ((equal? p_c1 "==")(set! qsen (string-append "if(" (string-append p_y1 (string-append "[" (string-append (number->string p_y3) (string-append "]==" (string-append (number->string p_y2) (string-append ")" " "))))))))))
     (display qsen)))
 
+
+
+

@@ -145,7 +145,5 @@
 ; compilation is error free or you have some bugs to kill.
 (set-current-output-port port1)
 (close port2)
-
-; Message
-(qcomm "This will appear on the console after compilation, just to show what goes where.")
+(qendc)
 

@@ -30,7 +30,7 @@
 
 (define-module (g2q g2q2)
   #:use-module (g2q g2q0)
-  ;#:use-module (grsp grsp1)
+  #:use-module (grsp grsp0)
   #:export (qconst
 	    g1y
 	    g1x
@@ -47,7 +47,8 @@
 	    crz
 	    cu1
 	    cu3
-	    g1cxg1))
+	    g1cxg1
+	    qendc))
 
 
 ; qconst - various constants.
@@ -320,5 +321,11 @@
   (g1 p_n1 p_l1 p_y2)
   (cx p_l1 p_y1 p_l1 p_y2)
   (g1 p_n1 p_l1 p_y2))
+
+
+; qendc - prints a message stating that compilation has ended.
+;
+(define (qendc)
+  (ptit "=" 60 2 "Compilation completed. Check your .qasm file."))
 
 
