@@ -4,16 +4,6 @@
 ;
 ; Guile to QASM compiler.
 ;
-; Sources: 
-;
-; - https://www.gnu.org/software/guile/manual/html_node/Writing-new-Modules.html
-; - https://quantumexperience.ng.bluemix.net/qx/community
-; - https://qiskit.org/documentation/				    
-; - https://quantumexperience.ng.bluemix.net/proxy/tutorial/full-user-guide/004-Quantum_Algorithms/061-Basic_Circuit_Identities_and_Larger_Circuits.html
-; - https://quantumexperience.ng.bluemix.net/qx/tutorial?sectionId=full-user-guide&page=introduction
-; - https://stackoverflow.com/questions/35191434/r5rs-scheme-input-output-how-to-write-append-text-to-an-output-file
-; - https://stackoverflow.com/questions/43347366/how-to-write-to-a-file-in-append-mode-scheme-r5rs
-;
 ; ==============================================================================
 ;
 ; Copyright (C) 2018  Pablo Edronkin (pablo.edronkin at yahoo.com)
