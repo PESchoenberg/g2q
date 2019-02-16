@@ -36,22 +36,28 @@
 ; processors, like those provided by IBM.
 ;
 (define-module (g2q g2q1)
-  #:export (ibm-apitoken
+  #:export (;ibm-apitoken
 	    ibm-config))
 
 
 ; TODO: token for using IBM Q series machines; equivalent to functions found on
 ; Qiskit IDE.
 ;
-(define (ibm-apitoken)
-  (let ((token "Your token here."))
-  (display token)))
+;(define (ibm-apitoken)
+  ;(let ((token "439e62ab146331baf8f5f664e60d5b3b95363bcc9e09b26e82f186b35455794c4dac1f1510afe95b2c1cf3e0b8dcaa7b81dd987e2dc9cc90c461afcaf61495fd"))
+    ;token
+    ;))
 
 
 ; TODO : configuration for using IBM Q series machines; equivalent to functions
 ; found on Qiskit IDE.
 ;
+; List elements:
+; 1 - Base uri for online access.
+; 2 - token.
+;
 (define (ibm-config)
-  (let ((conf(list "url" "Your URL here")))
-  (display conf)))
+  (let ((conf (list "https://quantumexperience.ng.bluemix.net/api/" "439e62ab146331baf8f5f664e60d5b3b95363bcc9e09b26e82f186b35455794c4dac1f1510afe95b2c1cf3e0b8dcaa7b81dd987e2dc9cc90c461afcaf61495fd" "Jobs/")))
+    conf
+    ))
 
