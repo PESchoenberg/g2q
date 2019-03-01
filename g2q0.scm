@@ -24,11 +24,9 @@
 ; ==============================================================================
 
 
-; Required modules.
-(use-modules (g2q g2q1))
-
-
 (define-module (g2q g2q0)
+  #:use-module (g2q g2q1)
+  #:use-module (grsp grsp0)
   #:export (qhead
 	    qstr
 	    qcomm
@@ -47,7 +45,9 @@
 	    u1
 	    u2
 	    u3
-	    qcond))
+	    qcond1
+	    qcond2
+	    qvalid-conditional))
 
 
 ; qhead - defines program name.
@@ -57,11 +57,10 @@
 ; - p_v: Open QASM version number.
 ;
 (define (qhead p_prog p_v)
-  (qstr (string-append "// " p_prog))
-  (qstr "//")
-  (qstr (string-append "OPENQASM " (string-append (number->string p_v) ";")))
-  (qstr "include \"qelib1.inc\";")
-  (qstr "//"))
+  (qstr (strings-append (list "// " p_prog ";") 0))
+  (qstr "// Compiled with g2q - v2.0.0;")
+  (qstr (strings-append (list "OPENQASM " (number->string p_v) ";") 0))
+  (qstr "include \"qelib1.inc\";"))
   
 
 ; qstr - writes a literal statement.
@@ -79,8 +78,8 @@
 ; - p_s: string to write as a comment.
 ;
 (define (qcomm p_s)
-  (qstr "// ")
-  (qstr (string-append "// " p_s)))
+  ;(qstr "// ")
+  (qstr (strings-append (list "// " p_s ";") 0)))
 
 
 ; qelib1 - includes initial QASM library.
@@ -114,7 +113,7 @@
 ; - p_y: item number.
 ;
 (define (qbgna p_l p_y)
-  (string-append p_l (string-append "[" (string-append (number->string p_y) "]"))))
+  (strings-append (list p_l "[" (number->string p_y) "]") 0))
 
 
 ; qbg - basic gate structure.
@@ -128,7 +127,7 @@
   (string-append (qbgns p_n) (qbgna p_l p_y)))
 
 
-; qbgd - basic gate structure displayed.
+; qbgd - display basic gate structure.
 ;
 ; Arguments:
 ; - p_n: gate name.
@@ -149,7 +148,7 @@
 ; - p_x2: register number of p_l2.
 ;
 (define (qmeas p_l1 p_x1 p_l2 p_x2)
-  (display (string-append (string-append "measure " (string-append (qbgna p_l1 p_x1) (string-append " -> " (qbgna p_l2 p_x2)))) ";"))
+  (display (strings-append (list "measure " (qbgna p_l1 p_x1) " -> " (qbgna p_l2 p_x2) ";") 0))
   (newline))
 
 
@@ -163,7 +162,7 @@
 ; - p_y2: y position (plus) 
 ;
 (define (qcx p_n1 p_l1 p_y1 p_l2 p_y2)
-  (display (string-append (string-append "cx " (string-append (qbgna p_l1 p_y1) (string-append "," (qbgna p_l2 p_y2)))) ";"))
+  (display (strings-append (list "cx " (qbgna p_l1 p_y1) "," (qbgna p_l2 p_y2) ";") 0))
   (newline))
 
  
@@ -224,7 +223,7 @@
 ; - p_y2: qubit number.
 ;
 (define (u1 p_y1 p_l1 p_y2)
-  (display (string-append "u1(" (string-append (number->string p_y1) (string-append ") " (string-append (qbgna p_l1 p_y2) ";")))))
+  (display (strings-append (list "u1(" (number->string p_y1) ") " (qbgna p_l1 p_y2) ";") 0))
   (newline))
 
 
@@ -237,7 +236,7 @@
 ; - p_y3: qubit number.
 ;
 (define (u2 p_y1 p_y2 p_l1 p_y3)
-  (display (string-append "u2(" (string-append (qbgnc p_y1) (string-append (number->string p_y2) (string-append ") " (string-append (qbgna p_l1 p_y3) ";"))))))
+  (display (strings-append (list "u2(" (qbgnc p_y1) (number->string p_y2) ") " (qbgna p_l1 p_y3) ";") 0))
   (newline))
 
 
@@ -251,23 +250,53 @@
 ; - p_y4: qubit number.
 ;
 (define (u3 p_y1 p_y2 p_y3 p_l1 p_y4)
-  (display (string-append "u3(" (string-append (qbgnc p_y1) (string-append (qbgnc p_y2) (string-append (number->string p_y3) (string-append ") " (string-append (qbgna p_l1 p_y4) ";")))))))
+  (display (strings-append (list "u3(" (qbgnc p_y1) (qbgnc p_y2) (number->string p_y3) ") " (qbgna p_l1 p_y4) ";") 0))
   (newline))
 
 
-; qcond - quantum conditional.
+; qcond1 - quantum conditional 1.
 ;
 ; Arguments:
 ; - p_c1: condition.
-; - p_y1: first parameter. Corresponds to classical bits.
-; - p_y2: second parameter.
-; - p_y3: third parameter. Corresponds to the number of classical bit.
-; - p_a1: action.
+; - p_y1: Classical bit vector.
+; - p_y2: Number to compare p_y1 to.
 ;
-(define (qcond p_c1 p_y1 p_y3 p_y2)
+(define (qcond1 p_c1 p_y1 p_y2)
   (let ((qsen " "))
-    (cond ((equal? p_c1 "==")(set! qsen (string-append "if(" (string-append p_y1 (string-append "[" (string-append (number->string p_y3) (string-append "]==" (string-append (number->string p_y2) (string-append ")" " "))))))))))
+    (cond ((equal? (qvalid-conditional p_c1) #t)(set! qsen (strings-append (list "if(" p_y1 p_c1 (number->string p_y2) ")" " ") 0))))
     (display qsen)))
+
+
+; qcond2 - quantum conditional 2.
+;
+; Arguments:
+; - p_c1: condition.
+; - p_y1: Classical bits.
+; - p_y2: number to compare p_y1[pY3] to.
+; - p_y3: Classical bit vector item.
+;
+(define (qcond2 p_c1 p_y1 p_y3 p_y2)
+  (let ((qsen " "))
+    (cond ((equal? (qvalid-conditional p_c1) #t)(set! qsen (strings-append (list "if(" p_y1 "[" (number->string p_y3) "]" p_c1 (number->string p_y2) ")" " ") 0))))
+    (display qsen)))
+
+
+; qvalid-string - Validate a string.
+;
+; Arguments:
+; - p_s1: string to validate.
+; 
+; Output:
+; - #t if the string is validated, #f otherwise.
+;
+(define (qvalid-conditional p_s1)
+  (let ((res #f))
+    (cond ((equal? p_s1 "==")(set! res #t)))
+    (cond ((equal? p_s1 "!=")(set! res #t)))
+    res))
+
+
+
 
 
 

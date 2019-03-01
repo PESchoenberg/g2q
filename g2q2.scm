@@ -30,7 +30,9 @@
 
 (define-module (g2q g2q2)
   #:use-module (g2q g2q0)
+  #:use-module (g2q g2q1)
   #:use-module (grsp grsp0)
+  #:use-module (ice-9 regex)
   #:export (qconst
 	    g1y
 	    g1x
@@ -48,20 +50,22 @@
 	    cu1
 	    cu3
 	    g1cxg1
-	    qendc))
+	    qendc
+	    qregex
+	    qreq))
 
 
-; qconst - various constants.
+; qconst - various required constants.
 ;
 ; Arguments:
 ; - p_n1: constant name, string.
 ;
 (define (qconst p_n1)
   (let ((res 0))
-  (cond ((equal? p_n1 "Pi")(set! res 3.14159))
-	((equal? p_n1 "gr")(set! res 1.00))
-	(else (set! res 0)))
-  res))
+    (cond ((equal? p_n1 "Pi")(set! res 3.14159))
+	  ((equal? p_n1 "gr")(set! res 1.00))
+	  (else (set! res 0)))
+    res))
   
 
 ; g1y - repeats placement of gate p_n1 and group p_l1 by repeating the use of qgate1
@@ -231,7 +235,7 @@
 ;
 (define (rx p_t p_l1 p_y1)
   (let ((y2 (/ (qconst "Pi") 2)))
-  (u3 p_t (* y2 -1) y2 p_l1 p_y1)))
+    (u3 p_t (* y2 -1) y2 p_l1 p_y1)))
 
 
 ; ry - gate ry, rotation around Y-axis.
@@ -326,7 +330,97 @@
 ; qendc - prints a message stating that compilation has ended.
 ;
 (define (qendc)
-  (ptit "=" 60 2 "Compilation completed. Check your .qasm file."))
+  (ptit "=" 60 2 "Compilation completed! Check your .qasm and .qreg files."))
+
+
+; Prepares a compiled qasm file as a string for passing to ibm q html api.
+;
+; Arguments
+; - p_f: name of .qasm file.
+;
+; Output: 
+; - It returns p_f as a single string variable without any \r or \n characters.
+;
+(define (qregex p_f)
+  (let ((res p_f))
+    (set! res (regexp-substitute/global #f "[\n]+" res 'pre "" 'post))
+    (set! res (regexp-substitute/global #f "[\r]+" res 'pre "" 'post))
+    (set! res (regexp-substitute/global #f "[\"]+" res 'pre "\\\"" 'post))
+    res))
+
+
+; qreq - consturcts a qreg file.
+;
+; Arguments
+; - p_f1: name of .qasm file.
+; - p_f2: name of .qreg file.
+; - p_r: where results will be saved to:
+;   - "json" to save results to a json file.
+;   - "sqlite3" to save results to a sqlite3 database.
+; - p_d: device.
+; - p_s: shots.
+; - p_m: max credits.
+;
+; Sources:
+; - https://developer.ibm.com/tutorials/os-quantum-computing-shell-game/
+;
+;
+(define (qreq p_f1 p_f2 p_r p_d p_s p_m)
+  (let ((port1 (current-output-port))
+	(port2 (open-output-file p_f2))
+	(conf #f)
+	(i1 "")
+	(i2 "")
+	(i3 "")
+	(i4 "")
+	(token "")
+	(i "")
+	(res "")
+	(dev p_d)
+	(data ""))
+
+    ;Get GX conf data
+    (set! conf (g2q-ibm-config))
+    (set! i1 (car conf))
+    (set! token (cadr conf))
+    (set! i2 (caddr conf))
+    (set! i (string-append i1 i2)) 
+    
+    ; Write to .comm file
+    (set! data (read-file-as-string p_f1))
+    (set! data (qregex data))
+    (set-current-output-port port2)
+    (qstr (strings-append (list "base-file=" p_f2) 0))
+    (qstr " ")
+    (qstr (strings-append (list "base-data=" data) 0))
+    (qstr " ")
+    (qstr (strings-append (list "base-token=" token) 0))
+    (qstr " ")
+    (qstr (strings-append (list "base-uri=" i1) 0))
+    (qstr " ")
+    (qstr (strings-append (list "base-results-storage=" p_r) 0))
+    (qstr " ")
+    (qstr (strings-append (list "base-device=" p_d) 0))
+    (qstr " ")
+    (qstr (strings-append (list "base-shots=" (number->string p_s)) 0))
+    (qstr " ")
+    (qstr (strings-append (list "base-max-credits=" (number->string p_m)) 0))
+    (qstr " ")    
+    (qstr (strings-append (list "post-content-type=" "application/x-www-form-urlencoded") 0))
+    (qstr " ")
+    (qstr (strings-append (list "post-uri=" (string-append i1 i2)) 0))
+    (qstr " ")
+    (qstr (strings-append (list "get-content-type=" "application/x-www-form-urlencoded") 0))
+    (qstr " ")
+    (qstr (strings-append (list "get-uri=" (string-append i1 i3)) 0))
+    (qstr " ")
+    (qstr (strings-append (list "delete-content-type=" "application/x-www-form-urlencoded") 0))
+    (qstr " ")
+    (qstr (strings-append (list "delete-uri=" (string-append i1 i4)) 0))
+    (qstr " ")
+    (set-current-output-port port1)
+    (close port2)))
+
 
 
 
