@@ -32,26 +32,23 @@
 ; but might be needed to test QASM prorams on IBM Q processors.
 
 
-; TODO - define config functions to access simulators or actual quantum
-; processors, like those provided by IBM.
-;
 (define-module (g2q g2q1)
-  #:export (ibm-apitoken
-	    ibm-config))
-
-
-; TODO: token for using IBM Q series machines; equivalent to functions found on
-; Qiskit IDE.
-;
-(define (ibm-apitoken)
-  (let ((token "Your token here."))
-  (display token)))
+  #:export (g2q-ibm-config))
 
 
 ; TODO : configuration for using IBM Q series machines; equivalent to functions
 ; found on Qiskit IDE.
 ;
-(define (ibm-config)
-  (let ((conf(list "url" "Your URL here")))
-  (display conf)))
+; List elements:
+; 1 - Base uri for online access.
+; 2 - token.
+;
+(define (g2q-ibm-config)
+  (let ((conf (list "https://quantumexperience.ng.bluemix.net/api/" "your-token-goes-here" "Jobs/")))
+    conf
+    ))
+
+
+
+
 
