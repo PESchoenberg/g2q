@@ -55,7 +55,7 @@ and that will do the trick.
 should be written and compiled as any regular Guile program.
 
 * See the examples contained in the /examples folder. These are self-explaining
-and filled with comments.
+and filled with comments. You will find there both .scm and .qasm files.
 
 * As a general guide, in order to compile a g2q-based program - say example1.scm:
 
@@ -69,7 +69,7 @@ and filled with comments.
 
 * If your code is correct, this will generate a full QASM file named
 example1.qasm on the same folder. You can then try that code on a quantum
-computer simulator or even a real one that is compatible with Opewn QASM 2.0.
+computer simulator or even a real one that is compatible with Open QASM 2.0.
 
 
 ## Credits and Sources:
