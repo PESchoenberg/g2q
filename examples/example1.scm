@@ -156,7 +156,7 @@
 (close port2)
 
 ; Now we create exxample1.qreg
-(qreq "example1.qasm" "example1.qreg" "json" "simulator" 1024 0)
+; (qreq "example1.qasm" "example1.qreg" "json" "simulator" 100 1 4070323006)
 
 (qendc)
 

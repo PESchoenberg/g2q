@@ -44,7 +44,7 @@
 ; 2 - token.
 ;
 (define (g2q-ibm-config)
-  (let ((conf (list "https://quantumexperience.ng.bluemix.net/api/" "your-token-goes-here" "Jobs/")))
+  (let ((conf (list "https://quantumexperience.ng.bluemix.net/api" "439e62ab146331baf8f5f664e60d5b3b95363bcc9e09b26e82f186b35455794c4dac1f1510afe95b2c1cf3e0b8dcaa7b81dd987e2dc9cc90c461afcaf61495fd" "/codes/execute")))
     conf
     ))
 
