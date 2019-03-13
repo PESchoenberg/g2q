@@ -33,6 +33,7 @@
   #:use-module (g2q g2q1)
   #:use-module (grsp grsp0)
   #:use-module (ice-9 regex)
+  #:use-module (ice-9 textual-ports)
   #:export (qconst
 	    g1y
 	    g1x
@@ -330,7 +331,7 @@
 ; qendc - prints a message stating that compilation has ended.
 ;
 (define (qendc)
-  (ptit "=" 60 2 "Compilation completed! Check your .qasm and .qreg files."))
+  (ptit "=" 60 2 "Compilation completed!"))
 
 
 ; Prepares a compiled qasm file as a string for passing to ibm q html api.
@@ -360,12 +361,13 @@
 ; - p_d: device.
 ; - p_s: shots.
 ; - p_m: max credits.
+; - p_e: seed.
 ;
 ; Sources:
 ; - https://developer.ibm.com/tutorials/os-quantum-computing-shell-game/
 ;
 ;
-(define (qreq p_f1 p_f2 p_r p_d p_s p_m)
+(define (qreq p_f1 p_f2 p_r p_d p_s p_m p_e)
   (let ((port1 (current-output-port))
 	(port2 (open-output-file p_f2))
 	(conf #f)
@@ -379,6 +381,8 @@
 	(dev p_d)
 	(data ""))
 
+    (set-port-encoding! port2 "UTF-8")
+    
     ;Get GX conf data
     (set! conf (g2q-ibm-config))
     (set! i1 (car conf))
@@ -404,23 +408,25 @@
     (qstr " ")
     (qstr (strings-append (list "base-shots=" (number->string p_s)) 0))
     (qstr " ")
+    (qstr (strings-append (list "base-seed=" (number->string p_e)) 0))
+    (qstr " ")    
     (qstr (strings-append (list "base-max-credits=" (number->string p_m)) 0))
     (qstr " ")
     (qstr (strings-append (list "login-data=" "apiToken=" token) 0))
     (qstr " ")    
-    (qstr (strings-append (list "login-uri=" i1 "users/loginWithToken") 0))
+    (qstr (strings-append (list "login-uri=" i1 "/users/loginWithToken") 0))
     (qstr " ")
     (qstr (strings-append (list "login-id=" "wait-until-login") 0))
     (qstr " ")
-    (qstr (strings-append (list "post-content-type=" "application/x-www-form-urlencoded") 0))
+    (qstr (strings-append (list "post-content-type=" "application/x-www-form-urlencoded;" "charset=utf-8") 0))
     (qstr " ")
     (qstr (strings-append (list "post-uri=" (string-append i1 i2)) 0))
     (qstr " ")
-    (qstr (strings-append (list "get-content-type=" "application/x-www-form-urlencoded") 0))
+    (qstr (strings-append (list "get-content-type=" "application/x-www-form-urlencoded;" "charset=utf-8") 0))
     (qstr " ")
     (qstr (strings-append (list "get-uri=" (string-append i1 i3)) 0))
     (qstr " ")
-    (qstr (strings-append (list "delete-content-type=" "application/x-www-form-urlencoded") 0))
+    (qstr (strings-append (list "delete-content-type=" "application/x-www-form-urlencoded;" "charset=utf-8") 0))
     (qstr " ")
     (qstr (strings-append (list "delete-uri=" (string-append i1 i4)) 0))
     (qstr " ")
