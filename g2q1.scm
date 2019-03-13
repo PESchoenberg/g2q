@@ -37,11 +37,12 @@
 
 
 ; TODO : configuration for using IBM Q series machines; equivalent to functions
-; found on Qiskit IDE.
+; found on Qiskit IDE. (Deprecated)
 ;
 ; List elements:
 ; 1 - Base uri for online access.
 ; 2 - token.
+; 3 - subdir to post https execution requests.
 ;
 (define (g2q-ibm-config)
   (let ((conf (list "https://quantumexperience.ng.bluemix.net/api" "your-token-goes-here" "/codes/execute")))
