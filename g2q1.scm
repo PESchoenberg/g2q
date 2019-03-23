@@ -33,7 +33,15 @@
 
 
 (define-module (g2q g2q1)
-  #:export (g2q-ibm-config))
+  #:export (g2q-version
+	    g2q-ibm-config))
+
+
+; g2q-version - returns the current version of the compiler.
+;
+(define (g2q-version)
+  (let ((res "g2q - v1.2.0"))
+    res))
 
 
 ; TODO : configuration for using IBM Q series machines; equivalent to functions

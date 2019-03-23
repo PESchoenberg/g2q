@@ -58,7 +58,7 @@
 ;
 (define (qhead p_prog p_v)
   (qstr (strings-append (list "// " p_prog ";") 0))
-  (qstr "// Compiled with g2q - v2.0.0;")
+  (qstr (strings-append (list "// Compiled with " (g2q-version) ";") 0))
   (qstr (strings-append (list "OPENQASM " (number->string p_v) ";") 0))
   (qstr "include \"qelib1.inc\";"))
   

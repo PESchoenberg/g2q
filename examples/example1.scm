@@ -39,7 +39,7 @@
 ; ==============================================================================
 
 
-; Modules. These two will be almost always required.
+; Modules. These will be almost always required.
 (use-modules (g2q g2q0)
 	     (g2q g2q1)
 	     (g2q g2q2))
@@ -47,7 +47,7 @@
 
 ; Vars and initial stuff.
 (define fname "example1.qasm")
-(define cname "example1.comm")
+(define cname "example1.qreg")
 (define qver 2.0)
 (define q "q")
 (define c "c")
@@ -125,6 +125,7 @@
 (qcomm "Controlled u3.")
 (cu3 1.6 1.6 q 2 q 0)
 
+
 ; if (Not yet available on IBM Q machines yet - uncomment to see how they 
 ; compile but the resulting program may not run on a Q series machine at
 ; least for now.
@@ -132,6 +133,7 @@
 (qcond1 "==" q 1)(g1 "y" q 2)
 (qcomm "Conditional2 eq.")
 (qcond2 "!=" q 2 1)(g1 "y" q 2)
+
 
 ; Let's put a barrier.
 (qcomm "Barriers.")
@@ -150,10 +152,12 @@
 ; Message
 (qcomm "This message will appear at the end of the qasm file.")
 
+
 ; Sets the output pot againt to the console. Don't forget to check if the 
 ; compilation is error free or you have some bugs to kill.
 (set-current-output-port port1)
 (close port2)
+
 
 ; Now we create exxample1.qreg
 ; (qreq "example1.qasm" "example1.qreg" "json" "simulator" 100 1 4070323006)
