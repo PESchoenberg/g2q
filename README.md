@@ -78,6 +78,8 @@ computer simulator or even a real one that is compatible with Open QASM 2.0.
 
 * OpenQASM 2.0 specification - https://github.com/Qiskit/openqasm
 
+* qre quantum remote execution - https://github.com/PESchoenberg/qre
+
 * URL of this project - https://github.com/PESchoenberg/g2q
 
 

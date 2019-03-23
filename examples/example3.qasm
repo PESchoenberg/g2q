@@ -1,8 +1,7 @@
-// example3.qasm
-//
+// example3.qasm;
+// Compiled with g2q - v1.2.0;
 OPENQASM 2.0;
 include "qelib1.inc";
-//
 qreg q[5];
 creg c[5];
 h q[0];
@@ -25,7 +24,6 @@ x q[0];
 x q[1];
 h q[0];
 h q[1];
-// 
-// Measuring
+// Measuring;
 measure q[0] -> c[0];
 measure q[1] -> c[1];
