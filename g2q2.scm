@@ -53,7 +53,9 @@
 	    g1cxg1
 	    qendc
 	    qregex
-	    qreq))
+	    qreq
+	    qcnot1
+	    qxor1))
 
 
 ; qconst - various required constants.
@@ -434,5 +436,47 @@
     (close port2)))
 
 
+; qcnot1 - a cx based NOT gate.
+;
+; Arguments:
+; - p_l1: gate group name 1.
+; - p_y1: target qubit (normally p_y2 - 1).
+; - p_l2: gate group name 2.
+; - p_y2: control quibit (value to be inverted, 0 or 1).
+;
+; Output:
+; - Inverse of p_l2[p_y2], on p_l1[p_y1].
+;  - |0> -> |1>
+;  - |1> -> |0>
+;
+(define (qcnot1 p_l2 p_y2 p_l1 p_y1)
+  (g1 "x" p_l1 p_y1)
+  (cx p_l2 p_y2 p_l1 p_y1))
 
+
+; qxor1 - a qcnot1 based XOR gate.
+;
+; Arguments:
+; - p_l1: gate group name 1.
+; - p_y1: target qubit a (normally p_y2 - 1).
+; - p_l2: gate group name 2.
+; - p_y2: control quibit a.
+; - p_l3: gate group name 3.
+; - p_y3: target qubit b (normally p_y3 - 1).
+; - p_l4: gate group name 4.
+; - p_y4: control quibit b.
+;
+; Output:
+; - On p_l1[p_y1].
+;  - |00> -> |0>
+;  - |11> -> |0>
+;  - |01> -> |1>
+;  - |10> -> |1>
+;
+(define (qxor1 p_l1 p_y1 p_l2 p_y2 p_l3 p_y3 p_l4 p_y4)
+  (qcnot1 p_l2 p_y2 p_l1 p_y1)
+  (qcnot1 p_l4 p_y4 p_l3 p_y3)
+  (qcnot1 p_l3 p_y3 p_l1 p_y1))
+
+    
 
