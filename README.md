@@ -74,11 +74,9 @@ computer simulator or even a real one that is compatible with Open QASM 2.0.
 
 ## Credits and Sources:
 
-* GNU Guile - https://www.gnu.org/software/guile/
+* GNU Guile - https://www.gnu.org/software/guile/ (LGPL-3.0 or later)
 
-* OpenQASM 2.0 specification - https://github.com/Qiskit/openqasm
-
-* qre quantum remote execution - https://github.com/PESchoenberg/qre
+* qre quantum remote execution - https://github.com/PESchoenberg/qre (LGPL-3.0 or later)
 
 * URL of this project - https://github.com/PESchoenberg/g2q
 
