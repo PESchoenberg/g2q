@@ -16,9 +16,14 @@ that lets you write programs for QASM-based quantum computers using Scheme.
 * grsp - https://github.com/PESchoenberg/grsp.git
 
 
+## Optional:
+
+* qre - https://github.com/PESchoenberg/qre if you want to run example6.scm
+
+
 ## Installation:
 
-* Assuming you have all dependencies installed on your system, get g2q, unpack 
+* Once you have all dependencies installed on your system, get g2q, unpack 
 it into a folder of your choice and cd into it.
 
 * g2q installs as a GNU Guile library. See GNU Guile's manual instructions for
@@ -70,6 +75,10 @@ and filled with comments. You will find there both .scm and .qasm files.
 * If your code is correct, this will generate a full QASM file named
 example1.qasm on the same folder. You can then try that code on a quantum
 computer simulator or even a real one that is compatible with Open QASM 2.0.
+
+* File example6.scm requires that you have qre installed on your system (see 
+below); this particular example not only compiles code into QASM2 but actually 
+runs it using qre.
 
 
 ## Credits and Sources:
