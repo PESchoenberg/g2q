@@ -92,7 +92,7 @@
 (close port2)
 (qendc)
 
-; This is a system call to invoke qre. Replace [your-path-to-qre-folder] with
+; This is a system call for qre. Replace [your-path-to-qre-folder] with
 ; the correct path or change your system PATH variable accordingly.
 (system "[your-path-to-qre-folder]/qre example6.qasm post y qlib_simulator 1 example6_1")
 

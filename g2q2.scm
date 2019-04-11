@@ -56,6 +56,7 @@
 	    qreq
 	    qcnot1
 	    qxor1))
+	    ;qrjfs))
 
 
 ; qconst - various required constants.
@@ -477,6 +478,28 @@
   (qcnot1 p_l2 p_y2 p_l1 p_y1)
   (qcnot1 p_l4 p_y4 p_l3 p_y3)
   (qcnot1 p_l3 p_y3 p_l1 p_y1))
+
+
+; qrjfs - reads from a jason string the last record.
+;
+; Arguments:
+; - p_s: string
+;
+; Output:
+; - The last complete json record contained in p_s
+;
+;(define (qrjfs p_s p_n)
+  ;(let ((res ""))
+    ;(if(= (string-contains res "idCode") #f)
+       ;(res "na")
+       ;(begin ()))
+    ;res))
+
+
+
+
+
+
 
     
 
