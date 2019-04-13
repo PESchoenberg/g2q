@@ -55,8 +55,8 @@
 	    qregex
 	    qreq
 	    qcnot1
-	    qxor1))
-	    ;qrjfs))
+	    qxor1
+	    qfclvr))
 
 
 ; qconst - various required constants.
@@ -480,26 +480,53 @@
   (qcnot1 p_l3 p_y3 p_l1 p_y1))
 
 
-; qrjfs - reads from a jason string the last record.
+; qfclvr - Find and construct label and value registers.
 ;
 ; Arguments:
-; - p_s: string
+; p_s: string with results from qre.
 ;
 ; Output:
-; - The last complete json record contained in p_s
+; - A list contaning two lists:
+; - The first list contains labels.
+; - Second list contains results.
 ;
-;(define (qrjfs p_s p_n)
-  ;(let ((res ""))
-    ;(if(= (string-contains res "idCode") #f)
-       ;(res "na")
-       ;(begin ()))
-    ;res))
+(define (qfclvr p_s)
+  (let ((res (list ))
+	(s1 p_s)
+	(ls1 0)
+	(slabels "")
+	(svalues "")
+	(lslabels (list ))
+	(lsvalues (list )))
+
+    ; Construct strings from relevant data.
+    (set! ls1 (string-length s1))
+    (set! slabels (substring s1 (string-contains s1 "labels")))
+    (set! svalues (substring slabels (string-contains slabels "values")))
+    (set! slabels (substring slabels (string-contains slabels "[")))
+    (set! svalues (substring svalues (string-contains svalues "[")))    
+    (set! slabels (substring slabels (+ (string-contains slabels "[") 1)))
+    (set! svalues (substring svalues (+ (string-contains svalues "[") 1)))
+    (set! slabels (string-copy slabels 0 (string-contains slabels "]")))
+    (set! svalues (string-copy svalues 0 (string-contains svalues "]")))   
+
+    ; Clean strings.
+    (set! slabels (regexp-substitute/global #f "u" slabels 'pre "" 'post))
+    (set! slabels (regexp-substitute/global #f "'" slabels 'pre "" 'post))
+    (set! slabels (regexp-substitute/global #f "," slabels 'pre " " 'post))
+    (set! svalues (regexp-substitute/global #f "," svalues 'pre " " 'post))
+    (set! slabels (regexp-substitute/global #f "  " slabels 'pre " " 'post))
+    (set! svalues (regexp-substitute/global #f "  " svalues 'pre " " 'post))
+
+    ; Construct lists from strings.
+    (set! lslabels (string-split slabels #\space ))
+    (set! lsvalues (string-split svalues #\space ))
+    (set! res (list lslabels lsvalues))
+        
+    res))
+	
+	
+	
 
 
-
-
-
-
-
-    
 
