@@ -56,7 +56,8 @@
 	    qreq
 	    qcnot1
 	    qxor1
-	    qfclvr))
+	    qfclvr
+	    qfres))
 
 
 ; qconst - various required constants.
@@ -525,8 +526,51 @@
         
     res))
 	
-	
-	
+
+; qfres - find max value among results. If more than one ocurrence is found, 
+; it returns the last label correspondign to the las element that matches.
+;
+; Arguments:
+; - p_l: List of results as obtained by applying qfclvr.
+; - p_r: choice between obtaining the max or min value.
+;  - "max" for maximum value.
+;  - "min" to get the minimum value.
+;
+; Output:
+; A list of two elements:
+; - First element contains the label of the result.
+; - Second element contains the max value obtained.
+;
+(define (qfres p_l p_r)
+  (let ((res (list ))
+	(sl (car p_l))
+	(sv (car (cdr p_l)))
+	(dvm 0)
+	(dv (list ))
+	(n 0)
+	(slm "na"))
+
+    ; Find value.
+    (set! dv (map string->number sv))
+    (if (equal? p_r "max")(set! dvm (apply max dv)))
+    (if (equal? p_r "min")(set! dvm (apply min dv)))
+    
+    ;Ge the corresponding label.
+    (set! n (- (length dv) 1))
+    (while (>= n 0)
+	   (if (= dvm (list-ref dv n))(begin
+					(set! slm (list-ref sl n))
+					(set! n 0)))
+	   (set! n (- n 1)))
+    
+    (set! res (list slm dvm))
+
+    res))
+    
+    
+    
+	   
+  
 
 
 
