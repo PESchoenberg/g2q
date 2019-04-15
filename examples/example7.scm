@@ -4,7 +4,7 @@
 
 ; ==============================================================================
 ;
-; example6.scm
+; example7.scm
 ;
 ; - This program is almost the same as example5.scm, but includes a system 
 ; call that invokes qre. This is a program that allows for execution in real or
@@ -17,7 +17,7 @@
 ;
 ; - Enter the following:
 ;
-;   guile example6.scm
+;   guile example7.scm
 ;
 ; Notes:
 ; - This program will only compile a .qasm file but not run it if you don't have
@@ -48,29 +48,33 @@
 
 ; Required modules.
 (use-modules (g2q g2q0)
-	     (g2q g2q2))
+	     (g2q g2q2)
+	     (grsp grsp0))
 
 
 ; Vars and initial stuff. 
-(define fname "example6.qasm")
+(define fnameo "example7.qasm")
+(define fnamei "data/json/example7_1.json")
+;(define path "/home/pablo/Programs/C++/qre/qre")
 (define qver 2.0)
 (define q "q")
 (define c "c")
 (define qn 4)
 (define cn 2)
+(define mc 0)
 
 
 ; This configures the output to be sent a file instead of the console. If you
 ; take out or disable these lines, and those closing the output port (see at  
 ; the bottom) instead of getting a qasm file you will see the compiled lines
 ; on the console.
-(define port1 (current-output-port))
-(define port2 (open-output-file fname))
-(set-current-output-port port2)
+(define porto1 (current-output-port))
+(define porto2 (open-output-file fnameo))
+(set-current-output-port porto2)
 
 
 ; Creating header and required vectors.
-(qhead fname qver)
+(qhead fnameo qver)
 (qregdef q qn c cn)
 
 
@@ -86,13 +90,53 @@
 (qmeas q 3 c 1)
 
 
-; Sets the output pot againt to the console. Don't forget to check if the 
+; Sets the output port again to the console. Don't forget to check if the 
 ; compilation is error free or you have some bugs to kill.
-(set-current-output-port port1)
-(close port2)
+(set-current-output-port porto1)
+(close porto2)
 (qendc)
 
-; This is a system call for qre. Replace [your-path-to-qre-folder] with
+
+; This is a system call to invoke qre. Replace [your-path-to-qre-folder] with
 ; the correct path or change your system PATH variable accordingly.
-(system "[your-path-to-qre-folder]/qre example6.qasm post y qlib_simulator 1 example6_1")
+(newline)
+(display "We make a system call to qre from within example7.scm ...")
+(newline)
+(newline)
+(system "./qre example7.qasm post y qlib_simulator 1 example7_1")
+
+
+; Now get the data from the QPU.
+(define a (read-file-as-string fnamei))
+(newlines 1)
+(display "And now we get the results from qre back into example7.scm as a string: ")
+(newlines 1)
+(newlines 1)
+(display a)
+(newlines 1)
+(display "You can parse the results from this string and use them in any way you want.")
+(newlines 1)
+
+(define b (qfclvr a))
+(newlines 1)
+(display (car b))
+(newlines 1)
+(display (cadr b))
+(newlines 1)
+
+(define c (qfres b "max"))
+(newlines 1)
+(display "Max value obtained: ")
+(display (car c))
+(display " ")
+(display (cadr c))
+(newlines 1)
+
+(define c (qfres b "min"))
+(newlines 1)
+(display "Min value obtained: ")
+(display (car c))
+(display " ")
+(display (cadr c))
+(newlines 1)
 

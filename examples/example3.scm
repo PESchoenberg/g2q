@@ -92,7 +92,7 @@
 (qmeas q a c a)
 
 
-; Sets the output pot againt to the console. Don't forget to check if the 
+; Sets the output port again to the console. Don't forget to check if the 
 ; compilation is error free or you have some bugs to kill.
 (set-current-output-port port1)
 (close port2)
