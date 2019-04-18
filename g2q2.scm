@@ -527,8 +527,9 @@
     res))
 	
 
-; qfres - find max value among results. If more than one ocurrence is found, 
-; it returns the last label correspondign to the las element that matches.
+; qfres - find max or min value among results. If more than one ocurrence
+; is found, it returns the last label corresponding to the las element that
+; matches.
 ;
 ; Arguments:
 ; - p_l: List of results as obtained by applying qfclvr.
@@ -568,9 +569,5 @@
     res))
     
     
-    
-	   
-  
-
 
 
