@@ -125,7 +125,7 @@
     ; This is a system call to invoke qre. Replace [your-path-to-qre-folder] with
     ; the correct path or change your system PATH variable accordingly. You need
     ; to have g2q and qre included on your system path variable or modify the
-    ; call below to make it work properly. It will alos work if you run 
+    ; call below to make it work properly. It will also work if you run 
     ; this program from within the main folder of qre.
     (system "./qre example8.qasm post n qlib_simulator 1 example8_1")
     
@@ -157,12 +157,11 @@
 		 (loop (- i 1)))))))
 
 
-; And this is the main program. It gives as a result the decimal ablsolute and
+; And this is the main program. It gives as a result the decimal absolute and
 ; non-probabilistic summation of the max values obtained on the execution of 
 ; each quantum circuit created on each qcall.
 (qcomm "Number of QPU call (qcalls): ")
 (set! qx (read))
-(set! qx (- qx 1))
 (set! res (main-loop qver q c qn cn mc qx))
 (newlines 2)
 (display "Result = ")
