@@ -78,7 +78,6 @@
 ; - p_s: string to write as a comment.
 ;
 (define (qcomm p_s)
-  ;(qstr "// ")
   (qstr (strings-append (list "// " p_s ";") 0)))
 
 
