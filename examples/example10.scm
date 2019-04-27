@@ -4,7 +4,7 @@
 
 ; ==============================================================================
 ;
-; example9.scm
+; example10.scm
 ;
 ; - This program shows how to use functions from module g2q3 to easily create
 ; QASM2 programs with multiple QPU calls and measurements.
@@ -15,17 +15,17 @@
 ;
 ; - Enter the following:
 ;
-;   guile example9.scm
+;   guile example10.scm
 ;   
 ; Notice that you will need to have g2q and qre (see README.md for details)
 ; installed on your system  and your system path variable set to point to both
 ; in order for this program to work properly. Alternatively, you can:
 ;
-; - copy example9.scm to the main folder of your qre installation.
+; - copy example10.scm to the main folder of your qre installation.
 ; 
 ; - Enter the following:
 ;
-;   guile example9.scm 
+;   guile example10.scm 
 ;
 ; ==============================================================================
 ;
@@ -49,14 +49,16 @@
 
 ; Required modules.
 (use-modules (g2q g2q0)
+	     (g2q g2q1)
 	     (g2q g2q2)
 	     (g2q g2q3)
 	     (grsp grsp0))
 
 
 ; Vars and initial stuff. These are editable.
-(define fname "example9") ; File name
-(define qpu "qx_simulator") ; qpu to use. Change it according to what qre accepts.
+(define fname "example10") ; File name
+;(define qpu "qlib_simulator")
+(define qpu "qx_simulator")
 (define clean "y") ; Clean the json files created in ddir after use.
 (define qver 2.0) ; OpenQASM version
 (define qn 5) ; Length of the quantum register.
@@ -64,7 +66,7 @@
 (define v "y") ; Verbosity.
 
 ; Vars and initial stuff. Do not edit these.
-(define ddir "data/json/")
+(define ddir (car (g2q-qre-config))) ;Obtain this value from configuration list.
 (define fnameo (strings-append (list fname ".qasm") 0))
 (define q "q")
 (define c "c")
@@ -90,10 +92,12 @@
 ;
 (define (qf p_i p_q p_c p_qnl p_qnh p_cnl p_cnh)
     (g1y "h" p_q p_qnl p_qnh)
-    (if (= p_i 1)(g1y "x" p_q p_qnl p_qnh))
-    (if (= p_i 2)(g1y "y" p_q p_qnl p_qnh))
-    (if (= p_i 3)(g1y "z" p_q p_qnl p_qnh))    
-    (qmeasy  p_q p_c p_cnl p_cnh))
+    (cond ((= p_i 1)(g1y "x" p_q p_qnl p_qnh))
+	  ((= p_i 2)(g1y "y" p_q p_qnl p_qnh))
+	  ((= p_i 3)(g1y "z" p_q p_qnl p_qnh))
+	  (else (g1y "t" p_q p_qnl p_qnh)))
+	  
+    (qmeasy p_q p_c p_cnl p_cnh))
 
 
 ; And this is the main program. It gives as a result the decimal absolute and
@@ -108,5 +112,4 @@
 (display "Result = ")
 (display res)
 (newlines 1)
-
 
