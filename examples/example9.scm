@@ -103,7 +103,7 @@
 (set! qx (read))
 (display "Wait...")
 (newlines 1)
-(set! res (main-loop clean fname fnameo qver ddir qpu qf q c qn cn mc qx v))
+(set! res (qmain-loop clean fname fnameo qver ddir qpu qf q c qn cn mc qx v))
 (newlines 2)
 (display "Result = ")
 (display res)

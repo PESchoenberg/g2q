@@ -2,7 +2,7 @@
 ;
 ; q2q3.scm
 ;
-; Functions that require the use of qre.
+; Functions that require the use of qre or are qre-related.
 ;
 ; ==============================================================================
 ;
@@ -31,11 +31,12 @@
   #:use-module (grsp grsp0)
   ;#:use-module (ice-9 regex)
   #:use-module (ice-9 textual-ports)
-  #:export (compile-and-run
-	    main-loop))
+  #:export (qcompile-and-run
+	    qmain-loop
+	    qdeclare))
 
 
-; compile-and-run - This function comprises an entire compilation and execution
+; qcompile-and-run - This function comprises an entire compilation and execution
 ; cycle.
 ;
 ; Arguments:
@@ -57,7 +58,7 @@
 ; - A result that consists in the maximum probability obtained from the 
 ; - execution of the compiled quantum circuit.
 ;
-(define (compile-and-run p_fname p_fnameo p_qver p_ddir p_qpu p_qf p_q p_c p_qn p_cn p_mc p_i p_v)
+(define (qcompile-and-run p_fname p_fnameo p_qver p_ddir p_qpu p_qf p_q p_c p_qn p_cn p_mc p_i p_v)
   (let ((porto1 (current-output-port))
 	(porto2 (open-output-file p_fnameo))
 	(a "")
@@ -101,7 +102,7 @@
     res))
     
 
-; main-loop - This is the main loop of the program. It will be repeated p_qx
+; qmain-loop - This is the main loop of the program. It will be repeated p_qx
 ; times. Note this function will remove the json files holding the results
 ; returned by the QPU in order to keep clean the ddir folder.
 ;
@@ -121,14 +122,32 @@
 ; p_qx: qx
 ; p_v: verbosity ("y" or "n").
 ;
-(define (main-loop p_clean p_fname p_fnameo p_qver p_ddir p_qpu p_qf p_q p_c p_qn p_cn p_mc p_qx p_v)
+(define (qmain-loop p_clean p_fname p_fnameo p_qver p_ddir p_qpu p_qf p_q p_c p_qn p_cn p_mc p_qx p_v)
   (let ((res 0))    
     (let loop ((i p_qx))
       (if (= i 0)
 	  (begin (if(equal? p_clean "y")(system (strings-append (list "rm " p_ddir p_fname "_*") 0)))
 	  res)
-	  (begin (set! res (+ res (compile-and-run p_fname p_fnameo p_qver p_ddir p_qpu p_qf p_q p_c p_qn p_cn p_mc i p_v)))
+	  (begin (set! res (+ res (qcompile-and-run p_fname p_fnameo p_qver p_ddir p_qpu p_qf p_q p_c p_qn p_cn p_mc i p_v)))
 		 (loop (- i 1)))))))
+
+
+; qre-declare - pragmas for specific quantum processors. Thsi function 
+; adds to a program to be compiled in QASM2 declarations for compilation 
+; that are specific for different quantum processors. These are applicable 
+; for the declared qpu, but not others. Pragmas are introduced as comments
+; using the standard double "/" character and thus do not modify the QASM2 
+; dode itself.
+; 
+; Arguments:
+; - p_qpu: qpu for which the declaration is intended for.
+; - p_d: declaration in the form of a string.
+;
+; Otput:
+; - A commented-out string that will be placed in compiled QADM2 code.
+;
+(define (qdeclare p_qpu p_d)
+  (qcomm (strings-append (list "qdeclare " p_qpu " " p_d) 0)))
 
 
 
