@@ -97,7 +97,9 @@
 	  ((= p_i 3)(g1y "z" p_q p_qnl p_qnh))
 	  (else (g1y "t" p_q p_qnl p_qnh)))
 	  
-    (qmeasy p_q p_c p_cnl p_cnh))
+    (qmeasy p_q p_c p_cnl p_cnh)
+    (qdeclare "qx-simulator" "error_model depolarizing_channel,0.001")
+    (qdeclare "qlib-simulator" "// Hello qlib-simulator"))
 
 
 ; And this is the main program. It gives as a result the decimal absolute and
@@ -107,7 +109,7 @@
 (set! qx (read))
 (display "Wait...")
 (newlines 1)
-(set! res (main-loop clean fname fnameo qver ddir qpu qf q c qn cn mc qx v))
+(set! res (qmain-loop clean fname fnameo qver ddir qpu qf q c qn cn mc qx v))
 (newlines 2)
 (display "Result = ")
 (display res)
