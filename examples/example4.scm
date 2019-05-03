@@ -63,20 +63,16 @@
 (qcomm "Number of qubits: ") ; q
 (set! qn (read))
 
-
 ; The number of conventional register will be the same as qubits.
 (set! cn qn) 
-
 
 ; Number of times that function g1y wil be called.
 (qcomm "Number of time steps: ")
 (set! qx (read))
 
-
 ; Register count starts at zero, so we need n for looping in the interval 
 ; [0: (- qn 1)].
 (set! n (- qn 1))
-
 
 ; This configures the output to be sent a file instead of the console. If you
 ; take out or disable these lines, and those closing the output port (see at  
@@ -86,23 +82,19 @@
 (define port2 (open-output-file fname))
 (set-current-output-port port2)
 
-
 ; Creating header and required vectors.
 (qhead fname qver)
 (qregdef q qn c cn)
-
 
 ; Main stuff, rather short code but can expand into a lot of if q or n have 
 ; significant values.
 (g1y g q 0 n)
 (g1xy "id" q 0 n qx)
 
-
 ; And finally, we measure. Notice that we use qmeasy instead of qmeas this 
 ; provides us with as many measuring gates as n requires.
 (qcomm "Measuring")
 (qmeasy q c 0 n)
-
 
 ; Sets the output port again to the console. Don't forget to check if the 
 ; compilation is error free or you have some bugs to kill.

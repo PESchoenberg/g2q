@@ -57,7 +57,6 @@
 
 ; Vars and initial stuff. These are editable.
 (define fname "example10") ; File name
-;(define qpu "qlib_simulator")
 (define qpu "qx_simulator")
 (define clean "y") ; Clean the json files created in ddir after use.
 (define qver 2.0) ; OpenQASM version
@@ -95,8 +94,7 @@
     (cond ((= p_i 1)(g1y "x" p_q p_qnl p_qnh))
 	  ((= p_i 2)(g1y "y" p_q p_qnl p_qnh))
 	  ((= p_i 3)(g1y "z" p_q p_qnl p_qnh))
-	  (else (g1y "t" p_q p_qnl p_qnh)))
-	  
+	  (else (g1y "t" p_q p_qnl p_qnh)))	  
     (qmeasy p_q p_c p_cnl p_cnh)
     (qdeclare "qx-simulator" "error_model depolarizing_channel,0.001")
     (qdeclare "qlib-simulator" "// Hello qlib-simulator"))
@@ -114,4 +112,5 @@
 (display "Result = ")
 (display res)
 (newlines 1)
+
 
