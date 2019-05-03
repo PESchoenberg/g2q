@@ -55,8 +55,7 @@
 ;
 (define (g2q-ibm-config)
   (let ((conf (list "https://quantumexperience.ng.bluemix.net/api" "your-token-goes-here" "/codes/execute")))
-    conf
-    ))
+    conf))
 
 
 ; Configuration for using qre
@@ -68,10 +67,7 @@
 ;
 (define (g2q-qre-config)
   (let ((conf (list "data/json/" "data/sqlite3/" "qlib_simulator" "ibmqx_simulator" "qx_simulator")))
-    conf
-    ))
-
-
+    conf))
 
 
 

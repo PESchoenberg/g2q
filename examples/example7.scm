@@ -51,7 +51,6 @@
 	     (g2q g2q2)
 	     (grsp grsp0))
 
-
 ; Vars and initial stuff. 
 (define fnameo "example7.qasm")
 (define fnamei "data/json/example7_1.json")
@@ -63,7 +62,6 @@
 (define cn 2)
 (define mc 0)
 
-
 ; This configures the output to be sent a file instead of the console. If you
 ; take out or disable these lines, and those closing the output port (see at  
 ; the bottom) instead of getting a qasm file you will see the compiled lines
@@ -72,11 +70,9 @@
 (define porto2 (open-output-file fnameo))
 (set-current-output-port porto2)
 
-
 ; Creating header and required vectors.
 (qhead fnameo qver)
 (qregdef q qn c cn)
-
 
 (g1y "h" q 0 3)
 (cx q 0 q 1)
@@ -85,17 +81,14 @@
 (cx q 3 q 2)
 (g1 "h" q 3)
 
-
 (qmeas q 0 c 0)
 (qmeas q 3 c 1)
-
 
 ; Sets the output port again to the console. Don't forget to check if the 
 ; compilation is error free or you have some bugs to kill.
 (set-current-output-port porto1)
 (close porto2)
 (qendc)
-
 
 ; This is a system call to invoke qre. Replace [your-path-to-qre-folder] with
 ; the correct path or change your system PATH variable accordingly.
@@ -104,7 +97,6 @@
 (newline)
 (newline)
 (system "./qre example7.qasm post y qlib_simulator 1 example7_1")
-
 
 ; Now get the data from the QPU.
 (define a (read-file-as-string fnamei))
@@ -139,4 +131,5 @@
 (display " ")
 (display (cadr c))
 (newlines 1)
+
 

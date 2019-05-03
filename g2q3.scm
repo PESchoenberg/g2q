@@ -29,7 +29,6 @@
   #:use-module (g2q g2q1)
   #:use-module (g2q g2q2)  
   #:use-module (grsp grsp0)
-  ;#:use-module (ice-9 regex)
   #:use-module (ice-9 textual-ports)
   #:export (qcompile-and-run
 	    qmain-loop
@@ -83,7 +82,7 @@
     (qhead p_fnameo p_qver)
     (qregdef p_q p_qn p_c p_cn)    
    
-    ; Qcircuit.
+    ; Qcircuit call.
     (p_qf p_i p_q p_c 0 pqn 0 pcn)
     
     ; Set the output port again to the console.
@@ -137,7 +136,9 @@
 ; that are specific for different quantum processors. These are applicable 
 ; for the declared qpu, but not others. Pragmas are introduced as comments
 ; using the standard double "/" character and thus do not modify the QASM2 
-; dode itself.
+; dode itself. Currently you can use it for writing comments on your QASM2
+; code and for sending special instructions to the qx simulator if you use
+; it.
 ; 
 ; Arguments:
 ; - p_qpu: qpu for which the declaration is intended for.

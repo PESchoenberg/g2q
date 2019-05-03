@@ -71,7 +71,7 @@
 	  ((equal? p_n1 "gr")(set! res 1.00))
 	  (else (set! res 0)))
     res))
-  
+
 
 ; g1y - repeats placement of gate p_n1 and group p_l1 by repeating the use of qgate1
 ; from qbit p_y1 to qbit p_y2 on y axis (vertically).
@@ -370,7 +370,6 @@
 ; Sources:
 ; - https://developer.ibm.com/tutorials/os-quantum-computing-shell-game/
 ;
-;
 (define (qreq p_f1 p_f2 p_r p_d p_s p_m p_e)
   (let ((port1 (current-output-port))
 	(port2 (open-output-file p_f2))
@@ -384,7 +383,6 @@
 	(res "")
 	(dev p_d)
 	(data ""))
-
     (set-port-encoding! port2 "UTF-8")
     
     ;Get GX conf data
@@ -563,9 +561,7 @@
 					(set! slm (list-ref sl n))
 					(set! n 0)))
 	   (set! n (- n 1)))
-    
     (set! res (list slm dvm))
-
     res))
     
     

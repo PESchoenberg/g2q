@@ -52,7 +52,6 @@
 (define q "q")
 (define c "c")
 
-
 ; This configures the output to be sent a file instead of the console. If you
 ; take out or disable these lines, and those closing the output port (see at  
 ; the bottom) instead of getting a qasm file you will see the compiled lines
@@ -61,15 +60,12 @@
 (define port2 (open-output-file fname))
 (set-current-output-port port2)
 
-
 ; Remember what this program is about (optional).
 (qcomm "This program does nothing in particular, but shows how to use g2q functions.")
-
 
 ; Creating header and required vectors.
 (qhead fname qver)
 (qregdef q 5 c 5)
-
 
 ; This places five Hadamard gates on y axis (i.e. in parallell), from register
 ; 0 to register 4. Notice that functuon qcomm will print comments on the qasm
@@ -78,13 +74,11 @@
 (qcomm "Five h gates.")
 (g1y "h" q 0 4)
 
-
 ; Now we do the same for a Pauli X, just for fun, but on the three first
 ; registers. You can view the source code for modules g2q0, g2q1 and g2q2 for 
 ; more specific info about these funtctions. Each one is commented there.
 (qcomm "Two x gates.")
 (g1y "x" q 1 2)
-
 
 ; And we add other gates, one by one.
 (qcomm "Various basic gates.")
@@ -98,7 +92,6 @@
 (u1 1.6 q 0)
 (u2 1.6 1.6 q 1)
 (u3 1.6 1.6 1.6 q 2)
-
 
 ; cx, cy, cz and ch gates.
 (qcomm "Controlled x.")
@@ -125,7 +118,6 @@
 (qcomm "Controlled u3.")
 (cu3 1.6 1.6 q 2 q 0)
 
-
 ; if (Not yet available on IBM Q machines yet - uncomment to see how they 
 ; compile but the resulting program may not run on a Q series machine at
 ; least for now.
@@ -134,11 +126,9 @@
 (qcomm "Conditional2 eq.")
 (qcond2 "!=" q 2 1)(g1 "y" q 2)
 
-
 ; Let's put a barrier.
 (qcomm "Barriers.")
 (g1y "barrier" q 0 4)
-
 
 ; And now measure.
 (qcomm "Measuring")
@@ -148,19 +138,13 @@
 (qmeas q 3 c 3)
 (qmeas q 4 c 4)
 
-
 ; Message
 (qcomm "This message will appear at the end of the qasm file.")
-
 
 ; Sets the output port again to the console. Don't forget to check if the 
 ; compilation is error free or you have some bugs to kill.
 (set-current-output-port port1)
 (close port2)
-
-
-; Now we create exxample1.qreg
-; (qreq "example1.qasm" "example1.qreg" "json" "simulator" 100 1 4070323006)
-
 (qendc)
+
 
