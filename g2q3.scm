@@ -55,7 +55,7 @@
 ;
 ; Output:
 ; - A result that consists in the maximum probability obtained from the 
-; - execution of the compiled quantum circuit.
+; execution of the compiled quantum circuit.
 ;
 (define (qcompile-and-run p_fname p_fnameo p_qver p_ddir p_qpu p_qf p_q p_c p_qn p_cn p_mc p_i p_v)
   (let ((porto1 (current-output-port))
@@ -82,7 +82,9 @@
     (qhead p_fnameo p_qver)
     (qregdef p_q p_qn p_c p_cn)    
    
-    ; Qcircuit call.
+    ; Qcircuit call. Note that this is a first-order function passed as an
+    ; argument. In this case, the function has itself several arguments that
+    ; could be passed as a a single list argument in the future.
     (p_qf p_i p_q p_c 0 pqn 0 pcn)
     
     ; Set the output port again to the console.
@@ -136,7 +138,7 @@
 ; that are specific for different quantum processors. These are applicable 
 ; for the declared qpu, but not others. Pragmas are introduced as comments
 ; using the standard double "/" character and thus do not modify the QASM2 
-; dode itself. Currently you can use it for writing comments on your QASM2
+; code itself. Currently you can use it for writing comments on your QASM2
 ; code and for sending special instructions to the qx simulator if you use
 ; it.
 ; 
