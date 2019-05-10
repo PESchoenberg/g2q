@@ -105,7 +105,7 @@
 ; each quantum circuit created on each qcall.
 (qcomm "Number of QPU call (qcalls): ")
 (set! qx (read))
-(display "Wait...")
+(display "Running. Wait...")
 (newlines 1)
 (set! res (qmain-loop clean fname fnameo qver ddir qpu qf q c qn cn mc qx v))
 (newlines 2)

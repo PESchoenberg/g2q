@@ -318,7 +318,7 @@
   (u3 (* p_la 0.5) p_pa 0 p_l2 p_y2))
 
 
-; Puts a set of gates in configuration g1 cx g1.
+; g1cxg1 - Puts a set of gates in configuration g1 cx g1.
 ;
 ; Arguments:
 ; - p_n1: g1 gate name.
@@ -338,7 +338,8 @@
   (ptit "=" 60 2 "Compilation completed!"))
 
 
-; Prepares a compiled qasm file as a string for passing to ibm q html api.
+; qregex - Prepares a compiled qasm file as a string for passing to ibm q html
+; api.
 ;
 ; Arguments
 ; - p_f: name of .qasm file.
