@@ -35,7 +35,8 @@
 (define-module (g2q g2q1)
   #:export (g2q-version
 	    g2q-ibm-config
-	    g2q-qre-config))
+	    g2q-qre-config
+	    g2q-select-qpu))
 
 
 ; g2q-version - returns the current version of the compiler.
@@ -45,8 +46,8 @@
     res))
 
 
-; TODO : configuration for using IBM Q series machines; equivalent to functions
-; found on Qiskit IDE. (Deprecated)
+; g2q-ibm-config - TODO : configuration for using IBM Q series machines;
+; equivalent to functions found on Qiskit IDE. (Deprecated).
 ;
 ; Elements:
 ; 1 - Base uri for online access.
@@ -58,7 +59,7 @@
     conf))
 
 
-; Configuration for using qre
+; g2q-qre-config - Configuration for using qre.
 ;
 ; Elements:
 ; 1 - json subdir.
@@ -66,8 +67,36 @@
 ; 3 - default qpu.
 ;
 (define (g2q-qre-config)
-  (let ((conf (list "data/json/" "data/sqlite3/" "qlib_simulator" "ibmqx_simulator" "qx_simulator")))
+  (let ((conf (list "data/json/" "data/sqlite3/" "qlib_simulator" "ibmqx_simulator" "qx_simulator" "ibmqx_real")))
     conf))
 
+
+; g2q-select-qpu - select qpu to be used.
+;
+; Output:
+; - String containing the name of the selected qpu. DEfaults to qlib_simulator.
+;
+(define (g2q-select-qpu)
+  (let ((res1 3)
+	(res ""))
+    (newline)
+    (display "Select qpu:")
+    (newline)
+    (display "1 - qlib_simulator.")
+    (newline)
+    (display "2 - qx_simulator.")
+    (newline)
+    (display "3 - ibmqx_simulator.")
+    (newline)
+    (display "4 - ibmqx_real.")
+    (newline)
+    (set! res1 (read))
+    (if (< res1 1)(set! res1 1))
+    (if (> res1 4)(set! res1 1))
+    (if (= res1 1)(set! res (car(cdr(cdr(g2q-qre-config))))))    
+    (if (= res1 2)(set! res (car(cdr(cdr(cdr(cdr(g2q-qre-config))))))))    
+    (if (= res1 4)(set! res (car(cdr(cdr(cdr(cdr(cdr(g2q-qre-config)))))))))
+    (if (= res1 3)(set! res (car(cdr(cdr(cdr(g2q-qre-config)))))))
+    res))
 
 
