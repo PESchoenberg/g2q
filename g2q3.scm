@@ -39,25 +39,26 @@
 ; cycle.
 ;
 ; Arguments:
-; p_fname: fname.
-; p_fnameo: fnameo.
-; p_qver: qver.
-; p_ddir: ddir.
-; p_qpu: qpu.
-; p_qf: quantum function.
-; p_q: q.
-; p_c: c.
-; p_qn qn.
-; p_cn: cn.
-; p_mc: mc.
-; p_i: iteration number.
-; p_v: verbosity ("y" or "n")
+; - p_fname: fname.
+; - p_fnameo: fnameo.
+; - p_qver: qver.
+; - p_ddir: ddir.
+; - p_qpu: qpu.
+; - p_qf: quantum function.
+; - p_q: q.
+; - p_c: c.
+; - p_qn qn.
+; - p_cn: cn.
+; - p_mc: mc.
+; - p_i: iteration number.
+; - p_v: verbosity ("y" or "n")
+; - p_rf: results function.
 ;
 ; Output:
 ; - A result that consists in the maximum probability obtained from the 
 ; execution of the compiled quantum circuit.
 ;
-(define (qcompile-and-run p_fname p_fnameo p_qver p_ddir p_qpu p_qf p_q p_c p_qn p_cn p_mc p_i p_v)
+(define (qcompile-and-run p_fname p_fnameo p_qver p_ddir p_qpu p_qf p_q p_c p_qn p_cn p_mc p_i p_v p_rf)
   (let ((porto1 (current-output-port))
 	(porto2 (open-output-file p_fnameo))
 	(a "")
@@ -98,7 +99,8 @@
     ; Now get the data from the QPU.
     (set! a (read-file-as-string fnamei))
     (set! b (qfclvr a))
-    (set! res (car (cdr (qfres b "max"))))
+    ;(set! res (car (cdr (qfres b "max"))))
+    (set! res (p_rf b))
     (qrsp-save-to-file a fsave "a")
     res))
     
@@ -108,28 +110,29 @@
 ; returned by the QPU in order to keep clean the ddir folder.
 ;
 ; Arguments:
-; p_clean: "y" to clean data folder.
-; p_fname: fname.
-; p_fnameo: fnameo.
-; p_qver: qver.
-; p_ddir: ddir.
-; p_qpu: qpu.
-; p_qf: quantum function.
-; p_q: q.
-; p_c: c.
-; p_qn qn.
-; p_cn: cn.
-; p_mc: mc.
-; p_qx: qx
-; p_v: verbosity ("y" or "n").
+; - p_clean: "y" to clean data folder.
+; - p_fname: fname.
+; - p_fnameo: fnameo.
+; - p_qver: qver.
+; - p_ddir: ddir.
+; - p_qpu: qpu.
+; - p_qf: quantum function.
+; - p_q: q.
+; - p_c: c.
+; - p_qn qn.
+; - p_cn: cn.
+; - p_mc: mc.
+; - p_qx: qx
+; - p_v: verbosity ("y" or "n").
+; - p_rf: results function.
 ;
-(define (qmain-loop p_clean p_fname p_fnameo p_qver p_ddir p_qpu p_qf p_q p_c p_qn p_cn p_mc p_qx p_v)
+(define (qmain-loop p_clean p_fname p_fnameo p_qver p_ddir p_qpu p_qf p_q p_c p_qn p_cn p_mc p_qx p_v p_rf)
   (let ((res 0))    
     (let loop ((i p_qx))
       (if (= i 0)
 	  (begin (if(equal? p_clean "y")(system (strings-append (list "rm " p_ddir p_fname "_*") 0)))
 	  res)
-	  (begin (set! res (+ res (qcompile-and-run p_fname p_fnameo p_qver p_ddir p_qpu p_qf p_q p_c p_qn p_cn p_mc i p_v)))
+	  (begin (set! res (+ res (qcompile-and-run p_fname p_fnameo p_qver p_ddir p_qpu p_qf p_q p_c p_qn p_cn p_mc i p_v p_rf)))
 		 (loop (- i 1)))))))
 
 

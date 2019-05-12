@@ -81,13 +81,13 @@
 ; to which this one is passed as an argument.
 ;
 ; Arguments:
-; p_i: counter for qcalls.
-; p_q: value of q variable.
-; p_c: c.
-; p_qnl: p_qn lowest.
-; p_qnh: p_qn highest.
-; p_cnl: p_cn lowest.
-; p_cnh: p_cn highest.
+; - p_i: counter for qcalls.
+; - p_q: value of q variable.
+; - p_c: c.
+; - p_qnl: p_qn lowest.
+; - p_qnh: p_qn highest.
+; - p_cnl: p_cn lowest.
+; - p_cnh: p_cn highest.
 ;
 (define (qf p_i p_q p_c p_qnl p_qnh p_cnl p_cnh)
     (g1y "h" p_q p_qnl p_qnh)
@@ -100,6 +100,17 @@
     (qdeclare "qlib-simulator" "// Hello qlib-simulator"))
 
 
+; rf - results function. In this case, extract the max value.
+;
+; Arguments:
+; - p_b: b. List fo results to process.
+;
+(define (rf p_b)
+  (let ((res 0))
+    (set! res (car (cdr (qfres p_b "max"))))
+    res))
+
+
 ; And this is the main program. It gives as a result the decimal absolute and
 ; non-probabilistic summation of the max values obtained on the execution of 
 ; each quantum circuit created on each qcall.
@@ -107,7 +118,7 @@
 (set! qx (read))
 (display "Running. Wait...")
 (newlines 1)
-(set! res (qmain-loop clean fname fnameo qver ddir qpu qf q c qn cn mc qx v))
+(set! res (qmain-loop clean fname fnameo qver ddir qpu qf q c qn cn mc qx v rf))
 (newlines 2)
 (display "Result = ")
 (display res)
