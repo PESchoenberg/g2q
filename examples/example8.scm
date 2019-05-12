@@ -66,13 +66,13 @@
 ; This function comprises an entire compilation and execution cycle.
 ;
 ; Arguments:
-; p_qver: qver.
-; p_q: q.
-; p_c: c.
-; p_qn qn.
-; p_cn: cn.
-; p_mc: mc.
-; p_i: iteration number.
+; - p_qver: qver.
+; - p_q: q.
+; - p_c: c.
+; - p_qn qn.
+; - p_cn: cn.
+; - p_mc: mc.
+; - p_i: iteration number.
 ;
 ; Output:
 ; - A result that consists in the maximum probability obtaied from the 
@@ -141,13 +141,13 @@
 ; This is the main loop of the program. It will be repeated p_qx times.
 ;
 ; Arguments:
-; p_qver: qver.
-; p_q: q.
-; p_c: c.
-; p_qn qn.
-; p_cn: cn.
-; p_mc: mc.
-; p_qx: qx
+; - p_qver: qver.
+; - p_q: q.
+; - p_c: c.
+; - p_qn qn.
+; - p_cn: cn.
+; - p_mc: mc.
+; - p_qx: qx
 ;
 ; Output:
 (define (main-loop p_qver p_q p_c p_qn p_cn p_mc p_qx)

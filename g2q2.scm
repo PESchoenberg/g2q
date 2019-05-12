@@ -483,7 +483,7 @@
 ; qfclvr - Find and construct label and value registers.
 ;
 ; Arguments:
-; p_s: string with results from qre.
+; - p_s: string with results from qre.
 ;
 ; Output:
 ; - A list contaning two lists:
@@ -527,7 +527,7 @@
 	
 
 ; qfres - find max or min value among results. If more than one ocurrence
-; is found, it returns the last label corresponding to the las element that
+; is found, it returns the last label corresponding to the last element that
 ; matches.
 ;
 ; Arguments:
@@ -537,9 +537,9 @@
 ;  - "min" to get the minimum value.
 ;
 ; Output:
-; A list of two elements:
-; - First element contains the label of the result.
-; - Second element contains the max value obtained.
+; - A list of two elements:
+;  - First element contains the label of the result.
+;  - Second element contains the max value obtained.
 ;
 (define (qfres p_l p_r)
   (let ((res (list ))
