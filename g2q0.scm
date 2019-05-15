@@ -47,7 +47,8 @@
 	    u3
 	    qcond1
 	    qcond2
-	    qvalid-conditional))
+	    qvalid-conditional
+	    swap))
 
 
 ; qhead - defines program name.
@@ -293,5 +294,22 @@
     (cond ((equal? p_s1 "==")(set! res #t)))
     (cond ((equal? p_s1 "!=")(set! res #t)))
     res))
+
+
+; swap - swap gate expressed atomically.
+;
+; Arguments:
+; - p_l1: gate group identifier. 
+; - p_y1: y position 1.
+; - p_y2: y position 2. 
+;
+; Sources:
+; - https://algassert.com/post/1717
+;
+(define (swap p_l1 p_y1 p_y2)
+  (qcx "cx" p_l1 p_y1 p_l1 p_y2)
+  (qcx "cx" p_l1 p_y2 p_l1 p_y1)
+  (qcx "cx" p_l1 p_y1 p_l1 p_y2))
+
 
 

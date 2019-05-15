@@ -67,6 +67,26 @@
 (qhead fname qver)
 (qregdef q 5 c 5)
 
+; Reset gates.
+(qcomm "Five reset gates.")
+(g1y "reset" q 0 4)
+
+; A swap gate.
+(qcomm "A swap gate.")
+(swap q 0 1)
+
+; A swap gate. Swap fast gates are better than their non-fast counterparts - in
+; this case this means that swap-fast is faster in execution than swap - but 
+; might not be recognized by all sorts of QPU, be them simulators or real 
+; processors. For such cases, I have written non-fast versions of several gates. 
+; These non-fast gates are atomic decompositions of swap-fast gates into gates
+; that can be recognized by a wider variety of QPU. So, in principle, if you
+; can, use the fast version of a gate when it is available because it will run
+; faster and with a lesser error rate, but if you can't or your QPU does not
+; recongixze the fast gate in question, use the non-fas version of it.
+(qcomm "A swap-fast gate.")
+(swap-fast q 0 1)
+
 ; This places five Hadamard gates on y axis (i.e. in parallell), from register
 ; 0 to register 4. Notice that functuon qcomm will print comments on the qasm
 ; file, while these comments, starting will ; only appear in source files such  

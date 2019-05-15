@@ -57,7 +57,8 @@
 	    qcnot1
 	    qxor1
 	    qfclvr
-	    qfres))
+	    qfres
+	    swap-fast))
 
 
 ; qconst - various required constants.
@@ -153,7 +154,7 @@
   (g2 "cx" p_l1 p_y1 p_l2 p_y2))
 
 
-; cz - gate cz, controlled phase.
+; cz - gate cz, controlled phase expressed atomically.
 ;
 ; Arguments:
 ; - p_l1: gate group indentifier 1
@@ -167,7 +168,7 @@
   (g1 "h" p_l2 p_y2))
 
 
-; cy - gate cy, controlled y.
+; cy - gate cy, controlled y expressed atomically.
 ;
 ; Arguments:
 ; - p_l1: gate group indentifier 1
@@ -181,7 +182,7 @@
   (g1 "s" p_l2 p_y2))
 
 
-; ch - gate ch, controlled h.
+; ch - gate ch, controlled h expressed atomically.
 ;
 ; Arguments:
 ; - p_l1: gate group indentifier 1.
@@ -203,7 +204,7 @@
   (g1 "s" p_l1 p_y1))
 
 
-; ccx - gate ccx - Toffoli.
+; ccx - gate ccx - Toffoli expressed atomically.
 ;
 ; Arguments:
 ; - p_l1: gate group indentifier 1.
@@ -265,7 +266,7 @@
   (u1 p_p p_l1 p_y1))
 
 
-; crz - gate crz, controlled rz.
+; crz - gate crz, controlled rz expressed atomically.
 ;
 ; Arguments:
 ; - p_la: lambda angle.
@@ -282,7 +283,7 @@
     (cx p_l1 p_y1 p_l2 p_y2)))
 
 
-; cu1 - gate cu1, controlled phase rotation.
+; cu1 - gate cu1, controlled phase rotation expressed atomically.
 ;
 ; Arguments:
 ; - p_la: lambda angle.
@@ -300,7 +301,7 @@
     (u1 la p_l1 p_y1)))
 
 
-; cu3 - gate cu3, controlled U.
+; cu3 - gate cu3, controlled U expressed atomically.
 ;
 ; Arguments:
 ; - p_la: lambda angle.
@@ -437,7 +438,7 @@
     (close port2)))
 
 
-; qcnot1 - a cx based NOT gate.
+; qcnot1 - a cx based NOT gate expressed atomically..
 ;
 ; Arguments:
 ; - p_l1: gate group name 1.
@@ -455,7 +456,7 @@
   (cx p_l2 p_y2 p_l1 p_y1))
 
 
-; qxor1 - a qcnot1 based XOR gate.
+; qxor1 - a qcnot1 based XOR gate expressed atomically.
 ;
 ; Arguments:
 ; - p_l1: gate group name 1.
@@ -565,6 +566,18 @@
     (set! res (list slm dvm))
     res))
     
-    
+
+; swap-fast - swap gate expressed in fast form.
+;
+; Arguments:
+; - p_l1: gate group identifier. 
+; - p_y1: y position 1.
+; - p_y2: y position 2. 
+;
+(define (swap-fast p_l1 p_y1 p_y2)
+  (display (strings-append (list "swap " (qbgna p_l1 p_y1) "," (qbgna p_l1 p_y2) ";") 0))
+  (newline))
+
+
 
 
