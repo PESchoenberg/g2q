@@ -162,7 +162,8 @@
 ; - p_y2: y position (plus) 
 ;
 (define (qcx p_n1 p_l1 p_y1 p_l2 p_y2)
-  (display (strings-append (list "cx " (qbgna p_l1 p_y1) "," (qbgna p_l2 p_y2) ";") 0))
+  ;(display (strings-append (list "cx " (qbgna p_l1 p_y1) "," (qbgna p_l2 p_y2) ";") 0))
+  (display (strings-append (list p_n1 " " (qbgna p_l1 p_y1) "," (qbgna p_l2 p_y2) ";") 0))
   (newline))
 
  
@@ -212,6 +213,9 @@
 ;
 (define (g2 p_n1 p_r1 p_y1 p_r2 p_y2)
   (cond ((equal? "cx" p_n1)(qcx p_n1 p_r1 p_y1 p_r2 p_y2))
+	((equal? "cy-fast" p_n1)(qcx "cy" p_r1 p_y1 p_r2 p_y2))
+	((equal? "cz-fast" p_n1)(qcx "cz" p_r1 p_y1 p_r2 p_y2))
+	((equal? "ch-fast" p_n1)(qcx "ch" p_r1 p_y1 p_r2 p_y2))
 	(else (qcx p_n1 p_r1 p_y1 p_r2 p_y2))))
 
 

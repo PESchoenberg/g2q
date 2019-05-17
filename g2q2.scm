@@ -41,12 +41,18 @@
 	    qmeasy
 	    cx
 	    cz
+	    cz-fast
 	    cy
+	    cy-fast
 	    ch
+	    ch-fast
 	    ccx
 	    rx
+	    rx-fast
 	    ry
+	    ry-fast
 	    rz
+	    rz-fast
 	    crz
 	    cu1
 	    cu3
@@ -168,6 +174,18 @@
   (g1 "h" p_l2 p_y2))
 
 
+; cz-fast - gate cz, controlled y in fast form.
+;
+; Arguments:
+; - p_l1: gate group indentifier 1
+; - p_y1: qubit 1 (dot).
+; - p_l1: gate group indentifier 1
+; - p_y2: qubit 2 (plus).
+;
+(define (cz-fast p_l1 p_y1 p_l2 p_y2)
+  (g2 "cz-fast" p_l1 p_y1 p_l2 p_y2))
+
+
 ; cy - gate cy, controlled y expressed atomically.
 ;
 ; Arguments:
@@ -180,6 +198,18 @@
   (g1 "sdg" p_l2 p_y2)
   (cx p_l1 p_y1 p_l2 p_y2)
   (g1 "s" p_l2 p_y2))
+
+
+; cy-fast - gate cy, controlled y in fast form.
+;
+; Arguments:
+; - p_l1: gate group indentifier 1
+; - p_y1: qubit 1 (dot).
+; - p_l1: gate group indentifier 1
+; - p_y2: qubit 2 (plus).
+;
+(define (cy-fast p_l1 p_y1 p_l2 p_y2)
+  (g2 "cy-fast" p_l1 p_y1 p_l2 p_y2))
 
 
 ; ch - gate ch, controlled h expressed atomically.
@@ -202,6 +232,18 @@
   (g1 "s" p_l2 p_y2)
   (g1 "x" p_l2 p_y2)
   (g1 "s" p_l1 p_y1))
+
+
+; ch-fast - gate ch, controlled h in fast form.
+;
+; Arguments:
+; - p_l1: gate group indentifier 1.
+; - p_y1: qubit 1 (dot).
+; - p_l2: gate group indentifier 2.
+; - p_y2: qubit 2 (plus).
+;
+(define (ch-fast p_l1 p_y1 p_l2 p_y2)
+  (g2 "ch-fast" p_l1 p_y1 p_l2 p_y2))
 
 
 ; ccx - gate ccx - Toffoli expressed atomically.
@@ -244,6 +286,19 @@
     (u3 p_t (* y2 -1) y2 p_l1 p_y1)))
 
 
+; rx-fast - gate rx, rotation around X-axis, in fast form.
+;
+; Arguments:
+; - p_t: theta angle (dummy, left for consistency).
+; - p_l1: gate group indentifier 1.
+; - p_y1: qubit 1.
+; 
+(define (rx-fast p_t p_l1 p_y1)
+  (let ((y2 (/ (qconst "Pi") 2)))
+    (display (strings-append (list "rx(" (number->string y2) ") " p_l1 "[" (number->string p_y1) "];") 0))
+    (newline)))
+
+
 ; ry - gate ry, rotation around Y-axis.
 ;
 ; Arguments:
@@ -255,6 +310,19 @@
   (u3 p_t 0 0 p_l1 p_y1))
 
 
+; ry-fast - gate ry, rotation around Y-axis, in fast form.
+;
+; Arguments:
+; - p_t: angle (dummy, left for consistency).
+; - p_l1: gate group indentifier 1.
+; - p_y1: qubit 1.
+; 
+(define (ry-fast p_t p_l1 p_y1)
+  (let ((y2 (/ (qconst "Pi") 2)))
+    (display (strings-append (list "ry(" (number->string y2) ") " p_l1 "[" (number->string p_y1) "];") 0))
+    (newline)))
+
+
 ; rz - gate rz, rotation around Z-axis.
 ;
 ; Arguments:
@@ -264,6 +332,19 @@
 ;
 (define (rz p_p p_l1 p_y1)
   (u1 p_p p_l1 p_y1))
+
+
+; rz-fast - gate rz, rotation around Z-axis, in fast form.
+;
+; Arguments:
+; - p_t: angle (dummy, left for consistency).
+; - p_l1: gate group indentifier 1.
+; - p_y1: qubit 1.
+; 
+(define (rz-fast p_t p_l1 p_y1)
+  (let ((y2 (/ (qconst "Pi") 2)))
+    (display (strings-append (list "rz(" (number->string y2) ") " p_l1 "[" (number->string p_y1) "];") 0))
+    (newline)))
 
 
 ; crz - gate crz, controlled rz expressed atomically.
