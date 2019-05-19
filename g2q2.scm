@@ -47,6 +47,7 @@
 	    ch
 	    ch-fast
 	    ccx
+	    ccx-fast
 	    rx
 	    rx-fast
 	    ry
@@ -54,6 +55,7 @@
 	    rz
 	    rz-fast
 	    crz
+	    crz-fast
 	    cu1
 	    cu3
 	    g1cxg1
@@ -274,6 +276,21 @@
   (cx p_l1 p_y1 p_l2 p_y2))
 
 
+; ccx-fast - Toffoli gate in fast form.
+;
+; Arguments:
+; - p_l1: gate group indentifier 1.
+; - p_y1 qubit 1.
+; - p_l2: gate group indentifier 2.
+; - p_y2: qubit 2.
+; - p_l3: gate group indentifier 3.
+; - p_y3: qubit 3.
+;
+(define (ccx-fast p_l1 p_y1 p_l2 p_y2 p_l3 p_y3)
+  (display (strings-append (list "ccx " (qbgna p_l1 p_y1) "," (qbgna p_l1 p_y2) "," (qbgna p_l3 p_y3) ";") 0))
+  (newline))
+  
+
 ; rx - gate rx, rotation around X-axis.
 ;
 ; Arguments:
@@ -362,6 +379,21 @@
     (cx p_l1 p_y1 p_l2 p_y2)
     (u1 (* -1.0 la) p_l2 p_y2)
     (cx p_l1 p_y1 p_l2 p_y2)))
+
+
+; crz-fast - gate crz, controlled rz expressed in fast form.
+;
+; Arguments:
+; - p_la: lambda angle.
+; - p_l1: gate group indentifier 1.
+; - p_y1: qubit 1.
+; - p_l2: gate group indentifier 2.
+; - p_y2: qubit 2.
+;
+(define (crz-fast p_la p_l1 p_y1 p_l2 p_y2)
+  (let ((y2 (/ (qconst "Pi") 2)))
+    (display (strings-append (list "crz(" (number->string y2) ") " p_l1 "[" (number->string p_y1) "]," p_l2 "[" (number->string p_y2) "];") 0))
+    (newline)))
 
 
 ; cu1 - gate cu1, controlled phase rotation expressed atomically.
