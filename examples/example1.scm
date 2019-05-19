@@ -129,6 +129,11 @@
 (qcomm "Controlled h in fast form.")
 (ch-fast q 2 q 0)
 
+; Toffoli stuff.
+(qcomm "Toffoli (ccx).")
+(ccx q 0 q 1 q 2)
+(qcomm "Toffoli in fast form.")
+(ccx-fast q 0 q 1 q 2)
 
 ; Rotations and others.
 (qcomm "rx.")
@@ -145,6 +150,8 @@
 (rz-fast 1.6 q 3)
 (qcomm "crz.")
 (crz 1.6 q 3 q 4)
+(qcomm "crz in fast form.")
+(crz-fast 1.6 q 3 q 4)
 (qcomm "Controlled u1.")
 (cu1 1.6 q 2 q 0)
 (qcomm "Controlled u3.")
