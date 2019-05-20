@@ -90,6 +90,17 @@ runs it using qre.
 * URL of this project - https://github.com/PESchoenberg/g2q
 
 
+## Related reading material:
+
+* Extending the Lambda Calculus to Express Randomized and Quantumized Algorithms - Mayman. 1996 - https://arxiv.org/abs/quant-ph/9612052
+
+* A Lambda Calculus for Quantum Computation - Van Tonder. 2003 - http://www.het.brown.edu/people/andre/qlambda/
+
+* Quantum Lambda Calculus  - Selinger, Valiron - https://www.mscs.dal.ca/~selinger/papers/qlambdabook.pdf
+
+* A Lambda Calculus for Quantum Computation with Classical Control - Selinger, Valiron. 2005 - https://www.mathstat.dal.ca/~selinger/papers/papers/qlambda-mscs.pdf 
+
+
 ## License:
 
 * LGPL-3.0-or-later.
