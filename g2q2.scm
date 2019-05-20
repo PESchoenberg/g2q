@@ -57,7 +57,9 @@
 	    crz
 	    crz-fast
 	    cu1
+	    cu1-fast
 	    cu3
+	    cu3-fast
 	    g1cxg1
 	    qendc
 	    qregex
@@ -414,11 +416,25 @@
     (u1 la p_l1 p_y1)))
 
 
-; cu3 - gate cu3, controlled U expressed atomically.
+; cu1-fast - gate cu1, controlled phase rotation expressed in fast form.
 ;
 ; Arguments:
 ; - p_la: lambda angle.
-; - p_pa: 
+; - p_l1: gate group indentifier 1.
+; - p_y1: qubit 1.
+; - p_l2: gate group indentifier 2.
+; - p_y2: qubit 2.
+;
+(define (cu1-fast p_la p_l1 p_y1 p_l2 p_y2)
+  (display (strings-append (list "cu1(" (number->string p_la) ") " p_l1 "[" (number->string p_y1) "]," p_l2 "[" (number->string p_y2) "];") 0))
+  (newline))
+
+
+; cu3 - gate cu3, controlled U expressed atomically.
+;
+; Arguments:
+; - p_la: angle.
+; - p_pa: angle.
 ; - p_l1: gate group indentifier 1.
 ; - p_y1: qubit 1.
 ; - p_l2: gate group indentifier 2.
@@ -430,6 +446,22 @@
   (u3 (* (* p_la 0.5) -1.0) 0 (* (* (+ p_pa p_la) 0.5) -1.0) p_l2 p_y2)
   (cx p_l1 p_y1 p_l2 p_y2)
   (u3 (* p_la 0.5) p_pa 0 p_l2 p_y2))
+
+
+; cu3-fast - gate cu3, controlled U expressed in fast form.
+;
+; Arguments:
+; - p_la1: angle 1.
+; - p_la2: angle 2.
+; - p_la3L angle 3.
+; - p_l1: gate group indentifier 1.
+; - p_y1: qubit 1.
+; - p_l2: gate group indentifier 2.
+; - p_y2: qubit 2.
+;
+(define (cu3-fast p_la1 p_la2 p_la3 p_l1 p_y1 p_l2 p_y2)
+  (display (strings-append (list "cu3(" (number->string p_la1) "," (number->string p_la2) "," (number->string p_la3) ") " p_l1 "[" (number->string p_y1) "]," p_l2 "[" (number->string p_y2) "];") 0))
+  (newline))
 
 
 ; g1cxg1 - Puts a set of gates in configuration g1 cx g1.

@@ -154,8 +154,12 @@
 (crz-fast 1.6 q 3 q 4)
 (qcomm "Controlled u1.")
 (cu1 1.6 q 2 q 0)
+(qcomm "Controlled u1 in fast form.")
+(cu1-fast 1.6 q 2 q 0)
 (qcomm "Controlled u3.")
 (cu3 1.6 1.6 q 2 q 0)
+(qcomm "Controlled u3 in fast form.")
+(cu3-fast 1.6 1.6 1.6 q 2 q 0)
 
 ; if (Not yet available on IBM Q machines yet - uncomment to see how they 
 ; compile but the resulting program may not run on a Q series machine at
