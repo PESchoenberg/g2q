@@ -83,12 +83,12 @@
 ; that can be recognized by a wider variety of QPU. So, in principle, if you
 ; can, use the fast version of a gate when it is available because it will run
 ; faster and with a lesser error rate, but if you can't or your QPU does not
-; recongixze the fast gate in question, use the non-fas version of it.
+; recongize the fast gate in question, use the non-fast version.
 (qcomm "A swap-fast gate.")
 (swap-fast q 0 1)
 
 ; This places five Hadamard gates on y axis (i.e. in parallell), from register
-; 0 to register 4. Notice that functuon qcomm will print comments on the qasm
+; 0 to register 4. Notice that function qcomm will print comments on the qasm
 ; file, while these comments, starting will ; only appear in source files such  
 ; as this one.
 (qcomm "Five h gates.")
