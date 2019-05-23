@@ -4,33 +4,36 @@
 
 ; ==============================================================================
 ;
-; example11.scm
+; test1.scm
 ;
-; - Experiment to produce majoranas.
-
+; - A series of tests to evaluate which gates provided by g2q and qre are
+;   compatible with a given qpu. In case that a gate is not compatible with the
+;   selected quantum processor or simulator, a message will state so. Note that
+;   in order for this to work, the gate must be one specified in the OpenQASM2
+;   standard.
 ;
 ; Compilation (if you have g2q and qre in your system path):
 ;
-; - cd to your /examples folder.
+; - cd to your /tests folder.
 ;
 ; - Enter the following:
 ;
-;   guile example11.scm
+;   guile test1.scm
 ;   
 ; Notice that you will need to have g2q and qre (see README.md for details)
 ; installed on your system  and your system path variable set to point to both
 ; in order for this program to work properly. Alternatively, you can:
 ;
-; - copy example11.scm to the main folder of your qre installation.
+; - copy test1.scm to the main folder of your qre installation.
 ; 
 ; - Enter the following:
 ;
-;   guile example11.scm 
+;   guile test1.scm 
 ;
 ; Sources:
-; - https://medium.com/@decodoku/an-experiment-i-did-and-why-you-should-care-9cbabe544cc7
-; - https://arxiv.org/pdf/1609.07774.pdf
-; - https://youtu.be/_xFOPmdjwCI
+; - Andrew W. Cross, Lev S. Bishop, John A. Smolin, Jay M. Gambetta "Open Quantum Assembly Language", https://arxiv.org/abs/1707.03429
+; - https://en.wikipedia.org/wiki/OpenQASM
+; - https://github.com/Qiskit/openqasm
 ;
 ; ==============================================================================
 ;
@@ -61,12 +64,12 @@
 
 
 ; Vars and initial stuff. These are editable.
-(define fname "example11") ; File name
+(define fname "test1") ; File name
 (define qpu "qlib_simulator")
 (define clean "y") ; Clean the json files created in ddir after use.
 (define qver 2.0) ; OpenQASM version
-(define qn 5) ; Length of the quantum register.
-(define cn 5) ; Length of the conventional register
+(define qn 3) ; Length of the quantum register.
+(define cn 3) ; Length of the conventional register
 (define v "y") ; Verbosity.
 
 ; Vars and initial stuff. Do not edit these.
@@ -80,10 +83,7 @@
 
 
 ; qf - Notice that qf is a function that contains the actual code to be compiled
-; into QASM2. The function itself is passed as an argument (higher order
-; function) to function main-loop. Also take in account that the arguments 
-; to functions such as this one must match the arguments passed to the functions 
-; to which this one is passed as an argument.
+; into QASM2.
 ;
 ; Arguments:
 ; - p_i: counter for qcalls.
@@ -95,28 +95,51 @@
 ; - p_cnh: p_cn highest.
 ;
 (define (qf p_i p_q p_c p_qnl p_qnh p_cnl p_cnh)
+  ; Basic gates.
+  (g1 "h" q 0)
+  (g1 "x" q 1)
+  (g1 "y" q 2)
+  (g1 "z" q 0)
+  (g1 "s" q 1)
+  (g1 "t" q 2)  
   (g1 "sdg" q 0)
-  (g1y "id" q 1 4)
-  (g1 "h" q 0)
-  (g1 "sdg" q 3)
-  (g1 "h" q 3)
-  (cx q 0 q 2)
-  (cx q 3 q 2)
-  (g1 "h" q 0)
-  (g1 "s" q 0)
-  (g1 "h" q 3)
-  (g1 "s" q 3)
-  (g1 "h" q 1)  
-  (g1 "h" q 2)
-  (cx q 1 q 2)
-  (g1 "h" q 1)  
-  (g1 "h" q 2)
-  (g1 "h" q 4)
-  (cx q 4 q 2)
-  (g1 "h" q 3)
-  (g1 "h" q 4)
-  (cx q 3 q 2)
-  (g1 "h" q 3)    
+  (g1 "tdg" q 1)
+  (g1 "reset" q 0)
+  (swap q 1 2)
+  (swap-fast q 0 1)  
+  ; Controlled gates.
+  (cx q 2 q 0)
+  (cy q 0 q 1)
+  (cy-fast q 2 q 0)
+  (cz q 0 q 1)
+  (cz-fast q 2 q 0)
+  (ch q 0 q 1)
+  (ch-fast q 2 q 0)
+  ; Universal gates.  
+  (u1 1.6 q 0)
+  (u2 1.6 1.6 q 1)
+  (u3 1.6 1.6 1.6 q 2)
+  (cu1 1.6 q 2 q 0)
+  (cu1-fast 1.6 q 2 q 1)
+  (cu3 1.6 1.6 q 2 q 2)
+  (cu3-fast 1.6 1.6 1.6 q 2 q 0)  
+  ; Toffoli.
+  (ccx q 0 q 1 q 2)
+  (ccx-fast q 0 q 1 q 2)  
+  ; Rotations and others.
+  (rx 1.6 q 1)
+  (rx-fast 1.6 q 1)
+  (ry 1.6 q 2)
+  (ry-fast 1.6 q 2)
+  (rz 1.6 q 3)
+  (rz-fast 1.6 q 0)
+  (crz 1.6 q 1 q 2)
+  (crz-fast 1.6 q 0 q 1)
+  ; Conditionals.
+  (qcond1 "==" q 1)(g1 "y" q 2)
+  (qcond2 "!=" q 2 1)(g1 "y" q 2)
+  ; Barrier and measure.
+  (g1y "barrier" q 0 (- qn 1))  
   (qmeasy p_q p_c p_cnl p_cnh)
   (qdeclare "qx-simulator" "error_model depolarizing_channel,0.001")
   (qdeclare "qlib-simulator" "// Hello qlib-simulator"))
@@ -157,8 +180,7 @@
 ; And this is the main program. It gives as a result the decimal absolute and
 ; non-probabilistic summation of the max values obtained on the execution of 
 ; each quantum circuit created on each qcall.
-(qpresent "Producing majoranas" "Based on a work by Dr. James Wootton." "n")
-(display "Department of Physics, University of Basel, 2017.\n")
+(qpresent "Test1.scm" "Testing gates for a selected qpu." "n")
 (set! qpu (g2q-select-qpu))
 (cond ((equal? qpu "none")(display "\nBye!\n"))
       (else  
@@ -171,5 +193,4 @@
 	 (display "Result = ")
 	 (display res)
 	 (newlines 1))))
-
 
