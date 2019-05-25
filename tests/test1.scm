@@ -148,12 +148,10 @@
 ; rf - results function. In this case, extract the max value.
 ;
 ; Arguments:
-; - p_b: b. List fo results to process.
+; - p_b: b. List of results to process.
 ;
 (define (rf p_b)
-  (let ((res 0))
-    (set! res (car (cdr (qfres p_b "max"))))
-    res))
+  (car (cdr (qfres p_b "max"))))
 
 
 ; qpresent - This is a presentation for the program and what it intends to
@@ -170,17 +168,13 @@
   (let ((n 0))
     (ptit "=" 60 2 p_ti)
     (ptit " " 60 0 p_te)
-    (display " ")
-    (newline)
     (if (eq? p_en "y")(begin
 			(qcomm "Press <ENT> to continue.")
 			(set! n (read))))))
 
 
-; And this is the main program. It gives as a result the decimal absolute and
-; non-probabilistic summation of the max values obtained on the execution of 
-; each quantum circuit created on each qcall.
-(qpresent "Test1.scm" "Testing gates for a selected qpu." "n")
+; Main program.
+(qpresent "Test1.scm" "Testing compatibility of OpenQASM2 standard gates." "n")
 (set! qpu (g2q-select-qpu))
 (cond ((equal? qpu "none")(display "\nBye!\n"))
       (else  
@@ -190,7 +184,6 @@
 	 (newline)
 	 (set! res (qmain-loop clean fname fnameo qver ddir qpu qf q c qn cn mc qx v rf))
 	 (newlines 2)
-	 (display "Result = ")
-	 (display res)
+	 (display (strings-append (list "Result = " (number->string res) " , please read the output provided to check the status of each gate in relation to " qpu ".") 0))
 	 (newlines 1))))
 

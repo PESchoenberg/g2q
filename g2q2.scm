@@ -289,8 +289,7 @@
 ; - p_y3: qubit 3.
 ;
 (define (ccx-fast p_l1 p_y1 p_l2 p_y2 p_l3 p_y3)
-  (display (strings-append (list "ccx " (qbgna p_l1 p_y1) "," (qbgna p_l1 p_y2) "," (qbgna p_l3 p_y3) ";") 0))
-  (newline))
+  (display (strings-append (list "ccx " (qbgna p_l1 p_y1) "," (qbgna p_l1 p_y2) "," (qbgna p_l3 p_y3) ";" "\n") 0)))
   
 
 ; rx - gate rx, rotation around X-axis.
@@ -313,9 +312,7 @@
 ; - p_y1: qubit 1.
 ; 
 (define (rx-fast p_t p_l1 p_y1)
-  (let ((y2 (/ (qconst "Pi") 2)))
-    (display (strings-append (list "rx(" (number->string y2) ") " p_l1 "[" (number->string p_y1) "];") 0))
-    (newline)))
+  (display (strings-append (list "rx(" (number->string (/ (qconst "Pi") 2)) ") " p_l1 "[" (number->string p_y1) "];" "\n") 0)))
 
 
 ; ry - gate ry, rotation around Y-axis.
@@ -337,9 +334,7 @@
 ; - p_y1: qubit 1.
 ; 
 (define (ry-fast p_t p_l1 p_y1)
-  (let ((y2 (/ (qconst "Pi") 2)))
-    (display (strings-append (list "ry(" (number->string y2) ") " p_l1 "[" (number->string p_y1) "];") 0))
-    (newline)))
+  (display (strings-append (list "ry(" (number->string (/ (qconst "Pi") 2)) ") " p_l1 "[" (number->string p_y1) "];" "\n") 0)))
 
 
 ; rz - gate rz, rotation around Z-axis.
@@ -361,9 +356,7 @@
 ; - p_y1: qubit 1.
 ; 
 (define (rz-fast p_t p_l1 p_y1)
-  (let ((y2 (/ (qconst "Pi") 2)))
-    (display (strings-append (list "rz(" (number->string y2) ") " p_l1 "[" (number->string p_y1) "];") 0))
-    (newline)))
+  (display (strings-append (list "rz(" (number->string (/ (qconst "Pi") 2)) ") " p_l1 "[" (number->string p_y1) "];" "\n") 0)))
 
 
 ; crz - gate crz, controlled rz expressed atomically.
@@ -393,9 +386,7 @@
 ; - p_y2: qubit 2.
 ;
 (define (crz-fast p_la p_l1 p_y1 p_l2 p_y2)
-  (let ((y2 (/ (qconst "Pi") 2)))
-    (display (strings-append (list "crz(" (number->string y2) ") " p_l1 "[" (number->string p_y1) "]," p_l2 "[" (number->string p_y2) "];") 0))
-    (newline)))
+  (display (strings-append (list "crz(" (number->string (/ (qconst "Pi") 2)) ") " p_l1 "[" (number->string p_y1) "]," p_l2 "[" (number->string p_y2) "];" "\n") 0)))
 
 
 ; cu1 - gate cu1, controlled phase rotation expressed atomically.
@@ -426,8 +417,7 @@
 ; - p_y2: qubit 2.
 ;
 (define (cu1-fast p_la p_l1 p_y1 p_l2 p_y2)
-  (display (strings-append (list "cu1(" (number->string p_la) ") " p_l1 "[" (number->string p_y1) "]," p_l2 "[" (number->string p_y2) "];") 0))
-  (newline))
+  (display (strings-append (list "cu1(" (number->string p_la) ") " p_l1 "[" (number->string p_y1) "]," p_l2 "[" (number->string p_y2) "];" "\n") 0)))
 
 
 ; cu3 - gate cu3, controlled U expressed atomically.
@@ -460,8 +450,7 @@
 ; - p_y2: qubit 2.
 ;
 (define (cu3-fast p_la1 p_la2 p_la3 p_l1 p_y1 p_l2 p_y2)
-  (display (strings-append (list "cu3(" (number->string p_la1) "," (number->string p_la2) "," (number->string p_la3) ") " p_l1 "[" (number->string p_y1) "]," p_l2 "[" (number->string p_y2) "];") 0))
-  (newline))
+  (display (strings-append (list "cu3(" (number->string p_la1) "," (number->string p_la2) "," (number->string p_la3) ") " p_l1 "[" (number->string p_y1) "]," p_l2 "[" (number->string p_y2) "];" "\n") 0)))
 
 
 ; g1cxg1 - Puts a set of gates in configuration g1 cx g1.
@@ -720,8 +709,7 @@
 ; - p_y2: y position 2. 
 ;
 (define (swap-fast p_l1 p_y1 p_y2)
-  (display (strings-append (list "swap " (qbgna p_l1 p_y1) "," (qbgna p_l1 p_y2) ";") 0))
-  (newline))
+  (display (strings-append (list "swap " (qbgna p_l1 p_y1) "," (qbgna p_l1 p_y2) ";" "\n") 0)))
 
 
 
