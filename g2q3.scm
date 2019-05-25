@@ -62,8 +62,6 @@
   (let ((porto1 (current-output-port))
 	(porto2 (open-output-file p_fnameo))
 	(a "")
-	(b "")
-	(c "")
 	(fget "")
 	(fsave "")
 	(fnamei "")
@@ -93,14 +91,11 @@
     (close porto2)
 
     ; This is a system call to invoke qre. 
-    (set! c (strings-append (list "./qre" p_fnameo "post" p_v p_qpu "1" fget) 1))
-    (system c)
+    (system (strings-append (list "./qre" p_fnameo "post" p_v p_qpu "1" fget) 1))
     
-    ; Now get the data from the QPU.
+    ; Now get the data from the QPU. Here we use again a first order function, p_rf.
     (set! a (read-file-as-string fnamei))
-    (set! b (qfclvr a))
-    ;(set! res (car (cdr (qfres b "max"))))
-    (set! res (p_rf b))
+    (set! res (p_rf (qfclvr a)))
     (qrsp-save-to-file a fsave "a")
     res))
     

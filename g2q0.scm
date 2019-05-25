@@ -69,8 +69,7 @@
 ; Arguments:
 ; - p_n: string containing the literal statement.
 (define (qstr p_n)
-  (display p_n)
-  (newline))
+  (display (strings-append (list p_n "\n") 0)))
 
 
 ; qcomm - writes a comment.
@@ -84,8 +83,7 @@
 
 ; qelib1 - includes initial QASM library.
 (define (qelib1)
-  (display "include \"qelib1.inc\";")
-  (newline))
+  (display "include \"qelib1.inc\";\n"))
 
 
 ; qbgns - adds a trailing space to a string.
@@ -135,8 +133,7 @@
 ; - p_y: number.
 ;
 (define (qbgd p_n p_l p_y)
-  (display (string-append (qbg p_n p_l p_y) ";"))
-  (newline))
+  (display (string-append (qbg p_n p_l p_y) ";\n")))
 
 
 ; qmeas - measurement gate.
@@ -148,8 +145,7 @@
 ; - p_x2: register number of p_l2.
 ;
 (define (qmeas p_l1 p_x1 p_l2 p_x2)
-  (display (strings-append (list "measure " (qbgna p_l1 p_x1) " -> " (qbgna p_l2 p_x2) ";") 0))
-  (newline))
+  (display (strings-append (list "measure " (qbgna p_l1 p_x1) " -> " (qbgna p_l2 p_x2) ";" "\n") 0)))
 
 
 ; qcx - cx gate
@@ -162,9 +158,7 @@
 ; - p_y2: y position (plus) 
 ;
 (define (qcx p_n1 p_l1 p_y1 p_l2 p_y2)
-  ;(display (strings-append (list "cx " (qbgna p_l1 p_y1) "," (qbgna p_l2 p_y2) ";") 0))
-  (display (strings-append (list p_n1 " " (qbgna p_l1 p_y1) "," (qbgna p_l2 p_y2) ";") 0))
-  (newline))
+  (display (strings-append (list p_n1 " " (qbgna p_l1 p_y1) "," (qbgna p_l2 p_y2) ";" "\n") 0)))
 
  
 ; qregdef - register definitions.
@@ -232,8 +226,7 @@
 ; - p_y2: qubit number.
 ;
 (define (u1 p_y1 p_l1 p_y2)
-  (display (strings-append (list "u1(" (number->string p_y1) ") " (qbgna p_l1 p_y2) ";") 0))
-  (newline))
+  (display (strings-append (list "u1(" (number->string p_y1) ") " (qbgna p_l1 p_y2) ";" "\n") 0)))
 
 
 ; u2 - gate u2.
@@ -245,8 +238,7 @@
 ; - p_y3: qubit number.
 ;
 (define (u2 p_y1 p_y2 p_l1 p_y3)
-  (display (strings-append (list "u2(" (qbgnc p_y1) (number->string p_y2) ") " (qbgna p_l1 p_y3) ";") 0))
-  (newline))
+  (display (strings-append (list "u2(" (qbgnc p_y1) (number->string p_y2) ") " (qbgna p_l1 p_y3) ";" "\n") 0)))
 
 
 ; u3 - gate u3.
@@ -259,8 +251,7 @@
 ; - p_y4: qubit number.
 ;
 (define (u3 p_y1 p_y2 p_y3 p_l1 p_y4)
-  (display (strings-append (list "u3(" (qbgnc p_y1) (qbgnc p_y2) (number->string p_y3) ") " (qbgna p_l1 p_y4) ";") 0))
-  (newline))
+  (display (strings-append (list "u3(" (qbgnc p_y1) (qbgnc p_y2) (number->string p_y3) ") " (qbgna p_l1 p_y4) ";" "\n") 0)))
 
 
 ; qcond1 - quantum conditional 1.
