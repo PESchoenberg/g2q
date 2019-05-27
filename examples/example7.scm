@@ -54,7 +54,7 @@
 ; Vars and initial stuff. 
 (define fnameo "example7.qasm")
 (define fnamei "data/json/example7_1.json")
-;(define path "/home/pablo/Programs/C++/qre/qre")
+;(define path "/home/Programs/qre/qre")
 (define qver 2.0)
 (define q "q")
 (define c "c")

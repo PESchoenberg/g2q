@@ -250,7 +250,7 @@
   (g2 "ch-fast" p_l1 p_y1 p_l2 p_y2))
 
 
-; ccx - gate ccx - Toffoli expressed atomically.
+; ccx - gate ccx - Toffoli (AND) expressed atomically.
 ;
 ; Arguments:
 ; - p_l1: gate group indentifier 1.
@@ -267,7 +267,7 @@
   (cx p_l1 p_y1 p_l3 p_y3)
   (g1 "t" p_l3 p_y3)
   (cx p_l2 p_y2 p_l3 p_y3)
-  (g1 "t" p_l3 p_y3)
+  (g1 "tdg" p_l3 p_y3);t
   (cx p_l1 p_y1 p_l3 p_y3)
   (g1 "t" p_l2 p_y2)
   (g1 "t" p_l3 p_y3)
@@ -278,7 +278,7 @@
   (cx p_l1 p_y1 p_l2 p_y2))
 
 
-; ccx-fast - Toffoli gate in fast form.
+; ccx-fast - Toffoli (AND) gate in fast form.
 ;
 ; Arguments:
 ; - p_l1: gate group indentifier 1.
@@ -572,7 +572,7 @@
     (close port2)))
 
 
-; qcnot1 - a cx based NOT gate expressed atomically..
+; qcnot1 - a cx based NOT gate expressed atomically.
 ;
 ; Arguments:
 ; - p_l1: gate group name 1.
