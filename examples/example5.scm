@@ -69,7 +69,6 @@
 (g1 "h" q 0)
 (cx q 3 q 2)
 (g1 "h" q 3)
-
 (qmeas q 0 c 0)
 (qmeas q 3 c 1)
 

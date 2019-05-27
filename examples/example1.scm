@@ -19,6 +19,11 @@
 ;
 ;   guile example1.scm 
 ;
+; Note that quantum processors in practice may or may not have full connectivity
+; and thus not all connections between qubits may work. You may need to modify
+; qubit numbers or generate new gate sequences to work around  such limitations
+; in this and other programs.
+;
 ; ==============================================================================
 ;
 ; Copyright (C) 2018 - 2019  Pablo Edronkin (pablo.edronkin at yahoo.com)

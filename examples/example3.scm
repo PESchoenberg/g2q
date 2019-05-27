@@ -71,7 +71,7 @@
 (qhead fname qver)
 (qregdef q qn c cn)
 
-; Main stuff.
+; Main stuff, i.e quantum gates.
 (g1y "h" q b a)
 (g1y "s" q b a)
 (g1cxg1 "h" q a b)

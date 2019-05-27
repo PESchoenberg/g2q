@@ -59,7 +59,7 @@ tdg q[2];
 cx q[0],q[2];
 t q[2];
 cx q[1],q[2];
-t q[2];
+tdg q[2];
 cx q[0],q[2];
 t q[1];
 t q[2];

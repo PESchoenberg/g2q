@@ -60,7 +60,7 @@
 (define cn 0)
 (define qx 0)
 (define n 0)
-(qcomm "Number of qubits: ") ; q
+(qcomm "Number of qubits: ")
 (set! qn (read))
 
 ; The number of conventional register will be the same as qubits.

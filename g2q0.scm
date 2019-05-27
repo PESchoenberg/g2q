@@ -213,11 +213,6 @@
 	(else (qcx p_n1 p_r1 p_y1 p_r2 p_y2))))
 
 
-;u1(pi/2) q[0];
-;u2(pi/2,pi/2) q[0];
-;u3(pi/2,pi/2,pi/2) q[0];
-
-
 ; u1 - gate u1.
 ;
 ; Arguments:
