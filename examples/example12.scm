@@ -98,25 +98,12 @@
   (g1 "h" p_q 1)
   (g1 "h" p_q 2)
   (g1 "h" p_q 0)
-  ;
-  (g1 "h" p_q 0)  
-  (cx p_q 1 p_q 0)
-  (g1 "tdg" p_q 0)
-  (cx p_q 2 p_q 0)
-  (g1 "t" p_q 0)
-  (cx p_q 1 p_q 0)
-  (g1 "tdg" p_q 0)
-  (cx p_q 2 p_q 0)
-  (g1 "t" p_q 0)
-  (g1 "tdg" p_q 1)
-  (g1 "h" p_q 0)
-  (cx p_q 2 p_q 1)
-  (g1 "tdg" p_q 1)
-  (cx p_q 2 p_q 1)
-  (g1 "s" p_q 1)
-  (g1 "t" p_q 2)
-  ;
-  ;(ccx q 0 q 1 q 2)
+  ; Toffoli gate. Note 0 1 2 -> 2 1 0 (inversion). Form this point and
+  ; until measurement, the code would be repeated if thre were more than
+  ; two qubits involved. This section would need to be repeated sqrt(N)
+  ; times, a value that should be passed as p_i. 
+  (ccx q 2 q 1 q 0)
+  ; Two-qubit Grover's diffusion operator.
   (g1 "h" p_q 1)
   (g1 "h" p_q 2)
   (g1 "x" p_q 1)
@@ -128,7 +115,7 @@
   (g1 "x" p_q 2)
   (g1 "h" p_q 1)
   (g1 "h" p_q 2)
-  ; Measure.
+  ; Measurement.
   (qmeasy p_q p_c 1 2)
   (qdeclare "qx-simulator" "error_model depolarizing_channel,0.001")
   (qdeclare "qlib-simulator" "// Hello qlib-simulator"))

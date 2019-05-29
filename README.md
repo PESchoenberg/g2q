@@ -89,6 +89,8 @@ runs it using qre.
 
 * URL of this project - https://github.com/PESchoenberg/g2q
 
+Please let me know if I forgot to add any credits or sources.
+
 
 ## Related reading material:
 
