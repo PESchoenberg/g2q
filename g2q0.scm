@@ -107,7 +107,7 @@
 ; qbgna - constructs an array item.
 ;
 ; Arguments:
-; - p_l: array.
+; - p_l: array name.
 ; - p_y: item number.
 ;
 (define (qbgna p_l p_y)
@@ -118,8 +118,8 @@
 ;
 ; Arguments:
 ; - p_n: gate name.
-; - p_l: gate identifier (q or c).
-; - p_y: number.
+; - p_l: quantum or conventional register name (q or c).
+; - p_y: qubit ordinal number.
 ;
 (define (qbg p_n p_l p_y)
   (string-append (qbgns p_n) (qbgna p_l p_y)))
@@ -129,8 +129,8 @@
 ;
 ; Arguments:
 ; - p_n: gate name.
-; - p_l: gate identifier (ex: q, c, etc.).
-; - p_y: number.
+; - p_l: quantum or conventional register name (q or c).
+; - p_y: qubit ordinal number.
 ;
 (define (qbgd p_n p_l p_y)
   (display (string-append (qbg p_n p_l p_y) ";\n")))
@@ -139,10 +139,10 @@
 ; qmeas - measurement gate.
 ;
 ; Arguments:
-; - p_l1: gate group identifier.
-; - p_x1: register number of p_l1.
-; - p_l2: gate group identifier.
-; - p_x2: register number of p_l2.
+; - p_l1: quantum register name 1.
+; - p_x1: register ordinal of p_l1.
+; - p_l2: quantum register name 2.
+; - p_x2: register ordinal of p_l2.
 ;
 (define (qmeas p_l1 p_x1 p_l2 p_x2)
   (display (strings-append (list "measure " (qbgna p_l1 p_x1) " -> " (qbgna p_l2 p_x2) ";" "\n") 0)))
@@ -152,10 +152,10 @@
 ;
 ; Arguments:
 ; - p_n1: item name.
-; - p_l1: gate group identifier 1. 
-; - p_y1: y position (dot).
-; - p_l2: gate group identifier 2. 
-; - p_y2: y position (plus) 
+; - p_l1: quantum register name 1. 
+; - p_y1: control qubit (dot).
+; - p_l2: quantum register name 2. 
+; - p_y2: target qubit (plus) 
 ;
 (define (qcx p_n1 p_l1 p_y1 p_l2 p_y2)
   (display (strings-append (list p_n1 " " (qbgna p_l1 p_y1) "," (qbgna p_l2 p_y2) ";" "\n") 0)))
@@ -164,10 +164,10 @@
 ; qregdef - register definitions.
 ;
 ; Arguments:
-; - p_l1: q register group name (usually q).
-; - p_y1: number of q registers.
-; - p_l2: c register group name (usually c).
-; - p_y2: number of c registers.
+; - p_l1: quantum register name 1.
+; - p_y1: number of items in p_l1.
+; - p_l2: quantum register name 2.
+; - p_y2: number of items in p_l2.
 ;
 (define (qregdef p_l1 p_y1 p_l2 p_y2)
   (qbgd "qreg" p_l1 p_y1)
@@ -188,8 +188,8 @@
 ;
 ; Arguments:
 ; - p_n1: gate name.
-; - p_l1: register name.
-; - p_y1: qbit number.
+; - p_l1: quantum register name 1.
+; - p_y1: qubit 1.
 ;
 (define (g1 p_n1 p_l1 p_y1)
   (qbgd p_n1 p_l1 p_y1))  
@@ -199,11 +199,11 @@
 ;
 ; Arguments:
 ; - p_n1: gate name.
-; - p_r1: register name 1.
-; - p_y1: origin q register number 1.
-; - p_r2: register name 2.
-; - p_y2: target q register number 2. Set to zero in the case of gates with no
-; target q register.
+; - p_r1: quantum register name 1.
+; - p_y1: cntrol qubit 1.
+; - p_r2: quantum register name 2.
+; - p_y2: target qubit number 2. Set to zero in the case of gates with no
+; target q quibt.
 ;
 (define (g2 p_n1 p_r1 p_y1 p_r2 p_y2)
   (cond ((equal? "cx" p_n1)(qcx p_n1 p_r1 p_y1 p_r2 p_y2))
@@ -217,7 +217,7 @@
 ;
 ; Arguments:
 ; - p_y1: first rotation.
-; - p_l1: gate group designator.
+; - p_l1: quantum register name 1.
 ; - p_y2: qubit number.
 ;
 (define (u1 p_y1 p_l1 p_y2)
@@ -227,9 +227,9 @@
 ; u2 - gate u2.
 ;
 ; Arguments:
-; - p_y1: first rotation.
-; - p_y2: second rotation.
-; - p_l1: gate group designator.
+; - p_y1: angle 1, first rotation.
+; - p_y2: angle 2, second rotation.
+; - p_l1: quantum register name 1.
 ; - p_y3: qubit number.
 ;
 (define (u2 p_y1 p_y2 p_l1 p_y3)
@@ -239,10 +239,10 @@
 ; u3 - gate u3.
 ;
 ; Arguments:
-; - p_y1: first rotation.
-; - p_y2: second rotation.
-; - p_y3: thirdd rotation.
-; - p_l1: gate group designator.
+; - p_y1: angle 1, first rotation.
+; - p_y2: angle 2, second rotation.
+; - p_y3: angle 3, third rotation.
+; - p_l1: quantum register name 1.
 ; - p_y4: qubit number.
 ;
 (define (u3 p_y1 p_y2 p_y3 p_l1 p_y4)
@@ -253,8 +253,8 @@
 ;
 ; Arguments:
 ; - p_c1: condition.
-; - p_y1: Classical bit vector.
-; - p_y2: Number to compare p_y1 to.
+; - p_y1: classical bit vector.
+; - p_y2: number to compare p_y1 to.
 ;
 (define (qcond1 p_c1 p_y1 p_y2)
   (let ((qsen " "))
@@ -266,9 +266,9 @@
 ;
 ; Arguments:
 ; - p_c1: condition.
-; - p_y1: Classical bits.
+; - p_y1: classical bits.
 ; - p_y2: number to compare p_y1[pY3] to.
-; - p_y3: Classical bit vector item.
+; - p_y3: classical bit vector item.
 ;
 (define (qcond2 p_c1 p_y1 p_y3 p_y2)
   (let ((qsen " "))
@@ -294,9 +294,9 @@
 ; swap - swap gate expressed atomically.
 ;
 ; Arguments:
-; - p_l1: gate group identifier. 
-; - p_y1: y position 1.
-; - p_y2: y position 2. 
+; - p_l1: quantum register name 1. 
+; - p_y1: qubit 1.
+; - p_y2: qubit 2. 
 ;
 ; Sources:
 ; - https://algassert.com/post/1717

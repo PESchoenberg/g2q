@@ -89,9 +89,9 @@
 ;
 ; Arguments:
 ; - p_n1: gate name.
-; - p_l1: gate group identifier.
-; - p_y1: initial qubit.
-; - p_y2: last qubit.
+; - p_l1: quantum register name (i.e. q).
+; - p_y1: ordinal of the initial qubit.
+; - p_y2: ordinal of the last qubit.
 ;
 (define (g1y p_n1 p_l1 p_y1 p_y2)
   (let loop ((i p_y1))
@@ -106,7 +106,7 @@
 ;
 ; Arguments:
 ; - p_n1: gate name.
-; - p_l1: gate group identifier.
+; - p_l1: quantum register name.
 ; - p_y1: number of iterations.
 ; - p_m1: number of iterations.
 ;
@@ -123,10 +123,10 @@
 ;
 ; Arguments:
 ; - p_n1: gate name.
-; - p_l1: gate group identifier.
-; - p_y1: initial qubit.
-; - p_y2: last qubit.
-; - p_x1: number if iterations that g1y will be repeated along x.
+; - p_l1: quantum register name.
+; - p_y1: ordinal of the initial qubit.
+; - p_y2: ordinal of the last qubit.
+; - p_x1: number if iterations that g1y will be repeated along x axis of sequence as a graph.
 ;
 (define (g1xy p_n1 p_l1 p_y1 p_y2 p_x1)
   (let loop ((j 1))
@@ -139,10 +139,10 @@
 ; qmeasy - Performs measurements on group p_l1 to group p_l2 from p_y1 to p_y2.
 ;
 ; Arguments:
-; - p_l1: quantum reginster group identifier.
-; - p_l2: conventional register group identifier.
-; - p_y1: initial qubit.
-; - p_y2: last qubit.
+; - p_l1: quantum register name.
+; - p_l2: conventional register name.
+; - p_y1: ordinal of the initial qubit.
+; - p_y2: ordinal of the last qubit.
 ;
 (define (qmeasy p_l1 p_l2 p_y1 p_y2)
   (let loop ((i p_y1))
@@ -155,10 +155,10 @@
 ; cx - gate cx.
 ;
 ; Arguments:
-; - p_l1: gate group name 1.
-; - p_y1: qubit 1 (dot).
-; - p_l2: gate group name 2.
-; - p_y2: qubit 2 (plus).
+; - p_l1: quantum register name 1.
+; - p_y1: control qubit 1 (dot).
+; - p_l2: quantum register name 2.
+; - p_y2: target qubit 2 (plus).
 ;
 (define (cx p_l1 p_y1 p_l2 p_y2)
   (g2 "cx" p_l1 p_y1 p_l2 p_y2))
@@ -167,10 +167,10 @@
 ; cz - gate cz, controlled phase expressed atomically.
 ;
 ; Arguments:
-; - p_l1: gate group indentifier 1
-; - p_y1: qbit 1 (dot).
-; - p_l1: gate group indentifier 1
-; - p_y2: qbit 2 (plus).
+; - p_l1: quantum register name 1.
+; - p_y1: control qubit 1.
+; - p_l1: quantum register name 1.
+; - p_y2: target qubit 2.
 ;
 (define (cz p_l1 p_y1 p_l2 p_y2)
   (g1 "h" p_l1 p_y2)
@@ -181,10 +181,10 @@
 ; cz-fast - gate cz, controlled y in fast form.
 ;
 ; Arguments:
-; - p_l1: gate group indentifier 1
-; - p_y1: qubit 1 (dot).
-; - p_l1: gate group indentifier 1
-; - p_y2: qubit 2 (plus).
+; - p_l1: quantum register name 1.
+; - p_y1: control qubit 1.
+; - p_l1: quantum register name 1.
+; - p_y2: target qubit 2.
 ;
 (define (cz-fast p_l1 p_y1 p_l2 p_y2)
   (g2 "cz-fast" p_l1 p_y1 p_l2 p_y2))
@@ -193,10 +193,10 @@
 ; cy - gate cy, controlled y expressed atomically.
 ;
 ; Arguments:
-; - p_l1: gate group indentifier 1
-; - p_y1: qubit 1 (dot).
-; - p_l1: gate group indentifier 1
-; - p_y2: qubit 2 (plus).
+; - p_l1: quantum register name 1.
+; - p_y1: control qubit 1.
+; - p_l1: quantum register name 1.
+; - p_y2: target qubit 2.
 ;
 (define (cy p_l1 p_y1 p_l2 p_y2)
   (g1 "sdg" p_l2 p_y2)
@@ -207,10 +207,10 @@
 ; cy-fast - gate cy, controlled y in fast form.
 ;
 ; Arguments:
-; - p_l1: gate group indentifier 1
-; - p_y1: qubit 1 (dot).
-; - p_l1: gate group indentifier 1
-; - p_y2: qubit 2 (plus).
+; - p_l1: quantum register name 1.
+; - p_y1: control qubit 1.
+; - p_l1: quantum register name 1.
+; - p_y2: target qubit 2.
 ;
 (define (cy-fast p_l1 p_y1 p_l2 p_y2)
   (g2 "cy-fast" p_l1 p_y1 p_l2 p_y2))
@@ -219,10 +219,10 @@
 ; ch - gate ch, controlled h expressed atomically.
 ;
 ; Arguments:
-; - p_l1: gate group indentifier 1.
-; - p_y1: qubit 1 (dot).
-; - p_l2: gate group indentifier 2.
-; - p_y2: qubit 2 (plus).
+; - p_l1: quantum register name 1.
+; - p_y1: controlqubit 1.
+; - p_l2: quantum register name 2.
+; - p_y2: target qubit 2.
 ;
 (define (ch p_l1 p_y1 p_l2 p_y2)
   (g1 "h" p_l2 p_y2)
@@ -241,10 +241,10 @@
 ; ch-fast - gate ch, controlled h in fast form.
 ;
 ; Arguments:
-; - p_l1: gate group indentifier 1.
-; - p_y1: qubit 1 (dot).
-; - p_l2: gate group indentifier 2.
-; - p_y2: qubit 2 (plus).
+; - p_l1: quantum register name 1.
+; - p_y1: control qubit 1.
+; - p_l2: quantum register name 2.
+; - p_y2: target qubit 2.
 ;
 (define (ch-fast p_l1 p_y1 p_l2 p_y2)
   (g2 "ch-fast" p_l1 p_y1 p_l2 p_y2))
@@ -253,12 +253,12 @@
 ; ccx - gate ccx - Toffoli (AND) expressed atomically.
 ;
 ; Arguments:
-; - p_l1: gate group indentifier 1.
-; - p_y1 qubit 1.
-; - p_l2: gate group indentifier 2.
-; - p_y2: qubit 2.
-; - p_l3: gate group indentifier 3.
-; - p_y3: qubit 3.
+; - p_l1: quantum register name 1.
+; - p_y1L control qubit 1.
+; - p_l2: quantum register name 2.
+; - p_y2: control qubit 2.
+; - p_l3: quantum register name 3.
+; - p_y3: target qubit 3.
 ;
 (define (ccx p_l1 p_y1 p_l2 p_y2 p_l3 p_y3)
   (g1 "h" p_l3 p_y3)
@@ -281,12 +281,12 @@
 ; ccx-fast - Toffoli (AND) gate in fast form.
 ;
 ; Arguments:
-; - p_l1: gate group indentifier 1.
-; - p_y1 qubit 1.
-; - p_l2: gate group indentifier 2.
-; - p_y2: qubit 2.
-; - p_l3: gate group indentifier 3.
-; - p_y3: qubit 3.
+; - p_l1: quantum register name 1.
+; - p_y1: control qubit 1.
+; - p_l2: quantum register name 2.
+; - p_y2: control qubit 2.
+; - p_l3: quantum register name 3.
+; - p_y3: target qubit 3.
 ;
 (define (ccx-fast p_l1 p_y1 p_l2 p_y2 p_l3 p_y3)
   (display (strings-append (list "ccx " (qbgna p_l1 p_y1) "," (qbgna p_l1 p_y2) "," (qbgna p_l3 p_y3) ";" "\n") 0)))
@@ -296,7 +296,7 @@
 ;
 ; Arguments:
 ; - p_t: theta angle.
-; - p_l1: gate group indentifier 1.
+; - p_l1: quantum register name 1.
 ; - p_y1: qubit 1.
 ;
 (define (rx p_t p_l1 p_y1)
@@ -308,7 +308,7 @@
 ;
 ; Arguments:
 ; - p_t: theta angle (dummy, left for consistency).
-; - p_l1: gate group indentifier 1.
+; - p_l1: quantum register name 1.
 ; - p_y1: qubit 1.
 ; 
 (define (rx-fast p_t p_l1 p_y1)
@@ -319,7 +319,7 @@
 ;
 ; Arguments:
 ; - p_t: theta angle.
-; - p_l1: gate group indentifier 1.
+; - p_l1: quantum register name 1.
 ; - p_y1: qubit 1.
 ;
 (define (ry p_t p_l1 p_y1)
@@ -330,7 +330,7 @@
 ;
 ; Arguments:
 ; - p_t: angle (dummy, left for consistency).
-; - p_l1: gate group indentifier 1.
+; - p_l1: quantum register name 1.
 ; - p_y1: qubit 1.
 ; 
 (define (ry-fast p_t p_l1 p_y1)
@@ -340,8 +340,8 @@
 ; rz - gate rz, rotation around Z-axis.
 ;
 ; Arguments:
-; - p_p: phi angle.
-; - p_l1: gate group indentifier 1.
+; - p_p: angle 1.
+; - p_l1: quantum register name 1.
 ; - p_y1: qubit 1.
 ;
 (define (rz p_p p_l1 p_y1)
@@ -351,8 +351,8 @@
 ; rz-fast - gate rz, rotation around Z-axis, in fast form.
 ;
 ; Arguments:
-; - p_t: angle (dummy, left for consistency).
-; - p_l1: gate group indentifier 1.
+; - p_t: angle (dummy, left for consistency with other functions).
+; - p_l1: quantum register name 1.
 ; - p_y1: qubit 1.
 ; 
 (define (rz-fast p_t p_l1 p_y1)
@@ -362,10 +362,10 @@
 ; crz - gate crz, controlled rz expressed atomically.
 ;
 ; Arguments:
-; - p_la: lambda angle.
-; - p_l1: gate group indentifier 1.
+; - p_la: angle 1.
+; - p_l1: quantum register name 1.
 ; - p_y1: qubit 1.
-; - p_l2: gate group indentifier 2.
+; - p_l2: quantum register name 2.
 ; - p_y2: qubit 2.
 ;
 (define (crz p_la p_l1 p_y1 p_l2 p_y2)
@@ -379,10 +379,10 @@
 ; crz-fast - gate crz, controlled rz expressed in fast form.
 ;
 ; Arguments:
-; - p_la: lambda angle.
-; - p_l1: gate group indentifier 1.
+; - p_la: angle 1.
+; - p_l1: quantum register name 1.
 ; - p_y1: qubit 1.
-; - p_l2: gate group indentifier 2.
+; - p_l2: quantum register name 2.
 ; - p_y2: qubit 2.
 ;
 (define (crz-fast p_la p_l1 p_y1 p_l2 p_y2)
@@ -392,10 +392,10 @@
 ; cu1 - gate cu1, controlled phase rotation expressed atomically.
 ;
 ; Arguments:
-; - p_la: lambda angle.
-; - p_l1: gate group indentifier 1.
+; - p_la: angle 1.
+; - p_l1: quantum register name 1.
 ; - p_y1: qubit 1.
-; - p_l2: gate group indentifier 2.
+; - p_l2: quantum register name 2.
 ; - p_y2: qubit 2.
 ;
 (define (cu1 p_la p_l1 p_y1 p_l2 p_y2)
@@ -410,10 +410,10 @@
 ; cu1-fast - gate cu1, controlled phase rotation expressed in fast form.
 ;
 ; Arguments:
-; - p_la: lambda angle.
-; - p_l1: gate group indentifier 1.
+; - p_la: angle 1.
+; - p_l1: quantum register name 1.
 ; - p_y1: qubit 1.
-; - p_l2: gate group indentifier 2.
+; - p_l2: quantum register name 2.
 ; - p_y2: qubit 2.
 ;
 (define (cu1-fast p_la p_l1 p_y1 p_l2 p_y2)
@@ -423,11 +423,11 @@
 ; cu3 - gate cu3, controlled U expressed atomically.
 ;
 ; Arguments:
-; - p_la: angle.
-; - p_pa: angle.
-; - p_l1: gate group indentifier 1.
+; - p_la: angle 1.
+; - p_pa: angle 2.
+; - p_l1: quantum register name 1.
 ; - p_y1: qubit 1.
-; - p_l2: gate group indentifier 2.
+; - p_l2: quantum register name 2.
 ; - p_y2: qubit 2.
 ;
 (define (cu3 p_la p_pa p_l1 p_y1 p_l2 p_y2)
@@ -443,10 +443,10 @@
 ; Arguments:
 ; - p_la1: angle 1.
 ; - p_la2: angle 2.
-; - p_la3L angle 3.
-; - p_l1: gate group indentifier 1.
+; - p_la3: angle 3.
+; - p_l1: quantum register name 1.
 ; - p_y1: qubit 1.
-; - p_l2: gate group indentifier 2.
+; - p_l2: quantum register name 2.
 ; - p_y2: qubit 2.
 ;
 (define (cu3-fast p_la1 p_la2 p_la3 p_l1 p_y1 p_l2 p_y2)
@@ -457,7 +457,7 @@
 ;
 ; Arguments:
 ; - p_n1: g1 gate name.
-; - p_l1: qubit group (q).
+; - p_l1: quantum register name (i.e. q).
 ; - p_y1: qubit number 1.
 ; - p_y2: qubit number 2.
 ;
@@ -593,14 +593,14 @@
 ; qxor1 - a qcnot1 based XOR gate expressed atomically.
 ;
 ; Arguments:
-; - p_l1: gate group name 1.
+; - p_l1: quantum register name 1.
 ; - p_y1: target qubit a (normally p_y2 - 1).
-; - p_l2: gate group name 2.
+; - p_l2: quantum register name 2.
 ; - p_y2: control quibit a.
-; - p_l3: gate group name 3.
+; - p_l3: quantum register name 3.
 ; - p_y3: target qubit b (normally p_y3 - 1).
-; - p_l4: gate group name 4.
-; - p_y4: control quibit b.
+; - p_l4: quantum register name 4.
+; - p_y4: control qubit b.
 ;
 ; Output:
 ; - On p_l1[p_y1].
@@ -666,7 +666,7 @@
 ; matches.
 ;
 ; Arguments:
-; - p_l: List of results as obtained by applying qfclvr.
+; - p_l: list of results as obtained by applying qfclvr.
 ; - p_r: choice between obtaining the max or min value.
 ;  - "max" for maximum value.
 ;  - "min" to get the minimum value.
@@ -704,9 +704,9 @@
 ; swap-fast - swap gate expressed in fast form.
 ;
 ; Arguments:
-; - p_l1: gate group identifier. 
-; - p_y1: y position 1.
-; - p_y2: y position 2. 
+; - p_l1: quantum register name. 
+; - p_y1: qubit 1.
+; - p_y2: qubit 2. 
 ;
 (define (swap-fast p_l1 p_y1 p_y2)
   (display (strings-append (list "swap " (qbgna p_l1 p_y1) "," (qbgna p_l1 p_y2) ";" "\n") 0)))
