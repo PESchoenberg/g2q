@@ -144,11 +144,10 @@
 ; - p_qpu: qpu for which the declaration is intended for.
 ; - p_d: declaration in the form of a string.
 ;
-; Otput:
+; Output:
 ; - A commented-out string that will be placed in compiled QADM2 code.
 ;
 (define (qdeclare p_qpu p_d)
   (qcomm (strings-append (list "qdeclare " p_qpu " " p_d) 0)))
-
 
 
