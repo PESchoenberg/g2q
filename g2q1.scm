@@ -93,6 +93,7 @@
     (display "4 - ibmqx_real.")
     (newline)
     (set! res1 (read))
+    ; Not elegant, but works for now.
     (if (< res1 0)(set! res1 0))
     (if (> res1 4)(set! res1 0))
     (if (= res1 0)(set! res "none"))

@@ -260,6 +260,11 @@
 ; - p_l3: quantum register name 3.
 ; - p_y3: target qubit 3.
 ;
+; Sources:
+; - https://quantumcomputing.stackexchange.com/questions/2177/how-can-i-implement-an-n-bit-toffoli-gate
+; - http://www.cs.princeton.edu/courses/archive/fall04/cos576/papers/bennett73.html
+; - Elementary gates for quantum computation - Barenco, Bennet et al. (1995) - https://arxiv.org/pdf/quant-ph/9503016.pdf
+;
 (define (ccx p_l1 p_y1 p_l2 p_y2 p_l3 p_y3)
   (g1 "h" p_l3 p_y3)
   (cx p_l2 p_y2 p_l3 p_y3)
