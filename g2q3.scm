@@ -81,7 +81,7 @@
     (qhead p_fnameo p_qver)
     (qregdef p_q p_qn p_c p_cn)    
    
-    ; Qcircuit call. Note that this is a first-order function passed as an
+    ; Qcircuit call. Note that this is a first-class function passed as an
     ; argument. In this case, the function has itself several arguments that
     ; could be passed as a a single list argument in the future.
     (p_qf p_i p_q p_c 0 pqn 0 pcn)
