@@ -23,7 +23,7 @@
 ;   GNU Lesser General Public License for more details.
 ;
 ;   You should have received a copy of the GNU Lesser General Public License
-;   along with this program.  If not, see <https://www.gnu.org/licenses/>.
+;   along with this program. If not, see <https://www.gnu.org/licenses/>.
 ;
 ; ==============================================================================
 
@@ -42,7 +42,7 @@
 ; g2q-version - returns the current version of the compiler.
 ;
 (define (g2q-version)
-  (let ((res "g2q - v1.2.0"))
+  (let ((res "g2q - v1.2.3"))
     res))
 
 
