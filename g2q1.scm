@@ -36,7 +36,8 @@
   #:export (g2q-version
 	    g2q-ibm-config
 	    g2q-qre-config
-	    g2q-select-qpu))
+	    g2q-select-qpu
+	    g2q-txt))
 
 
 ; g2q-version - returns the current version of the compiler.
@@ -103,4 +104,16 @@
     (if (= res1 3)(set! res (car(cdr(cdr(cdr(g2q-qre-config)))))))
     res))
 
+(define (g2q-txt p_n)
+  (let ((res ""))
+    (cond ((= p_n 0)(set! res "];")))
+    (cond ((= p_n 1)(set! res "\n")))
+    (cond ((= p_n 2)(set! res ";\n")))
+    (cond ((= p_n 3)(set! res "];\n")))
+    (cond ((= p_n 4)(set! res ") ")))
+    (cond ((= p_n 5)(set! res "if(")))
+    (cond ((= p_n 6)(set! res "// ")))
+    res))
+    
+  
 
