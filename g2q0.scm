@@ -58,8 +58,8 @@
 ; - p_v: Open QASM version number.
 ;
 (define (qhead p_prog p_v)
-  (qstr (strings-append (list "// " p_prog ";") 0))
-  (qstr (strings-append (list "// Compiled with " (g2q-version) ";") 0))
+  (qstr (strings-append (list (g2q-txt 6) p_prog ";") 0))
+  (qstr (strings-append (list (g2q-txt 6) "Compiled with " (g2q-version) ";") 0))
   (qstr (strings-append (list "OPENQASM " (number->string p_v) ";") 0))
   (qstr "include \"qelib1.inc\";"))
   
@@ -78,7 +78,7 @@
 ; - p_s: string to write as a comment.
 ;
 (define (qcomm p_s)
-  (qstr (strings-append (list "// " p_s ";") 0)))
+  (qstr (strings-append (list (g2q-txt 6) p_s ";") 0)))
 
 
 ; qelib1 - includes initial QASM library.
@@ -133,8 +133,8 @@
 ; - p_y: qubit ordinal number.
 ;
 (define (qbgd p_n p_l p_y)
-  (display (string-append (qbg p_n p_l p_y) ";\n")))
-
+  ;(display (string-append (qbg p_n p_l p_y) ";\n")))
+  (display (string-append (qbg p_n p_l p_y) (g2q-txt 2))))
 
 ; qmeas - measurement gate.
 ;
@@ -145,8 +145,8 @@
 ; - p_x2: register ordinal of p_l2.
 ;
 (define (qmeas p_l1 p_x1 p_l2 p_x2)
-  (display (strings-append (list "measure " (qbgna p_l1 p_x1) " -> " (qbgna p_l2 p_x2) ";" "\n") 0)))
-
+  ;(display (strings-append (list "measure " (qbgna p_l1 p_x1) " -> " (qbgna p_l2 p_x2) ";" "\n") 0)))
+  (display (strings-append (list "measure " (qbgna p_l1 p_x1) " -> " (qbgna p_l2 p_x2) (g2q-txt 2)) 0)))
 
 ; qcx - cx gate
 ;
@@ -158,7 +158,7 @@
 ; - p_y2: target qubit (plus) 
 ;
 (define (qcx p_n1 p_l1 p_y1 p_l2 p_y2)
-  (display (strings-append (list p_n1 " " (qbgna p_l1 p_y1) "," (qbgna p_l2 p_y2) ";" "\n") 0)))
+  (display (strings-append (list p_n1 " " (qbgna p_l1 p_y1) "," (qbgna p_l2 p_y2) (g2q-txt 2)) 0)))
 
  
 ; qregdef - register definitions.
@@ -221,7 +221,7 @@
 ; - p_y2: qubit number.
 ;
 (define (u1 p_y1 p_l1 p_y2)
-  (display (strings-append (list "u1(" (number->string p_y1) ") " (qbgna p_l1 p_y2) ";" "\n") 0)))
+  (display (strings-append (list "u1(" (number->string p_y1) (g2q-txt 4) (qbgna p_l1 p_y2) (g2q-txt 2)) 0)))
 
 
 ; u2 - gate u2.
@@ -233,7 +233,7 @@
 ; - p_y3: qubit number.
 ;
 (define (u2 p_y1 p_y2 p_l1 p_y3)
-  (display (strings-append (list "u2(" (qbgnc p_y1) (number->string p_y2) ") " (qbgna p_l1 p_y3) ";" "\n") 0)))
+  (display (strings-append (list "u2(" (qbgnc p_y1) (number->string p_y2) (g2q-txt 4) (qbgna p_l1 p_y3) (g2q-txt 2)) 0)))
 
 
 ; u3 - gate u3.
@@ -246,7 +246,7 @@
 ; - p_y4: qubit number.
 ;
 (define (u3 p_y1 p_y2 p_y3 p_l1 p_y4)
-  (display (strings-append (list "u3(" (qbgnc p_y1) (qbgnc p_y2) (number->string p_y3) ") " (qbgna p_l1 p_y4) ";" "\n") 0)))
+  (display (strings-append (list "u3(" (qbgnc p_y1) (qbgnc p_y2) (number->string p_y3) (g2q-txt 4) (qbgna p_l1 p_y4) (g2q-txt 2)) 0)))
 
 
 ; qcond1 - quantum conditional 1.
@@ -258,7 +258,7 @@
 ;
 (define (qcond1 p_c1 p_y1 p_y2)
   (let ((qsen " "))
-    (cond ((equal? (qvalid-conditional p_c1) #t)(set! qsen (strings-append (list "if(" p_y1 p_c1 (number->string p_y2) ")" " ") 0))))
+    (cond ((equal? (qvalid-conditional p_c1) #t)(set! qsen (strings-append (list (g2q-txt 5) p_y1 p_c1 (number->string p_y2) ")" " ") 0))))
     (display qsen)))
 
 
@@ -272,7 +272,7 @@
 ;
 (define (qcond2 p_c1 p_y1 p_y3 p_y2)
   (let ((qsen " "))
-    (cond ((equal? (qvalid-conditional p_c1) #t)(set! qsen (strings-append (list "if(" p_y1 "[" (number->string p_y3) "]" p_c1 (number->string p_y2) ")" " ") 0))))
+    (cond ((equal? (qvalid-conditional p_c1) #t)(set! qsen (strings-append (list (g2q-txt 5) p_y1 "[" (number->string p_y3) "]" p_c1 (number->string p_y2) ")" " ") 0))))
     (display qsen)))
 
 

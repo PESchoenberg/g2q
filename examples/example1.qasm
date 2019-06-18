@@ -1,6 +1,6 @@
 // This program does nothing in particular, but shows how to use g2q functions.;
 // example1.qasm;
-// Compiled with g2q - v1.2.0;
+// Compiled with g2q - v1.2.3;
 OPENQASM 2.0;
 include "qelib1.inc";
 qreg q[5];
