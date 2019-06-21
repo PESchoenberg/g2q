@@ -104,6 +104,12 @@
     (if (= res1 3)(set! res (car(cdr(cdr(cdr(g2q-qre-config)))))))
     res))
 
+
+; g2q-txt - Defines some string constants that are intrinsic to g2q.
+;
+; Arguments:
+; - p_n: string number.
+;
 (define (g2q-txt p_n)
   (let ((res ""))
     (cond ((= p_n 0)(set! res "];")))
@@ -113,6 +119,10 @@
     (cond ((= p_n 4)(set! res ") ")))
     (cond ((= p_n 5)(set! res "if(")))
     (cond ((= p_n 6)(set! res "// ")))
+    (cond ((= p_n 7)(set! res "charset=utf-8")))
+    (cond ((= p_n 8)(set! res "application/x-www-form-urlencoded;")))
+    (cond ((= p_n 9)(set! res "na")))
+    
     res))
     
   

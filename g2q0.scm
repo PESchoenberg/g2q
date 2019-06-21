@@ -133,7 +133,6 @@
 ; - p_y: qubit ordinal number.
 ;
 (define (qbgd p_n p_l p_y)
-  ;(display (string-append (qbg p_n p_l p_y) ";\n")))
   (display (string-append (qbg p_n p_l p_y) (g2q-txt 2))))
 
 ; qmeas - measurement gate.
@@ -145,7 +144,6 @@
 ; - p_x2: register ordinal of p_l2.
 ;
 (define (qmeas p_l1 p_x1 p_l2 p_x2)
-  ;(display (strings-append (list "measure " (qbgna p_l1 p_x1) " -> " (qbgna p_l2 p_x2) ";" "\n") 0)))
   (display (strings-append (list "measure " (qbgna p_l1 p_x1) " -> " (qbgna p_l2 p_x2) (g2q-txt 2)) 0)))
 
 ; qcx - cx gate
@@ -203,7 +201,7 @@
 ; - p_y1: cntrol qubit 1.
 ; - p_r2: quantum register name 2.
 ; - p_y2: target qubit number 2. Set to zero in the case of gates with no
-; target q quibt.
+;   target q quibt.
 ;
 (define (g2 p_n1 p_r1 p_y1 p_r2 p_y2)
   (cond ((equal? "cx" p_n1)(qcx p_n1 p_r1 p_y1 p_r2 p_y2))
@@ -258,7 +256,7 @@
 ;
 (define (qcond1 p_c1 p_y1 p_y2)
   (let ((qsen " "))
-    (cond ((equal? (qvalid-conditional p_c1) #t)(set! qsen (strings-append (list (g2q-txt 5) p_y1 p_c1 (number->string p_y2) ")" " ") 0))))
+(cond ((equal? (qvalid-conditional p_c1) #t)(set! qsen (strings-append (list (g2q-txt 5) p_y1 p_c1 (number->string p_y2) (g2q-txt 4)) 0))))
     (display qsen)))
 
 
@@ -272,7 +270,7 @@
 ;
 (define (qcond2 p_c1 p_y1 p_y3 p_y2)
   (let ((qsen " "))
-    (cond ((equal? (qvalid-conditional p_c1) #t)(set! qsen (strings-append (list (g2q-txt 5) p_y1 "[" (number->string p_y3) "]" p_c1 (number->string p_y2) ")" " ") 0))))
+    (cond ((equal? (qvalid-conditional p_c1) #t)(set! qsen (strings-append (list (g2q-txt 5) p_y1 "[" (number->string p_y3) "]" p_c1 (number->string p_y2) (g2q-txt 4)) 0))))
     (display qsen)))
 
 
