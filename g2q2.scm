@@ -423,7 +423,7 @@
 ; - p_y2: qubit 2.
 ;
 (define (cu1-fast p_la p_l1 p_y1 p_l2 p_y2)
-  (display (strings-append (list "cu1(" (number->string p_la) ") " p_l1 "[" (number->string p_y1) "]," p_l2 "[" (number->string p_y2) (g2q-txt 3)) 0)))
+  (display (strings-append (list "cu1(" (number->string p_la) (g2q-txt 4) p_l1 "[" (number->string p_y1) "]," p_l2 "[" (number->string p_y2) (g2q-txt 3)) 0)))
 
 
 ; cu3 - gate cu3, controlled U expressed atomically.
@@ -562,15 +562,15 @@
     (qstr " ")
     (qstr (strings-append (list "login-id=" "wait-until-login") 0))
     (qstr " ")
-    (qstr (strings-append (list "post-content-type=" "application/x-www-form-urlencoded;" "charset=utf-8") 0))
+    (qstr (strings-append (list "post-content-type=" (g2q-txt 8) (g2q-txt 7)) 0))
     (qstr " ")
     (qstr (strings-append (list "post-uri=" (string-append i1 i2)) 0))
     (qstr " ")
-    (qstr (strings-append (list "get-content-type=" "application/x-www-form-urlencoded;" "charset=utf-8") 0))
+    (qstr (strings-append (list "get-content-type=" (g2q-txt 8) (g2q-txt 7)) 0))
     (qstr " ")
     (qstr (strings-append (list "get-uri=" (string-append i1 i3)) 0))
     (qstr " ")
-    (qstr (strings-append (list "delete-content-type=" "application/x-www-form-urlencoded;" "charset=utf-8") 0))
+    (qstr (strings-append (list "delete-content-type=" (g2q-txt 8) (g2q-txt 7)) 0))
     (qstr " ")
     (qstr (strings-append (list "delete-uri=" (string-append i1 i4)) 0))
     (qstr " ")
@@ -689,7 +689,7 @@
 	(dvm 0)
 	(dv (list ))
 	(n 0)
-	(slm "na"))
+	(slm (g2q-txt 9)))
 
     ; Find value.
     (set! dv (map string->number sv))
