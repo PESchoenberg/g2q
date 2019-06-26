@@ -131,7 +131,7 @@
 		 (loop (- i 1)))))))
 
 
-; qre-declare - pragmas for specific quantum processors. This function 
+; qre-declare - Pragmas for specific quantum processors. This function 
 ; adds to a program to be compiled in QASM2 declarations for compilation 
 ; that are specific for different quantum processors. These are applicable 
 ; for the declared qpu, but not others. Pragmas are introduced as comments
