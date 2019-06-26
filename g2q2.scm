@@ -71,7 +71,7 @@
 	    swap-fast))
 
 
-; qconst - various required constants.
+; qconst - Various required constants.
 ;
 ; Arguments:
 ; - p_n1: constant name, string.
@@ -85,7 +85,7 @@
     res))
 
 
-; g1y - repeats placement of gate p_n1 and group p_l1 by repeating the use of qgate1
+; g1y - Repeats placement of gate p_n1 and group p_l1 by repeating the use of qgate1
 ; from qbit p_y1 to qbit p_y2 on y axis (vertically).
 ;
 ; Arguments:
@@ -102,7 +102,7 @@
 	       (loop (+ i 1))))))
 
 
-; g1x - repeats placement of gate p_n1 and group p_l1 by repeating the use of
+; g1x - Repeats placement of gate p_n1 and group p_l1 by repeating the use of
 ; qgate1 from qbit p_y1 to qbit p_y2 on x axis (horizontally).
 ;
 ; Arguments:
@@ -119,7 +119,7 @@
 	       (loop (+ i 1))))))
 
 
-; g1xy - repeats placement of gate p_n1 and group p_l1 by repeating the use of
+; g1xy - Repeats placement of gate p_n1 and group p_l1 by repeating the use of
 ; qgate1 from qubit p_y1 to qubit p_y2 on y axis (vertically).
 ;
 ; Arguments:
@@ -153,7 +153,7 @@
 	       (loop (+ i 1))))))
 
 
-; cx - gate cx.
+; cx - Gate cx.
 ;
 ; Arguments:
 ; - p_l1: quantum register name 1.
@@ -165,7 +165,7 @@
   (g2 "cx" p_l1 p_y1 p_l2 p_y2))
 
 
-; cz - gate cz, controlled phase expressed atomically.
+; cz - Gate cz, controlled phase expressed atomically.
 ;
 ; Arguments:
 ; - p_l1: quantum register name 1.
@@ -179,7 +179,7 @@
   (g1 "h" p_l2 p_y2))
 
 
-; cz-fast - gate cz, controlled y in fast form.
+; cz-fast - Gate cz, controlled y in fast form.
 ;
 ; Arguments:
 ; - p_l1: quantum register name 1.
@@ -191,7 +191,7 @@
   (g2 "cz-fast" p_l1 p_y1 p_l2 p_y2))
 
 
-; cy - gate cy, controlled y expressed atomically.
+; cy - Gate cy, controlled y expressed atomically.
 ;
 ; Arguments:
 ; - p_l1: quantum register name 1.
@@ -205,7 +205,7 @@
   (g1 "s" p_l2 p_y2))
 
 
-; cy-fast - gate cy, controlled y in fast form.
+; cy-fast - Gate cy, controlled y in fast form.
 ;
 ; Arguments:
 ; - p_l1: quantum register name 1.
@@ -217,7 +217,7 @@
   (g2 "cy-fast" p_l1 p_y1 p_l2 p_y2))
 
 
-; ch - gate ch, controlled h expressed atomically.
+; ch - Gate ch, controlled h expressed atomically.
 ;
 ; Arguments:
 ; - p_l1: quantum register name 1.
@@ -239,7 +239,7 @@
   (g1 "s" p_l1 p_y1))
 
 
-; ch-fast - gate ch, controlled h in fast form.
+; ch-fast - Gate ch, controlled h in fast form.
 ;
 ; Arguments:
 ; - p_l1: quantum register name 1.
@@ -251,11 +251,11 @@
   (g2 "ch-fast" p_l1 p_y1 p_l2 p_y2))
 
 
-; ccx - gate ccx - Toffoli (AND) expressed atomically.
+; ccx - Gate ccx - Toffoli (AND) expressed atomically.
 ;
 ; Arguments:
 ; - p_l1: quantum register name 1.
-; - p_y1L control qubit 1.
+; - p_y1: control qubit 1.
 ; - p_l2: quantum register name 2.
 ; - p_y2: control qubit 2.
 ; - p_l3: quantum register name 3.
@@ -298,7 +298,7 @@
   (display (strings-append (list "ccx " (qbgna p_l1 p_y1) "," (qbgna p_l1 p_y2) "," (qbgna p_l3 p_y3) (g2q-txt 2)) 0)))
   
 
-; rx - gate rx, rotation around X-axis.
+; rx - Gate rx, rotation around X-axis.
 ;
 ; Arguments:
 ; - p_t: theta angle.
@@ -310,7 +310,7 @@
     (u3 p_t (* y2 -1) y2 p_l1 p_y1)))
 
 
-; rx-fast - gate rx, rotation around X-axis, in fast form.
+; rx-fast - Gate rx, rotation around X-axis, in fast form.
 ;
 ; Arguments:
 ; - p_t: theta angle (dummy, left for consistency).
@@ -321,7 +321,7 @@
   (display (strings-append (list "rx(" (number->string (/ (qconst "Pi") 2)) (g2q-txt 4)  p_l1 "[" (number->string p_y1) (g2q-txt 3)) 0)))
 
 
-; ry - gate ry, rotation around Y-axis.
+; ry - Gate ry, rotation around Y-axis.
 ;
 ; Arguments:
 ; - p_t: theta angle.
@@ -332,7 +332,7 @@
   (u3 p_t 0 0 p_l1 p_y1))
 
 
-; ry-fast - gate ry, rotation around Y-axis, in fast form.
+; ry-fast - Gate ry, rotation around Y-axis, in fast form.
 ;
 ; Arguments:
 ; - p_t: angle (dummy, left for consistency).
@@ -343,7 +343,7 @@
   (display (strings-append (list "ry(" (number->string (/ (qconst "Pi") 2)) (g2q-txt 4) p_l1 "[" (number->string p_y1) (g2q-txt 3)) 0)))
 
 
-; rz - gate rz, rotation around Z-axis.
+; rz - Gate rz, rotation around Z-axis.
 ;
 ; Arguments:
 ; - p_p: angle 1.
@@ -354,7 +354,7 @@
   (u1 p_p p_l1 p_y1))
 
 
-; rz-fast - gate rz, rotation around Z-axis, in fast form.
+; rz-fast - Gate rz, rotation around Z-axis, in fast form.
 ;
 ; Arguments:
 ; - p_t: angle (dummy, left for consistency with other functions).
@@ -365,7 +365,7 @@
   (display (strings-append (list "rz(" (number->string (/ (qconst "Pi") 2)) (g2q-txt 4) p_l1 "[" (number->string p_y1) (g2q-txt 3)) 0)))
 
 
-; crz - gate crz, controlled rz expressed atomically.
+; crz - Gate crz, controlled rz expressed atomically.
 ;
 ; Arguments:
 ; - p_la: angle 1.
@@ -382,7 +382,7 @@
     (cx p_l1 p_y1 p_l2 p_y2)))
 
 
-; crz-fast - gate crz, controlled rz expressed in fast form.
+; crz-fast - Gate crz, controlled rz expressed in fast form.
 ;
 ; Arguments:
 ; - p_la: angle 1.
@@ -395,7 +395,7 @@
   (display (strings-append (list "crz(" (number->string (/ (qconst "Pi") 2)) (g2q-txt 4) p_l1 "[" (number->string p_y1) "]," p_l2 "[" (number->string p_y2) (g2q-txt 3)) 0)))
 
 
-; cu1 - gate cu1, controlled phase rotation expressed atomically.
+; cu1 - Gate cu1, controlled phase rotation expressed atomically.
 ;
 ; Arguments:
 ; - p_la: angle 1.
@@ -413,7 +413,7 @@
     (u1 la p_l1 p_y1)))
 
 
-; cu1-fast - gate cu1, controlled phase rotation expressed in fast form.
+; cu1-fast - Gate cu1, controlled phase rotation expressed in fast form.
 ;
 ; Arguments:
 ; - p_la: angle 1.
@@ -426,7 +426,7 @@
   (display (strings-append (list "cu1(" (number->string p_la) (g2q-txt 4) p_l1 "[" (number->string p_y1) "]," p_l2 "[" (number->string p_y2) (g2q-txt 3)) 0)))
 
 
-; cu3 - gate cu3, controlled U expressed atomically.
+; cu3 - Gate cu3, controlled U expressed atomically.
 ;
 ; Arguments:
 ; - p_la: angle 1.
@@ -444,7 +444,7 @@
   (u3 (* p_la 0.5) p_pa 0 p_l2 p_y2))
 
 
-; cu3-fast - gate cu3, controlled U expressed in fast form.
+; cu3-fast - Gate cu3, controlled U expressed in fast form.
 ;
 ; Arguments:
 ; - p_la1: angle 1.
@@ -473,7 +473,7 @@
   (g1 p_n1 p_l1 p_y2))
 
 
-; qendc - prints a message stating that compilation has ended.
+; qendc - Prints a message stating that compilation has ended.
 ;
 (define (qendc)
   (ptit "=" 60 2 "Compilation completed!"))
@@ -496,7 +496,7 @@
     res))
 
 
-; qreq - consturcts a qreg file.
+; qreq - Constructs a qreg file.
 ;
 ; Arguments
 ; - p_f1: name of .qasm file.
@@ -578,7 +578,7 @@
     (close port2)))
 
 
-; qcnot1 - a cx based NOT gate expressed atomically.
+; qcnot1 - A cx based NOT gate expressed atomically.
 ;
 ; Arguments:
 ; - p_l1: gate group name 1.
@@ -596,7 +596,7 @@
   (cx p_l2 p_y2 p_l1 p_y1))
 
 
-; qxor1 - a qcnot1 based XOR gate expressed atomically.
+; qxor1 - A qcnot1 based XOR gate expressed atomically.
 ;
 ; Arguments:
 ; - p_l1: quantum register name 1.
@@ -667,7 +667,7 @@
     res))
 	
 
-; qfres - find max or min value among results. If more than one ocurrence
+; qfres - Find max or min value among results. If more than one ocurrence
 ; is found, it returns the last label corresponding to the last element that
 ; matches.
 ;
@@ -707,7 +707,7 @@
     res))
     
 
-; swap-fast - swap gate expressed in fast form.
+; swap-fast - Swap gate expressed in fast form.
 ;
 ; Arguments:
 ; - p_l1: quantum register name. 

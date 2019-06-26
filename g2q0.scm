@@ -51,7 +51,7 @@
 	    swap))
 
 
-; qhead - defines program name.
+; qhead - Defines program name.
 ;
 ; Arguments:
 ; - p_prog: program name.
@@ -64,7 +64,7 @@
   (qstr "include \"qelib1.inc\";"))
   
 
-; qstr - writes a literal statement.
+; qstr - Writes a literal statement.
 ;
 ; Arguments:
 ; - p_n: string containing the literal statement.
@@ -72,7 +72,7 @@
   (display (strings-append (list p_n "\n") 0)))
 
 
-; qcomm - writes a comment.
+; qcomm - Writes a comment.
 ;
 ; Arguments:
 ; - p_s: string to write as a comment.
@@ -81,12 +81,12 @@
   (qstr (strings-append (list (g2q-txt 6) p_s ";") 0)))
 
 
-; qelib1 - includes initial QASM library.
+; qelib1 - Includes initial QASM library.
 (define (qelib1)
   (display "include \"qelib1.inc\";\n"))
 
 
-; qbgns - adds a trailing space to a string.
+; qbgns - Adds a trailing space to a string.
 ;
 ; Arguments:
 ; - p_n: string.
@@ -95,7 +95,7 @@
   (string-append p_n " "))
 
 
-; qbgns - adds a trailing colon to a number after converting it into a string.
+; qbgns - Adds a trailing colon to a number after converting it into a string.
 ;
 ; Arguments:
 ; - p_y: number.
@@ -104,7 +104,7 @@
   (string-append (number->string p_y) ","))
 
 
-; qbgna - constructs an array item.
+; qbgna - Constructs an array item.
 ;
 ; Arguments:
 ; - p_l: array name.
@@ -114,7 +114,7 @@
   (strings-append (list p_l "[" (number->string p_y) "]") 0))
 
 
-; qbg - basic gate structure.
+; qbg - Basic gate structure.
 ;
 ; Arguments:
 ; - p_n: gate name.
@@ -125,7 +125,7 @@
   (string-append (qbgns p_n) (qbgna p_l p_y)))
 
 
-; qbgd - display basic gate structure.
+; qbgd - Display basic gate structure.
 ;
 ; Arguments:
 ; - p_n: gate name.
@@ -135,7 +135,7 @@
 (define (qbgd p_n p_l p_y)
   (display (string-append (qbg p_n p_l p_y) (g2q-txt 2))))
 
-; qmeas - measurement gate.
+; qmeas - Measurement gate.
 ;
 ; Arguments:
 ; - p_l1: quantum register name 1.
@@ -146,7 +146,7 @@
 (define (qmeas p_l1 p_x1 p_l2 p_x2)
   (display (strings-append (list "measure " (qbgna p_l1 p_x1) " -> " (qbgna p_l2 p_x2) (g2q-txt 2)) 0)))
 
-; qcx - cx gate
+; qcx - Gate cx.
 ;
 ; Arguments:
 ; - p_n1: item name.
@@ -159,7 +159,7 @@
   (display (strings-append (list p_n1 " " (qbgna p_l1 p_y1) "," (qbgna p_l2 p_y2) (g2q-txt 2)) 0)))
 
  
-; qregdef - register definitions.
+; qregdef - Register definitions.
 ;
 ; Arguments:
 ; - p_l1: quantum register name 1.
@@ -182,7 +182,7 @@
   (set! p_v (+ p_v p_t )))
 
 
-; g1 - fundamental gate using one qbit.
+; g1 - Fundamental gate using one qbit.
 ;
 ; Arguments:
 ; - p_n1: gate name.
@@ -193,7 +193,7 @@
   (qbgd p_n1 p_l1 p_y1))  
 
 
-; g2 - fundamental quantum gates.
+; g2 - Fundamental quantum gates.
 ;
 ; Arguments:
 ; - p_n1: gate name.
@@ -211,7 +211,7 @@
 	(else (qcx p_n1 p_r1 p_y1 p_r2 p_y2))))
 
 
-; u1 - gate u1.
+; u1 - Gate u1.
 ;
 ; Arguments:
 ; - p_y1: first rotation.
@@ -222,7 +222,7 @@
   (display (strings-append (list "u1(" (number->string p_y1) (g2q-txt 4) (qbgna p_l1 p_y2) (g2q-txt 2)) 0)))
 
 
-; u2 - gate u2.
+; u2 - Gate u2.
 ;
 ; Arguments:
 ; - p_y1: angle 1, first rotation.
@@ -234,7 +234,7 @@
   (display (strings-append (list "u2(" (qbgnc p_y1) (number->string p_y2) (g2q-txt 4) (qbgna p_l1 p_y3) (g2q-txt 2)) 0)))
 
 
-; u3 - gate u3.
+; u3 - Gate u3.
 ;
 ; Arguments:
 ; - p_y1: angle 1, first rotation.
@@ -247,7 +247,7 @@
   (display (strings-append (list "u3(" (qbgnc p_y1) (qbgnc p_y2) (number->string p_y3) (g2q-txt 4) (qbgna p_l1 p_y4) (g2q-txt 2)) 0)))
 
 
-; qcond1 - quantum conditional 1.
+; qcond1 - Quantum conditional 1.
 ;
 ; Arguments:
 ; - p_c1: condition.
@@ -260,7 +260,7 @@
     (display qsen)))
 
 
-; qcond2 - quantum conditional 2.
+; qcond2 - Quantum conditional 2.
 ;
 ; Arguments:
 ; - p_c1: condition.
@@ -289,7 +289,7 @@
     res))
 
 
-; swap - swap gate expressed atomically.
+; swap - Gate swap expressed atomically.
 ;
 ; Arguments:
 ; - p_l1: quantum register name 1. 
