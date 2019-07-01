@@ -300,9 +300,11 @@
 ; - https://algassert.com/post/1717
 ;
 (define (swap p_l1 p_y1 p_y2)
+  (display "// swap\n")
   (qcx "cx" p_l1 p_y1 p_l1 p_y2)
   (qcx "cx" p_l1 p_y2 p_l1 p_y1)
-  (qcx "cx" p_l1 p_y1 p_l1 p_y2))
+  (qcx "cx" p_l1 p_y1 p_l1 p_y2)
+  (display "// end swap\n"))
 
 
 
