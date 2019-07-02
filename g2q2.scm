@@ -96,13 +96,13 @@
 ; - p_y2: ordinal of the last qubit.
 ;
 (define (g1y p_n1 p_l1 p_y1 p_y2)
-  (display "// g1y\n")
+  (qcomg "g1y" 0)
   (let loop ((i p_y1))
     (if (= i p_y2)
 	(g1 p_n1 p_l1 i)
 	(begin (g1 p_n1 p_l1 i)
 	       (loop (+ i 1)))))
-  (display "// end g1y\n"))
+  (qcomg "g1y" 1))
 
 
 ; g1x - Repeats placement of gate p_n1 and group p_l1 by repeating the use of
@@ -115,13 +115,13 @@
 ; - p_m1: number of iterations.
 ;
 (define (g1x p_n1 p_l1 p_y1 p_m1)
-  (display "// g1x\n")
+  (qcomg "g1x" 0)
   (let loop ((i 1))
     (if (= i p_m1)
 	(g1 p_n1 p_l1 p_y1)
 	(begin (g1 p_n1 p_l1 p_y1)
 	       (loop (+ i 1)))))
-  (display "// end g1x\n"))
+  (qcomg "g1x" 1))
 
 
 ; g1xy - Repeats placement of gate p_n1 and group p_l1 by repeating the use of
@@ -135,13 +135,13 @@
 ; - p_x1: number if iterations that g1y will be repeated along x axis of sequence as a graph.
 ;
 (define (g1xy p_n1 p_l1 p_y1 p_y2 p_x1)
-  (display "// g1xy\n")
+  (qcomg "g1xy" 0)
   (let loop ((j 1))
     (if (= j p_x1)
 	(g1y p_n1 p_l1 p_y1 p_y2)
 	(begin (g1y p_n1 p_l1 p_y1 p_y2)
 	       (loop (+ j 1)))))
-  (display "// end g1xy\n"))
+  (qcomg "g1xy" 1))
 
 
 ; qmeasy - Performs measurements on group p_l1 to group p_l2 from p_y1 to p_y2.
@@ -153,13 +153,13 @@
 ; - p_y2: ordinal of the last qubit.
 ;
 (define (qmeasy p_l1 p_l2 p_y1 p_y2)
-  (display "// qmeasy\n")
+  (qcomg "qmeasy" 0)
   (let loop ((i p_y1))
     (if (= i p_y2)
 	(qmeas p_l1 p_y2 p_l2 p_y2)
 	(begin (qmeas p_l1 i p_l2 i)
 	       (loop (+ i 1)))))
-  (display "// end qmeasy\n"))
+  (qcomg "qmeasy" 1))
 
 
 ; cx - Gate cx.
@@ -183,11 +183,11 @@
 ; - p_y2: target qubit 2.
 ;
 (define (cz p_l1 p_y1 p_l2 p_y2)
-  (display "// cz\n")  
+  (qcomg "cz" 0)
   (g1 "h" p_l1 p_y2)
   (cx p_l1 p_y1 p_l2 p_y2)
   (g1 "h" p_l2 p_y2)
-  (display "// end cz\n"))
+  (qcomg "cz" 1))
 
 
 ; cz-fast - Gate cz, controlled y in fast form.
@@ -211,11 +211,11 @@
 ; - p_y2: target qubit 2.
 ;
 (define (cy p_l1 p_y1 p_l2 p_y2)
-  (display "// cy\n")
+  (qcomg "cy" 0)
   (g1 "sdg" p_l2 p_y2)
   (cx p_l1 p_y1 p_l2 p_y2)
   (g1 "s" p_l2 p_y2)
-  (display "// end cy\n"))
+  (qcomg "cy" 1))
 
 
 ; cy-fast - Gate cy, controlled y in fast form.
@@ -239,7 +239,7 @@
 ; - p_y2: target qubit 2.
 ;
 (define (ch p_l1 p_y1 p_l2 p_y2)
-  (display "// ch\n")
+  (qcomg "ch" 0)
   (g1 "h" p_l2 p_y2)
   (g1 "sdg" p_l2 p_y2)
   (cx p_l1 p_y1 p_l2 p_y2)
@@ -251,7 +251,7 @@
   (g1 "s" p_l2 p_y2)
   (g1 "x" p_l2 p_y2)
   (g1 "s" p_l1 p_y1)
-  (display "// end ch\n"))
+  (qcomg "ch" 1))
 
 
 ; ch-fast - Gate ch, controlled h in fast form.
@@ -282,7 +282,7 @@
 ; - Elementary gates for quantum computation - Barenco, Bennet et al. (1995) - https://arxiv.org/pdf/quant-ph/9503016.pdf
 ;
 (define (ccx p_l1 p_y1 p_l2 p_y2 p_l3 p_y3)
-  (display "// ccx\n")
+  (qcomg "ccx" 0)
   (g1 "h" p_l3 p_y3)
   (cx p_l2 p_y2 p_l3 p_y3)
   (g1 "tdg" p_l3 p_y3)
@@ -298,7 +298,7 @@
   (g1 "t" p_l1 p_y1)
   (g1 "tdg" p_l2 p_y2)
   (cx p_l1 p_y1 p_l2 p_y2)
-  (display "// end ccx\n"))
+  (qcomg "ccx" 1))
 
 
 ; ccx-fast - Toffoli (AND) gate in fast form.
@@ -392,13 +392,13 @@
 ; - p_y2: qubit 2.
 ;
 (define (crz p_la p_l1 p_y1 p_l2 p_y2)
-  (display "// crz\n")
+  (qcomg "crz" 0)
   (let ((la (/ p_la 2)))
     (u1 la p_l2 p_y2)
     (cx p_l1 p_y1 p_l2 p_y2)
     (u1 (* -1.0 la) p_l2 p_y2)
     (cx p_l1 p_y1 p_l2 p_y2))
-  (display "// end crz\n"))
+  (qcomg "crz" 1))
 
 
 ; crz-fast - Gate crz, controlled rz expressed in fast form.
@@ -424,14 +424,14 @@
 ; - p_y2: qubit 2.
 ;
 (define (cu1 p_la p_l1 p_y1 p_l2 p_y2)
-  (display "// cu1\n")
+  (qcomg "cu1" 0)
   (let ((la (* p_la 0.5)))
     (u1 la p_l1 p_y1)
     (cx p_l1 p_y1 p_l2 p_y2)
     (u1 (* -1.0 la) p_l2 p_y2)
     (cx p_l1 p_y1 p_l2 p_y2)
     (u1 la p_l1 p_y1))
-  (display "// end cu1\n"))
+  (qcomg "cu1" 1))
 
 
 ; cu1-fast - Gate cu1, controlled phase rotation expressed in fast form.
@@ -458,13 +458,13 @@
 ; - p_y2: qubit 2.
 ;
 (define (cu3 p_la p_pa p_l1 p_y1 p_l2 p_y2)
-  (display "// cu3\n")
+  (qcomg "cu3" 0)
   (u1 (* (- p_la p_pa) 0.5) p_l2 p_y2)
   (cx p_l1 p_y1 p_l2 p_y2)
   (u3 (* (* p_la 0.5) -1.0) 0 (* (* (+ p_pa p_la) 0.5) -1.0) p_l2 p_y2)
   (cx p_l1 p_y1 p_l2 p_y2)
   (u3 (* p_la 0.5) p_pa 0 p_l2 p_y2)
-  (display "// end cu3\n"))
+  (qcomg "cu3" 1))
 
 
 ; cu3-fast - Gate cu3, controlled U expressed in fast form.
@@ -491,11 +491,11 @@
 ; - p_y2: qubit number 2.
 ;
 (define (g1cxg1 p_n1 p_l1 p_y1 p_y2)
-  (display "// g1cxg1\n")
+  (qcomg "g1cxg1" 0)
   (g1 p_n1 p_l1 p_y2)
   (cx p_l1 p_y1 p_l1 p_y2)
   (g1 p_n1 p_l1 p_y2)
-  (display "// end g1cxg1\n"))
+  (qcomg "g1cxg1" 1))
 
 
 ; qendc - Prints a message stating that compilation has ended.
@@ -617,10 +617,10 @@
 ;  - |1> -> |0>
 ;
 (define (qcnot1 p_l2 p_y2 p_l1 p_y1)
-  (display "// qcnot1\n")  
+  (qcomg "qcnot1" 0) 
   (g1 "x" p_l1 p_y1)
   (cx p_l2 p_y2 p_l1 p_y1)
-  (display "// end qcnot1\n"))
+  (qcomg "qcnot1" 1))
 
 
 ; qxor1 - A qcnot1 based XOR gate expressed atomically.
@@ -643,11 +643,11 @@
 ;  - |10> -> |1>
 ;
 (define (qxor1 p_l1 p_y1 p_l2 p_y2 p_l3 p_y3 p_l4 p_y4)
-  (display "// qxor1\n")  
+  (qcomg "qxor1" 0)
   (qcnot1 p_l2 p_y2 p_l1 p_y1)
   (qcnot1 p_l4 p_y4 p_l3 p_y3)
   (qcnot1 p_l3 p_y3 p_l1 p_y1)
-  (display "// end qxor1\n"))
+  (qcomg "qxor1" 1))
 
 
 ; qfclvr - Find and construct label and value registers.
@@ -747,8 +747,10 @@
   (display (strings-append (list "swap " (qbgna p_l1 p_y1) "," (qbgna p_l1 p_y2) (g2q-txt 2)) 0)))
 
 
-; qftyn - qft for n qubits in the range [p_l1[p_y1] : p_l2[p_y2]].
+; qftyn - Quantum Fourier Transformation for n qubits in the range
+; [p_l1[p_y1] : p_l2[p_y2]].
 ;
+; Arguments:
 ; p_l1: quantum register name 1.
 ; p_y1: qubit 1, min limit of the range.
 ; p_l2: quantum register name 2.
@@ -758,7 +760,7 @@
 ; - https://quantum-computing.ibm.com/support/guides/quantum-algorithms-with-qiskit?page=5cbc5e2d74a4010049e1a2b0#qiskit-implementation
 ;
 (define (qftyn p_l1 p_y1 p_l2 p_y2)
-  (display "// qftyn\n")
+  (qcomg "qftyn" 0)
   (let ((i p_y1)
 	(j 0))
     (while (<= i p_y2)
@@ -768,7 +770,8 @@
 		  (cu1 (/ (qconst "Pi") (expt 2 (- j i))) p_l1 j p_l2 i)
 		  (set! j (+ j 1)))
 	   (set! i (+ i 1))))
-    (display "// end qftyn\n"))
+  (qcomg "qftyn" 1))
+
 
 
 

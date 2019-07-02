@@ -1,13 +1,15 @@
 // example5.qasm;
-// Compiled with g2q - v1.2.3;
+// Compiled with g2q - v1.2.4;
 OPENQASM 2.0;
 include "qelib1.inc";
 qreg q[4];
 creg c[2];
+// Begin g1y;
 h q[0];
 h q[1];
 h q[2];
 h q[3];
+// End g1y;
 cx q[0],q[1];
 h q[2];
 h q[0];

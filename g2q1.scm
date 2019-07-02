@@ -43,7 +43,7 @@
 ; g2q-version - Returns the current version of the compiler.
 ;
 (define (g2q-version)
-  (let ((res "g2q - v1.2.3"))
+  (let ((res "g2q - v1.2.4"))
     res))
 
 
@@ -75,7 +75,7 @@
 ; g2q-select-qpu - Select qpu to be used.
 ;
 ; Output:
-; - String containing the name of the selected qpu. DEfaults to qlib_simulator.
+; - String containing the name of the selected qpu. Defaults to qlib_simulator.
 ;
 (define (g2q-select-qpu)
   (let ((res1 3)

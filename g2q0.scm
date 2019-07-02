@@ -48,7 +48,8 @@
 	    qcond1
 	    qcond2
 	    qvalid-conditional
-	    swap))
+	    swap
+	    qcomg))
 
 
 ; qhead - Defines program name.
@@ -300,11 +301,25 @@
 ; - https://algassert.com/post/1717
 ;
 (define (swap p_l1 p_y1 p_y2)
-  (display "// swap\n")
+  (qcomg "swap" 0)
   (qcx "cx" p_l1 p_y1 p_l1 p_y2)
   (qcx "cx" p_l1 p_y2 p_l1 p_y1)
   (qcx "cx" p_l1 p_y1 p_l1 p_y2)
-  (display "// end swap\n"))
+  (qcomg "swap" 1))
 
 
-
+; qxomg - Comments for complex gates. Useful to identify various code sections 
+; when complex gates are compiled into QASM2 code.
+;
+; Arguments:
+; - p_s: string (gate name).
+; - p_v: value indicating the kind of gate comment.
+;  - 0: begin block.
+;  - 1: end block.
+;
+(define (qcomg p_s p_v)
+  (let ((s ""))
+    (cond ((eq? p_v 0)(set! s (strings-append (list (g2q-txt 6) "Begin " p_s ";") 0))))
+    (cond ((eq? p_v 1)(set! s (strings-append (list (g2q-txt 6) "End " p_s ";") 0))))
+    (display s)
+    (newline)))
