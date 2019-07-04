@@ -140,8 +140,9 @@
   (qcond2 "!=" q 2 1)(g1 "y" q 2)
   ; QFT
   (qftyn q 0 q 2)
+  (qftdgyn q 0 q 2)
   ; Barrier and measure.
-  (g1y "barrier" q 0 (- qn 1))  
+  (g1y "barrier" q 0 (- qn 1))
   (qmeasy p_q p_c p_cnl p_cnh)
   (qdeclare "qx-simulator" "error_model depolarizing_channel,0.001")
   (qdeclare "qlib-simulator" "// Hello qlib-simulator"))

@@ -69,7 +69,8 @@
 	    qfclvr
 	    qfres
 	    swap-fast
-	    qftyn))
+	    qftyn
+	    qftdgyn))
 
 
 ; qconst - Various required constants.
@@ -748,7 +749,9 @@
 
 
 ; qftyn - Quantum Fourier Transformation for n qubits in the range
-; [p_l1[p_y1] : p_l2[p_y2]].
+; [p_l1[p_y1] : p_l2[p_y2]]. Note that this function assumes that all qubits
+; in the quantum register can be interconnected. In some QPU architectures
+; this may not be the case.
 ;
 ; Arguments:
 ; p_l1: quantum register name 1.
@@ -772,6 +775,31 @@
 	   (set! i (+ i 1))))
   (qcomg "qftyn" 1))
 
+
+; qftdgyn - qftyn dagger.
+;
+; Arguments:
+; p_l1: quantum register name 1.
+; p_y1: qubit 1, min limit of the range.
+; p_l2: quantum register name 2.
+; p_y2: qubit 2, max limit of the range.
+;
+; Sources:
+; - https://quantum-computing.ibm.com/support/guides/quantum-algorithms-with-qiskit?page=5cc0b79786b50d00642353b9#qiskit-implementation-1
+;
+(define (qftdgyn p_l1 p_y1 p_l2 p_y2)
+  (qcomg "qftdgyn" 0)
+  (let ((i p_y1)
+	(j 0)
+	(k 0))
+    (while (<= i p_y2)
+	   (set! j (- (- p_y2 1) i))
+	   (while (<= k j)
+		  (cu1 (/ (qconst "Pi") (expt 2 (- j k))) p_l1 j p_l2 k)
+		  (set! k (+ k 1)))
+	   (g1 "h" p_l1 j)
+	   (set! i (+ i 1))))
+  (qcomg "qftdgyn" 1))
 
 
 
