@@ -751,7 +751,7 @@
 ; qftyn - Quantum Fourier Transformation for n qubits in the range
 ; [p_l1[p_y1] : p_l2[p_y2]]. Note that this function assumes that all qubits
 ; in the quantum register can be interconnected. In some QPU architectures
-; this may not be the case.
+; this may not be the case. Expressed atomically.
 ;
 ; Arguments:
 ; p_l1: quantum register name 1.
@@ -775,9 +775,8 @@
 	   (set! i (+ i 1))))
   (qcomg "qftyn" 1))
 
-
-; qftdgyn - qftyn dagger.
-;
+	  
+; qftdgyn - Function qftyn dagger, expressed atomically.
 ; Arguments:
 ; p_l1: quantum register name 1.
 ; p_y1: qubit 1, min limit of the range.
@@ -786,6 +785,9 @@
 ;
 ; Sources:
 ; - https://quantum-computing.ibm.com/support/guides/quantum-algorithms-with-qiskit?page=5cc0b79786b50d00642353b9#qiskit-implementation-1
+;
+; Notes:
+; - See the comments for qftyn.
 ;
 (define (qftdgyn p_l1 p_y1 p_l2 p_y2)
   (qcomg "qftdgyn" 0)
@@ -800,6 +802,8 @@
 	   (g1 "h" p_l1 j)
 	   (set! i (+ i 1))))
   (qcomg "qftdgyn" 1))
+
+
 
 
 
