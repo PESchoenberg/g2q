@@ -70,7 +70,8 @@
 	    qfres
 	    swap-fast
 	    qftyn
-	    qftdgyn))
+	    qftdgyn
+	    cswap))
 
 
 ; qconst - Various required constants.
@@ -106,19 +107,19 @@
   (qcomg "g1y" 1))
 
 
-; g1x - Repeats placement of gate p_n1 and group p_l1 by repeating the use of
-; qgate1 from qbit p_y1 to qbit p_y2 on x axis (horizontally).
+; g1x - Repeats placement of gate p_n1 and register p_l1 by repeating the use of
+; qgate1 on regster element p_y1 p_x1 times on x axis (horizontally).
 ;
 ; Arguments:
 ; - p_n1: gate name.
 ; - p_l1: quantum register name.
-; - p_y1: number of iterations.
-; - p_m1: number of iterations.
+; - p_y1: register element.
+; - p_x1: number of iterations on x.
 ;
-(define (g1x p_n1 p_l1 p_y1 p_m1)
+(define (g1x p_n1 p_l1 p_y1 p_x1)
   (qcomg "g1x" 0)
   (let loop ((i 1))
-    (if (= i p_m1)
+    (if (= i p_x1)
 	(g1 p_n1 p_l1 p_y1)
 	(begin (g1 p_n1 p_l1 p_y1)
 	       (loop (+ i 1)))))
@@ -163,7 +164,8 @@
   (qcomg "qmeasy" 1))
 
 
-; cx - Gate cx.
+; cx - Gate cx. Performs a NOT operation on the target qubit if the control 
+; qubit is |1>. Leaves target qubit as it is otherwise.
 ;
 ; Arguments:
 ; - p_l1: quantum register name 1.
@@ -267,7 +269,7 @@
   (g2 "ch-fast" p_l1 p_y1 p_l2 p_y2))
 
 
-; ccx - Gate ccx - Toffoli (AND) expressed atomically.
+; ccx - Gate ccx - Toffoli gate expressed atomically.
 ;
 ; Arguments:
 ; - p_l1: quantum register name 1.
@@ -777,6 +779,7 @@
 
 	  
 ; qftdgyn - Function qftyn dagger, expressed atomically.
+;
 ; Arguments:
 ; p_l1: quantum register name 1.
 ; p_y1: qubit 1, min limit of the range.
@@ -804,6 +807,39 @@
   (qcomg "qftdgyn" 1))
 
 
-
+; cswap - Gate  Fredkin in atomic form. Swaps p_y2 and p_y3 if p_y1 is |1> 
+; (controlled swap).
+;
+; - p_l1: quantum register name 1.
+; - p_y1: control qubit 1.
+; - p_l2: quantum register name 2.
+; - p_y2: control qubit 2.
+; - p_l3: quantum register name 3.
+; - p_y3: target qubit 3.
+;
+; Sources:
+; - https://www.semanticscholar.org/paper/A-Resource-Efficient-Design-for-a-Reversible-Point-Nguyen-Meter/697e4fd8282e1b3cc151956bbb302b0b8e7df22b/figure/13
+; - https://en.wikipedia.org/wiki/Quantum_logic_gate#Controlled_(cX_cY_cZ)_gates
+;
+(define (cswap p_l1 p_y1 p_l2 p_y2 p_l3 p_y3)
+  (qcomg "cswap" 0)
+  (cx p_l3 p_y3 p_l2 p_y2)
+  (cx p_l1 p_y1 p_l2 p_y2)
+  (g1 "h" p_l3 p_y3)
+  (g1 "t" p_l1 p_y1)
+  (g1 "tdg" p_l2 p_y2)
+  (g1 "t" p_l3 p_y3)
+  (cx p_l3 p_y3 p_l2 p_y2)
+  (cx p_l1 p_y1 p_l3 p_y3)
+  (g1 "t" p_l2 p_y2)
+  (g1 "tdg" p_l3 p_y3)  
+  (cx p_l1 p_y1 p_l2 p_y2)
+  (g1 "tdg" p_l2 p_y2)
+  (cx p_l1 p_y1 p_l3 p_y3)
+  (cx p_l3 p_y3 p_l2 p_y2)
+  (g1 "t" p_l2 p_y2)
+  (g1 "h" p_l3 p_y3)
+  (cx p_l3 p_y3 p_l2 p_y2)  
+  (qcomg "cswap" 1))
 
 

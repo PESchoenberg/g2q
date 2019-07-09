@@ -115,6 +115,7 @@
   (cz-fast q 2 q 0)
   (ch q 0 q 1)
   (ch-fast q 2 q 0)
+  (cswap q 0 q 1 q 2)
   ; Universal gates.  
   (u1 1.6 q 0)
   (u2 1.6 1.6 q 1)
