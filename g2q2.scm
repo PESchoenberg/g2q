@@ -811,11 +811,11 @@
 ; (controlled swap).
 ;
 ; - p_l1: quantum register name 1.
-; - p_y1: control qubit 1.
+; - p_y1: qubit 1.
 ; - p_l2: quantum register name 2.
-; - p_y2: control qubit 2.
+; - p_y2: qubit 2.
 ; - p_l3: quantum register name 3.
-; - p_y3: target qubit 3.
+; - p_y3: qubit 3.
 ;
 ; Sources:
 ; - https://www.semanticscholar.org/paper/A-Resource-Efficient-Design-for-a-Reversible-Point-Nguyen-Meter/697e4fd8282e1b3cc151956bbb302b0b8e7df22b/figure/13
