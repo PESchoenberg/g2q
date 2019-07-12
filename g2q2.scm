@@ -71,7 +71,8 @@
 	    swap-fast
 	    qftyn
 	    qftdgyn
-	    cswap))
+	    cswap
+	    cx-ladder))
 
 
 ; qconst - Various required constants.
@@ -842,4 +843,46 @@
   (cx p_l3 p_y3 p_l2 p_y2)  
   (qcomg "cswap" 1))
 
+
+; cx-ladder - creates a ladder of succesive cx gates from p_l1[p_y1] to
+; p_l1[p_y2] according to :
+; - If p_y1 < p_y2: ladder goes from lower element number to greater
+;   element number on the registry.
+; - If p_y1 = p_y2: the fuunction behaves as a single cx gate.
+; - if p_y1 > p_y2: the ladder goes from higher to lower registry element.
+;
+; Arguments:
+; - p_l1: quantum register name.
+; - p_y1: qubit 1, control qubit of the cx gate where the ladder begins.
+; - p_y2: qubit 2, target qubit of the cx gate where the ladder ends.
+; - p_s:
+;
+(define (cx-ladder p_l1 p_y1 p_y2 p_s)
+  (qcomg "cx-ladder" 0)
+  (cond ((equal? p_y1 p_y2)(cx p_l1 p_y1 p_l1 p_y2))
+        ; Control qubit on top, descending.
+	((equal? p_s 1)(begin (let loop ((i1 p_y1))
+				 (if (equal? i1 (- p_y2 1))
+				     (cx p_l1 i1 p_l1 p_y2)
+				     (begin (cx p_l1 i1 p_l1 (+ i1 1))
+					    (loop (+ i1 1)))))))
+        ; Control qubit on top, ascending
+	((equal? p_s 2)(begin (let loop ((i1 (- p_y1 1)))
+				 (if (equal? i1 p_y2)
+				     (cx p_l1 p_y2 p_l1 (+ i1 1))
+				     (begin (cx p_l1 i1 p_l1 (+ i1 1))
+					    (loop (- i1 1)))))))
+        ; Control qubit on bottom, descending.
+	((equal? p_s 3)(begin (let loop ((i1 p_y1))
+				 (if (equal? i1 (- p_y2 1))
+				     (cx p_l1 p_y2 p_l1 i1)
+				     (begin (cx p_l1 (+ i1 1) p_l1 i1)
+					    (loop (+ i1 1)))))))	
+        ; Control qubit on bottom, ascending
+	((equal? p_s 4)(begin (let loop ((i1 p_y1))
+				 (if (equal? i1 (+ p_y2 1))
+				     (cx p_l1 i1 p_l1 p_y2)
+				     (begin (cx p_l1 i1 p_l1 (- i1 1))
+					    (loop (- i1 1))))))))
+  (qcomg "cx-ladder" 1))
 
