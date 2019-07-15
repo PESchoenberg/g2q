@@ -72,7 +72,8 @@
 	    qftyn
 	    qftdgyn
 	    cswap
-	    cx-ladder))
+	    cx-ladder
+	    swap-fast-ladder))
 
 
 ; qconst - Various required constants.
@@ -764,6 +765,7 @@
 ;
 ; Sources:
 ; - https://quantum-computing.ibm.com/support/guides/quantum-algorithms-with-qiskit?page=5cbc5e2d74a4010049e1a2b0#qiskit-implementation
+; - https://en.wikipedia.org/wiki/Quantum_Fourier_transform
 ;
 (define (qftyn p_l1 p_y1 p_l2 p_y2)
   (qcomg "qftyn" 0)
@@ -855,7 +857,11 @@
 ; - p_l1: quantum register name.
 ; - p_y1: qubit 1, control qubit of the cx gate where the ladder begins.
 ; - p_y2: qubit 2, target qubit of the cx gate where the ladder ends.
-; - p_s:
+; - p_s: mode:
+;   - 1: Descending ladder, control qubit on top (p_y1).
+;   - 2: Ascending ladder, control qubit on top (p_y1).
+;   - 3: Descending ladder, control qubit on bottom (p_y2).
+;   - 4: Ascending ladder, control qubit on bottom (p_y2).
 ;
 (define (cx-ladder p_l1 p_y1 p_y2 p_s)
   (qcomg "cx-ladder" 0)
@@ -885,4 +891,38 @@
 				     (begin (cx p_l1 i1 p_l1 (- i1 1))
 					    (loop (- i1 1))))))))
   (qcomg "cx-ladder" 1))
+
+
+; swap-fast-ladder - creates a ladder of succesive swap-fast gates from
+; p_l1[p_y1] to  p_l1[p_y2] according to :
+; - If p_y1 < p_y2: ladder goes from lower element number to greater
+;   element number on the registry.
+; - If p_y1 = p_y2: the fuunction behaves as a single swap-fast gate.
+; - if p_y1 > p_y2: the ladder goes from higher to lower registry element.
+;
+; Arguments:
+; - p_l1: quantum register name.
+; - p_y1: qubit 1, lower registry number qubit where the ladder begins.
+; - p_y2: qubit 2, higher registry number qubit where the ladder ends.
+; - p_s: mode:
+;   - 1: Descending ladder.
+;   - 2: Ascending ladder.
+;
+(define (swap-fast-ladder p_l1 p_y1 p_y2 p_s)
+  (qcomg "swap-fast-ladder" 0)
+  (cond ((equal? p_y1 p_y2)(swap-fast p_l1 p_y1 p_y2))
+        ; Descending.
+	((equal? p_s 1)(begin (let loop ((i1 p_y1))
+				 (if (equal? i1 (- p_y2 1))
+				     (swap-fast p_l1 i1 p_y2)
+				     (begin (swap-fast p_l1 i1 (+ i1 1))
+					    (loop (+ i1 1)))))))
+        ; Ascending
+	((equal? p_s 2)(begin (let loop ((i1 (- p_y1 1)))
+				 (if (equal? i1 p_y2)
+				     (swap-fast p_l1 p_y2 (+ i1 1))
+				     (begin (swap-fast p_l1 i1 (+ i1 1))
+					    (loop (- i1 1))))))))
+  (qcomg "swap-fast-ladder" 1))
+
 
