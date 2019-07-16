@@ -73,7 +73,8 @@
 	    qftdgyn
 	    cswap
 	    cx-ladder
-	    swap-fast-ladder))
+	    swap-fast-ladder
+	    swap-ladder))
 
 
 ; qconst - Various required constants.
@@ -924,5 +925,38 @@
 				     (begin (swap-fast p_l1 i1 (+ i1 1))
 					    (loop (- i1 1))))))))
   (qcomg "swap-fast-ladder" 1))
+
+
+; swap-ladder - creates a ladder of succesive swap gates from
+; p_l1[p_y1] to  p_l1[p_y2] according to :
+; - If p_y1 < p_y2: ladder goes from lower element number to greater
+;   element number on the registry.
+; - If p_y1 = p_y2: the fuunction behaves as a single swap gate.
+; - if p_y1 > p_y2: the ladder goes from higher to lower registry element.
+;
+; Arguments:
+; - p_l1: quantum register name.
+; - p_y1: qubit 1, lower registry number qubit where the ladder begins.
+; - p_y2: qubit 2, higher registry number qubit where the ladder ends.
+; - p_s: mode:
+;   - 1: Descending ladder.
+;   - 2: Ascending ladder.
+;
+(define (swap-ladder p_l1 p_y1 p_y2 p_s)
+  (qcomg "swap-ladder" 0)
+  (cond ((equal? p_y1 p_y2)(swap p_l1 p_y1 p_y2))
+        ; Descending.
+	((equal? p_s 1)(begin (let loop ((i1 p_y1))
+				 (if (equal? i1 (- p_y2 1))
+				     (swap p_l1 i1 p_y2)
+				     (begin (swap p_l1 i1 (+ i1 1))
+					    (loop (+ i1 1)))))))
+        ; Ascending
+	((equal? p_s 2)(begin (let loop ((i1 (- p_y1 1)))
+				 (if (equal? i1 p_y2)
+				     (swap p_l1 p_y2 (+ i1 1))
+				     (begin (swap p_l1 i1 (+ i1 1))
+					    (loop (- i1 1))))))))
+  (qcomg "swap-ladder" 1))
 
 
