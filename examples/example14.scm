@@ -96,9 +96,13 @@
   ; shows four different ladder variants available. For detals, see the 
   ; documentation for this function (comments on file g2q2.scm.)
   (cx-ladder p_q p_qnl p_qnh 1)
+  (g1y "barrier" p_q p_qnl p_qnh)
   (cx-ladder p_q p_qnh p_qnl 2)
+  (g1y "barrier" p_q p_qnl p_qnh)
   (cx-ladder p_q p_qnl p_qnh 3)
+  (g1y "barrier" p_q p_qnl p_qnh)
   (cx-ladder p_q p_qnh p_qnl 4)
+  (g1y "barrier" p_q p_qnl p_qnh)
   ; Measurement.
   (qmeasy p_q p_c 0 4)
   ; Declaratons for internal simulators available on qre.

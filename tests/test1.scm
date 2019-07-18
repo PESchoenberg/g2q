@@ -31,7 +31,8 @@
 ;   guile test1.scm 
 ;
 ; Sources:
-; - Andrew W. Cross, Lev S. Bishop, John A. Smolin, Jay M. Gambetta "Open Quantum Assembly Language", https://arxiv.org/abs/1707.03429
+; - Andrew W. Cross, Lev S. Bishop, John A. Smolin, Jay M. Gambetta "Open 
+;   Quantum Assembly Language", https://arxiv.org/abs/1707.03429
 ; - https://en.wikipedia.org/wiki/OpenQASM
 ; - https://github.com/Qiskit/openqasm
 ;
@@ -142,6 +143,8 @@
   ; QFT
   (qftyn q 0 q 2)
   (qftdgyn q 0 q 2)
+  ; g2q specific.
+  (g1cxg1 "h" q 0 1)  
   ; Barrier and measure.
   (g1y "barrier" q 0 (- qn 1))
   (qmeasy p_q p_c p_cnl p_cnh)

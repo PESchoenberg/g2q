@@ -6,7 +6,9 @@
 ;
 ; Sources: 
 ;
-; - https://arxiv.org/abs/1707.03429 , arXiv:1707.03429v2 [quant-ph] , Open Quantum Assembly Language, Andrew W. Cross, Lev S. Bishop, John A. Smolin, Jay M. Gambetta.
+; - https://arxiv.org/abs/1707.03429 , arXiv:1707.03429v2 [quant-ph] , Open
+;   Quantum Assembly Language, Andrew W. Cross, Lev S. Bishop, John A. Smolin,
+;   Jay M. Gambetta.
 ;
 ; ==============================================================================
 ;
@@ -286,6 +288,7 @@
 ; - https://quantumcomputing.stackexchange.com/questions/2177/how-can-i-implement-an-n-bit-toffoli-gate
 ; - http://www.cs.princeton.edu/courses/archive/fall04/cos576/papers/bennett73.html
 ; - Elementary gates for quantum computation - Barenco, Bennet et al. (1995) - https://arxiv.org/pdf/quant-ph/9503016.pdf
+; - https://en.wikipedia.org/wiki/Quantum_logic_gate
 ;
 (define (ccx p_l1 p_y1 p_l2 p_y2 p_l3 p_y3)
   (qcomg "ccx" 0)
@@ -493,8 +496,8 @@
 ; Arguments:
 ; - p_n1: g1 gate name.
 ; - p_l1: quantum register name (i.e. q).
-; - p_y1: qubit number 1.
-; - p_y2: qubit number 2.
+; - p_y1: qubit number 1 (control of cx).
+; - p_y2: qubit number 2 (target of cx).
 ;
 (define (g1cxg1 p_n1 p_l1 p_y1 p_y2)
   (qcomg "g1cxg1" 0)
@@ -823,7 +826,7 @@
 ;
 ; Sources:
 ; - https://www.semanticscholar.org/paper/A-Resource-Efficient-Design-for-a-Reversible-Point-Nguyen-Meter/697e4fd8282e1b3cc151956bbb302b0b8e7df22b/figure/13
-; - https://en.wikipedia.org/wiki/Quantum_logic_gate#Controlled_(cX_cY_cZ)_gates
+; - https://en.wikipedia.org/wiki/Quantum_logic_gate
 ;
 (define (cswap p_l1 p_y1 p_l2 p_y2 p_l3 p_y3)
   (qcomg "cswap" 0)

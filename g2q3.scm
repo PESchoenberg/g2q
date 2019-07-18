@@ -93,7 +93,8 @@
     ; This is a system call to invoke qre. 
     (system (strings-append (list "./qre" p_fnameo "post" p_v p_qpu "1" fget) 1))
     
-    ; Now get the data from the QPU. Here we use again a first order function, p_rf.
+    ; Now get the data from the QPU. Here we use again a first order function,
+    ; p_rf.
     (set! a (read-file-as-string fnamei))
     (set! res (p_rf (qfclvr a)))
     (qrsp-save-to-file a fsave "a")
