@@ -299,7 +299,7 @@
 ;
 ; Sources:
 ; - https://algassert.com/post/1717
-;
+;                                                                      
 (define (swap p_l1 p_y1 p_y2)
   (qcomg "swap" 0)
   (qcx "cx" p_l1 p_y1 p_l1 p_y2)
@@ -323,3 +323,83 @@
     (cond ((eq? p_v 1)(set! s (strings-append (list (g2q-txt 6) "End " p_s ";") 0))))
     (display s)
     (newline)))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

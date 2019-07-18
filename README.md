@@ -49,7 +49,15 @@ and that will do the trick.
 
 ## Uninstall:
 
-* You just need to remove /usr/share/guile/site/2.2/g2q or /usr/local/share/guile/site/2.2/g2q and its subfolders.
+* You just need to remove
+
+/usr/share/guile/site/2.2/g2q
+
+or
+
+/usr/local/share/guile/site/2.2/g2q
+
+and its subfolders.
 
 * There are no other dependencies.
 
