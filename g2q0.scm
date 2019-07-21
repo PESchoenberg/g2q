@@ -136,6 +136,7 @@
 (define (qbgd p_n p_l p_y)
   (display (string-append (qbg p_n p_l p_y) (g2q-txt 2))))
 
+
 ; qmeas - Measurement gate.
 ;
 ; Arguments:
@@ -146,6 +147,7 @@
 ;
 (define (qmeas p_l1 p_x1 p_l2 p_x2)
   (display (strings-append (list "measure " (qbgna p_l1 p_x1) " -> " (qbgna p_l2 p_x2) (g2q-txt 2)) 0)))
+
 
 ; qcx - Gate cx.
 ;
@@ -323,83 +325,6 @@
     (cond ((eq? p_v 1)(set! s (strings-append (list (g2q-txt 6) "End " p_s ";") 0))))
     (display s)
     (newline)))
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

@@ -169,7 +169,7 @@
   (qcomg "qmeasy" 1))
 
 
-; cx - Gate cx. Performs a NOT operation on the target qubit if the control 
+; cx - Gate cx, performs a NOT operation on the target qubit if the control 
 ; qubit is |1>. Leaves target qubit as it is otherwise.
 ;
 ; Arguments:
@@ -274,7 +274,7 @@
   (g2 "ch-fast" p_l1 p_y1 p_l2 p_y2))
 
 
-; ccx - Gate ccx - Toffoli gate expressed atomically.
+; ccx - Gate ccx, Toffoli gate expressed atomically.
 ;
 ; Arguments:
 ; - p_l1: quantum register name 1.
@@ -310,7 +310,7 @@
   (qcomg "ccx" 1))
 
 
-; ccx-fast - Toffoli (AND) gate in fast form.
+; ccx-fast - Toffoli gate in fast form.
 ;
 ; Arguments:
 ; - p_l1: quantum register name 1.
@@ -513,7 +513,7 @@
   (ptit "=" 60 2 "Compilation completed!"))
 
 
-; qregex - Prepares a compiled qasm file as a string for passing to ibm q html
+; qregex - Prepares a compiled qasm file as a string for passing to ibm q html.
 ; api.
 ;
 ; Arguments
@@ -734,7 +734,7 @@
     (if (equal? p_r "max")(set! dvm (apply max dv)))
     (if (equal? p_r "min")(set! dvm (apply min dv)))
     
-    ;Ge the corresponding label.
+    ; Get the corresponding label.
     (set! n (- (length dv) 1))
     (while (>= n 0)
 	   (if (= dvm (list-ref dv n))(begin
@@ -758,14 +758,14 @@
 
 ; qftyn - Quantum Fourier Transformation for n qubits in the range
 ; [p_l1[p_y1] : p_l2[p_y2]]. Note that this function assumes that all qubits
-; in the quantum register can be interconnected. In some QPU architectures
-; this may not be the case. Expressed atomically.
+; in the quantum register are  interconnected. In some QPU architectures this
+; may not be possible. Expressed atomically.
 ;
 ; Arguments:
-; p_l1: quantum register name 1.
-; p_y1: qubit 1, min limit of the range.
-; p_l2: quantum register name 2.
-; p_y2: qubit 2, max limit of the range.
+; - p_l1: quantum register name 1.
+; - p_y1: qubit 1, min limit of the range.
+; - p_l2: quantum register name 2.
+; - p_y2: qubit 2, max limit of the range.
 ;
 ; Sources:
 ; - https://quantum-computing.ibm.com/support/guides/quantum-algorithms-with-qiskit?page=5cbc5e2d74a4010049e1a2b0#qiskit-implementation
@@ -788,10 +788,10 @@
 ; qftdgyn - Function qftyn dagger, expressed atomically.
 ;
 ; Arguments:
-; p_l1: quantum register name 1.
-; p_y1: qubit 1, min limit of the range.
-; p_l2: quantum register name 2.
-; p_y2: qubit 2, max limit of the range.
+; - p_l1: quantum register name 1.
+; - p_y1: qubit 1, min limit of the range.
+; - p_l2: quantum register name 2.
+; - p_y2: qubit 2, max limit of the range.
 ;
 ; Sources:
 ; - https://quantum-computing.ibm.com/support/guides/quantum-algorithms-with-qiskit?page=5cc0b79786b50d00642353b9#qiskit-implementation-1
@@ -814,7 +814,7 @@
   (qcomg "qftdgyn" 1))
 
 
-; cswap - Gate  Fredkin in atomic form. Swaps p_y2 and p_y3 if p_y1 is |1> 
+; cswap - Gate Fredkin in atomic form. Swaps p_y2 and p_y3 if p_y1 is |1> 
 ; (controlled swap).
 ;
 ; - p_l1: quantum register name 1.
@@ -850,7 +850,7 @@
   (qcomg "cswap" 1))
 
 
-; cx-ladder - creates a ladder of succesive cx gates from p_l1[p_y1] to
+; cx-ladder - Creates a ladder of succesive cx gates from p_l1[p_y1] to
 ; p_l1[p_y2] according to :
 ; - If p_y1 < p_y2: ladder goes from lower element number to greater
 ;   element number on the registry.
@@ -862,10 +862,10 @@
 ; - p_y1: qubit 1, control qubit of the cx gate where the ladder begins.
 ; - p_y2: qubit 2, target qubit of the cx gate where the ladder ends.
 ; - p_s: mode:
-;   - 1: Descending ladder, control qubit on top (p_y1).
-;   - 2: Ascending ladder, control qubit on top (p_y1).
-;   - 3: Descending ladder, control qubit on bottom (p_y2).
-;   - 4: Ascending ladder, control qubit on bottom (p_y2).
+;   - 1: descending ladder, control qubit on top (p_y1).
+;   - 2: ascending ladder, control qubit on top (p_y1).
+;   - 3: descending ladder, control qubit on bottom (p_y2).
+;   - 4: ascending ladder, control qubit on bottom (p_y2).
 ;
 (define (cx-ladder p_l1 p_y1 p_y2 p_s)
   (qcomg "cx-ladder" 0)
@@ -876,7 +876,7 @@
 				     (cx p_l1 i1 p_l1 p_y2)
 				     (begin (cx p_l1 i1 p_l1 (+ i1 1))
 					    (loop (+ i1 1)))))))
-        ; Control qubit on top, ascending
+        ; Control qubit on top, ascending.
 	((equal? p_s 2)(begin (let loop ((i1 (- p_y1 1)))
 				 (if (equal? i1 p_y2)
 				     (cx p_l1 p_y2 p_l1 (+ i1 1))
@@ -888,7 +888,7 @@
 				     (cx p_l1 p_y2 p_l1 i1)
 				     (begin (cx p_l1 (+ i1 1) p_l1 i1)
 					    (loop (+ i1 1)))))))	
-        ; Control qubit on bottom, ascending
+        ; Control qubit on bottom, ascending.
 	((equal? p_s 4)(begin (let loop ((i1 p_y1))
 				 (if (equal? i1 (+ p_y2 1))
 				     (cx p_l1 i1 p_l1 p_y2)
@@ -897,7 +897,7 @@
   (qcomg "cx-ladder" 1))
 
 
-; swap-fast-ladder - creates a ladder of succesive swap-fast gates from
+; swap-fast-ladder - Creates a ladder of succesive swap-fast gates from
 ; p_l1[p_y1] to  p_l1[p_y2] according to :
 ; - If p_y1 < p_y2: ladder goes from lower element number to greater
 ;   element number on the registry.
@@ -909,8 +909,8 @@
 ; - p_y1: qubit 1, lower registry number qubit where the ladder begins.
 ; - p_y2: qubit 2, higher registry number qubit where the ladder ends.
 ; - p_s: mode:
-;   - 1: Descending ladder.
-;   - 2: Ascending ladder.
+;   - 1: descending ladder.
+;   - 2: ascending ladder.
 ;
 (define (swap-fast-ladder p_l1 p_y1 p_y2 p_s)
   (qcomg "swap-fast-ladder" 0)
@@ -921,7 +921,7 @@
 				     (swap-fast p_l1 i1 p_y2)
 				     (begin (swap-fast p_l1 i1 (+ i1 1))
 					    (loop (+ i1 1)))))))
-        ; Ascending
+        ; Ascending.
 	((equal? p_s 2)(begin (let loop ((i1 (- p_y1 1)))
 				 (if (equal? i1 p_y2)
 				     (swap-fast p_l1 p_y2 (+ i1 1))
@@ -930,7 +930,7 @@
   (qcomg "swap-fast-ladder" 1))
 
 
-; swap-ladder - creates a ladder of succesive swap gates from
+; swap-ladder - Creates a ladder of succesive swap gates from
 ; p_l1[p_y1] to  p_l1[p_y2] according to :
 ; - If p_y1 < p_y2: ladder goes from lower element number to greater
 ;   element number on the registry.
@@ -942,8 +942,8 @@
 ; - p_y1: qubit 1, lower registry number qubit where the ladder begins.
 ; - p_y2: qubit 2, higher registry number qubit where the ladder ends.
 ; - p_s: mode:
-;   - 1: Descending ladder.
-;   - 2: Ascending ladder.
+;   - 1: descending ladder.
+;   - 2: ascending ladder.
 ;
 (define (swap-ladder p_l1 p_y1 p_y2 p_s)
   (qcomg "swap-ladder" 0)
@@ -954,7 +954,7 @@
 				     (swap p_l1 i1 p_y2)
 				     (begin (swap p_l1 i1 (+ i1 1))
 					    (loop (+ i1 1)))))))
-        ; Ascending
+        ; Ascending.
 	((equal? p_s 2)(begin (let loop ((i1 (- p_y1 1)))
 				 (if (equal? i1 p_y2)
 				     (swap p_l1 p_y2 (+ i1 1))

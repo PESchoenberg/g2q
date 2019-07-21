@@ -51,9 +51,9 @@
 ; equivalent to functions found on Qiskit IDE. (Deprecated).
 ;
 ; Elements:
-; 1 - Base uri for online access.
-; 2 - token.
-; 3 - subdir to post https execution requests.
+; - 1: base uri for online access.
+; - 2: token.
+; - 3: subdir to post https execution requests.
 ;
 (define (g2q-ibm-config)
   (let ((conf (list "https://quantumexperience.ng.bluemix.net/api" "your-token-goes-here" "/codes/execute")))
@@ -63,9 +63,12 @@
 ; g2q-qre-config - Configuration for using qre.
 ;
 ; Elements:
-; 1 - json subdir.
-; 2 - sqlite3 subdir.
-; 3 - default qpu.
+; - 1: json subdir.
+; - 2: sqlite3 subdir.
+; - 3: primary local (default) qpu.
+; - 4: secondary local qpu.
+; - 5: primary remote qpu.
+; - 6: secondary remote qpu.
 ;
 (define (g2q-qre-config)
   (let ((conf (list "data/json/" "data/sqlite3/" "qlib_simulator" "ibmqx_simulator" "qx_simulator" "ibmqx_real")))
@@ -122,7 +125,6 @@
     (cond ((= p_n 7)(set! res "charset=utf-8")))
     (cond ((= p_n 8)(set! res "application/x-www-form-urlencoded;")))
     (cond ((= p_n 9)(set! res "na")))
-    
     res))
     
   
