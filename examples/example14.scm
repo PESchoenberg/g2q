@@ -105,7 +105,7 @@
   (g1y "barrier" p_q p_qnl p_qnh)
   ; Measurement.
   (qmeasy p_q p_c 0 4)
-  ; Declaratons for internal simulators available on qre.
+  ; Declarations for internal simulators available on qre.
   (qdeclare "qx-simulator" "error_model depolarizing_channel,0.001")
   (qdeclare "qlib-simulator" "// Hello qlib-simulator"))
 

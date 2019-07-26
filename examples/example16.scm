@@ -6,7 +6,7 @@
 ;
 ; example16.scm
 ;
-; - Parallel execution prototype.
+; - Parallel execution prototype. Multi-threaded qpu calls.
 
 ;
 ; Compilation (if you have g2q and qre in your system path):
@@ -65,7 +65,7 @@
 (define qpu "")
 (define qpu1 "qlib_simulator") ; First QPU.
 (define qpu2 "qx_simulator") ; Second QPU.
-(define iter 4) ; Number of iterations.
+(define iter 32) ; Number of iterations.
 (define clean "y") ; Clean the json files created in ddir after use.
 (define qver 2.0) ; OpenQASM version
 (define qn 5) ; Length of the quantum register.
@@ -108,7 +108,7 @@
   (g1y "id" p_q p_qnl p_qnh)
   ; Measurement.
   (qmeasy p_q p_c p_cnl p_cnh)
-  ; Declaratons for internal simulators available on qre.
+  ; Declarations for internal simulators available on qre.
   (qdeclare "qx-simulator" "error_model depolarizing_channel,0.001")
   (qdeclare "qlib-simulator" "// Hello qlib-simulator"))
 
@@ -153,18 +153,16 @@
 (newline)
 (let loop ((i iter))			   
   (if (= i 0)
-      (display "Finished!\n\n")
+      (display "Loop completed.\n")
       ; Here we use multithreading, Guile fashion (not OpenMP, not MPI). This 
       ; allows us to use to QPU at the same time, if available. Please note that
-      ; a multithreading method, this one is rather simplistic and could be done 
-      ; much better, but in this case, it serves the purpose.
-      ;
-      ;(begin (let ((f (future (qmain-loop clean fname fnameo qver ddir qpu1 qf q c qn cn mc qx v rf))))
-	;(or (qmain-loop clean fname fnameo qver ddir qpu2 qf q c qn cn mc qx v rf)
-	    ;(touch f))
-	;(loop (- i 1))))));	
-      (begin (parallel (set! res (qmain-loop clean fname1 fnameo1 qver ddir qpu1 qf q c qn cn mc qx v rf))
-		       (set! res (qmain-loop clean fname2 fnameo2 qver ddir qpu2 qf q c qn cn mc qx v rf))	
-		       (loop (- i 1))))))
-(quit)
+      ; a multi threading method, this one is rather simplistic and could be done 
+      ; much better, but in this case, it serves the purpose. Care should be 
+      ; taken, however, because qmain-loop has I/O side effects.
+      (begin (let ((f (future (qmain-loop clean fname1 fnameo1 qver ddir qpu1 qf q c qn cn mc qx v rf))))
+	(or (qmain-loop clean fname2 fnameo2 qver ddir qpu2 qf q c qn cn mc qx v rf)
+	    (touch f))
+	(loop (- i 1))))))
+(gc)
+(display "\nFinished!\n")
 
