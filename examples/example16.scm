@@ -153,10 +153,10 @@
 (newline)
 (let loop ((i iter))			   
   (if (= i 0)
-      (display "Loop completed.\n")
+      (display "Threads completed.\n")
       ; Here we use multithreading, Guile fashion (not OpenMP, not MPI). This 
       ; allows us to use to QPU at the same time, if available. Please note that
-      ; a multi threading method this one is rather simplistic and could be done 
+      ; a multi-threading method this one is rather simplistic and could be done 
       ; much better, but in this case, it serves the purpose. Care should be 
       ; taken, however, because qmain-loop has I/O side effects.
       (begin (let ((thread1 (future (qmain-loop clean fname1 fnameo1 qver ddir qpu1 qf q c qn cn mc qx v rf)))
@@ -165,7 +165,6 @@
 	    (touch thread2))
 	(loop (- i 1))))))
 (yield)
-(display "\n")
 (gc)
 (display "\nFinished!\n")
 
