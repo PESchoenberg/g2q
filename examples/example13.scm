@@ -137,7 +137,7 @@
 ; And this is the main program. It gives as a result the decimal absolute and
 ; non-probabilistic summation of the max values obtained on the execution of 
 ; each quantum circuit created on each qcall.
-(qpresent "cswap gate" "Se g2q2.scm for details" "n")
+(qpresent "cswap gate" "See g2q2.scm for details" "n")
 (set! qpu (g2q-select-qpu))
 (cond ((equal? qpu "none")(display "\nBye!\n"))
       (else  

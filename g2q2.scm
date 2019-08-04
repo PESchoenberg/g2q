@@ -344,7 +344,7 @@
 ; - p_y1: qubit 1.
 ; 
 (define (rx-fast p_t p_l1 p_y1)
-  (display (strings-append (list "rx(" (number->string (/ (qconst "Pi") 2)) (g2q-txt 4)  p_l1 "[" (number->string p_y1) (g2q-txt 3)) 0)))
+  (display (strings-append (list "rx(" (grsp-n2s (/ (qconst "Pi") 2)) (g2q-txt 4)  p_l1 "[" (grsp-n2s p_y1) (g2q-txt 3)) 0)))
 
 
 ; ry - Gate ry, rotation around Y-axis.
@@ -366,7 +366,7 @@
 ; - p_y1: qubit 1.
 ; 
 (define (ry-fast p_t p_l1 p_y1)
-  (display (strings-append (list "ry(" (number->string (/ (qconst "Pi") 2)) (g2q-txt 4) p_l1 "[" (number->string p_y1) (g2q-txt 3)) 0)))
+  (display (strings-append (list "ry(" (grsp-n2s (/ (qconst "Pi") 2)) (g2q-txt 4) p_l1 "[" (grsp-n2s p_y1) (g2q-txt 3)) 0)))
 
 
 ; rz - Gate rz, rotation around Z-axis.
@@ -388,7 +388,7 @@
 ; - p_y1: qubit 1.
 ; 
 (define (rz-fast p_t p_l1 p_y1)
-  (display (strings-append (list "rz(" (number->string (/ (qconst "Pi") 2)) (g2q-txt 4) p_l1 "[" (number->string p_y1) (g2q-txt 3)) 0)))
+  (display (strings-append (list "rz(" (grsp-n2s (/ (qconst "Pi") 2)) (g2q-txt 4) p_l1 "[" (grsp-n2s p_y1) (g2q-txt 3)) 0)))
 
 
 ; crz - Gate crz, controlled rz expressed atomically.
@@ -420,7 +420,7 @@
 ; - p_y2: qubit 2.
 ;
 (define (crz-fast p_la p_l1 p_y1 p_l2 p_y2)
-  (display (strings-append (list "crz(" (number->string (/ (qconst "Pi") 2)) (g2q-txt 4) p_l1 "[" (number->string p_y1) "]," p_l2 "[" (number->string p_y2) (g2q-txt 3)) 0)))
+  (display (strings-append (list "crz(" (grsp-n2s (/ (qconst "Pi") 2)) (g2q-txt 4) p_l1 "[" (grsp-n2s p_y1) "]," p_l2 "[" (grsp-n2s p_y2) (g2q-txt 3)) 0)))
 
 
 ; cu1 - Gate cu1, controlled phase rotation expressed atomically.
@@ -453,7 +453,7 @@
 ; - p_y2: qubit 2.
 ;
 (define (cu1-fast p_la p_l1 p_y1 p_l2 p_y2)
-  (display (strings-append (list "cu1(" (number->string p_la) (g2q-txt 4) p_l1 "[" (number->string p_y1) "]," p_l2 "[" (number->string p_y2) (g2q-txt 3)) 0)))
+  (display (strings-append (list "cu1(" (grsp-n2s p_la) (g2q-txt 4) p_l1 "[" (grsp-n2s p_y1) "]," p_l2 "[" (grsp-n2s p_y2) (g2q-txt 3)) 0)))
 
 
 ; cu3 - Gate cu3, controlled U expressed atomically.
@@ -488,7 +488,7 @@
 ; - p_y2: qubit 2.
 ;
 (define (cu3-fast p_la1 p_la2 p_la3 p_l1 p_y1 p_l2 p_y2)
-  (display (strings-append (list "cu3(" (number->string p_la1) "," (number->string p_la2) "," (number->string p_la3) (g2q-txt 4) p_l1 "[" (number->string p_y1) "]," p_l2 "[" (number->string p_y2) (g2q-txt 3)) 0)))
+  (display (strings-append (list "cu3(" (grsp-n2s p_la1) "," (grsp-n2s p_la2) "," (grsp-n2s p_la3) (g2q-txt 4) p_l1 "[" (grsp-n2s p_y1) "]," p_l2 "[" (grsp-n2s p_y2) (g2q-txt 3)) 0)))
 
 
 ; g1cxg1 - Puts a set of gates in configuration g1 cx g1.

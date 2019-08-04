@@ -96,16 +96,12 @@
   ; shows four different ladder variants available. For detals, see the 
   ; documentation for this function (comments on file g2q2.scm.)
   (cx-ladder p_q p_qnl p_qnh 1)
-  (g1y "barrier" p_q p_qnl p_qnh)
   (cx-ladder p_q p_qnh p_qnl 2)
-  (g1y "barrier" p_q p_qnl p_qnh)
   (cx-ladder p_q p_qnl p_qnh 3)
-  (g1y "barrier" p_q p_qnl p_qnh)
   (cx-ladder p_q p_qnh p_qnl 4)
-  (g1y "barrier" p_q p_qnl p_qnh)
   ; Measurement.
   (qmeasy p_q p_c 0 4)
-  ; Declarations for internal simulators available on qre.
+  ; Declaratons for internal simulators available on qre.
   (qdeclare "qx-simulator" "error_model depolarizing_channel,0.001")
   (qdeclare "qlib-simulator" "// Hello qlib-simulator"))
 
@@ -145,7 +141,7 @@
 ; And this is the main program. It gives as a result the decimal absolute and
 ; non-probabilistic summation of the max values obtained on the execution of 
 ; each quantum circuit created on each qcall.
-(qpresent "cx ladder" "Se g2q2.scm for details" "n")
+(qpresent "cx ladder" "See g2q2.scm for details" "n")
 (set! qpu (g2q-select-qpu))
 (cond ((equal? qpu "none")(display "\nBye!\n"))
       (else  

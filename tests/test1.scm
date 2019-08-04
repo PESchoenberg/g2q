@@ -146,7 +146,7 @@
   ; g2q specific.
   (g1cxg1 "h" q 0 1)  
   ; Barrier and measure.
-  (g1y "barrier" q 0 (- qn 1))
+  (g1y "barrier" q 0 (- p_qnh 1))
   (qmeasy p_q p_c p_cnl p_cnh)
   (qdeclare "qx-simulator" "error_model depolarizing_channel,0.001")
   (qdeclare "qlib-simulator" "// Hello qlib-simulator"))
@@ -191,6 +191,6 @@
 	 (newline)
 	 (set! res (qmain-loop clean fname fnameo qver ddir qpu qf q c qn cn mc qx v rf))
 	 (newlines 2)
-	 (display (strings-append (list "Result = " (number->string res) " , please read the output provided to check the status of each gate in relation to " qpu ".") 0))
+	 (display (strings-append (list "Result = " (grsp-n2s res) " , please read the output provided to check the status of each gate in relation to " qpu ".") 0))	 
 	 (newlines 1))))
 

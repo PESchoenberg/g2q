@@ -70,7 +70,7 @@
 	(pcn (- p_cn 1)))
 
     ; Define the names of the files that we will use.
-    (set! fget (strings-append (list p_fname "_" (number->string p_i)) 0))
+    (set! fget (strings-append (list p_fname "_" (grsp-n2s p_i)) 0))
     (set! fsave (strings-append (list p_fname "_all_results.json") 0))    
     (set! fnamei (strings-append (list p_ddir fget ".json") 0))     
     
