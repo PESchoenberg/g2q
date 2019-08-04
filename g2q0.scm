@@ -61,7 +61,7 @@
 (define (qhead p_prog p_v)
   (qstr (strings-append (list (g2q-txt 6) p_prog ";") 0))
   (qstr (strings-append (list (g2q-txt 6) "Compiled with " (g2q-version) ";") 0))
-  (qstr (strings-append (list "OPENQASM " (number->string p_v) ";") 0))
+  (qstr (strings-append (list "OPENQASM " (grsp-n2s p_v) ";") 0))
   (qstr "include \"qelib1.inc\";"))
   
 
@@ -102,7 +102,7 @@
 ; - p_y: number.
 ;
 (define (qbgnc p_y)
-  (string-append (number->string p_y) ","))
+  (string-append (grsp-n2s p_y) ","))
 
 
 ; qbgna - Constructs an array item.
@@ -112,7 +112,7 @@
 ; - p_y: item number.
 ;
 (define (qbgna p_l p_y)
-  (strings-append (list p_l "[" (number->string p_y) "]") 0))
+  (strings-append (list p_l "[" (grsp-n2s p_y) "]") 0))
 
 
 ; qbg - Basic gate structure.
@@ -222,7 +222,7 @@
 ; - p_y2: qubit number.
 ;
 (define (u1 p_y1 p_l1 p_y2)
-  (display (strings-append (list "u1(" (number->string p_y1) (g2q-txt 4) (qbgna p_l1 p_y2) (g2q-txt 2)) 0)))
+  (display (strings-append (list "u1(" (grsp-n2s p_y1) (g2q-txt 4) (qbgna p_l1 p_y2) (g2q-txt 2)) 0)))
 
 
 ; u2 - Gate u2.
@@ -234,8 +234,8 @@
 ; - p_y3: qubit number.
 ;
 (define (u2 p_y1 p_y2 p_l1 p_y3)
-  (display (strings-append (list "u2(" (qbgnc p_y1) (number->string p_y2) (g2q-txt 4) (qbgna p_l1 p_y3) (g2q-txt 2)) 0)))
-
+  (display (strings-append (list "u2(" (qbgnc p_y1) (grsp-n2s p_y2) (g2q-txt 4) (qbgna p_l1 p_y3) (g2q-txt 2)) 0)))
+  
 
 ; u3 - Gate u3.
 ;
@@ -247,8 +247,8 @@
 ; - p_y4: qubit number.
 ;
 (define (u3 p_y1 p_y2 p_y3 p_l1 p_y4)
-  (display (strings-append (list "u3(" (qbgnc p_y1) (qbgnc p_y2) (number->string p_y3) (g2q-txt 4) (qbgna p_l1 p_y4) (g2q-txt 2)) 0)))
-
+  (display (strings-append (list "u3(" (qbgnc p_y1) (qbgnc p_y2) (grsp-n2s p_y3) (g2q-txt 4) (qbgna p_l1 p_y4) (g2q-txt 2)) 0)))
+  
 
 ; qcond1 - Quantum conditional 1.
 ;
@@ -259,7 +259,7 @@
 ;
 (define (qcond1 p_c1 p_y1 p_y2)
   (let ((qsen " "))
-(cond ((equal? (qvalid-conditional p_c1) #t)(set! qsen (strings-append (list (g2q-txt 5) p_y1 p_c1 (number->string p_y2) (g2q-txt 4)) 0))))
+    (cond ((equal? (qvalid-conditional p_c1) #t)(set! qsen (strings-append (list (g2q-txt 5) p_y1 p_c1 (grsp-n2s p_y2) (g2q-txt 4)) 0))))    
     (display qsen)))
 
 
@@ -273,7 +273,7 @@
 ;
 (define (qcond2 p_c1 p_y1 p_y3 p_y2)
   (let ((qsen " "))
-    (cond ((equal? (qvalid-conditional p_c1) #t)(set! qsen (strings-append (list (g2q-txt 5) p_y1 "[" (number->string p_y3) "]" p_c1 (number->string p_y2) (g2q-txt 4)) 0))))
+    (cond ((equal? (qvalid-conditional p_c1) #t)(set! qsen (strings-append (list (g2q-txt 5) p_y1 "[" (grsp-n2s p_y3) "]" p_c1 (grsp-n2s p_y2) (g2q-txt 4)) 0))))    
     (display qsen)))
 
 
