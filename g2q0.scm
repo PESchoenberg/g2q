@@ -175,7 +175,7 @@
   (qbgd "creg" p_l2 p_y2))
 
 
-; qin - Increment a variable.
+; qin - Increment the value of a variable p_v by p_s.
 ;
 ; Arguments:
 ; - p_v: variable to increment
@@ -201,7 +201,7 @@
 ; Arguments:
 ; - p_n1: gate name.
 ; - p_r1: quantum register name 1.
-; - p_y1: cntrol qubit 1.
+; - p_y1: control qubit 1.
 ; - p_r2: quantum register name 2.
 ; - p_y2: target qubit number 2. Set to zero in the case of gates with no
 ;   target q quibt.
