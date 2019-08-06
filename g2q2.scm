@@ -513,7 +513,7 @@
   (ptit "=" 60 2 "Compilation completed!"))
 
 
-; qregex - Prepares a compiled qasm file as a string for passing to ibm q html.
+; qregex - Prepares a compiled qasm file as a string for passing to ibm q html
 ; api.
 ;
 ; Arguments

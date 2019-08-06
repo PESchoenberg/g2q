@@ -65,7 +65,7 @@
 (define v "y") ; Verbosity.
 
 ; Vars and initial stuff. Do not edit these.
-(define ddir (car (g2q-qre-config))) ;Obtain this value from configuration list.
+(define ddir (car (g2q-qre-config))) ; Obtain this value from configuration list.
 (define fnameo (strings-append (list fname ".qasm") 0))
 (define q "q")
 (define c "c")
@@ -93,7 +93,7 @@
   ; Prep.
   (g1y "h" p_q p_qnl p_qnh)
   ; cswap "wave"; this doesn't do anything special quantum-mechanically but 
-  ; shows four different ladder variants available. For detals, see the 
+  ; shows four different ladder variants available. For details, see the 
   ; documentation for this function (comments on file g2q2.scm.)
   (cx-ladder p_q p_qnl p_qnh 1)
   (cx-ladder p_q p_qnh p_qnl 2)
@@ -101,7 +101,7 @@
   (cx-ladder p_q p_qnh p_qnl 4)
   ; Measurement.
   (qmeasy p_q p_c 0 4)
-  ; Declaratons for internal simulators available on qre.
+  ; Declarations for internal simulators available on qre.
   (qdeclare "qx-simulator" "error_model depolarizing_channel,0.001")
   (qdeclare "qlib-simulator" "// Hello qlib-simulator"))
 

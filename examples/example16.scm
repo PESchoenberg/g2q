@@ -74,7 +74,7 @@
 
 
 ; Vars and initial stuff. Do not edit these.
-(define ddir (car (g2q-qre-config))) ;Obtain this value from configuration list.
+(define ddir (car (g2q-qre-config))) ; Obtain this value from configuration list.
 (define fname1 (string-append fname "_1")) ; fname for first thread.
 (define fname2 (string-append fname "_2")) ; fname for second thread.
 (define fnameo1 (strings-append (list fname ".qasm") 0)) ; fnameo for first thread.
