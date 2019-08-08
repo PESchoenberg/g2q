@@ -339,7 +339,7 @@
 ; rx-fast - Gate rx, rotation around X-axis, in fast form.
 ;
 ; Arguments:
-; - p_t: theta angle (dummy, left for consistency).
+; - p_t: theta angle; this is a dummy arument, left for consistency.
 ; - p_l1: quantum register name 1.
 ; - p_y1: qubit 1.
 ; 
@@ -383,7 +383,7 @@
 ; rz-fast - Gate rz, rotation around Z-axis, in fast form.
 ;
 ; Arguments:
-; - p_t: angle (dummy, left for consistency with other functions).
+; - p_t: angle; dummy argument left for consistency with other functions.
 ; - p_l1: quantum register name 1.
 ; - p_y1: qubit 1.
 ; 
@@ -616,9 +616,9 @@
 ;
 ; Arguments:
 ; - p_l1: gate group name 1.
-; - p_y1: target qubit (normally p_y2 - 1).
+; - p_y1: target qubit, normally p_y2 - 1.
 ; - p_l2: gate group name 2.
-; - p_y2: control quibit (value to be inverted, 0 or 1).
+; - p_y2: control quibit, value to be inverted, 0 or 1.
 ;
 ; Output:
 ; - Inverse of p_l2[p_y2], on p_l1[p_y1].
@@ -636,11 +636,11 @@
 ;
 ; Arguments:
 ; - p_l1: quantum register name 1.
-; - p_y1: target qubit a (normally p_y2 - 1).
+; - p_y1: target qubit a, normally p_y2 - 1.
 ; - p_l2: quantum register name 2.
 ; - p_y2: control quibit a.
 ; - p_l3: quantum register name 3.
-; - p_y3: target qubit b (normally p_y3 - 1).
+; - p_y3: target qubit b, normally p_y3 - 1.
 ; - p_l4: quantum register name 4.
 ; - p_y4: control qubit b.
 ;
