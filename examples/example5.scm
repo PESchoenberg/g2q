@@ -65,7 +65,7 @@
 
 (g1y "h" q 0 3)
 (cx q 0 q 1)
-(g1 "h" q 2) ; (1) replace with z gate for a normal qpe+
+(g1 "h" q 2) ; [1] replace with z gate for a normal qpe+
 (g1 "h" q 0)
 (cx q 3 q 2)
 (g1 "h" q 3)
