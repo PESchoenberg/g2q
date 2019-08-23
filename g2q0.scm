@@ -294,7 +294,7 @@
 
 ; swap - Gate swap expressed atomically.
 ;
-; Arguments:
+; Arguments:51
 ; - p_l1: quantum register name 1. 
 ; - p_y1: qubit 1.
 ; - p_y2: qubit 2. 

@@ -94,7 +94,7 @@
 
 
 ; g1y - Repeats placement of gate p_n1 and group p_l1 by repeating the use of qgate1
-; from qbit p_y1 to qbit p_y2 on y axis (vertically).
+; from qbit p_y1 to qbit p_y2 on y axis (vertically on graphical representation).
 ;
 ; Arguments:
 ; - p_n1: gate name.
@@ -113,7 +113,7 @@
 
 
 ; g1x - Repeats placement of gate p_n1 and register p_l1 by repeating the use of
-; qgate1 on regster element p_y1 p_x1 times on x axis (horizontally).
+; qgate1 on regster element p_y1 p_x1 times on x axis.
 ;
 ; Arguments:
 ; - p_n1: gate name.
@@ -132,7 +132,7 @@
 
 
 ; g1xy - Repeats placement of gate p_n1 and group p_l1 by repeating the use of
-; qgate1 from qubit p_y1 to qubit p_y2 on y axis (vertically).
+; qgate1 from qubit p_y1 to qubit p_y2 on y axis.
 ;
 ; Arguments:
 ; - p_n1: gate name.
@@ -182,7 +182,9 @@
   (g2 "cx" p_l1 p_y1 p_l2 p_y2))
 
 
-; cz - Gate cz, controlled phase expressed atomically.
+; cz - Gate cz, controlled phase expressed atomically. Gates expressed in
+; this way are universally compatible but more error-prone than the same 
+; gates expressed in fast form.
 ;
 ; Arguments:
 ; - p_l1: quantum register name 1.
@@ -198,7 +200,9 @@
   (qcomg "cz" 1))
 
 
-; cz-fast - Gate cz, controlled y in fast form.
+; cz-fast - Gate cz, controlled y in fast form. Such a form is generally 
+; less error - prone that atomic variants, but they might not be 
+; compatible with all sorts and makes of qpu.
 ;
 ; Arguments:
 ; - p_l1: quantum register name 1.
@@ -898,7 +902,7 @@
 
 
 ; swap-fast-ladder - Creates a ladder of succesive swap-fast gates from
-; p_l1[p_y1] to  p_l1[p_y2] according to :
+; p_l1[p_y1] to  p_l1[p_y2] according to:
 ; - If p_y1 < p_y2: ladder goes from lower element number to greater
 ;   element number on the registry.
 ; - If p_y1 = p_y2: the fuunction behaves as a single swap-fast gate.
