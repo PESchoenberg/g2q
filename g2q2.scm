@@ -174,9 +174,9 @@
 ;
 ; Arguments:
 ; - p_l1: quantum register name 1.
-; - p_y1: control qubit 1 (dot).
+; - p_y1: control qubit 1 (represented as a dot in a q diagram).
 ; - p_l2: quantum register name 2.
-; - p_y2: target qubit 2 (plus).
+; - p_y2: target qubit 2 (represented as a plus).
 ;
 (define (cx p_l1 p_y1 p_l2 p_y2)
   (g2 "cx" p_l1 p_y1 p_l2 p_y2))
@@ -246,7 +246,7 @@
 ;
 ; Arguments:
 ; - p_l1: quantum register name 1.
-; - p_y1: controlqubit 1.
+; - p_y1: control qubit 1.
 ; - p_l2: quantum register name 2.
 ; - p_y2: target qubit 2.
 ;
@@ -282,11 +282,11 @@
 ;
 ; Arguments:
 ; - p_l1: quantum register name 1.
-; - p_y1: control qubit 1.
+; - p_y1: control qubit 1 (dot).
 ; - p_l2: quantum register name 2.
-; - p_y2: control qubit 2.
+; - p_y2: control qubit 2 (dot).
 ; - p_l3: quantum register name 3.
-; - p_y3: target qubit 3.
+; - p_y3: target qubit 3 (plus).
 ;
 ; Sources:
 ; - https://quantumcomputing.stackexchange.com/questions/2177/how-can-i-implement-an-n-bit-toffoli-gate
@@ -318,11 +318,11 @@
 ;
 ; Arguments:
 ; - p_l1: quantum register name 1.
-; - p_y1: control qubit 1.
+; - p_y1: control qubit 1 (dot).
 ; - p_l2: quantum register name 2.
-; - p_y2: control qubit 2.
+; - p_y2: control qubit 2 (dot).
 ; - p_l3: quantum register name 3.
-; - p_y3: target qubit 3.
+; - p_y3: target qubit 3 (plus).
 ;
 (define (ccx-fast p_l1 p_y1 p_l2 p_y2 p_l3 p_y3)
   (display (strings-append (list "ccx " (qbgna p_l1 p_y1) "," (qbgna p_l1 p_y2) "," (qbgna p_l3 p_y3) (g2q-txt 2)) 0)))
@@ -365,7 +365,7 @@
 ; ry-fast - Gate ry, rotation around Y-axis, in fast form.
 ;
 ; Arguments:
-; - p_t: angle (dummy, left for consistency).
+; - p_t: angle (dummy, left for consistency with other functions).
 ; - p_l1: quantum register name 1.
 ; - p_y1: qubit 1.
 ; 
