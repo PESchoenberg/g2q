@@ -75,7 +75,7 @@
     conf))
 
 
-; g2q-select-qpu - Select qpu to be used.
+; g2q-select-qpu - Menu for selecting a qpu to be used.
 ;
 ; Output:
 ; - String containing the name of the selected qpu. Defaults to qlib_simulator.
