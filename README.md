@@ -11,9 +11,9 @@ that lets you write programs for QASM-based quantum computers using Scheme.
 
 ## Dependencies:
 
-* GNU Guile - ver 2.0.11 or newer ( https://www.gnu.org/software/guile/ )
+* GNU Guile - v2.2.3 or later ( https://www.gnu.org/software/guile/ )
 
-* grsp - https://github.com/PESchoenberg/grsp.git
+* grsp - v1.0.7 or later ( https://github.com/PESchoenberg/grsp.git )
 
 
 ## Optional:
@@ -91,11 +91,18 @@ runs it using qre.
 
 ## Credits and Sources:
 
-* GNU Guile - https://www.gnu.org/software/guile/ (LGPL-3.0 or later)
+* GNU contributors (2019). GNU's programming and extension language — GNU
+Guile. [online] Gnu.org. Available at: https://www.gnu.org/software/guile/
+[Accessed 2 Sep. 2019].
 
-* qre quantum remote execution - https://github.com/PESchoenberg/qre (LGPL-3.0 or later)
+* Edronkin, P. (2019). qre - local and remote runtime for QASM2 programs.
+[online] qre. Available at: https://peschoenberg.github.io/qre/
+[Accessed 26 Aug. 2019].
 
-* URL of this project - https://github.com/PESchoenberg/g2q
+* Edronkin, P. (2019). grsp - Useful Scheme functions. [online] grsp.
+Available at: https://peschoenberg.github.io/grsp/ [Accessed 26 Aug. 2019].
+
+* URL of this project - https://github.com/PESchoenberg/g2q .
 
 Please let me know if I forgot to add any credits or sources.
 
