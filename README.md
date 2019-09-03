@@ -109,13 +109,22 @@ Please let me know if I forgot to add any credits or sources.
 
 ## Related reading material:
 
-* Extending the Lambda Calculus to Express Randomized and Quantumized Algorithms - Mayman. 1996 - https://arxiv.org/abs/quant-ph/9612052
+* P. Maymin (1996). Extending the Lambda Calculus to Express Randomized and
+Quantumized Algorithms [online]. Available at:
+https://arxiv.org/abs/quant-ph/9612052 [Accessed 02 Sep. 2019]
 
-* A Lambda Calculus for Quantum Computation - Van Tonder. 2003 - http://www.het.brown.edu/people/andre/qlambda/
+* van Tonder, A. (2003). A lambda calculus for quantum computation. [online]
+Het.brown.edu. Available at:
+http://www.het.brown.edu/people/andre/qlambda/ [Accessed 2 Sep. 2019].
 
-* Quantum Lambda Calculus  - Selinger, Valiron - https://www.mscs.dal.ca/~selinger/papers/qlambdabook.pdf
+* Selinger, P. and Valiron, B. (2012). Quantum Lambda Calculus. [ebook]
+Available at: https://www.mscs.dal.ca/~selinger/papers/qlambdabook.pdf
+[Accessed 2 Sep. 2019].
 
-* A Lambda Calculus for Quantum Computation with Classical Control - Selinger, Valiron. 2005 - https://www.mathstat.dal.ca/~selinger/papers/papers/qlambda-mscs.pdf 
+* Selinger, P. and Valiron, B. (2005). A lambda calculus for quantum
+computation with classical control. [ebook] Available at:
+https://www.mathstat.dal.ca/~selinger/papers/papers/qlambda-mscs.pdf
+[Accessed 2 Sep. 2019].
 
 
 ## License:
