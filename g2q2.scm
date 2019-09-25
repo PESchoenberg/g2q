@@ -139,8 +139,9 @@
 ; - p_l1: quantum register name.
 ; - p_y1: ordinal of the initial qubit.
 ; - p_y2: ordinal of the last qubit.
-; - p_x1: number if iterations that g1y will be repeated along x axis of sequence as a graph.
-;
+; - p_x1: number if iterations that g1y will be repeated along x axis of
+;   sequence as a graph.
+
 (define (g1xy p_n1 p_l1 p_y1 p_y2 p_x1)
   (qcomg "g1xy" 0)
   (let loop ((j 1))
