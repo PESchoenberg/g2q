@@ -86,9 +86,9 @@ example1.qasm on the same folder. You can then try that code on a quantum
 computer simulator or even a real one that is compatible with Open QASM 2.0.
 
 * File example6.scm and other with a higher prder number (example7, example8,
-etc.)requires that you have qre installed on your system (see below); this
-particular example not only compiles code into QASM2 but actually runs it
-using qre.
+etc.) require that you have qre installed on your system (see below); this
+particular example as well as many of the others described above not only
+compile code into QASM2 but actually runs it using qre.
 
 
 ## Credits and Sources:
