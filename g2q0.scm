@@ -294,14 +294,15 @@
 
 ; swap - Gate swap expressed atomically.
 ;
-; Arguments:51
+; Arguments:
 ; - p_l1: quantum register name 1. 
 ; - p_y1: qubit 1.
 ; - p_y2: qubit 2. 
 ;
 ; Sources:
-; - https://algassert.com/post/1717
-;                                                                      
+; - Gidney, C. (2019). Breaking Down the Quantum Swap. [online] Algassert.com. 
+;   Available at: https://algassert.com/post/1717 [Accessed 28 Sep. 2019].
+;                                                                     
 (define (swap p_l1 p_y1 p_y2)
   (qcomg "swap" 0)
   (qcx "cx" p_l1 p_y1 p_l1 p_y2)

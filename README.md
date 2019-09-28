@@ -69,7 +69,8 @@ and its subfolders.
 should be written and compiled as any regular Guile program.
 
 * See the examples contained in the /examples folder. These are self-explaining
-and filled with comments. You will find there both .scm and .qasm files.
+and filled with comments. You will find there both .scm and .qasm files. Some
+programs can run as they are, and some will require program qre.
 
 * As a general guide, in order to compile a g2q-based program - say example1.scm:
 
