@@ -184,7 +184,7 @@
 
 
 ; cz - Gate cz, controlled phase expressed atomically. Gates expressed in
-; this way are universally compatible but more error-prone than the same 
+; this way are universally compatible but more error - prone than the same 
 ; gates expressed in fast form.
 ;
 ; Arguments:
@@ -303,7 +303,7 @@
   (cx p_l1 p_y1 p_l3 p_y3)
   (g1 "t" p_l3 p_y3)
   (cx p_l2 p_y2 p_l3 p_y3)
-  (g1 "tdg" p_l3 p_y3);t
+  (g1 "tdg" p_l3 p_y3)
   (cx p_l1 p_y1 p_l3 p_y3)
   (g1 "t" p_l2 p_y2)
   (g1 "t" p_l3 p_y3)
@@ -549,7 +549,10 @@
 ; - p_e: seed.
 ;
 ; Sources:
-; - https://developer.ibm.com/tutorials/os-quantum-computing-shell-game/
+; - Casey, K. (2017). Archived | Quantum computing in action: IBM's Q experience 
+; and the quantum shell game. [online] IBM Developer. Available at: 
+; https://developer.ibm.com/tutorials/os-quantum-computing-shell-game/ 
+; [Accessed 30 Sep. 2019].
 ;
 (define (qreq p_f1 p_f2 p_r p_d p_s p_m p_e)
   (let ((port1 (current-output-port))
