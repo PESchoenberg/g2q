@@ -290,11 +290,22 @@
 ; - p_y3: target qubit 3 (plus).
 ;
 ; Sources:
-; - https://quantumcomputing.stackexchange.com/questions/2177/how-can-i-implement-an-n-bit-toffoli-gate
-; - http://www.cs.princeton.edu/courses/archive/fall04/cos576/papers/bennett73.html
-; - Elementary gates for quantum computation - Barenco, Bennet et al. (1995) - https://arxiv.org/pdf/quant-ph/9503016.pdf
-; - https://en.wikipedia.org/wiki/Quantum_logic_gate
-;
+; - Javadi, A. (2019). How can I implement an n-bit Toffoli gate?. [online] 
+;   Quantum Computing Stack Exchange. Available at: https://quantumcomputing.
+;   stackexchange.com/questions/2177/how-can-i-implement-an-n-bit-toffoli-gate 
+;   [Accessed 1 Oct. 2019].
+; - Bennet, C. (2019). Logical Reversibility of Computation*. [online] 
+;   Cs.princeton.edu. Available at: http://www.cs.princeton.edu/courses/archive
+;   /fall04/cos576/papers/bennett73.html [Accessed 1 Oct. 2019].
+; - Elementary gates for quantum computation. Adriano Barenco (Oxford U.), 
+;   Charles H. Bennett (IBM Watson Res. Ctr.), Richard Cleve (Calgary U.), 
+;   David P. DiVincenzo (IBM Watson Res. Ctr.), Norman Margolus (MIT, LNS), 
+;   Peter Shor (Bell Labs), Tycho Sleator (New York U.), John Smolin (UCLA), 
+;   Harald Weinfurter (Innsbruck U.). Mar 1995. 39 pp. Published in Phys.Rev. 
+;   A52 (1995) 3457. DOI: 10.1103/PhysRevA.52.3457
+; - En.wikipedia.org. (2019). Quantum logic gate. [online] Available at: 
+;   https://en.wikipedia.org/wiki/Quantum_logic_gate [Accessed 1 Oct. 2019].
+
 (define (ccx p_l1 p_y1 p_l2 p_y2 p_l3 p_y3)
   (qcomg "ccx" 0)
   (g1 "h" p_l3 p_y3)
