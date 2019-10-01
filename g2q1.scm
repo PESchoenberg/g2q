@@ -2,7 +2,7 @@
 ;
 ; g2q1.scm
 ;
-; Additional configuratin and machines-specific functions.
+; Additional configuration and machine-specific functions.
 ;
 ; Sources:
 ;
