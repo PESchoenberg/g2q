@@ -6,7 +6,9 @@
 ;
 ; Sources:
 ;
-; - https://qiskit.org/documentation/install.html 
+; - Qiskit.org. (2019). Installing Qiskit — Qiskit 0.12.0 documentation.
+;   [online] Available at: https://qiskit.org/documentation/install.html
+;   [Accessed 7 Oct. 2019].
 ;
 ; ==============================================================================
 ;

@@ -69,6 +69,7 @@
 ;
 ; Arguments:
 ; - p_n: string containing the literal statement.
+;
 (define (qstr p_n)
   (display (strings-append (list p_n "\n") 0)))
 

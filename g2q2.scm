@@ -787,8 +787,11 @@
 ; - p_y2: qubit 2, max limit of the range.
 ;
 ; Sources:
-; - https://quantum-computing.ibm.com/support/guides/quantum-algorithms-with-qiskit?page=5cbc5e2d74a4010049e1a2b0#qiskit-implementation
-; - https://en.wikipedia.org/wiki/Quantum_Fourier_transform
+; - IBM Q Experience. (2019). IBM Q Experience. [online] Available at:
+;   https://quantum-computing.ibm.com/support/guides/quantum-algorithms-with-qiskit?
+;   page=5cbc5e2d74a4010049e1a2b0#qiskit-implementation [Accessed 7 Oct. 2019].
+; - En.wikipedia.org. (2019). Quantum Fourier transform. [online] Available at:
+;   https://en.wikipedia.org/wiki/Quantum_Fourier_transform [Accessed 7 Oct. 2019].
 ;
 (define (qftyn p_l1 p_y1 p_l2 p_y2)
   (qcomg "qftyn" 0)
@@ -813,7 +816,9 @@
 ; - p_y2: qubit 2, max limit of the range.
 ;
 ; Sources:
-; - https://quantum-computing.ibm.com/support/guides/quantum-algorithms-with-qiskit?page=5cc0b79786b50d00642353b9#qiskit-implementation-1
+; - IBM Q Experience. (2019). IBM Q Experience. [online] Available at:
+;   https://quantum-computing.ibm.com/support/guides/quantum-algorithms-with-qiskit?
+;   page=5cc0b79786b50d00642353b9#qiskit-implementation-1 [Accessed 7 Oct. 2019].
 ;
 ; Notes:
 ; - See the comments for qftyn.
@@ -844,8 +849,13 @@
 ; - p_y3: qubit 3.
 ;
 ; Sources:
-; - https://www.semanticscholar.org/paper/A-Resource-Efficient-Design-for-a-Reversible-Point-Nguyen-Meter/697e4fd8282e1b3cc151956bbb302b0b8e7df22b/figure/13
-; - https://en.wikipedia.org/wiki/Quantum_logic_gate
+; - Nguyen, T. and Meter, R. (2019). A Resource-Efficient Design for a Reversible
+;   Floating Point Adder in Quantum Computing. [online] Semanticscholar.org.
+;   Available at: https://www.semanticscholar.org/paper/A-Resource-Efficient-Design-
+;   for-a-Reversible-Point-Nguyen-Meter/697e4fd8282e1b3cc151956bbb302b0b8e7df22b/
+;   figure/13 [Accessed 7 Oct. 2019].
+; - En.wikipedia.org. (2019). Quantum logic gate. [online] Available at:
+;   https://en.wikipedia.org/wiki/Quantum_logic_gate [Accessed 7 Oct. 2019].
 ;
 (define (cswap p_l1 p_y1 p_l2 p_y2 p_l3 p_y3)
   (qcomg "cswap" 0)
