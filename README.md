@@ -19,7 +19,7 @@ that lets you write programs for QASM-based quantum computers using Scheme.
 ## Optional:
 
 * qre - https://github.com/PESchoenberg/qre if you want to run some of the
-examples on a couple of quantum simulator, on your computer.
+examples on a couple of quantum simulators on your computer.
 
 
 ## Installation:
