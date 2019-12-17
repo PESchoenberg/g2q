@@ -52,7 +52,7 @@
 	    qcomg))
 
 
-; qhead - Defines program name.
+; qhead - Defines a program name.
 ;
 ; Arguments:
 ; - p_prog: program name.
@@ -84,6 +84,7 @@
 
 
 ; qelib1 - Includes initial QASM library.
+;
 (define (qelib1)
   (display "include \"qelib1.inc\";\n"))
 

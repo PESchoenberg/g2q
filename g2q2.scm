@@ -76,7 +76,9 @@
 	    cswap
 	    cx-ladder
 	    swap-fast-ladder
-	    swap-ladder))
+	    swap-ladder
+	    ghzy
+	    g1yl))
 
 
 ; qconst - Sets the values of various required constants.
@@ -141,7 +143,7 @@
 ; - p_y2: ordinal of the last qubit.
 ; - p_x1: number if iterations that g1y will be repeated along x axis of
 ;   sequence as a graph.
-
+;
 (define (g1xy p_n1 p_l1 p_y1 p_y2 p_x1)
   (qcomg "g1xy" 0)
   (let loop ((j 1))
@@ -305,7 +307,7 @@
 ;   A52 (1995) 3457. DOI: 10.1103/PhysRevA.52.3457
 ; - En.wikipedia.org. (2019). Quantum logic gate. [online] Available at: 
 ;   https://en.wikipedia.org/wiki/Quantum_logic_gate [Accessed 1 Oct. 2019].
-
+;
 (define (ccx p_l1 p_y1 p_l2 p_y2 p_l3 p_y3)
   (qcomg "ccx" 0)
   (g1 "h" p_l3 p_y3)
@@ -657,7 +659,7 @@
 ; - p_l1: quantum register name 1.
 ; - p_y1: target qubit a, normally p_y2 - 1.
 ; - p_l2: quantum register name 2.
-; - p_y2: control quibit a.
+; - p_y2: control qubit a.
 ; - p_l3: quantum register name 3.
 ; - p_y3: target qubit b, normally p_y3 - 1.
 ; - p_l4: quantum register name 4.
@@ -970,21 +972,21 @@
 ; - p_l1: quantum register name.
 ; - p_y1: qubit 1, lower registry number qubit where the ladder begins.
 ; - p_y2: qubit 2, higher registry number qubit where the ladder ends.
-; - p_s: mode:
+; - p_s1: mode:
 ;   - 1: descending ladder.
 ;   - 2: ascending ladder.
 ;
-(define (swap-ladder p_l1 p_y1 p_y2 p_s)
+(define (swap-ladder p_l1 p_y1 p_y2 p_s1)
   (qcomg "swap-ladder" 0)
   (cond ((equal? p_y1 p_y2)(swap p_l1 p_y1 p_y2))
         ; Descending.
-	((equal? p_s 1)(begin (let loop ((i1 p_y1))
+	((equal? p_s1 1)(begin (let loop ((i1 p_y1))
 				 (if (equal? i1 (- p_y2 1))
 				     (swap p_l1 i1 p_y2)
 				     (begin (swap p_l1 i1 (+ i1 1))
 					    (loop (+ i1 1)))))))
         ; Ascending.
-	((equal? p_s 2)(begin (let loop ((i1 (- p_y1 1)))
+	((equal? p_s1 2)(begin (let loop ((i1 (- p_y1 1)))
 				 (if (equal? i1 p_y2)
 				     (swap p_l1 p_y2 (+ i1 1))
 				     (begin (swap p_l1 i1 (+ i1 1))
@@ -992,3 +994,82 @@
   (qcomg "swap-ladder" 1))
 
 
+; ghzy - Prepares a GHX state for the interval of qubits defined by 
+; (- p_y2 p_y1) if the interval is equal or greater than three. Note that
+; this only prepares a GHZ state on y qubits. It does not make any 
+; measurement nor defines any measurement bases. You need to provide 
+; those steps separatedly. This function is a generalization to y qubits
+; from a basic three-qubit case.
+;
+; Arguments:
+; - p_n1: quantum gate 1 (".e. "h").
+; - p_n2: quantum gate 2 (".e. "x").
+; - p_l1: quantum register name (.e. "q").
+; - p_y1: qubit 1, lower registry qubit of the GHZ array.
+; - p_y2: qubit 2, higher registry qubit of the GHZ array.
+; - p_s1: mode:
+;   - 1: descending order.
+;   - 2: ascending order.
+;
+; Remarks:
+; - If p_s1 = 1, qubit p_y2 contains the non - Hadamard gate.
+; - If p_s1 = 2, qubit p_y1 contains the non - Hadamard gate.
+;
+; Sources:
+; - IBM Q Experience. (2019). IBM Q Experience. [online] Available at:
+;   https://quantum-computing.ibm.com/support/guides/user-guide?
+;   page=5ddae9d75d640300671cc60f [Accessed 16 Dec. 2019].
+; - En.wikipedia.org. (2019). Greenberger–Horne–Zeilinger state. [online] Available at:
+;   https://en.wikipedia.org/wiki/Greenberger%E2%80%93Horne%E2%80%93Zeilinger_state
+;   [Accessed 16 Dec. 2019].
+;
+(define (ghzy p_n1 p_n2 p_l1 p_y1 p_y2 p_s1)
+  (let ((d (- p_y2 p_y1))
+	(y1 p_y1)
+	(y2 p_y2)
+	(s1 1))
+    (qcomg "ghzy" 0)
+    (cond ((equal? p_s1 1)(set! s1 p_s1))
+	  ((equal? p_s1 2)(set! s1 p_s1))
+	  (else (set! s1 1)))	   
+    (cond ((> d 1)(begin (cond ((equal? s1 1)(begin (qcomg "ghzy ladder ascending" 0)
+						    (g1y p_n1 p_l1 p_y1 (- p_y2 1))
+						    (g1 p_n2 p_l1 p_y2)
+
+					            ; cx ascending ladder.
+						    (let loop ((i1 y2))
+						      (if (equal? i1 (+ p_y1 1))
+							  (cx p_l1 p_y1 p_l1 p_y2)					  
+							  (begin (cx p_l1 (- i1 1) p_l1 p_y2)
+								 (loop (- i1 1)))))))				    
+			       ((equal? s1 2)(begin (qcomg "ghzy ladder descending" 0)
+						    (g1 p_n2 p_l1 p_y1)
+						    (g1y p_n1 p_l1 (+ p_y1 1) p_y2)
+						    
+						    ; cx descending ladder
+						    (let loop ((i1 y1))
+						      (if (equal? i1 (- p_y2 1))
+							  (cx p_l1 p_y2 p_l1 p_y1)
+							  (begin (cx p_l1 (+ i1 1) p_l1 p_y1)
+								 (loop (+ i1 1)))))))))
+			       
+					;Finish the structure.
+	                       (qcomg "ghzy ladder" 1)  
+			       (g1y p_n1 p_l1 p_y1 p_y2)
+			       (g1y "barrier" p_l1 p_y1 p_y2)))
+    (qcomg "ghzy" 1)))
+
+
+; g1yl - Places gates on y axis according to list p_l.
+;
+; Arguments:
+; - p_l1: quantum register name (.e. "q").
+; - p_l2: list of strings defining the order on y axis of gates to be placed.
+;
+(define (g1yl p_l1 p_l2)
+  (let ((l (length p_l2)))
+    (let loop ((i1 0))
+      (if (equal? i1 (- l 1))
+	  (g1 (list-ref p_l2 il) p_l1 il)
+	  (begin (g1 (list-ref p_l2 il) p_l1 il)
+		 (loop (+ il 1)))))))
