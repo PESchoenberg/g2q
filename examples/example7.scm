@@ -99,13 +99,11 @@
 
 ; Now get the data from the QPU.
 (define a (read-file-as-string fnamei))
-(newlines 1)
-(display "And now we get the results from qre back into example7.scm as a string: ")
+(grsp-ld "And now we get the results from qre back into example7.scm as a string: ")
 (newlines 1)
 (newlines 1)
 (display a)
-(newlines 1)
-(display "You can parse the results from this string and use them in any way you want.")
+(grsp-ld "You can parse the results from this string and use them in any way you want.")
 (newlines 1)
 
 (define b (qfclvr a))
@@ -116,16 +114,14 @@
 (newlines 1)
 
 (define c (qfres b "max"))
-(newlines 1)
-(display "Max value obtained: ")
+(grsp-ld "Max value obtained: ")
 (display (car c))
 (display " ")
 (display (cadr c))
 (newlines 1)
 
 (define c (qfres b "min"))
-(newlines 1)
-(display "Min value obtained: ")
+(grsp-ld "Min value obtained: ")
 (display (car c))
 (display " ")
 (display (cadr c))

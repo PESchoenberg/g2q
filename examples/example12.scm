@@ -161,8 +161,7 @@
 (cond ((equal? qpu "none")(display "\nBye!\n"))
       (else  
        (begin
-	 (newline)
-	 (display "Running. Wait...")
+	 (grsp-ld "Running. Wait...")
 	 (newline)
 	 (set! res (qmain-loop clean fname fnameo qver ddir qpu qf q c qn cn mc qx v rf))
 	 (newlines 2)

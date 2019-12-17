@@ -35,8 +35,8 @@
 	    qdeclare))
 
 
-; qcompile-and-run - This function comprises an entire compilation and execution
-; cycle.
+; qcompile-and-run - This function comprises an entire Scheme to QASM compilation  
+; and execution cycle.
 ;
 ; Arguments:
 ; - p_fname: fname.
@@ -55,7 +55,7 @@
 ; - p_rf: results function.
 ;
 ; Output:
-; - A result that consists in the maximum probability obtained from the 
+; - A result that consists of the maximum probability obtained from the 
 ; execution of the compiled quantum circuit.
 ;
 (define (qcompile-and-run p_fname p_fnameo p_qver p_ddir p_qpu p_qf p_q p_c p_qn p_cn p_mc p_i p_v p_rf)

@@ -174,6 +174,11 @@
 (qcomm "Conditional2 eq.")
 (qcond2 "!=" q 2 1)(g1 "y" q 2)
 
+; GHZ state stuff.
+(qcomm "Three qubit GHZ state generation")
+(ghzy "h" "x" q 0 2 1)
+(ghzy "h" "x" q 0 2 2)
+
 ; Let's put a barrier.
 (qcomm "Barriers.")
 (g1y "barrier" q 0 4)
