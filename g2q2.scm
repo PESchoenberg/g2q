@@ -1064,12 +1064,20 @@
 ;
 ; Arguments:
 ; - p_l1: quantum register name (.e. "q").
-; - p_l2: list of strings defining the order on y axis of gates to be placed.
+; - p_l2: list of strings defining the order on y axis of gates to be placed 
+;   (i.e. '("h" "h" "s") in the case of a three qubit system in which to place 
+;   h gates on the first and second, and an s gate on the third.
+; - p_y1: qubit 1, lower registry qubit
 ;
-(define (g1yl p_l1 p_l2)
-  (let ((l (length p_l2)))
-    (let loop ((i1 0))
-      (if (equal? i1 (- l 1))
-	  (g1 (list-ref p_l2 il) p_l1 il)
-	  (begin (g1 (list-ref p_l2 il) p_l1 il)
-		 (loop (+ il 1)))))))
+(define (g1yl p_l1 p_l2 p_y1)
+  (qcomg "g1y1" 0)
+  (let ((l (length p_l2))
+	(v 0))
+    (let loop ((i1 p_y1))
+      (if (equal? i1 (- (+ l p_y1) 1))
+	  (g1 (list-ref p_l2 v) p_l1 i1)
+	  (begin (g1 (list-ref p_l2 v) p_l1 i1)
+		 (set! v (+ v 1))
+		 (loop (+ i1 1))))))
+  (qcomg "g1y1" 1))
+

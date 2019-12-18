@@ -179,6 +179,10 @@
 (ghzy "h" "x" q 0 2 1)
 (ghzy "h" "x" q 0 2 2)
 
+; Using lists.
+(g1yl q '("h" "h" "h" "h" "sdg") 0)
+(g1yl q '("x" "h" "h" "sdg") 1)
+
 ; Let's put a barrier.
 (qcomm "Barriers.")
 (g1y "barrier" q 0 4)
