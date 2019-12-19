@@ -554,8 +554,8 @@
 ; - p_f1: name of .qasm file.
 ; - p_f2: name of .qreg file.
 ; - p_r: where results will be saved to:
-;   - "json" to save results to a json file.
-;   - "sqlite3" to save results to a sqlite3 database.
+;  - "json" to save results to a json file.
+;  - "sqlite3" to save results to a sqlite3 database.
 ; - p_d: device.
 ; - p_s: shots.
 ; - p_m: max credits.
@@ -563,9 +563,9 @@
 ;
 ; Sources:
 ; - Casey, K. (2017). Archived | Quantum computing in action: IBM's Q experience 
-; and the quantum shell game. [online] IBM Developer. Available at: 
-; https://developer.ibm.com/tutorials/os-quantum-computing-shell-game/ 
-; [Accessed 30 Sep. 2019].
+;   and the quantum shell game. [online] IBM Developer. Available at: 
+;   https://developer.ibm.com/tutorials/os-quantum-computing-shell-game/ 
+;   [Accessed 30 Sep. 2019].
 ;
 (define (qreq p_f1 p_f2 p_r p_d p_s p_m p_e)
   (let ((port1 (current-output-port))
@@ -817,13 +817,13 @@
 ; - p_l2: quantum register name 2.
 ; - p_y2: qubit 2, max limit of the range.
 ;
+; Remarks:
+; - See the comments for qftyn.
+;
 ; Sources:
 ; - IBM Q Experience. (2019). IBM Q Experience. [online] Available at:
 ;   https://quantum-computing.ibm.com/support/guides/quantum-algorithms-with-qiskit?
 ;   page=5cc0b79786b50d00642353b9#qiskit-implementation-1 [Accessed 7 Oct. 2019].
-;
-; Notes:
-; - See the comments for qftyn.
 ;
 (define (qftdgyn p_l1 p_y1 p_l2 p_y2)
   (qcomg "qftdgyn" 0)
@@ -843,6 +843,7 @@
 ; cswap - Gate Fredkin in atomic form. Swaps p_y2 and p_y3 if p_y1 is |1> 
 ; (controlled swap).
 ;
+; Arguments:
 ; - p_l1: quantum register name 1.
 ; - p_y1: qubit 1.
 ; - p_l2: quantum register name 2.
@@ -893,10 +894,10 @@
 ; - p_y1: qubit 1, control qubit of the cx gate where the ladder begins.
 ; - p_y2: qubit 2, target qubit of the cx gate where the ladder ends.
 ; - p_s: mode:
-;   - 1: descending ladder, control qubit on top (p_y1).
-;   - 2: ascending ladder, control qubit on top (p_y1).
-;   - 3: descending ladder, control qubit on bottom (p_y2).
-;   - 4: ascending ladder, control qubit on bottom (p_y2).
+;  - 1: descending ladder, control qubit on top (p_y1).
+;  - 2: ascending ladder, control qubit on top (p_y1).
+;  - 3: descending ladder, control qubit on bottom (p_y2).
+;  - 4: ascending ladder, control qubit on bottom (p_y2).
 ;
 (define (cx-ladder p_l1 p_y1 p_y2 p_s)
   (qcomg "cx-ladder" 0)
@@ -940,8 +941,8 @@
 ; - p_y1: qubit 1, lower registry number qubit where the ladder begins.
 ; - p_y2: qubit 2, higher registry number qubit where the ladder ends.
 ; - p_s: mode:
-;   - 1: descending ladder.
-;   - 2: ascending ladder.
+;  - 1: descending ladder.
+;  - 2: ascending ladder.
 ;
 (define (swap-fast-ladder p_l1 p_y1 p_y2 p_s)
   (qcomg "swap-fast-ladder" 0)
@@ -973,8 +974,8 @@
 ; - p_y1: qubit 1, lower registry number qubit where the ladder begins.
 ; - p_y2: qubit 2, higher registry number qubit where the ladder ends.
 ; - p_s1: mode:
-;   - 1: descending ladder.
-;   - 2: ascending ladder.
+;  - 1: descending ladder.
+;  - 2: ascending ladder.
 ;
 (define (swap-ladder p_l1 p_y1 p_y2 p_s1)
   (qcomg "swap-ladder" 0)
@@ -1008,12 +1009,14 @@
 ; - p_y1: qubit 1, lower registry qubit of the GHZ array.
 ; - p_y2: qubit 2, higher registry qubit of the GHZ array.
 ; - p_s1: mode:
-;   - 1: descending order.
-;   - 2: ascending order.
+;  - 1: descending order.
+;  - 2: ascending order.
 ;
 ; Remarks:
 ; - If p_s1 = 1, qubit p_y2 contains the non - Hadamard gate.
 ; - If p_s1 = 2, qubit p_y1 contains the non - Hadamard gate.
+; - This function places a barrier on all involved qubits after its relevant 
+;   code.
 ;
 ; Sources:
 ; - IBM Q Experience. (2019). IBM Q Experience. [online] Available at:
@@ -1060,7 +1063,13 @@
     (qcomg "ghzy" 1)))
 
 
-; g1yl - Places gates on y axis according to list p_l.
+; g1yl - Places gates on y axis according to list p_l. This allows you to set
+; a complete array of gates at once. While setting gates at a given execution
+; step can be achieved by means of other functions, g1y1 is yet another
+; option that might be more convenient at times, for example, when you want
+; to define an array of gates for a given time step procedureally depending
+; on certain factors such as the kind of reading that you might want to 
+; perform after a certain operation such as a GHZ state preparation.
 ;
 ; Arguments:
 ; - p_l1: quantum register name (.e. "q").
@@ -1068,6 +1077,12 @@
 ;   (i.e. '("h" "h" "s") in the case of a three qubit system in which to place 
 ;   h gates on the first and second, and an s gate on the third.
 ; - p_y1: qubit 1, lower registry qubit
+;
+; Remarks:
+; - You might want to place a barrier on all qubits before or after calling
+;   this function. g1y1 does not place any barriers by itself, so if that is
+;   your choice, you would have to place your barrier(s) using the appropriate
+;   function calls.
 ;
 (define (g1yl p_l1 p_l2 p_y1)
   (qcomg "g1y1" 0)
