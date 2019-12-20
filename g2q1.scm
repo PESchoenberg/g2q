@@ -52,7 +52,7 @@
 ; g2q-ibm-config - TODO : configuration for using IBM Q series machines;
 ; equivalent to functions found on Qiskit IDE. (Deprecated).
 ;
-; Elements:
+; List elements:
 ; - 1: base uri for online access.
 ; - 2: token.
 ; - 3: subdir to post https execution requests.

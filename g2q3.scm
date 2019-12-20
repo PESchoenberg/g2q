@@ -56,7 +56,7 @@
 ;
 ; Output:
 ; - A result that consists of the maximum probability obtained from the 
-; execution of the compiled quantum circuit.
+;   execution of the compiled quantum circuit.
 ;
 (define (qcompile-and-run p_fname p_fnameo p_qver p_ddir p_qpu p_qf p_q p_c p_qn p_cn p_mc p_i p_v p_rf)
   (let ((porto1 (current-output-port))
