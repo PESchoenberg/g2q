@@ -167,5 +167,5 @@
 (yield)
 (display "\n")
 (gc)
-(grsp-ld "Finished!\n")
+(display "\nFinished!\n")
 

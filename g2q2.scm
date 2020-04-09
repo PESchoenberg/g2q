@@ -86,12 +86,17 @@
 ; Arguments:
 ; - p_n1: constant name, string.
 ;
+; Output:
+; - Returns the value of p_n1 if it exists. Zero otherwise.
+;
 (define (qconst p_n1)
   (let ((res 0))
+    
     (cond ((equal? p_n1 "Pi")(set! res 3.14159))
 	  ((equal? p_n1 "gr")(set! res 1.00))
-	  ((equal? p_n1 "e")(set! res 2.71828))
+	  ((equal? p_n1 "e")(set! res 2.71828))	  
 	  (else (set! res 0)))
+    
     res))
 
 
@@ -351,6 +356,7 @@
 ;
 (define (rx p_t p_l1 p_y1)
   (let ((y2 (/ (qconst "Pi") 2)))
+    
     (u3 p_t (* y2 -1) y2 p_l1 p_y1)))
 
 
@@ -419,13 +425,14 @@
 ; - p_y2: qubit 2.
 ;
 (define (crz p_la p_l1 p_y1 p_l2 p_y2)
-  (qcomg "crz" 0)
   (let ((la (/ p_la 2)))
+
+    (qcomg "crz" 0)
     (u1 la p_l2 p_y2)
     (cx p_l1 p_y1 p_l2 p_y2)
     (u1 (* -1.0 la) p_l2 p_y2)
-    (cx p_l1 p_y1 p_l2 p_y2))
-  (qcomg "crz" 1))
+    (cx p_l1 p_y1 p_l2 p_y2)
+    (qcomg "crz" 1)))
 
 
 ; crz-fast - Gate crz, controlled rz expressed in fast form.
@@ -451,14 +458,15 @@
 ; - p_y2: qubit 2.
 ;
 (define (cu1 p_la p_l1 p_y1 p_l2 p_y2)
-  (qcomg "cu1" 0)
   (let ((la (* p_la 0.5)))
+
+    (qcomg "cu1" 0)
     (u1 la p_l1 p_y1)
     (cx p_l1 p_y1 p_l2 p_y2)
     (u1 (* -1.0 la) p_l2 p_y2)
     (cx p_l1 p_y1 p_l2 p_y2)
-    (u1 la p_l1 p_y1))
-  (qcomg "cu1" 1))
+    (u1 la p_l1 p_y1)
+    (qcomg "cu1" 1)))
 
 
 ; cu1-fast - Gate cu1, controlled phase rotation expressed in fast form.
@@ -542,9 +550,11 @@
 ;
 (define (qregex p_f)
   (let ((res p_f))
+    
     (set! res (regexp-substitute/global #f "[\n]+" res 'pre "" 'post))
     (set! res (regexp-substitute/global #f "[\r]+" res 'pre "" 'post))
     (set! res (regexp-substitute/global #f "[\"]+" res 'pre "\\\"" 'post))
+    
     res))
 
 
@@ -580,6 +590,7 @@
 	(res "")
 	(dev p_d)
 	(data ""))
+    
     (set-port-encoding! port2 "UTF-8")
     
     ;Get GX conf data
@@ -763,6 +774,7 @@
 					(set! n 0)))
 	   (set! n (- n 1)))
     (set! res (list slm dvm))
+    
     res))
     
 
@@ -796,17 +808,18 @@
 ;   https://en.wikipedia.org/wiki/Quantum_Fourier_transform [Accessed 7 Oct. 2019].
 ;
 (define (qftyn p_l1 p_y1 p_l2 p_y2)
-  (qcomg "qftyn" 0)
   (let ((i p_y1)
 	(j 0))
+    
+    (qcomg "qftyn" 0)    
     (while (<= i p_y2)
 	   (g1 "h" p_l1 i)
 	   (set! j (+ i 1))
 	   (while (<= j p_y2)
 		  (cu1 (/ (qconst "Pi") (expt 2 (- j i))) p_l1 j p_l2 i)
 		  (set! j (+ j 1)))
-	   (set! i (+ i 1))))
-  (qcomg "qftyn" 1))
+	   (set! i (+ i 1)))
+    (qcomg "qftyn" 1)))
 
 	  
 ; qftdgyn - Function qftyn dagger, expressed atomically.
@@ -826,18 +839,19 @@
 ;   page=5cc0b79786b50d00642353b9#qiskit-implementation-1 [Accessed 7 Oct. 2019].
 ;
 (define (qftdgyn p_l1 p_y1 p_l2 p_y2)
-  (qcomg "qftdgyn" 0)
   (let ((i p_y1)
 	(j 0)
 	(k 0))
+    
+    (qcomg "qftdgyn" 0)
     (while (<= i p_y2)
 	   (set! j (- (- p_y2 1) i))
 	   (while (<= k j)
 		  (cu1 (/ (qconst "Pi") (expt 2 (- j k))) p_l1 j p_l2 k)
 		  (set! k (+ k 1)))
 	   (g1 "h" p_l1 j)
-	   (set! i (+ i 1))))
-  (qcomg "qftdgyn" 1))
+	   (set! i (+ i 1)))
+  (qcomg "qftdgyn" 1)))
 
 
 ; cswap - Gate Fredkin in atomic form. Swaps p_y2 and p_y3 if p_y1 is |1> 
@@ -1015,8 +1029,7 @@
 ; Remarks:
 ; - If p_s1 = 1, qubit p_y2 contains the non - Hadamard gate.
 ; - If p_s1 = 2, qubit p_y1 contains the non - Hadamard gate.
-; - This function places a barrier on all involved qubits after its relevant 
-;   code.
+; - This function places a barrier on all involved qubits after its relevant code.
 ;
 ; Sources:
 ; - IBM Q Experience. (2019). IBM Q Experience. [online] Available at:
@@ -1025,12 +1038,22 @@
 ; - En.wikipedia.org. (2019). Greenberger–Horne–Zeilinger state. [online] Available at:
 ;   https://en.wikipedia.org/wiki/Greenberger%E2%80%93Horne%E2%80%93Zeilinger_state
 ;   [Accessed 16 Dec. 2019].
+; - Uchida, G., Bertlmann, R. and Hiesmayr, B. (2019). Entangled entanglement: A
+;   construction procedure. [online] Arxiv.org. Available at:
+;   https://arxiv.org/abs/1410.7145 [Accessed 21 Dec. 2019].
+; - Cruz, D., Fournier, R., Gremion, F., Jeannerot, A., Komagata, K., Tosic,
+;   T., Thiesbrummel, J., Chan, C., Macris, N., Dupertuis, M. and Javerzac‐Galy, C.
+;   (2019). Efficient Quantum Algorithms for GHZ and W States, and Implementation
+;   on the IBM Quantum Computer. [online] Wiley Online Library. Available at:
+;   https://onlinelibrary.wiley.com/doi/full/10.1002/qute.201900015 
+;   [Accessed 21 Dec. 2019].
 ;
 (define (ghzy p_n1 p_n2 p_l1 p_y1 p_y2 p_s1)
   (let ((d (- p_y2 p_y1))
 	(y1 p_y1)
 	(y2 p_y2)
 	(s1 1))
+    
     (qcomg "ghzy" 0)
     (cond ((equal? p_s1 1)(set! s1 p_s1))
 	  ((equal? p_s1 2)(set! s1 p_s1))
@@ -1085,14 +1108,15 @@
 ;   function calls.
 ;
 (define (g1yl p_l1 p_l2 p_y1)
-  (qcomg "g1y1" 0)
   (let ((l (length p_l2))
 	(v 0))
+
+    (qcomg "g1y1" 0)
     (let loop ((i1 p_y1))
       (if (equal? i1 (- (+ l p_y1) 1))
 	  (g1 (list-ref p_l2 v) p_l1 i1)
 	  (begin (g1 (list-ref p_l2 v) p_l1 i1)
 		 (set! v (+ v 1))
-		 (loop (+ i1 1))))))
-  (qcomg "g1y1" 1))
+		 (loop (+ i1 1)))))
+    (qcomg "g1y1" 1)))
 

@@ -65,7 +65,7 @@
   (qstr "include \"qelib1.inc\";"))
   
 
-; qstr - Writes a literal statement.
+; qstr - Dispays or writes a literal statement.
 ;
 ; Arguments:
 ; - p_n: string containing the literal statement.
@@ -275,6 +275,7 @@
 ;
 (define (qcond2 p_c1 p_y1 p_y3 p_y2)
   (let ((qsen " "))
+    
     (cond ((equal? (qvalid-conditional p_c1) #t)(set! qsen (strings-append (list (g2q-txt 5) p_y1 "[" (grsp-n2s p_y3) "]" p_c1 (grsp-n2s p_y2) (g2q-txt 4)) 0))))    
     (display qsen)))
 
@@ -289,8 +290,10 @@
 ;
 (define (qvalid-conditional p_s1)
   (let ((res #f))
+    
     (cond ((equal? p_s1 "==")(set! res #t)))
     (cond ((equal? p_s1 "!=")(set! res #t)))
+    
     res))
 
 
@@ -324,10 +327,9 @@
 ;
 (define (qcomg p_s p_v)
   (let ((s ""))
+    
     (cond ((eq? p_v 0)(set! s (strings-append (list (g2q-txt 6) "Begin " p_s ";") 0))))
     (cond ((eq? p_v 1)(set! s (strings-append (list (g2q-txt 6) "End " p_s ";") 0))))
     (display s)
     (newline)))
-
-
 
