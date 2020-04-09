@@ -1,5 +1,5 @@
 // example7.qasm;
-// Compiled with g2q - v1.2.4;
+// Compiled with g2q - v1.2.5;
 OPENQASM 2.0;
 include "qelib1.inc";
 qreg q[4];

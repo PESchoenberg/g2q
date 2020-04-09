@@ -31,7 +31,7 @@
 
 
 ; Config for IBM Quantum Experience and Qiskit. This still needs development in
-; but might be needed to test QASM prorams on IBM Q processors.
+; but might be needed to test QASM programs on IBM Q processors.
 
 
 (define-module (g2q g2q1)
@@ -46,6 +46,7 @@
 ;
 (define (g2q-version)
   (let ((res "g2q - v1.2.5"))
+    
     res))
 
 
@@ -59,6 +60,7 @@
 ;
 (define (g2q-ibm-config)
   (let ((conf (list "https://quantumexperience.ng.bluemix.net/api" "your-token-goes-here" "/codes/execute")))
+    
     conf))
 
 
@@ -74,6 +76,7 @@
 ;
 (define (g2q-qre-config)
   (let ((conf (list "data/json/" "data/sqlite3/" "qlib_simulator" "ibmqx_simulator" "qx_simulator" "ibmqx_real")))
+    
     conf))
 
 
@@ -85,6 +88,7 @@
 (define (g2q-select-qpu)
   (let ((res1 3)
 	(res ""))
+    
     (newline)
     (display "Select qpu:")
     (newline)
@@ -108,6 +112,7 @@
     (if (= res1 2)(set! res (car(cdr(cdr(cdr(cdr(g2q-qre-config))))))))    
     (if (= res1 4)(set! res (car(cdr(cdr(cdr(cdr(cdr(g2q-qre-config)))))))))
     (if (= res1 3)(set! res (car(cdr(cdr(cdr(g2q-qre-config)))))))
+    
     res))
 
 
@@ -118,6 +123,7 @@
 ;
 (define (g2q-txt p_n)
   (let ((res ""))
+    
     (cond ((= p_n 0)(set! res "];")))
     (cond ((= p_n 1)(set! res "\n")))
     (cond ((= p_n 2)(set! res ";\n")))
@@ -128,7 +134,6 @@
     (cond ((= p_n 7)(set! res "charset=utf-8")))
     (cond ((= p_n 8)(set! res "application/x-www-form-urlencoded;")))
     (cond ((= p_n 9)(set! res "na")))
-    res))
     
-  
+    res))
 

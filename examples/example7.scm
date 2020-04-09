@@ -54,6 +54,7 @@
 ; Vars and initial stuff. 
 (define fnameo "example7.qasm")
 (define fnamei "data/json/example7_1.json")
+;(define path "/home/Programs/qre/qre")
 (define qver 2.0)
 (define q "q")
 (define c "c")
@@ -75,7 +76,7 @@
 
 (g1y "h" q 0 3)
 (cx q 0 q 1)
-(g1 "h" q 2) ; [1] replace with z gate for a normal qpe+
+(g1 "h" q 2) ; (1) replace with z gate for a normal qpe+
 (g1 "h" q 0)
 (cx q 3 q 2)
 (g1 "h" q 3)
@@ -99,11 +100,13 @@
 
 ; Now get the data from the QPU.
 (define a (read-file-as-string fnamei))
-(grsp-ld "And now we get the results from qre back into example7.scm as a string: ")
+(newlines 1)
+(display "And now we get the results from qre back into example7.scm as a string: ")
 (newlines 1)
 (newlines 1)
 (display a)
-(grsp-ld "You can parse the results from this string and use them in any way you want.")
+(newlines 1)
+(display "You can parse the results from this string and use them in any way you want.")
 (newlines 1)
 
 (define b (qfclvr a))
@@ -114,14 +117,16 @@
 (newlines 1)
 
 (define c (qfres b "max"))
-(grsp-ld "Max value obtained: ")
+(newlines 1)
+(display "Max value obtained: ")
 (display (car c))
 (display " ")
 (display (cadr c))
 (newlines 1)
 
 (define c (qfres b "min"))
-(grsp-ld "Min value obtained: ")
+(newlines 1)
+(display "Min value obtained: ")
 (display (car c))
 (display " ")
 (display (cadr c))

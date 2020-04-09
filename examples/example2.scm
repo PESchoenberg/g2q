@@ -66,7 +66,7 @@
 (g1 "h" q 0)
 (cx q 1 q 0)
 
-; And now, measure registers.
+; And now, measure.
 (qcomm "Measuring")
 (qmeas q 0 c 0)
 
