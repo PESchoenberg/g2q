@@ -6,7 +6,7 @@
 ;
 ; ==============================================================================
 ;
-; Copyright (C) 2018 - 2019  Pablo Edronkin (pablo.edronkin at yahoo.com)
+; Copyright (C) 2018 - 2020  Pablo Edronkin (pablo.edronkin at yahoo.com)
 ;
 ;   This program is free software: you can redistribute it and/or modify
 ;   it under the terms of the GNU Lesser General Public License as published by
@@ -209,10 +209,14 @@
 ;   target q quibt.
 ;
 (define (g2 p_n1 p_r1 p_y1 p_r2 p_y2)
-  (cond ((equal? "cx" p_n1)(qcx p_n1 p_r1 p_y1 p_r2 p_y2))
-	((equal? "cy-fast" p_n1)(qcx "cy" p_r1 p_y1 p_r2 p_y2))
-	((equal? "cz-fast" p_n1)(qcx "cz" p_r1 p_y1 p_r2 p_y2))
-	((equal? "ch-fast" p_n1)(qcx "ch" p_r1 p_y1 p_r2 p_y2))
+  (cond ((equal? "cx" p_n1)
+	 (qcx p_n1 p_r1 p_y1 p_r2 p_y2))
+	((equal? "cy-fast" p_n1)
+	 (qcx "cy" p_r1 p_y1 p_r2 p_y2))
+	((equal? "cz-fast" p_n1)
+	 (qcx "cz" p_r1 p_y1 p_r2 p_y2))
+	((equal? "ch-fast" p_n1)
+	 (qcx "ch" p_r1 p_y1 p_r2 p_y2))
 	(else (qcx p_n1 p_r1 p_y1 p_r2 p_y2))))
 
 
@@ -261,7 +265,8 @@
 ;
 (define (qcond1 p_c1 p_y1 p_y2)
   (let ((qsen " "))
-    (cond ((equal? (qvalid-conditional p_c1) #t)(set! qsen (strings-append (list (g2q-txt 5) p_y1 p_c1 (grsp-n2s p_y2) (g2q-txt 4)) 0))))    
+    (cond ((equal? (qvalid-conditional p_c1) #t)
+	   (set! qsen (strings-append (list (g2q-txt 5) p_y1 p_c1 (grsp-n2s p_y2) (g2q-txt 4)) 0))))
     (display qsen)))
 
 
@@ -276,7 +281,8 @@
 (define (qcond2 p_c1 p_y1 p_y3 p_y2)
   (let ((qsen " "))
     
-    (cond ((equal? (qvalid-conditional p_c1) #t)(set! qsen (strings-append (list (g2q-txt 5) p_y1 "[" (grsp-n2s p_y3) "]" p_c1 (grsp-n2s p_y2) (g2q-txt 4)) 0))))    
+    (cond ((equal? (qvalid-conditional p_c1) #t)
+	   (set! qsen (strings-append (list (g2q-txt 5) p_y1 "[" (grsp-n2s p_y3) "]" p_c1 (grsp-n2s p_y2) (g2q-txt 4)) 0))))    
     (display qsen)))
 
 
@@ -291,8 +297,10 @@
 (define (qvalid-conditional p_s1)
   (let ((res #f))
     
-    (cond ((equal? p_s1 "==")(set! res #t)))
-    (cond ((equal? p_s1 "!=")(set! res #t)))
+    (cond ((equal? p_s1 "==")
+	   (set! res #t)))
+    (cond ((equal? p_s1 "!=")
+	   (set! res #t)))
     
     res))
 
@@ -322,14 +330,16 @@
 ; Arguments:
 ; - p_s: string (gate name).
 ; - p_v: value indicating the kind of gate comment.
-;  - 0: begin block.
-;  - 1: end block.
+;   - 0: begin block.
+;   - 1: end block.
 ;
 (define (qcomg p_s p_v)
   (let ((s ""))
     
-    (cond ((eq? p_v 0)(set! s (strings-append (list (g2q-txt 6) "Begin " p_s ";") 0))))
-    (cond ((eq? p_v 1)(set! s (strings-append (list (g2q-txt 6) "End " p_s ";") 0))))
+    (cond ((eq? p_v 0)
+	   (set! s (strings-append (list (g2q-txt 6) "Begin " p_s ";") 0))))
+    (cond ((eq? p_v 1)
+	   (set! s (strings-append (list (g2q-txt 6) "End " p_s ";") 0))))
     (display s)
     (newline)))
 

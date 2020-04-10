@@ -6,7 +6,7 @@
 ;
 ; ==============================================================================
 ;
-; Copyright (C) 2018 - 2019  Pablo Edronkin (pablo.edronkin at yahoo.com)
+; Copyright (C) 2018 - 2020  Pablo Edronkin (pablo.edronkin at yahoo.com)
 ;
 ;   This program is free software: you can redistribute it and/or modify
 ;   it under the terms of the GNU Lesser General Public License as published by
@@ -127,8 +127,9 @@
   (let ((res 0))    
     (let loop ((i p_qx))
       (if (= i 0)
-	  (begin (if(equal? p_clean "y")(system (strings-append (list "rm " p_ddir p_fname "_*") 0)))
-	  res)
+	  (begin (if (equal? p_clean "y")
+		     (system (strings-append (list "rm " p_ddir p_fname "_*") 0)))
+		 res)
 	  (begin (set! res (+ res (qcompile-and-run p_fname p_fnameo p_qver p_ddir p_qpu p_qf p_q p_c p_qn p_cn p_mc i p_v p_rf)))
 		 (loop (- i 1)))))))
 
