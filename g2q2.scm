@@ -12,7 +12,7 @@
 ;
 ; ==============================================================================
 ;
-; Copyright (C) 2018 - 2019  Pablo Edronkin (pablo.edronkin at yahoo.com)
+; Copyright (C) 2018 - 2020  Pablo Edronkin (pablo.edronkin at yahoo.com)
 ;
 ;   This program is free software: you can redistribute it and/or modify
 ;   it under the terms of the GNU Lesser General Public License as published by
@@ -92,9 +92,12 @@
 (define (qconst p_n1)
   (let ((res 0))
     
-    (cond ((equal? p_n1 "Pi")(set! res 3.14159))
-	  ((equal? p_n1 "gr")(set! res 1.00))
-	  ((equal? p_n1 "e")(set! res 2.71828))	  
+    (cond ((equal? p_n1 "Pi")
+	   (set! res 3.14159))
+	  ((equal? p_n1 "gr")
+	   (set! res 1.00))
+	  ((equal? p_n1 "e")
+	   (set! res 2.71828))	  
 	  (else (set! res 0)))
     
     res))
@@ -678,10 +681,10 @@
 ;
 ; Output:
 ; - On p_l1[p_y1].
-;  - |00> -> |0>
-;  - |11> -> |0>
-;  - |01> -> |1>
-;  - |10> -> |1>
+;   - |00> -> |0>
+;   - |11> -> |0>
+;   - |01> -> |1>
+;   - |10> -> |1>
 ;
 (define (qxor1 p_l1 p_y1 p_l2 p_y2 p_l3 p_y3 p_l4 p_y4)
   (qcomg "qxor1" 0)
@@ -744,13 +747,13 @@
 ; Arguments:
 ; - p_l: list of results as obtained by applying qfclvr.
 ; - p_r: choice between obtaining the max or min value.
-;  - "max" for maximum value.
-;  - "min" to get the minimum value.
+;   - "max" for maximum value.
+;   - "min" to get the minimum value.
 ;
 ; Output:
 ; - A list of two elements:
-;  - First element contains the label of the result.
-;  - Second element contains the max value obtained.
+;   - First element contains the label of the result.
+;   - Second element contains the max value obtained.
 ;
 (define (qfres p_l p_r)
   (let ((res (list ))
@@ -763,15 +766,17 @@
 
     ; Find value.
     (set! dv (map string->number sv))
-    (if (equal? p_r "max")(set! dvm (apply max dv)))
-    (if (equal? p_r "min")(set! dvm (apply min dv)))
+    (if (equal? p_r "max")
+	(set! dvm (apply max dv)))
+    (if (equal? p_r "min")
+	(set! dvm (apply min dv)))
     
     ; Get the corresponding label.
     (set! n (- (length dv) 1))
     (while (>= n 0)
-	   (if (= dvm (list-ref dv n))(begin
-					(set! slm (list-ref sl n))
-					(set! n 0)))
+	   (if (= dvm (list-ref dv n))
+	       (begin (set! slm (list-ref sl n))
+		      (set! n 0)))
 	   (set! n (- n 1)))
     (set! res (list slm dvm))
     
@@ -908,10 +913,10 @@
 ; - p_y1: qubit 1, control qubit of the cx gate where the ladder begins.
 ; - p_y2: qubit 2, target qubit of the cx gate where the ladder ends.
 ; - p_s: mode:
-;  - 1: descending ladder, control qubit on top (p_y1).
-;  - 2: ascending ladder, control qubit on top (p_y1).
-;  - 3: descending ladder, control qubit on bottom (p_y2).
-;  - 4: ascending ladder, control qubit on bottom (p_y2).
+;   - 1: descending ladder, control qubit on top (p_y1).
+;   - 2: ascending ladder, control qubit on top (p_y1).
+;   - 3: descending ladder, control qubit on bottom (p_y2).
+;   - 4: ascending ladder, control qubit on bottom (p_y2).
 ;
 (define (cx-ladder p_l1 p_y1 p_y2 p_s)
   (qcomg "cx-ladder" 0)
@@ -955,8 +960,8 @@
 ; - p_y1: qubit 1, lower registry number qubit where the ladder begins.
 ; - p_y2: qubit 2, higher registry number qubit where the ladder ends.
 ; - p_s: mode:
-;  - 1: descending ladder.
-;  - 2: ascending ladder.
+;   - 1: descending ladder.
+;   - 2: ascending ladder.
 ;
 (define (swap-fast-ladder p_l1 p_y1 p_y2 p_s)
   (qcomg "swap-fast-ladder" 0)
@@ -1023,8 +1028,8 @@
 ; - p_y1: qubit 1, lower registry qubit of the GHZ array.
 ; - p_y2: qubit 2, higher registry qubit of the GHZ array.
 ; - p_s1: mode:
-;  - 1: descending order.
-;  - 2: ascending order.
+;   - 1: descending order.
+;   - 2: ascending order.
 ;
 ; Remarks:
 ; - If p_s1 = 1, qubit p_y2 contains the non - Hadamard gate.
@@ -1058,31 +1063,34 @@
     (cond ((equal? p_s1 1)(set! s1 p_s1))
 	  ((equal? p_s1 2)(set! s1 p_s1))
 	  (else (set! s1 1)))	   
-    (cond ((> d 1)(begin (cond ((equal? s1 1)(begin (qcomg "ghzy ladder ascending" 0)
-						    (g1y p_n1 p_l1 p_y1 (- p_y2 1))
-						    (g1 p_n2 p_l1 p_y2)
+    (cond ((> d 1)
+	   (begin (cond ((equal? s1 1)
+			 (begin (qcomg "ghzy ladder ascending" 0)
+				(g1y p_n1 p_l1 p_y1 (- p_y2 1))
+				(g1 p_n2 p_l1 p_y2)
 
-					            ; cx ascending ladder.
-						    (let loop ((i1 y2))
-						      (if (equal? i1 (+ p_y1 1))
-							  (cx p_l1 p_y1 p_l1 p_y2)					  
-							  (begin (cx p_l1 (- i1 1) p_l1 p_y2)
-								 (loop (- i1 1)))))))				    
-			       ((equal? s1 2)(begin (qcomg "ghzy ladder descending" 0)
-						    (g1 p_n2 p_l1 p_y1)
-						    (g1y p_n1 p_l1 (+ p_y1 1) p_y2)
-						    
-						    ; cx descending ladder
-						    (let loop ((i1 y1))
-						      (if (equal? i1 (- p_y2 1))
-							  (cx p_l1 p_y2 p_l1 p_y1)
-							  (begin (cx p_l1 (+ i1 1) p_l1 p_y1)
-								 (loop (+ i1 1)))))))))
+				; cx ascending ladder.
+				(let loop ((i1 y2))
+				  (if (equal? i1 (+ p_y1 1))
+				      (cx p_l1 p_y1 p_l1 p_y2)					  
+				      (begin (cx p_l1 (- i1 1) p_l1 p_y2)
+					     (loop (- i1 1)))))))				    
+			((equal? s1 2)
+			 (begin (qcomg "ghzy ladder descending" 0)
+				(g1 p_n2 p_l1 p_y1)
+				(g1y p_n1 p_l1 (+ p_y1 1) p_y2)
+				
+				; cx descending ladder
+				(let loop ((i1 y1))
+				  (if (equal? i1 (- p_y2 1))
+				      (cx p_l1 p_y2 p_l1 p_y1)
+				      (begin (cx p_l1 (+ i1 1) p_l1 p_y1)
+					     (loop (+ i1 1)))))))))
 			       
-					;Finish the structure.
-	                       (qcomg "ghzy ladder" 1)  
-			       (g1y p_n1 p_l1 p_y1 p_y2)
-			       (g1y "barrier" p_l1 p_y1 p_y2)))
+	   ;Finish the structure.
+	   (qcomg "ghzy ladder" 1)  
+	   (g1y p_n1 p_l1 p_y1 p_y2)
+	   (g1y "barrier" p_l1 p_y1 p_y2)))
     (qcomg "ghzy" 1)))
 
 

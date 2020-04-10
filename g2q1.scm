@@ -12,7 +12,7 @@
 ;
 ; ==============================================================================
 ;
-; Copyright (C) 2018 - 2019  Pablo Edronkin (pablo.edronkin at yahoo.com)
+; Copyright (C) 2018 - 2020  Pablo Edronkin (pablo.edronkin at yahoo.com)
 ;
 ;   This program is free software: you can redistribute it and/or modify
 ;   it under the terms of the GNU Lesser General Public License as published by
@@ -45,7 +45,7 @@
 ; g2q-version - Returns the current version of the compiler.
 ;
 (define (g2q-version)
-  (let ((res "g2q - v1.2.5"))
+  (let ((res "g2q - v1.2.6"))
     
     res))
 
@@ -105,13 +105,20 @@
     (set! res1 (read))
 
     ; Not elegant, but works for now.
-    (if (< res1 0)(set! res1 0))
-    (if (> res1 4)(set! res1 0))
-    (if (= res1 0)(set! res "none"))
-    (if (= res1 1)(set! res (car(cdr(cdr(g2q-qre-config))))))    
-    (if (= res1 2)(set! res (car(cdr(cdr(cdr(cdr(g2q-qre-config))))))))    
-    (if (= res1 4)(set! res (car(cdr(cdr(cdr(cdr(cdr(g2q-qre-config)))))))))
-    (if (= res1 3)(set! res (car(cdr(cdr(cdr(g2q-qre-config)))))))
+    (if (< res1 0)
+	(set! res1 0))
+    (if (> res1 4)
+	(set! res1 0))
+    (if (= res1 0)
+	(set! res "none"))
+    (if (= res1 1)
+	(set! res (car(cdr(cdr(g2q-qre-config))))))    
+    (if (= res1 2)
+	(set! res (car(cdr(cdr(cdr(cdr(g2q-qre-config))))))))    
+    (if (= res1 4)
+	(set! res (car(cdr(cdr(cdr(cdr(cdr(g2q-qre-config)))))))))
+    (if (= res1 3)
+	(set! res (car(cdr(cdr(cdr(g2q-qre-config)))))))
     
     res))
 
@@ -124,16 +131,26 @@
 (define (g2q-txt p_n)
   (let ((res ""))
     
-    (cond ((= p_n 0)(set! res "];")))
-    (cond ((= p_n 1)(set! res "\n")))
-    (cond ((= p_n 2)(set! res ";\n")))
-    (cond ((= p_n 3)(set! res "];\n")))
-    (cond ((= p_n 4)(set! res ") ")))
-    (cond ((= p_n 5)(set! res "if(")))
-    (cond ((= p_n 6)(set! res "// ")))
-    (cond ((= p_n 7)(set! res "charset=utf-8")))
-    (cond ((= p_n 8)(set! res "application/x-www-form-urlencoded;")))
-    (cond ((= p_n 9)(set! res "na")))
+    (cond ((= p_n 0)
+	   (set! res "];")))
+    (cond ((= p_n 1)
+	   (set! res "\n")))
+    (cond ((= p_n 2)
+	   (set! res ";\n")))
+    (cond ((= p_n 3)
+	   (set! res "];\n")))
+    (cond ((= p_n 4)
+	   (set! res ") ")))
+    (cond ((= p_n 5)
+	   (set! res "if(")))
+    (cond ((= p_n 6)
+	   (set! res "// ")))
+    (cond ((= p_n 7)
+	   (set! res "charset=utf-8")))
+    (cond ((= p_n 8)
+	   (set! res "application/x-www-form-urlencoded;")))
+    (cond ((= p_n 9)
+	   (set! res "na")))
     
     res))
 
