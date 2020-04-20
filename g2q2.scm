@@ -34,6 +34,7 @@
   #:use-module (g2q g2q0)
   #:use-module (g2q g2q1)
   #:use-module (grsp grsp0)
+  #:use-module (grsp grsp1)  
   #:use-module (ice-9 regex)
   #:use-module (ice-9 textual-ports)
   #:export (qconst
@@ -78,7 +79,10 @@
 	    swap-fast-ladder
 	    swap-ladder
 	    ghzy
-	    g1yl))
+	    g1yl
+	    ecc1
+	    ecc2
+	    ecc3))
 
 
 ; qconst - Sets the values of various required constants.
@@ -90,21 +94,23 @@
 ; - Returns the value of p_n1 if it exists. Zero otherwise.
 ;
 (define (qconst p_n1)
-  (let ((res 0))
+  (let ((res 0.0))
     
     (cond ((equal? p_n1 "Pi")
-	   (set! res 3.14159))
+	   ;(set! res 3.14159))
+	   (set! res (gconst "A000796")))
 	  ((equal? p_n1 "gr")
-	   (set! res 1.00))
+	   ;(set! res 1.00))
+	   (set! res (gconst "gr"))) 
 	  ((equal? p_n1 "e")
-	   (set! res 2.71828))	  
-	  (else (set! res 0)))
+           ;(set! res 2.71828))
+	   (set! res (gconst "A001113"))))
     
     res))
 
 
 ; g1y - Repeats placement of gate p_n1 and group p_l1 by repeating the use of qgate1
-; from qbit p_y1 to qbit p_y2 on y axis (vertically on graphical representation).
+; from qubit p_y1 to qubit p_y2 on y axis (vertically on graphical representation).
 ;
 ; Arguments:
 ; - p_n1: gate name.
@@ -1127,4 +1133,135 @@
 		 (set! v (+ v 1))
 		 (loop (+ i1 1)))))
     (qcomg "g1y1" 1)))
+
+
+; ecc1 - Error correcting code. Encoder into bit flip code for qubits
+; [p_y1, p_y1+2].
+;
+; Arguments:
+; - p_l1: quantum register name 1.
+; - p_y1: qubit 1.
+;
+; Sources:
+; - IBM Quantum Experience. 2020. IBM Quantum Experience - Docs And Resources.
+;   [online] Available at:
+;   https://quantum-computing.ibm.com/docs/guide/err-corxn/quantum-repetition-code
+;   [Accessed 16 April 2020].
+;
+; Notes:
+; - Code adapted from sources.
+;
+(define (ecc1 p_l1 p_y1)
+  (let ((y1 p_y1)
+	(y2 (+ p_y1 1))
+	(y3 (+ p_y1 2)))
+    (qcomg "ecc1" 0)
+    (g1y "h" p_l1 y1 y3)    
+    (g1 "t" p_l1 y2)
+    (g1x "h" p_l1 y2 2)    
+    (cx p_l1 y1 p_l1 y2)
+    (g1 "h" p_l1 y1)
+    (cx p_l1 y3 p_l1 y2)
+    (g1y "h" p_l1 y2 y3) 
+    (qcomg "ecc1" 1)))
+  
+
+; ecc2 - Error correcting code. Reversible majority select by vote function for
+; decoding a selectable bit-flip gate passed as p_n1. Requres three qubits in
+; array p_l1 and interval [p_y1, p_y1+2].
+
+; Arguments:
+; - p_n1: name of the gate to be tested.					;
+; - p_l1: quantum register name 1.
+; - p_y1: qubit 1.
+;
+; Sources:
+; - IBM Quantum Experience. 2020. IBM Quantum Experience - Docs And Resources.
+;   [online] Available at:
+;   https://quantum-computing.ibm.com/docs/guide/err-corxn/quantum-repetition-code
+;   [Accessed 16 April 2020].
+;
+; Notes:
+; - Code adapted from sources.
+;
+(define (ecc2 p_n1 p_l1 p_y1)
+  (let ((y1 p_y1)
+	(y2 (+ p_y1 1))
+	(y3 (+ p_y1 2)))
+    (qcomg "ecc2" 0)
+    (g1y "h" p_l1 y1 y3)
+    (g1 "h" p_l1 y2)
+    (cx p_l1 y1 p_l1 y2)
+    (g1 "h" p_l1 y1)
+    (cx p_l1 y3 p_l1 y2)
+    (g1 p_n1 p_l1 y1)
+    (g1 "h" p_l1 y2)
+    (g1 "h" p_l1 y3)
+    (g1y p_n1 p_l1 y1 y3)
+    (g1y p_n1 p_l1 y1 y3)    
+    (g1 "h" p_l1 y1)
+    (g1y p_n1 p_l1 y2 y3)
+    (g1 "h" p_l1 y2)
+    (g1 "h" p_l1 y3)
+    (cx p_l1 y3 p_l1 y2)
+    (cx p_l1 y1 p_l1 y2)    
+    (g1 "h" p_l1 y3)
+    (g1 "h" p_l1 y1)
+    (cx p_l1 y3 p_l1 y2)
+    (g1 "tdg" p_l1 y2)
+    (cx p_l1 y1 p_l1 y2)    
+    (g1 "t" p_l1 y2)
+    (cx p_l1 y3 p_l1 y2)
+    (g1 "tdg" p_l1 y2)
+    (cx p_l1 y1 p_l1 y2)    
+    (g1 "t" p_l1 y2)
+    (g1 "h" p_l1 y2)
+    (g1 "h" p_l1 y2) ; Check if this replaces (g1 "bloch" p_l1 y2) of the original buggy IBM's code.
+    (qcomg "ecc2" 1)))
+
+
+; ecc3 - Error correcting code. Encoder into bit flip code with parity checks for 
+; for qubits p_y1, p_y1+1, p_y1+4 using qubits [p_y1, p_y1+4].
+;
+; Arguments:
+; - p_l1: quantum register name 1.
+; - p_y1: qubit 1.
+;
+; Sources:
+; - IBM Quantum Experience. 2020. IBM Quantum Experience - Docs And Resources.
+;   [online] Available at:
+;   https://quantum-computing.ibm.com/docs/guide/err-corxn/quantum-repetition-code
+;   [Accessed 16 April 2020].
+;
+; Notes:
+; - Code adapted from sources.
+;
+(define (ecc3 p_l1 p_y1)
+  (let ((y1 p_y1)
+	(y2 (+ p_y1 1))
+	(y3 (+ p_y1 2))
+	(y4 (+ p_y1 3))
+	(y5 (+ p_y1 4)))
+    (qcomg "ecc3" 0)
+    (g1y "h" p_l1 y1 y5)
+    (g1 "t" p_l1 y3)    
+    (g1x "h" p_l1 y3 2)
+    (cx p_l1 y2 p_l1 y3)
+    (cx p_l1 y1 p_l1 y3)
+    (g1 "h" p_l1 y1)
+    (g1 "h" p_l1 y2)
+    (cx p_l1 y4 p_l1 y3)
+    (g1 "h" p_l1 y3)
+    (g1 "h" p_l1 y4)
+    (cx p_l1 y4 p_l1 y3)
+    (cx p_l1 y1 p_l1 y3)   
+    (cx p_l1 y2 p_l1 y3)
+    (g1 "h" p_l1 y3)
+    (cx p_l1 y5 p_l1 y3)    
+    (g1 "h" p_l1 y3)
+    (g1 "h" p_l1 y5)
+    (cx p_l1 y5 p_l1 y3)
+    (cx p_l1 y2 p_l1 y3)    
+    (cx p_l1 y4 p_l1 y3)	
+    (qcomg "ecc3" 1)))
 
