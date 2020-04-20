@@ -45,7 +45,7 @@
 ; g2q-version - Returns the current version of the compiler.
 ;
 (define (g2q-version)
-  (let ((res "g2q - v1.2.6"))
+  (let ((res "g2q - v1.2.9"))
     
     res))
 

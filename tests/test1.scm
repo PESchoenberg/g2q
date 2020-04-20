@@ -74,7 +74,7 @@
 (define v "y") ; Verbosity.
 
 ; Vars and initial stuff. Do not edit these.
-(define ddir (car (g2q-qre-config))) ; Obtains this value from configuration list.
+(define ddir (car (g2q-qre-config))) ; Obtain this value from configuration list.
 (define fnameo (strings-append (list fname ".qasm") 0))
 (define q "q")
 (define c "c")
@@ -143,6 +143,10 @@
   ; QFT
   (qftyn q 0 q 2)
   (qftdgyn q 0 q 2)
+  ; ECC
+  (ecc1 q 0)
+  (ecc2 "x" q 0)
+  (ecc3 q 0)
   ; g2q specific.
   (g1cxg1 "h" q 0 1)  
   ; Barrier and measure.
