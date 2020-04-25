@@ -61,6 +61,7 @@
 	     (g2q g2q1)
 	     (g2q g2q2)
 	     (g2q g2q3)
+         (g2q g2q4)
 	     (grsp grsp0))
 
 
@@ -69,8 +70,8 @@
 (define qpu "qlib_simulator")
 (define clean "y") ; Clean the json files created in ddir after use.
 (define qver 2.0) ; OpenQASM version
-(define qn 3) ; Length of the quantum register.
-(define cn 3) ; Length of the conventional register
+(define qn 5) ; Length of the quantum register.
+(define cn 5) ; Length of the conventional register
 (define v "y") ; Verbosity.
 
 ; Vars and initial stuff. Do not edit these.
@@ -147,10 +148,21 @@
   (ecc1 q 0)
   (ecc2 "x" q 0)
   (ecc3 q 0)
+  ; Complex superpositions.
+  (hx q 0)
+  (hy q 0)
+  (hz q 0)
+  (hs q 0)
+  (hsdg q 0)
+  (ht q 0)
+  (htdg q 0)
+  ; Probabilistic.
+  (qrand1 q 0)
   ; g2q specific.
   (g1cxg1 "h" q 0 1)  
   ; Barrier and measure.
-  (g1y "barrier" q 0 (- p_qnh 1))
+  ;(g1y "barrier" q 0 (- p_qnh 1))
+  (g1y "barrier" q 0 p_qnh)
   (qmeasy p_q p_c p_cnl p_cnh)
   (qdeclare "qx-simulator" "error_model depolarizing_channel,0.001")
   (qdeclare "qlib-simulator" "// Hello qlib-simulator"))

@@ -65,7 +65,7 @@
   (qstr "include \"qelib1.inc\";"))
   
 
-; qstr - Dispays or writes a literal statement.
+; qstr - Displays or writes a literal statement.
 ;
 ; Arguments:
 ; - p_n: string containing the literal statement.
@@ -180,7 +180,7 @@
 ; qin - Increment the value of a variable p_v by p_s.
 ;
 ; Arguments:
-; - p_v: variable to increment
+; - p_v: variable to increment.
 ; - p_s: increment step.
 ;
 (define (qin p_v p_t)

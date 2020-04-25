@@ -82,7 +82,14 @@
 	    g1yl
 	    ecc1
 	    ecc2
-	    ecc3))
+	    ecc3
+	    hx
+	    hy
+	    hz
+	    hs
+	    hsdg
+	    ht
+	    htdg))
 
 
 ; qconst - Sets the values of various required constants.
@@ -95,17 +102,16 @@
 ;
 (define (qconst p_n1)
   (let ((res 0.0))
-    
+
     (cond ((equal? p_n1 "Pi")
-	   ;(set! res 3.14159))
-	   (set! res (gconst "A000796")))
+	   ;(set! res (gconst "A000796")))
+	   (set! res 3.14159))
 	  ((equal? p_n1 "gr")
-	   ;(set! res 1.00))
 	   (set! res (gconst "gr"))) 
-	  ((equal? p_n1 "e")
-           ;(set! res 2.71828))
-	   (set! res (gconst "A001113"))))
-    
+	  ((equal? p_n1 "e")	   
+	   ;(set! res (gconst "A001113"))))
+	   (set! res 2.71828)))
+	   
     res))
 
 
@@ -857,6 +863,12 @@
     (qcomg "qftdgyn" 0)
     (while (<= i p_y2)
 	   (set! j (- (- p_y2 1) i))
+	   
+	   ; PATCH: j does not behave well. Sometimes acquires -1 as value.
+	   ; this produces an error at least when using qx_simulator.
+	   (cond ((< j 0)
+		  (set! j 0)))
+	   
 	   (while (<= k j)
 		  (cu1 (/ (qconst "Pi") (expt 2 (- j k))) p_l1 j p_l2 k)
 		  (set! k (+ k 1)))
@@ -1242,6 +1254,7 @@
 	(y3 (+ p_y1 2))
 	(y4 (+ p_y1 3))
 	(y5 (+ p_y1 4)))
+    
     (qcomg "ecc3" 0)
     (g1y "h" p_l1 y1 y5)
     (g1 "t" p_l1 y3)    
@@ -1264,4 +1277,95 @@
     (cx p_l1 y2 p_l1 y3)    
     (cx p_l1 y4 p_l1 y3)	
     (qcomg "ecc3" 1)))
+
+
+; hx - Gate hx, places an h gate followed by an x on element p_y1 of register p_l1.
+;
+; Arguments:
+; - p_l1: quantum register name.
+; - p_y1: qubit number.
+;
+(define (hx p_l1 p_y1)
+  (qcomg "hx" 0)
+  (g1 "h" p_l1 p_y1)
+  (g1 "x" p_l1 p_y1)
+  (qcomg "hx" 1))
+
+
+; hy - Gate hy, places an h gate followed by an y on element p_y1 of register p_l1.
+;
+; Arguments:
+; - p_l1: quantum register name.
+; - p_y1: qubit number.
+;
+(define (hy p_l1 p_y1)
+  (qcomg "hy" 0)
+  (g1 "h" p_l1 p_y1)
+  (g1 "y" p_l1 p_y1)
+  (qcomg "hy" 1))
+
+
+; hz - Gate hz, places an h gate followed by an z on element p_y1 of register p_l1.
+;
+; Arguments:
+; - p_l1: quantum register name.
+; - p_y1: qubit number.
+;
+(define (hz p_l1 p_y1)
+  (qcomg "hz" 0)
+  (g1 "h" p_l1 p_y1)
+  (g1 "z" p_l1 p_y1)
+  (qcomg "hz" 1))
+
+
+; hs - Gate hs, places an h gate followed by an s on element p_y1 of register p_l1.
+;
+; Arguments:
+; - p_l1: quantum register name.
+; - p_y1: qubit number.
+;
+(define (hs p_l1 p_y1)
+  (qcomg "hs" 0)
+  (g1 "h" p_l1 p_y1)
+  (g1 "s" p_l1 p_y1)
+  (qcomg "hs" 1))
+
+
+; hsdg - Gate hsdg, places an h gate followed by an sdag on element p_y1 of register p_l1.
+;
+; Arguments:
+; - p_l1: quantum register name.
+; - p_y1: qubit number.
+;
+(define (hsdg p_l1 p_y1)
+  (qcomg "hsdg" 0)
+  (g1 "h" p_l1 p_y1)
+  (g1 "sdg" p_l1 p_y1)
+  (qcomg "hsdg" 1))
+
+
+; ht - Gate ht, places an h gate followed by a t on element p_y1 of register p_l1.
+;
+; Arguments:
+; - p_l1: quantum register name.
+; - p_y1: qubit number.
+;
+(define (ht p_l1 p_y1)
+  (qcomg "ht" 0)
+  (g1 "h" p_l1 p_y1)
+  (g1 "t" p_l1 p_y1)
+  (qcomg "ht" 1))
+
+
+; htdg - Gate htdg, places an h gate followed by a tdag on element p_y1 of register p_l1.
+;
+; Arguments:
+; - p_l1: quantum register name.
+; - p_y1: qubit number.
+;
+(define (htdg p_l1 p_y1)
+  (qcomg "htdg" 0)
+  (g1 "h" p_l1 p_y1)
+  (g1 "tdg" p_l1 p_y1)
+  (qcomg "htdg" 1))
 
