@@ -40,7 +40,17 @@
   #:export (qrand1))
 
 
-; https://towardsdatascience.com/demystifying-quantum-gates-one-qubit-at-a-time-54404ed80640
+; qrand1 - 4 x 1 universal random quantum circuit.
+;
+; Arguments:
+; - p_l1: quantum register name.
+; - p_y1: qubit number.
+;
+; Sources:
+; - Roell, J., 2018. Demystifying Quantum Gates — One Qubit At A Time. [online]
+;   Medium. Available at: https://towardsdatascience.com/demystifying-quantum-gates-one-qubit-at-a-time-54404ed80640
+;   [Accessed 25 April 2020].
+;
 (define (qrand1 p_l1 p_y1)
   (let ((y1 p_y1)
 	(y2 (+ p_y1 1))

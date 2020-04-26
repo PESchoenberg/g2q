@@ -104,13 +104,13 @@
   (let ((res 0.0))
 
     (cond ((equal? p_n1 "Pi")
-	   ;(set! res (gconst "A000796")))
-	   (set! res 3.14159))
+	   (set! res (gconst "A000796")))
+	   ;(set! res 3.14159))
 	  ((equal? p_n1 "gr")
 	   (set! res (gconst "gr"))) 
 	  ((equal? p_n1 "e")	   
-	   ;(set! res (gconst "A001113"))))
-	   (set! res 2.71828)))
+	   (set! res (gconst "A001113"))))
+	   ;(set! res 2.71828)))
 	   
     res))
 
