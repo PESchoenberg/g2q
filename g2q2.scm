@@ -105,12 +105,10 @@
 
     (cond ((equal? p_n1 "Pi")
 	   (set! res (gconst "A000796")))
-	   ;(set! res 3.14159))
 	  ((equal? p_n1 "gr")
 	   (set! res (gconst "gr"))) 
 	  ((equal? p_n1 "e")	   
 	   (set! res (gconst "A001113"))))
-	   ;(set! res 2.71828)))
 	   
     res))
 
@@ -278,12 +276,14 @@
   (g1 "h" p_l2 p_y2)
   (g1 "sdg" p_l2 p_y2)
   (cx p_l1 p_y1 p_l2 p_y2)
-  (g1 "h" p_l2 p_y2)
-  (g1 "t" p_l2 p_y2)
+  ;(g1 "h" p_l2 p_y2)
+  ;(g1 "t" p_l2 p_y2)
+  (ht p_l2 p_y2)
   (cx p_l1 p_y1 p_l2 p_y2)
   (g1 "t" p_l2 p_y2)
-  (g1 "h" p_l2 p_y2)
-  (g1 "s" p_l2 p_y2)
+  ;(g1 "h" p_l2 p_y2)
+  ;(g1 "s" p_l2 p_y2)
+  (hs p_l2 p_y2)
   (g1 "x" p_l2 p_y2)
   (g1 "s" p_l1 p_y1)
   (qcomg "ch" 1))
@@ -484,7 +484,7 @@
     (qcomg "cu1" 1)))
 
 
-; cu1-fast - Gate cu1, controlled phase rotation expressed in fast form.
+; cu1-fast - Gate cu1, controlled phase rotation gate expressed in fast form.
 ;
 ; Arguments:
 ; - p_la: angle 1.
@@ -497,7 +497,7 @@
   (display (strings-append (list "cu1(" (grsp-n2s p_la) (g2q-txt 4) p_l1 "[" (grsp-n2s p_y1) "]," p_l2 "[" (grsp-n2s p_y2) (g2q-txt 3)) 0)))
 
 
-; cu3 - Gate cu3, controlled U expressed atomically.
+; cu3 - Gate cu3, controlled U gate expressed atomically.
 ;
 ; Arguments:
 ; - p_la: angle 1.
@@ -517,7 +517,7 @@
   (qcomg "cu3" 1))
 
 
-; cu3-fast - Gate cu3, controlled U expressed in fast form.
+; cu3-fast - Gate cu3, controlled U gate expressed in fast form.
 ;
 ; Arguments:
 ; - p_la1: angle 1.
@@ -1207,14 +1207,16 @@
     (g1 "h" p_l1 y1)
     (cx p_l1 y3 p_l1 y2)
     (g1 p_n1 p_l1 y1)
-    (g1 "h" p_l1 y2)
-    (g1 "h" p_l1 y3)
+    ;(g1 "h" p_l1 y2)
+    ;(g1 "h" p_l1 y3)
+    (g1y "h" p_l1 y2 y3)
     (g1y p_n1 p_l1 y1 y3)
     (g1y p_n1 p_l1 y1 y3)    
     (g1 "h" p_l1 y1)
     (g1y p_n1 p_l1 y2 y3)
-    (g1 "h" p_l1 y2)
-    (g1 "h" p_l1 y3)
+    ;(g1 "h" p_l1 y2)
+    ;(g1 "h" p_l1 y3)
+    (g1y "h" p_l1 y2 y3)
     (cx p_l1 y3 p_l1 y2)
     (cx p_l1 y1 p_l1 y2)    
     (g1 "h" p_l1 y3)
@@ -1261,11 +1263,13 @@
     (g1x "h" p_l1 y3 2)
     (cx p_l1 y2 p_l1 y3)
     (cx p_l1 y1 p_l1 y3)
-    (g1 "h" p_l1 y1)
-    (g1 "h" p_l1 y2)
+    ;(g1 "h" p_l1 y1)
+    ;(g1 "h" p_l1 y2)
+    (g1y "h" p_l1 y1 y2)
     (cx p_l1 y4 p_l1 y3)
-    (g1 "h" p_l1 y3)
-    (g1 "h" p_l1 y4)
+    ;(g1 "h" p_l1 y3)
+    ;(g1 "h" p_l1 y4)
+    (g1y "h" p_l1 y3 y4)
     (cx p_l1 y4 p_l1 y3)
     (cx p_l1 y1 p_l1 y3)   
     (cx p_l1 y2 p_l1 y3)
