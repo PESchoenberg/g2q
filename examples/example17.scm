@@ -4,31 +4,28 @@
 
 ;; =============================================================================
 ;;
-;; example11.scm
+;; example17.scm
 ;;
-;; Experiment to produce majoranas.
+;; This program shows how to use functions from module g2q3 to easily create
+;; QASM2 programs with multiple QPU calls and measurements.
 ;;
-; Compilation (if you have g2q and qre in your system path):
+;; Compilation (if you have g2q and qre in your system path):
+;;
 ;; - cd to your /examples folder.
 ;;
 ;; - Enter the following:
 ;;
-;;   guile example11.scm
+;;   guile example17.scm
 ;;   
 ;; Notice that you will need to have g2q and qre (see README.md for details)
 ;; installed on your system  and your system path variable set to point to both
 ;; in order for this program to work properly. Alternatively, you can:
 ;;
-;; - copy example11.scm to the main folder of your qre installation.
+;; - copy example17.scm to the main folder of your qre installation.
 ;; 
 ;; - Enter the following:
 ;;
-;;   guile example11.scm 
-;;
-;; Sources:
-;; - https://medium.com/@decodoku/an-experiment-i-did-and-why-you-should-care-9cbabe544cc7
-;; - https://arxiv.org/pdf/1609.07774.pdf
-;; - https://youtu.be/_xFOPmdjwCI
+;;   guile example17.scm 
 ;;
 ;; =============================================================================
 ;;
@@ -59,7 +56,7 @@
 
 
 ;; Vars and initial stuff. These are editable.
-(define fname "example11") ; File name
+(define fname "example17") ; File name
 (define qpu "qlib_simulator")
 (define clean "y") ; Clean the json files created in ddir after use.
 (define qver 2.0) ; OpenQASM version
@@ -73,7 +70,7 @@
 (define q "q")
 (define c "c")
 (define mc 0)
-(define qx 1)
+(define qx 0)
 (define res 0)
 
 
@@ -93,28 +90,11 @@
 ;; - p_cnh: p_cn highest.
 ;;
 (define (qf p_i p_q p_c p_qnl p_qnh p_cnl p_cnh)
-  (g1 "sdg" q 0)
-  (g1y "id" q 1 4)
-  (g1 "h" q 0)
-  (g1 "sdg" q 3)
-  (g1 "h" q 3)
-  (cx q 0 q 2)
-  (cx q 3 q 2)
-  (g1 "h" q 0)
-  (g1 "s" q 0)
-  (g1 "h" q 3)
-  (g1 "s" q 3)
-  (g1 "h" q 1)  
-  (g1 "h" q 2)
-  (cx q 1 q 2)
-  (g1 "h" q 1)  
-  (g1 "h" q 2)
-  (g1 "h" q 4)
-  (cx q 4 q 2)
-  (g1 "h" q 3)
-  (g1 "h" q 4)
-  (cx q 3 q 2)
-  (g1 "h" q 3)    
+  (g1y "h" p_q p_qnl p_qnh)
+  (cond ((= p_i 1)
+	 (ghzy "h" "x" p_q p_qnl p_qnh 1))
+	(else
+	 (ghzy "h" "x" p_q p_qnl p_qnh 2)))
   (qmeasy p_q p_c p_cnl p_cnh)
   (qdeclare "qx-simulator" "error_model depolarizing_channel,0.001")
   (qdeclare "qlib-simulator" "// Hello qlib-simulator"))
@@ -123,52 +103,26 @@
 ;; rf - results function. In this case, extract the max value.
 ;;
 ;; Arguments:
-;; - p_b: b. list of results to process.
+;; - p_b: b. List of results to process.
 ;;
 (define (rf p_b)
   (let ((res 0))
+    (display p_b)
     (set! res (car (cdr (qfres p_b "max"))))
     
     res))
 
 
-;; qpresent - This is a presentation for the program and what it intends to
-;; do.
-;;
-;; Arguments:
-;; - p_ti: title.
-;; - p_te: text.
-;; - p_en: if you want an <ENT> message to appear.
-;;  - "y" for yes.
-;;  - "n" for no.
-;;
-(define (qpresent p_ti p_te p_en)
-  (let ((n 0))
-    (ptit "=" 60 2 p_ti)
-    (ptit " " 60 0 p_te)
-    (display " ")
-    (newline)
-    (if (eq? p_en "y")(begin
-			(qcomm "Press <ENT> to continue.")
-			(set! n (read))))))
-
-
 ;; And this is the main program. It gives as a result the decimal absolute and
 ;; non-probabilistic summation of the max values obtained on the execution of 
 ;; each quantum circuit created on each qcall.
-(qpresent "Producing majoranas" "Based on a work by Dr. James Wootton." "n")
-(display "Department of Physics, University of Basel, 2017.\n")
-(set! qpu (g2q-select-qpu))
-(cond ((equal? qpu "none")(display "\nBye!\n"))
-      (else  
-       (begin
-	 (newline)
-	 (display "Running. Wait...")
-	 (newline)
-	 (set! res (qmain-loop clean fname fnameo qver ddir qpu qf q c qn cn mc qx v rf))
-	 (newlines 2)
-	 (display "Result = ")
-	 (display res)
-	 (newlines 1))))
-
+(qcomm "Number of QPU call (qcalls): ")
+(set! qx (read))
+(display "Running. Wait...")
+(newlines 1)
+(set! res (qmain-loop clean fname fnameo qver ddir qpu qf q c qn cn mc qx v rf))
+(newlines 2)
+(display "Result = ")
+(display res)
+(newlines 1)
 
