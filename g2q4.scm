@@ -4,14 +4,9 @@
 ;;
 ;; Useful algorithms and functions.
 ;;
-;; Sources: 
-;; - https://arxiv.org/abs/1707.03429 , arXiv:1707.03429v2 [quant-ph] , Open
-;;   Quantum Assembly Language, Andrew W. Cross, Lev S. Bishop, John A. Smolin,
-;;   Jay M. Gambetta.
-;;
 ;; =============================================================================
 ;;
-;; Copyright (C) 2018 - 2020  Pablo Edronkin (pablo.edronkin at yahoo.com)
+;; Copyright (C) 2018 - 2022 Pablo Edronkin (pablo.edronkin at yahoo.com)
 ;;
 ;;   This program is free software: you can redistribute it and/or modify
 ;;   it under the terms of the GNU Lesser General Public License as published by
@@ -29,6 +24,15 @@
 ;; =============================================================================
 
 
+;;;; General notes:
+;; - Read sources for limitations on function parameters.
+;;
+;; Sources:
+;; - [1] Roell, J., 2018. Demystifying Quantum Gates — One Qubit At A Time. [online]
+;;   Medium. Available at: https://towardsdatascience.com/demystifying-quantum-gates-one-qubit-at-a-time-54404ed80640
+;;   [Accessed 25 April 2020].
+
+
 (define-module (g2q g2q4)
   #:use-module (g2q g2q0)
   #:use-module (g2q g2q1)
@@ -39,16 +43,14 @@
   #:export (qrand1))
 
 
-;; qrand1 - 4 x 1 universal random quantum circuit.
+;; qrand1 - 4 x 1 universal random quantum circuit .
 ;;
-;; Arguments:
+;; Parameters:
 ;; - p_l1: quantum register name.
 ;; - p_y1: qubit number.
 ;;
 ;; Sources:
-;; - Roell, J., 2018. Demystifying Quantum Gates — One Qubit At A Time. [online]
-;;   Medium. Available at: https://towardsdatascience.com/demystifying-quantum-gates-one-qubit-at-a-time-54404ed80640
-;;   [Accessed 25 April 2020].
+;; - [1][g2q2.[6]] .
 ;;
 (define (qrand1 p_l1 p_y1)
   (let ((y1 p_y1)
