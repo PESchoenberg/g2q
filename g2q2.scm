@@ -91,7 +91,7 @@
 	    htdg))
 
 
-;; qconst - Sets the values of various required constants.
+;; qconst - Sets the values of  various required constants.
 ;;
 ;; Arguments:
 ;; - p_n1: constant name, string.

@@ -103,7 +103,7 @@
     (newline)
     (set! res1 (read))
 
-    ;; Not elegant, but works for now.
+    ;; Not elegant, but works for now (needs to be reworked).
     (if (< res1 0)
 	(set! res1 0))
     (if (> res1 4)

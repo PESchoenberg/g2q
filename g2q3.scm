@@ -6,7 +6,7 @@
 ;;
 ;; =============================================================================
 ;;
-;; Copyright (C) 2018 - 2020  Pablo Edronkin (pablo.edronkin at yahoo.com)
+;; Copyright (C) 2018 - 2022 Pablo Edronkin (pablo.edronkin at yahoo.com)
 ;;
 ;;   This program is free software: you can redistribute it and/or modify
 ;;   it under the terms of the GNU Lesser General Public License as published by
@@ -24,6 +24,10 @@
 ;; =============================================================================
 
 
+;;;; General notes:
+;; - Read sources for limitations on function parameters.
+
+
 (define-module (g2q g2q3)  
   #:use-module (g2q g2q0)
   #:use-module (g2q g2q1)
@@ -35,10 +39,10 @@
 	    qdeclare))
 
 
-;; qcompile-and-run - This function comprises an entire Scheme to QASM
+;;;; qcompile-and-run - This function comprises an entire Scheme to QASM
 ;; compilation and execution cycle.
 ;;
-;; Arguments:
+;; Parameters:
 ;; - p_fname: fname.
 ;; - p_fnameo: fnameo.
 ;; - p_qver: qver.
@@ -90,11 +94,11 @@
     (set-current-output-port porto1)
     (close porto2)
 
-    ;; This is a system call to invoke qre. 
+    ;; This is a system call to invoke  qre. 
     (system (strings-append (list "./qre" p_fnameo "post" p_v p_qpu "1" fget) 1))
     
     ;; Now get the data from the QPU. Here we use again a first order function,
-    ;; p_rf.
+    ;; which is passed as an argument to p_rf.
     (set! a (read-file-as-string fnamei))
     (set! res (p_rf (qfclvr a)))
     (grsp-save-to-file a fsave "a")
@@ -102,11 +106,11 @@
     res))
     
 
-;; qmain-loop - This is the main loop of the program. It will be repeated p_qx
+;;;; qmain-loop - This is the main loop of the program. It will be repeated p_qx
 ;; times. Note this function will remove the json files holding the results
-;; returned by the QPU in order to keep clean the ddir folder.
+;; returned by the QPU in order to keep clean the ddir folder .
 ;;
-;; Arguments:
+;; Parameters:
 ;; - p_clean: "y" to clean data folder.
 ;; - p_fname: fname.
 ;; - p_fnameo: fnameo.
@@ -134,7 +138,7 @@
 		 (loop (- i 1)))))))
 
 
-;; qre-declare - Pragmas for specific quantum processors. This function 
+;;;; qre-declare - Pragmas for specific quantum processors. This function 
 ;; adds to a program to be compiled in QASM2 declarations for compilation 
 ;; that are specific for different quantum processors. These are applicable 
 ;; for the declared qpu, but not others. Pragmas are introduced as comments
@@ -143,7 +147,7 @@
 ;; code and for sending special instructions to the qx simulator if you use
 ;; it.
 ;; 
-;; Arguments:
+;; Parameters:
 ;; - p_qpu: qpu for which the declaration is intended for.
 ;; - p_d: declaration in the form of a string.
 ;;
