@@ -4,11 +4,6 @@
 ;;
 ;; Structures made of fundamental gates.
 ;;
-;; Sources: 
-;; - https://arxiv.org/abs/1707.03429 , arXiv:1707.03429v2 [quant-ph] , Open
-;;   Quantum Assembly Language, Andrew W. Cross, Lev S. Bishop, John A. Smolin,
-;;   Jay M. Gambetta.
-;;
 ;; =============================================================================
 ;;
 ;; Copyright (C) 2018 - 2020  Pablo Edronkin (pablo.edronkin at yahoo.com)
@@ -27,6 +22,68 @@
 ;;   along with this program. If not, see <https://www.gnu.org/licenses/>.
 ;;
 ;; =============================================================================
+
+
+;;;; General notes:
+;; - Read sources for limitations on function parameters.
+;; - Read at least the general notes of all scm files in this library before
+;;   use.
+;;
+;; Sources:
+;; - [1] Gidney, C. (2019). Breaking Down the Quantum Swap. [online]
+;;   Algassert.com. Available at: https://algassert.com/post/1717
+;;   [Accessed 28 Sep. 2019].
+;; - [2] Javadi, A. (2019). How can I implement an n-bit Toffoli gate?. [online] 
+;;   Quantum Computing Stack Exchange. Available at: https://quantumcomputing.
+;;   stackexchange.com/questions/2177/how-can-i-implement-an-n-bit-toffoli-gate 
+;;   [Accessed 1 Oct. 2019].
+;; - [3] Bennet, C. (2019). Logical Reversibility of Computation*. [online] 
+;;   Cs.princeton.edu. Available at: http://www.cs.princeton.edu/courses/archive
+;;   /fall04/cos576/papers/bennett73.html [Accessed 1 Oct. 2019].
+;; - [4] Elementary gates for quantum computation. Adriano Barenco (Oxford U.), 
+;;   Charles H. Bennett (IBM Watson Res. Ctr.), Richard Cleve (Calgary U.), 
+;;   David P. DiVincenzo (IBM Watson Res. Ctr.), Norman Margolus (MIT, LNS), 
+;;   Peter Shor (Bell Labs), Tycho Sleator (New York U.), John Smolin (UCLA), 
+;;   Harald Weinfurter (Innsbruck U.). Mar 1995. 39 pp. Published in Phys.Rev. 
+;;   A52 (1995) 3457. DOI: 10.1103/PhysRevA.52.3457
+;; - [5] En.wikipedia.org. (2019). Quantum logic gate. [online] Available at: 
+;;   https://en.wikipedia.org/wiki/Quantum_logic_gate [Accessed 1 Oct. 2019].
+;; - [6] IBM Q Experience. (2019). IBM Q Experience. [online] Available at:
+;;   https://quantum-computing.ibm.com/support/guides/quantum-algorithms-with-qiskit?
+;;   page=5cbc5e2d74a4010049e1a2b0#qiskit-implementation [Accessed 7 Oct. 2019].
+;; - [7] En.wikipedia.org. (2019). Quantum Fourier transform. [online]
+;;   Available at: https://en.wikipedia.org/wiki/Quantum_Fourier_transform
+;;   [Accessed 7 Oct. 2019].
+;; - [8] IBM Q Experience. (2019). IBM Q Experience. [online] Available at:
+;;   https://quantum-computing.ibm.com/support/guides/quantum-algorithms-with-qiskit?
+;;   page=5cc0b79786b50d00642353b9#qiskit-implementation-1 [Accessed 7 Oct. 2019].
+;; - [9] Nguyen, T. and Meter, R. (2019). A Resource-Efficient Design for a Reversible
+;;   Floating Point Adder in Quantum Computing. [online] Semanticscholar.org.
+;;   Available at: https://www.semanticscholar.org/paper/A-Resource-Efficient-Design-
+;;   for-a-Reversible-Point-Nguyen-Meter/697e4fd8282e1b3cc151956bbb302b0b8e7df22b/
+;;   figure/13 [Accessed 7 Oct. 2019].
+;; - [10] IBM Q Experience. (2019). IBM Q Experience. [online] Available at:
+;;   https://quantum-computing.ibm.com/support/guides/user-guide?
+;;   page=5ddae9d75d640300671cc60f [Accessed 16 Dec. 2019].
+;; - [11] En.wikipedia.org. (2019). Greenberger–Horne–Zeilinger state. [online] Available at:
+;;   https://en.wikipedia.org/wiki/Greenberger%E2%80%93Horne%E2%80%93Zeilinger_state
+;;   [Accessed 16 Dec. 2019].
+;; - [12] Uchida, G., Bertlmann, R. and Hiesmayr, B. (2019). Entangled entanglement: A
+;;   construction procedure. [online] Arxiv.org. Available at:
+;;   https://arxiv.org/abs/1410.7145 [Accessed 21 Dec. 2019].
+;; - [13] Cruz, D., Fournier, R., Gremion, F., Jeannerot, A., Komagata, K., Tosic,
+;;   T., Thiesbrummel, J., Chan, C., Macris, N., Dupertuis, M. and Javerzac‐Galy, C.
+;;   (2019). Efficient Quantum Algorithms for GHZ and W States, and Implementation
+;;   on the IBM Quantum Computer. [online] Wiley Online Library. Available at:
+;;   https://onlinelibrary.wiley.com/doi/full/10.1002/qute.201900015 
+;;   [Accessed 21 Dec. 2019].
+;; - [14] IBM Quantum Experience. 2020. IBM Quantum Experience - Docs And Resources.
+;;   [online] Available at:
+;;   https://quantum-computing.ibm.com/docs/guide/err-corxn/quantum-repetition-code
+;;   [Accessed 16 April 2020].
+;; - [15] https://arxiv.org/abs/1707.03429 , arXiv:1707.03429v2 [quant-ph] , Open
+;;   Quantum Assembly Language, Andrew W. Cross, Lev S. Bishop, John A. Smolin,
+;;   Jay M. Gambetta.
 
 
 (define-module (g2q g2q2)
@@ -91,32 +148,32 @@
 	    htdg))
 
 
-;; qconst - Sets the values of  various required constants.
+;; qconst - Sets the values of various required constants.
 ;;
-;; Arguments:
+;; Parameters:
 ;; - p_n1: constant name, string.
 ;;
 ;; Output:
 ;; - Returns the value of p_n1 if it exists. Zero otherwise.
 ;;
 (define (qconst p_n1)
-  (let ((res 0.0))
+  (let ((res1 0.0))
 
     (cond ((equal? p_n1 "Pi")
-	   (set! res (gconst "A000796")))
+	   (set! res1 (gconst "A000796")))
 	  ((equal? p_n1 "gr")
-	   (set! res (gconst "gr"))) 
+	   (set! res1 (gconst "gr"))) 
 	  ((equal? p_n1 "e")	   
-	   (set! res (gconst "A001113"))))
+	   (set! res1 (gconst "A001113"))))
 	   
-    res))
+    res1))
 
 
 ;; g1y - Repeats placement of gate p_n1 and group p_l1 by repeating the use of
 ;; qgate1 from qubit p_y1 to qubit p_y2 on y axis (vertically on graphical
 ;; representation).
 ;;
-;; Arguments:
+;; Parameters:
 ;; - p_n1: gate name.
 ;; - p_l1: quantum register name (i.e. q).
 ;; - p_y1: ordinal of the initial qubit.
@@ -124,18 +181,20 @@
 ;;
 (define (g1y p_n1 p_l1 p_y1 p_y2)
   (qcomg "g1y" 0)
-  (let loop ((i p_y1))
-    (if (= i p_y2)
-	(g1 p_n1 p_l1 i)
-	(begin (g1 p_n1 p_l1 i)
-	       (loop (+ i 1)))))
+  
+  (let loop ((i1 p_y1))
+    (if (= i1 p_y2)
+	(g1 p_n1 p_l1 i1)
+	(begin (g1 p_n1 p_l1 i1)
+	       (loop (+ i1 1)))))
+  
   (qcomg "g1y" 1))
 
 
 ;; g1x - Repeats placement of gate p_n1 and register p_l1 by repeating the use
 ;; of qgate1 on regster element p_y1 p_x1 times on x axis.
 ;;
-;; Arguments:
+;; Parameters:
 ;; - p_n1: gate name.
 ;; - p_l1: quantum register name.
 ;; - p_y1: register element.
@@ -143,18 +202,20 @@
 ;;
 (define (g1x p_n1 p_l1 p_y1 p_x1)
   (qcomg "g1x" 0)
-  (let loop ((i 1))
-    (if (= i p_x1)
+  
+  (let loop ((i1 1))
+    (if (= i1 p_x1)
 	(g1 p_n1 p_l1 p_y1)
 	(begin (g1 p_n1 p_l1 p_y1)
-	       (loop (+ i 1)))))
+	       (loop (+ i1 1)))))
+  
   (qcomg "g1x" 1))
 
 
 ;; g1xy - Repeats placement of gate p_n1 and group p_l1 by repeating the use of
 ;; qgate1 from qubit p_y1 to qubit p_y2 on y axis.
 ;;
-;; Arguments:
+;; Parameters:
 ;; - p_n1: gate name.
 ;; - p_l1: quantum register name.
 ;; - p_y1: ordinal of the initial qubit.
@@ -164,17 +225,19 @@
 ;;
 (define (g1xy p_n1 p_l1 p_y1 p_y2 p_x1)
   (qcomg "g1xy" 0)
-  (let loop ((j 1))
-    (if (= j p_x1)
+  
+  (let loop ((j1 1))
+    (if (= j1 p_x1)
 	(g1y p_n1 p_l1 p_y1 p_y2)
 	(begin (g1y p_n1 p_l1 p_y1 p_y2)
-	       (loop (+ j 1)))))
+	       (loop (+ j1 1)))))
+  
   (qcomg "g1xy" 1))
 
 
 ;; qmeasy - Performs measurements on group p_l1 to group p_l2 from p_y1 to p_y2.
 ;;
-;; Arguments:
+;; Parameters:
 ;; - p_l1: quantum register name.
 ;; - p_l2: conventional register name.
 ;; - p_y1: ordinal of the initial qubit.
@@ -182,18 +245,20 @@
 ;;
 (define (qmeasy p_l1 p_l2 p_y1 p_y2)
   (qcomg "qmeasy" 0)
-  (let loop ((i p_y1))
-    (if (= i p_y2)
+  
+  (let loop ((i1 p_y1))
+    (if (= i1 p_y2)
 	(qmeas p_l1 p_y2 p_l2 p_y2)
-	(begin (qmeas p_l1 i p_l2 i)
-	       (loop (+ i 1)))))
+	(begin (qmeas p_l1 i1 p_l2 i1)
+	       (loop (+ i1 1)))))
+  
   (qcomg "qmeasy" 1))
 
 
 ;; cx - Gate cx, performs a NOT operation on the target qubit if the control 
 ;; qubit is |1>. Leaves target qubit as it is otherwise.
 ;;
-;; Arguments:
+;; Parameters:
 ;; - p_l1: quantum register name 1.
 ;; - p_y1: control qubit 1 (represented as a dot in a q diagram).
 ;; - p_l2: quantum register name 2.
@@ -207,7 +272,7 @@
 ;; this way are universally compatible but more error - prone than the same 
 ;; gates expressed in fast form.
 ;;
-;; Arguments:
+;; Parameters:
 ;; - p_l1: quantum register name 1.
 ;; - p_y1: control qubit 1.
 ;; - p_l1: quantum register name 1.
@@ -225,7 +290,7 @@
 ;; less error - prone that atomic variants, but they might not be 
 ;; compatible with all sorts and makes of qpu.
 ;;
-;; Arguments:
+;; Parameters:
 ;; - p_l1: quantum register name 1.
 ;; - p_y1: control qubit 1.
 ;; - p_l1: quantum register name 1.
@@ -237,7 +302,7 @@
 
 ;; cy - Gate cy, controlled y expressed atomically.
 ;;
-;; Arguments:
+;; Parameters:
 ;; - p_l1: quantum register name 1.
 ;; - p_y1: control qubit 1.
 ;; - p_l1: quantum register name 1.
@@ -253,7 +318,7 @@
 
 ;; cy-fast - Gate cy, controlled y in fast form.
 ;;
-;; Arguments:
+;; Parameters:
 ;; - p_l1: quantum register name 1.
 ;; - p_y1: control qubit 1.
 ;; - p_l1: quantum register name 1.
@@ -265,7 +330,7 @@
 
 ;; ch - Gate ch, controlled h expressed atomically.
 ;;
-;; Arguments:
+;; Parameters:
 ;; - p_l1: quantum register name 1.
 ;; - p_y1: control qubit 1.
 ;; - p_l2: quantum register name 2.
@@ -287,7 +352,7 @@
 
 ;; ch-fast - Gate ch, controlled h in fast form.
 ;;
-;; Arguments:
+;; Parameters:
 ;; - p_l1: quantum register name 1.
 ;; - p_y1: control qubit 1.
 ;; - p_l2: quantum register name 2.
@@ -299,7 +364,7 @@
 
 ;; ccx - Gate ccx, Toffoli gate expressed atomically.
 ;;
-;; Arguments:
+;; Parameters:
 ;; - p_l1: quantum register name 1.
 ;; - p_y1: control qubit 1 (dot).
 ;; - p_l2: quantum register name 2.
@@ -308,21 +373,7 @@
 ;; - p_y3: target qubit 3 (plus).
 ;;
 ;; Sources:
-;; - Javadi, A. (2019). How can I implement an n-bit Toffoli gate?. [online] 
-;;   Quantum Computing Stack Exchange. Available at: https://quantumcomputing.
-;;   stackexchange.com/questions/2177/how-can-i-implement-an-n-bit-toffoli-gate 
-;;   [Accessed 1 Oct. 2019].
-;; - Bennet, C. (2019). Logical Reversibility of Computation*. [online] 
-;;   Cs.princeton.edu. Available at: http://www.cs.princeton.edu/courses/archive
-;;   /fall04/cos576/papers/bennett73.html [Accessed 1 Oct. 2019].
-;; - Elementary gates for quantum computation. Adriano Barenco (Oxford U.), 
-;;   Charles H. Bennett (IBM Watson Res. Ctr.), Richard Cleve (Calgary U.), 
-;;   David P. DiVincenzo (IBM Watson Res. Ctr.), Norman Margolus (MIT, LNS), 
-;;   Peter Shor (Bell Labs), Tycho Sleator (New York U.), John Smolin (UCLA), 
-;;   Harald Weinfurter (Innsbruck U.). Mar 1995. 39 pp. Published in Phys.Rev. 
-;;   A52 (1995) 3457. DOI: 10.1103/PhysRevA.52.3457
-;; - En.wikipedia.org. (2019). Quantum logic gate. [online] Available at: 
-;;   https://en.wikipedia.org/wiki/Quantum_logic_gate [Accessed 1 Oct. 2019].
+;; - [1][2][3][4][5].
 ;;
 (define (ccx p_l1 p_y1 p_l2 p_y2 p_l3 p_y3)
   (qcomg "ccx" 0)
@@ -346,7 +397,7 @@
 
 ;; ccx-fast - Toffoli gate in fast form.
 ;;
-;; Arguments:
+;; Parameters:
 ;; - p_l1: quantum register name 1.
 ;; - p_y1: control qubit 1 (dot).
 ;; - p_l2: quantum register name 2.
@@ -355,12 +406,19 @@
 ;; - p_y3: target qubit 3 (plus).
 ;;
 (define (ccx-fast p_l1 p_y1 p_l2 p_y2 p_l3 p_y3)
-  (display (strings-append (list "ccx " (qbgna p_l1 p_y1) "," (qbgna p_l1 p_y2) "," (qbgna p_l3 p_y3) (g2q-txt 2)) 0)))
+  (display (strings-append (list "ccx "
+				 (qbgna p_l1 p_y1)
+				 ","
+				 (qbgna p_l1 p_y2)
+				 ","
+				 (qbgna p_l3 p_y3)
+				 (g2q-txt 2))
+			   0)))
   
 
 ;; rx - Gate rx, rotation around X-axis.
 ;;
-;; Arguments:
+;; Parameters:
 ;; - p_t: theta angle.
 ;; - p_l1: quantum register name 1.
 ;; - p_y1: qubit 1.
@@ -373,18 +431,25 @@
 
 ;; rx-fast - Gate rx, rotation around X-axis, in fast form.
 ;;
-;; Arguments:
+;; Parameters:
 ;; - p_t: theta angle; this is a dummy arument, left for consistency.
 ;; - p_l1: quantum register name 1.
 ;; - p_y1: qubit 1.
 ;; 
 (define (rx-fast p_t p_l1 p_y1)
-  (display (strings-append (list "rx(" (grsp-n2s (/ (qconst "Pi") 2)) (g2q-txt 4)  p_l1 "[" (grsp-n2s p_y1) (g2q-txt 3)) 0)))
+  (display (strings-append (list "rx("
+				 (grsp-n2s (/ (qconst "Pi") 2))
+				 (g2q-txt 4)
+				 p_l1
+				 "["
+				 (grsp-n2s p_y1)
+				 (g2q-txt 3))
+			   0)))
 
 
 ;; ry - Gate ry, rotation around Y-axis.
 ;;
-;; Arguments:
+;; Parameters:
 ;; - p_t: theta angle.
 ;; - p_l1: quantum register name 1.
 ;; - p_y1: qubit 1.
@@ -395,18 +460,25 @@
 
 ;; ry-fast - Gate ry, rotation around Y-axis, in fast form.
 ;;
-;; Arguments:
+;; Parameters:
 ;; - p_t: angle (dummy, left for consistency with other functions).
 ;; - p_l1: quantum register name 1.
 ;; - p_y1: qubit 1.
 ;; 
 (define (ry-fast p_t p_l1 p_y1)
-  (display (strings-append (list "ry(" (grsp-n2s (/ (qconst "Pi") 2)) (g2q-txt 4) p_l1 "[" (grsp-n2s p_y1) (g2q-txt 3)) 0)))
+  (display (strings-append (list "ry("
+				 (grsp-n2s (/ (qconst "Pi") 2))
+				 (g2q-txt 4)
+				 p_l1
+				 "["
+				 (grsp-n2s p_y1)
+				 (g2q-txt 3))
+			   0)))
 
 
 ;; rz - Gate rz, rotation around Z-axis.
 ;;
-;; Arguments:
+;; Parameters:
 ;; - p_p: angle 1.
 ;; - p_l1: quantum register name 1.
 ;; - p_y1: qubit 1.
@@ -417,18 +489,25 @@
 
 ;; rz-fast - Gate rz, rotation around Z-axis, in fast form.
 ;;
-;; Arguments:
+;; Parameters:
 ;; - p_t: angle; dummy argument left for consistency with other functions.
 ;; - p_l1: quantum register name 1.
 ;; - p_y1: qubit 1.
 ;; 
 (define (rz-fast p_t p_l1 p_y1)
-  (display (strings-append (list "rz(" (grsp-n2s (/ (qconst "Pi") 2)) (g2q-txt 4) p_l1 "[" (grsp-n2s p_y1) (g2q-txt 3)) 0)))
+  (display (strings-append (list "rz("
+				 (grsp-n2s (/ (qconst "Pi") 2))
+				 (g2q-txt 4)
+				 p_l1
+				 "["
+				 (grsp-n2s p_y1)
+				 (g2q-txt 3))
+			   0)))
 
 
 ;; crz - Gate crz, controlled rz expressed atomically.
 ;;
-;; Arguments:
+;; Parameters:
 ;; - p_la: angle 1.
 ;; - p_l1: quantum register name 1.
 ;; - p_y1: qubit 1.
@@ -448,7 +527,7 @@
 
 ;; crz-fast - Gate crz, controlled rz expressed in fast form.
 ;;
-;; Arguments:
+;; Parameters:
 ;; - p_la: angle 1.
 ;; - p_l1: quantum register name 1.
 ;; - p_y1: qubit 1.
@@ -456,12 +535,23 @@
 ;; - p_y2: qubit 2.
 ;;
 (define (crz-fast p_la p_l1 p_y1 p_l2 p_y2)
-  (display (strings-append (list "crz(" (grsp-n2s (/ (qconst "Pi") 2)) (g2q-txt 4) p_l1 "[" (grsp-n2s p_y1) "]," p_l2 "[" (grsp-n2s p_y2) (g2q-txt 3)) 0)))
+  (display (strings-append (list "crz("
+				 (grsp-n2s (/ (qconst "Pi") 2))
+				 (g2q-txt 4)
+				 p_l1
+				 "["
+				 (grsp-n2s p_y1)
+				 "],"
+				 p_l2
+				 "["
+				 (grsp-n2s p_y2)
+				 (g2q-txt 3))
+			   0)))
 
 
 ;; cu1 - Gate cu1, controlled phase rotation expressed atomically.
 ;;
-;; Arguments:
+;; Parameters:
 ;; - p_la: angle 1.
 ;; - p_l1: quantum register name 1.
 ;; - p_y1: qubit 1.
@@ -482,7 +572,7 @@
 
 ;; cu1-fast - Gate cu1, controlled phase rotation gate expressed in fast form.
 ;;
-;; Arguments:
+;; Parameters:
 ;; - p_la: angle 1.
 ;; - p_l1: quantum register name 1.
 ;; - p_y1: qubit 1.
@@ -490,12 +580,23 @@
 ;; - p_y2: qubit 2.
 ;;
 (define (cu1-fast p_la p_l1 p_y1 p_l2 p_y2)
-  (display (strings-append (list "cu1(" (grsp-n2s p_la) (g2q-txt 4) p_l1 "[" (grsp-n2s p_y1) "]," p_l2 "[" (grsp-n2s p_y2) (g2q-txt 3)) 0)))
+  (display (strings-append (list "cu1("
+				 (grsp-n2s p_la)
+				 (g2q-txt 4)
+				 p_l1
+				 "["
+				 (grsp-n2s p_y1)
+				 "],"
+				 p_l2
+				 "["
+				 (grsp-n2s p_y2)
+				 (g2q-txt 3))
+			   0)))
 
 
 ;; cu3 - Gate cu3, controlled U gate expressed atomically.
 ;;
-;; Arguments:
+;; Parameters:
 ;; - p_la: angle 1.
 ;; - p_pa: angle 2.
 ;; - p_l1: quantum register name 1.
@@ -515,7 +616,7 @@
 
 ;; cu3-fast - Gate cu3, controlled U gate expressed in fast form.
 ;;
-;; Arguments:
+;; Parameters:
 ;; - p_la1: angle 1.
 ;; - p_la2: angle 2.
 ;; - p_la3: angle 3.
@@ -525,12 +626,27 @@
 ;; - p_y2: qubit 2.
 ;;
 (define (cu3-fast p_la1 p_la2 p_la3 p_l1 p_y1 p_l2 p_y2)
-  (display (strings-append (list "cu3(" (grsp-n2s p_la1) "," (grsp-n2s p_la2) "," (grsp-n2s p_la3) (g2q-txt 4) p_l1 "[" (grsp-n2s p_y1) "]," p_l2 "[" (grsp-n2s p_y2) (g2q-txt 3)) 0)))
+  (display (strings-append (list "cu3("
+				 (grsp-n2s p_la1)
+				 ","
+				 (grsp-n2s p_la2)
+				 ","
+				 (grsp-n2s p_la3)
+				 (g2q-txt 4)
+				 p_l1
+				 "["
+				 (grsp-n2s p_y1)
+				 "],"
+				 p_l2
+				 "["
+				 (grsp-n2s p_y2)
+				 (g2q-txt 3))
+			   0)))
 
 
 ;; g1cxg1 - Puts a set of gates in configuration g1 cx g1.
 ;;
-;; Arguments:
+;; Parameters:
 ;; - p_n1: g1 gate name.
 ;; - p_l1: quantum register name (i.e. q).
 ;; - p_y1: qubit number 1 (control of cx).
@@ -560,13 +676,13 @@
 ;; - It returns p_f as a single string variable without any \r or \n characters.
 ;;
 (define (qregex p_f)
-  (let ((res p_f))
+  (let ((res1 p_f))
     
-    (set! res (regexp-substitute/global #f "[\n]+" res 'pre "" 'post))
-    (set! res (regexp-substitute/global #f "[\r]+" res 'pre "" 'post))
-    (set! res (regexp-substitute/global #f "[\"]+" res 'pre "\\\"" 'post))
+    (set! res1 (regexp-substitute/global #f "[\n]+" res1 'pre "" 'post))
+    (set! res1 (regexp-substitute/global #f "[\r]+" res1 'pre "" 'post))
+    (set! res1 (regexp-substitute/global #f "[\"]+" res1 'pre "\\\"" 'post))
     
-    res))
+    res1))
 
 
 ;; qreq - Constructs a qreg file.
@@ -598,7 +714,7 @@
 	(i4 "")
 	(token "")
 	(i "")
-	(res "")
+	;;(res1 "")
 	(dev p_d)
 	(data ""))
     
@@ -639,7 +755,10 @@
     (qstr " ")
     (qstr (strings-append (list "login-id=" "wait-until-login") 0))
     (qstr " ")
-    (qstr (strings-append (list "post-content-type=" (g2q-txt 8) (g2q-txt 7)) 0))
+    (qstr (strings-append (list "post-content-type="
+				(g2q-txt 8)
+				(g2q-txt 7))
+			  0))
     (qstr " ")
     (qstr (strings-append (list "post-uri=" (string-append i1 i2)) 0))
     (qstr " ")
@@ -647,7 +766,10 @@
     (qstr " ")
     (qstr (strings-append (list "get-uri=" (string-append i1 i3)) 0))
     (qstr " ")
-    (qstr (strings-append (list "delete-content-type=" (g2q-txt 8) (g2q-txt 7)) 0))
+    (qstr (strings-append (list "delete-content-type="
+				(g2q-txt 8)
+				(g2q-txt 7))
+			  0))
     (qstr " ")
     (qstr (strings-append (list "delete-uri=" (string-append i1 i4)) 0))
     (qstr " ")
@@ -657,7 +779,7 @@
 
 ;; qcnot1 - A cx based NOT gate expressed atomically.
 ;;
-;; Arguments:
+;; Parameters:
 ;; - p_l1: gate group name 1.
 ;; - p_y1: target qubit, normally p_y2 - 1.
 ;; - p_l2: gate group name 2.
@@ -665,8 +787,8 @@
 ;;
 ;; Output:
 ;; - Inverse of p_l2[p_y2], on p_l1[p_y1].
-;;  - |0> -> |1>
-;;  - |1> -> |0>
+;;  - |0> -> |1>.
+;;  - |1> -> |0>.
 ;;
 (define (qcnot1 p_l2 p_y2 p_l1 p_y1)
   (qcomg "qcnot1" 0) 
@@ -677,7 +799,7 @@
 
 ;; qxor1 - A qcnot1 based XOR gate expressed atomically.
 ;;
-;; Arguments:
+;; Parameters:
 ;; - p_l1: quantum register name 1.
 ;; - p_y1: target qubit a, normally p_y2 - 1.
 ;; - p_l2: quantum register name 2.
@@ -689,10 +811,10 @@
 ;;
 ;; Output:
 ;; - On p_l1[p_y1].
-;;   - |00> -> |0>
-;;   - |11> -> |0>
-;;   - |01> -> |1>
-;;   - |10> -> |1>
+;;   - |00> -> |0>.
+;;   - |11> -> |0>.
+;;   - |01> -> |1>.
+;;   - |10> -> |1>.
 ;;
 (define (qxor1 p_l1 p_y1 p_l2 p_y2 p_l3 p_y3 p_l4 p_y4)
   (qcomg "qxor1" 0)
@@ -704,7 +826,7 @@
 
 ;; qfclvr - Find and construct label and value registers.
 ;;
-;; Arguments:
+;; Parameters:
 ;; - p_s: string with results from qre.
 ;;
 ;; Output:
@@ -713,7 +835,7 @@
 ;; - Second list contains results.
 ;;
 (define (qfclvr p_s)
-  (let ((res (list ))
+  (let ((res1 (list ))
 	(s1 p_s)
 	(ls1 0)
 	(slabels "")
@@ -743,16 +865,16 @@
     ;; Construct lists from strings.
     (set! lslabels (string-split slabels #\space ))
     (set! lsvalues (string-split svalues #\space ))
-    (set! res (list lslabels lsvalues))
+    (set! res1 (list lslabels lsvalues))
         
-    res))
+    res1))
 	
 
 ;; qfres - Find max or min value among results. If more than one ocurrence
 ;; is found, it returns the last label corresponding to the last element that
 ;; matches.
 ;;
-;; Arguments:
+;; Parameters:
 ;; - p_l: list of results as obtained by applying qfclvr.
 ;; - p_r: choice between obtaining the max or min value.
 ;;   - "max" for maximum value.
@@ -764,42 +886,49 @@
 ;;   - Second element contains the max value obtained.
 ;;
 (define (qfres p_l p_r)
-  (let ((res (list ))
+  (let ((res1 (list ))
 	(sl (car p_l))
 	(sv (car (cdr p_l)))
 	(dvm 0)
 	(dv (list ))
-	(n 0)
+	(n1 0)
 	(slm (g2q-txt 9)))
 
     ;; Find value.
     (set! dv (map string->number sv))
-    (if (equal? p_r "max")
-	(set! dvm (apply max dv)))
-    (if (equal? p_r "min")
-	(set! dvm (apply min dv)))
+    (cond ((equal? p_r "max")
+	   (set! dvm (apply max dv)))
+	  ((equal? p_r "min")
+	   (set! dvm (apply min dv))))
     
     ;; Get the corresponding label.
-    (set! n (- (length dv) 1))
-    (while (>= n 0)
-	   (if (= dvm (list-ref dv n))
-	       (begin (set! slm (list-ref sl n))
-		      (set! n 0)))
-	   (set! n (- n 1)))
-    (set! res (list slm dvm))
+    (set! n1 (- (length dv) 1))
+    (while (>= n1 0)
+	   (if (= dvm (list-ref dv n1))
+	       (begin (set! slm (list-ref sl n1))
+		      (set! n1 0)))
+	   (set! n1 (- n1 1)))
+
+    ;; Compose results.
+    (set! res1 (list slm dvm))
     
-    res))
+    res1))
     
 
 ;; swap-fast - Swap gate expressed in fast form.
 ;;
-;; Arguments:
+;; Parameters:
 ;; - p_l1: quantum register name. 
 ;; - p_y1: qubit 1.
 ;; - p_y2: qubit 2. 
 ;;
 (define (swap-fast p_l1 p_y1 p_y2)
-  (display (strings-append (list "swap " (qbgna p_l1 p_y1) "," (qbgna p_l1 p_y2) (g2q-txt 2)) 0)))
+  (display (strings-append (list "swap "
+				 (qbgna p_l1 p_y1)
+				 ","
+				 (qbgna p_l1 p_y2)
+				 (g2q-txt 2))
+			   0)))
 
 
 ;; qftyn - Quantum Fourier Transformation for n qubits in the range
@@ -807,37 +936,38 @@
 ;; in the quantum register are  interconnected. In some QPU architectures this
 ;; may not be possible. Expressed atomically.
 ;;
-;; Arguments:
+;; Parameters:
 ;; - p_l1: quantum register name 1.
 ;; - p_y1: qubit 1, min limit of the range.
 ;; - p_l2: quantum register name 2.
 ;; - p_y2: qubit 2, max limit of the range.
 ;;
 ;; Sources:
-;; - IBM Q Experience. (2019). IBM Q Experience. [online] Available at:
-;;   https://quantum-computing.ibm.com/support/guides/quantum-algorithms-with-qiskit?
-;;   page=5cbc5e2d74a4010049e1a2b0#qiskit-implementation [Accessed 7 Oct. 2019].
-;; - En.wikipedia.org. (2019). Quantum Fourier transform. [online] Available at:
-;;   https://en.wikipedia.org/wiki/Quantum_Fourier_transform [Accessed 7 Oct. 2019].
+;; - [6][7].
 ;;
 (define (qftyn p_l1 p_y1 p_l2 p_y2)
-  (let ((i p_y1)
-	(j 0))
+  (let ((i1 p_y1)
+	(j1 0))
     
     (qcomg "qftyn" 0)    
-    (while (<= i p_y2)
-	   (g1 "h" p_l1 i)
-	   (set! j (+ i 1))
-	   (while (<= j p_y2)
-		  (cu1 (/ (qconst "Pi") (expt 2 (- j i))) p_l1 j p_l2 i)
-		  (set! j (+ j 1)))
-	   (set! i (+ i 1)))
+    (while (<= i1 p_y2)
+	   (g1 "h" p_l1 i1)
+	   
+	   (set! j1 (+ i1 1))
+	   (while (<= j1 p_y2)
+		  (cu1 (/ (qconst "Pi") (expt 2 (- j1 i1))) p_l1 j1 p_l2 i1)
+		  
+		  (set! j1 (+ j1 1)))
+	   
+	   (set! i1 (+ i1 1)))
+
+    
     (qcomg "qftyn" 1)))
 
 	  
 ;; qftdgyn - Function qftyn dagger, expressed atomically.
 ;;
-;; Arguments:
+;; Parameters:
 ;; - p_l1: quantum register name 1.
 ;; - p_y1: qubit 1, min limit of the range.
 ;; - p_l2: quantum register name 2.
@@ -847,9 +977,7 @@
 ;; - See the comments for qftyn.
 ;;
 ;; Sources:
-;; - IBM Q Experience. (2019). IBM Q Experience. [online] Available at:
-;;   https://quantum-computing.ibm.com/support/guides/quantum-algorithms-with-qiskit?
-;;   page=5cc0b79786b50d00642353b9#qiskit-implementation-1 [Accessed 7 Oct. 2019].
+;; - [8].
 ;;
 (define (qftdgyn p_l1 p_y1 p_l2 p_y2)
   (let ((i p_y1)
@@ -867,16 +995,19 @@
 	   
 	   (while (<= k j)
 		  (cu1 (/ (qconst "Pi") (expt 2 (- j k))) p_l1 j p_l2 k)
+		  
 		  (set! k (+ k 1)))
+	   
 	   (g1 "h" p_l1 j)
 	   (set! i (+ i 1)))
+    
   (qcomg "qftdgyn" 1)))
 
 
 ;; cswap - Gate Fredkin in atomic form. Swaps p_y2 and p_y3 if p_y1 is |1> 
 ;; (controlled swap).
 ;;
-;; Arguments:
+;; Parameters:
 ;; - p_l1: quantum register name 1.
 ;; - p_y1: qubit 1.
 ;; - p_l2: quantum register name 2.
@@ -885,13 +1016,7 @@
 ;; - p_y3: qubit 3.
 ;;
 ;; Sources:
-;; - Nguyen, T. and Meter, R. (2019). A Resource-Efficient Design for a Reversible
-;;   Floating Point Adder in Quantum Computing. [online] Semanticscholar.org.
-;;   Available at: https://www.semanticscholar.org/paper/A-Resource-Efficient-Design-
-;;   for-a-Reversible-Point-Nguyen-Meter/697e4fd8282e1b3cc151956bbb302b0b8e7df22b/
-;;   figure/13 [Accessed 7 Oct. 2019].
-;; - En.wikipedia.org. (2019). Quantum logic gate. [online] Available at:
-;;   https://en.wikipedia.org/wiki/Quantum_logic_gate [Accessed 7 Oct. 2019].
+;; - [5][9].
 ;;
 (define (cswap p_l1 p_y1 p_l2 p_y2 p_l3 p_y3)
   (qcomg "cswap" 0)
@@ -922,7 +1047,7 @@
 ;; - If p_y1 = p_y2: the fuunction behaves as a single cx gate.
 ;; - if p_y1 > p_y2: the ladder goes from higher to lower registry element.
 ;;
-;; Arguments:
+;; Parameters:
 ;; - p_l1: quantum register name.
 ;; - p_y1: qubit 1, control qubit of the cx gate where the ladder begins.
 ;; - p_y2: qubit 2, target qubit of the cx gate where the ladder ends.
@@ -935,30 +1060,34 @@
 (define (cx-ladder p_l1 p_y1 p_y2 p_s)
   (qcomg "cx-ladder" 0)
   (cond ((equal? p_y1 p_y2)(cx p_l1 p_y1 p_l1 p_y2))
+	
         ;; Control qubit on top, descending.
 	((equal? p_s 1)(begin (let loop ((i1 p_y1))
-				 (if (equal? i1 (- p_y2 1))
-				     (cx p_l1 i1 p_l1 p_y2)
-				     (begin (cx p_l1 i1 p_l1 (+ i1 1))
-					    (loop (+ i1 1)))))))
+				(if (equal? i1 (- p_y2 1))
+				    (cx p_l1 i1 p_l1 p_y2)
+				    (begin (cx p_l1 i1 p_l1 (+ i1 1))
+					   (loop (+ i1 1)))))))
+	
         ;; Control qubit on top, ascending.
 	((equal? p_s 2)(begin (let loop ((i1 (- p_y1 1)))
-				 (if (equal? i1 p_y2)
-				     (cx p_l1 p_y2 p_l1 (+ i1 1))
-				     (begin (cx p_l1 i1 p_l1 (+ i1 1))
-					    (loop (- i1 1)))))))
+				(if (equal? i1 p_y2)
+				    (cx p_l1 p_y2 p_l1 (+ i1 1))
+				    (begin (cx p_l1 i1 p_l1 (+ i1 1))
+					   (loop (- i1 1)))))))
+	
         ;; Control qubit on bottom, descending.
 	((equal? p_s 3)(begin (let loop ((i1 p_y1))
-				 (if (equal? i1 (- p_y2 1))
-				     (cx p_l1 p_y2 p_l1 i1)
-				     (begin (cx p_l1 (+ i1 1) p_l1 i1)
-					    (loop (+ i1 1)))))))	
+				(if (equal? i1 (- p_y2 1))
+				    (cx p_l1 p_y2 p_l1 i1)
+				    (begin (cx p_l1 (+ i1 1) p_l1 i1)
+					   (loop (+ i1 1)))))))
+	
         ;; Control qubit on bottom, ascending.
 	((equal? p_s 4)(begin (let loop ((i1 p_y1))
-				 (if (equal? i1 (+ p_y2 1))
-				     (cx p_l1 i1 p_l1 p_y2)
-				     (begin (cx p_l1 i1 p_l1 (- i1 1))
-					    (loop (- i1 1))))))))
+				(if (equal? i1 (+ p_y2 1))
+				    (cx p_l1 i1 p_l1 p_y2)
+				    (begin (cx p_l1 i1 p_l1 (- i1 1))
+					   (loop (- i1 1))))))))
   (qcomg "cx-ladder" 1))
 
 
@@ -969,7 +1098,7 @@
 ;; - If p_y1 = p_y2: the fuunction behaves as a single swap-fast gate.
 ;; - if p_y1 > p_y2: the ladder goes from higher to lower registry element.
 ;;
-;; Arguments:
+;; Parameters:
 ;; - p_l1: quantum register name.
 ;; - p_y1: qubit 1, lower registry number qubit where the ladder begins.
 ;; - p_y2: qubit 2, higher registry number qubit where the ladder ends.
@@ -980,18 +1109,21 @@
 (define (swap-fast-ladder p_l1 p_y1 p_y2 p_s)
   (qcomg "swap-fast-ladder" 0)
   (cond ((equal? p_y1 p_y2)(swap-fast p_l1 p_y1 p_y2))
+	
         ;; Descending.
 	((equal? p_s 1)(begin (let loop ((i1 p_y1))
-				 (if (equal? i1 (- p_y2 1))
-				     (swap-fast p_l1 i1 p_y2)
-				     (begin (swap-fast p_l1 i1 (+ i1 1))
-					    (loop (+ i1 1)))))))
+				(if (equal? i1 (- p_y2 1))
+				    (swap-fast p_l1 i1 p_y2)
+				    (begin (swap-fast p_l1 i1 (+ i1 1))
+					   (loop (+ i1 1)))))))
+	
         ;; Ascending.
 	((equal? p_s 2)(begin (let loop ((i1 (- p_y1 1)))
-				 (if (equal? i1 p_y2)
-				     (swap-fast p_l1 p_y2 (+ i1 1))
-				     (begin (swap-fast p_l1 i1 (+ i1 1))
-					    (loop (- i1 1))))))))
+				(if (equal? i1 p_y2)
+				    (swap-fast p_l1 p_y2 (+ i1 1))
+				    (begin (swap-fast p_l1 i1 (+ i1 1))
+					   (loop (- i1 1))))))))
+  
   (qcomg "swap-fast-ladder" 1))
 
 
@@ -1002,7 +1134,7 @@
 ;; - If p_y1 = p_y2: the fuunction behaves as a single swap gate.
 ;; - if p_y1 > p_y2: the ladder goes from higher to lower registry element.
 ;;
-;; Arguments:
+;; Parameters:
 ;; - p_l1: quantum register name.
 ;; - p_y1: qubit 1, lower registry number qubit where the ladder begins.
 ;; - p_y2: qubit 2, higher registry number qubit where the ladder ends.
@@ -1013,18 +1145,21 @@
 (define (swap-ladder p_l1 p_y1 p_y2 p_s1)
   (qcomg "swap-ladder" 0)
   (cond ((equal? p_y1 p_y2)(swap p_l1 p_y1 p_y2))
+	
         ;; Descending.
 	((equal? p_s1 1)(begin (let loop ((i1 p_y1))
 				 (if (equal? i1 (- p_y2 1))
 				     (swap p_l1 i1 p_y2)
 				     (begin (swap p_l1 i1 (+ i1 1))
 					    (loop (+ i1 1)))))))
+	
         ;; Ascending.
 	((equal? p_s1 2)(begin (let loop ((i1 (- p_y1 1)))
 				 (if (equal? i1 p_y2)
 				     (swap p_l1 p_y2 (+ i1 1))
 				     (begin (swap p_l1 i1 (+ i1 1))
 					    (loop (- i1 1))))))))
+  
   (qcomg "swap-ladder" 1))
 
 
@@ -1035,7 +1170,7 @@
 ;; those steps separatedly. This function is a generalization to y qubits
 ;; from a basic three-qubit case.
 ;;
-;; Arguments:
+;; Parameters:
 ;; - p_n1: quantum gate 1 (i.e. "h").
 ;; - p_n2: quantum gate 2 (i.e. "x").
 ;; - p_l1: quantum register name (i.e. "q").
@@ -1050,22 +1185,8 @@
 ;; - If p_s1 = 2, qubit p_y1 contains the non - Hadamard gate.
 ;; - This function places a barrier on all involved qubits after its relevant code.
 ;;
-; Sources:
-;; - IBM Q Experience. (2019). IBM Q Experience. [online] Available at:
-;;   https://quantum-computing.ibm.com/support/guides/user-guide?
-;;   page=5ddae9d75d640300671cc60f [Accessed 16 Dec. 2019].
-;; - En.wikipedia.org. (2019). Greenberger–Horne–Zeilinger state. [online] Available at:
-;;   https://en.wikipedia.org/wiki/Greenberger%E2%80%93Horne%E2%80%93Zeilinger_state
-;;   [Accessed 16 Dec. 2019].
-;; - Uchida, G., Bertlmann, R. and Hiesmayr, B. (2019). Entangled entanglement: A
-;;   construction procedure. [online] Arxiv.org. Available at:
-;;   https://arxiv.org/abs/1410.7145 [Accessed 21 Dec. 2019].
-;; - Cruz, D., Fournier, R., Gremion, F., Jeannerot, A., Komagata, K., Tosic,
-;;   T., Thiesbrummel, J., Chan, C., Macris, N., Dupertuis, M. and Javerzac‐Galy, C.
-;;   (2019). Efficient Quantum Algorithms for GHZ and W States, and Implementation
-;;   on the IBM Quantum Computer. [online] Wiley Online Library. Available at:
-;;   https://onlinelibrary.wiley.com/doi/full/10.1002/qute.201900015 
-;;   [Accessed 21 Dec. 2019].
+;; Sources:
+;; - [9][10][11][12][13].
 ;;
 (define (ghzy p_n1 p_n2 p_l1 p_y1 p_y2 p_s1)
   (let ((d (- p_y2 p_y1))
@@ -1074,9 +1195,11 @@
 	(s1 1))
     
     (qcomg "ghzy" 0)
+    
     (cond ((equal? p_s1 1)(set! s1 p_s1))
 	  ((equal? p_s1 2)(set! s1 p_s1))
-	  (else (set! s1 1)))	   
+	  (else (set! s1 1)))
+    
     (cond ((> d 1)
 	   (begin (cond ((equal? s1 1)
 			 (begin (qcomg "ghzy ladder ascending" 0)
@@ -1088,7 +1211,8 @@
 				  (if (equal? i1 (+ p_y1 1))
 				      (cx p_l1 p_y1 p_l1 p_y2)					  
 				      (begin (cx p_l1 (- i1 1) p_l1 p_y2)
-					     (loop (- i1 1)))))))				    
+					     (loop (- i1 1)))))))
+			
 			((equal? s1 2)
 			 (begin (qcomg "ghzy ladder descending" 0)
 				(g1 p_n2 p_l1 p_y1)
@@ -1105,6 +1229,7 @@
 	   (qcomg "ghzy ladder" 1)  
 	   (g1y p_n1 p_l1 p_y1 p_y2)
 	   (g1y "barrier" p_l1 p_y1 p_y2)))
+    
     (qcomg "ghzy" 1)))
 
 
@@ -1116,7 +1241,7 @@
 ;; on certain factors such as the kind of reading that you might want to 
 ;; perform after a certain operation such as a GHZ state preparation.
 ;;
-;; Arguments:
+;; Parameters:
 ;; - p_l1: quantum register name (.e. "q").
 ;; - p_l2: list of strings defining the order on y axis of gates to be placed 
 ;;   (i.e. '("h" "h" "s") in the case of a three qubit system in which to place 
@@ -1140,21 +1265,19 @@
 	  (begin (g1 (list-ref p_l2 v) p_l1 i1)
 		 (set! v (+ v 1))
 		 (loop (+ i1 1)))))
+    
     (qcomg "g1y1" 1)))
 
 
 ;; ecc1 - Error correcting code. Encoder into bit flip code for qubits
 ;; [p_y1, p_y1+2].
 ;;
-;; Arguments:
+;; Parameters:
 ;; - p_l1: quantum register name 1.
 ;; - p_y1: qubit 1.
 ;;
 ;; Sources:
-;; - IBM Quantum Experience. 2020. IBM Quantum Experience - Docs And Resources.
-;;   [online] Available at:
-;;   https://quantum-computing.ibm.com/docs/guide/err-corxn/quantum-repetition-code
-;;   [Accessed 16 April 2020].
+;; - [14].
 ;;
 ;; Notes:
 ;; - Code adapted from sources.
@@ -1178,16 +1301,13 @@
 ;; decoding a selectable bit-flip gate passed as p_n1. Requres three qubits in
 ;; array p_l1 and interval [p_y1, p_y1+2].
 ;;
-;; Arguments:
-;; - p_n1: name of the gate to be tested.					;
+;; Parameters:
+;; - p_n1: name of the gate to be tested.
 ;; - p_l1: quantum register name 1.
 ;; - p_y1: qubit 1.
 ;;
 ;; Sources:
-;; - IBM Quantum Experience. 2020. IBM Quantum Experience - Docs And Resources.
-;;   [online] Available at:
-;;   https://quantum-computing.ibm.com/docs/guide/err-corxn/quantum-repetition-code
-;;   [Accessed 16 April 2020].
+;; [14][15].
 ;;
 ;; Notes:
 ;; - Code adapted from sources.
@@ -1196,6 +1316,7 @@
   (let ((y1 p_y1)
 	(y2 (+ p_y1 1))
 	(y3 (+ p_y1 2)))
+    
     (qcomg "ecc2" 0)
     (g1y "h" p_l1 y1 y3)
     (g1 "h" p_l1 y2)
@@ -1229,15 +1350,12 @@
 ;; ecc3 - Error correcting code. Encoder into bit flip code with parity checks for 
 ;; for qubits p_y1, p_y1+1, p_y1+4 using qubits [p_y1, p_y1+4].
 ;;
-;; Arguments:
+;; Parameters:
 ;; - p_l1: quantum register name 1.
 ;; - p_y1: qubit 1.
 ;;
 ;; Sources:
-;; - IBM Quantum Experience. 2020. IBM Quantum Experience - Docs And Resources.
-;;   [online] Available at:
-;;   https://quantum-computing.ibm.com/docs/guide/err-corxn/quantum-repetition-code
-;;   [Accessed 16 April 2020].
+;; - [14].
 ;;
 ;; Notes:
 ;; - Code adapted from sources.
@@ -1271,9 +1389,10 @@
     (qcomg "ecc3" 1)))
 
 
-;; hx - Gate hx, places an h gate followed by an x on element p_y1 of register p_l1.
+;; hx - Gate hx, places an h gate followed by an x on element p_y1 of register
+;; p_l1.
 ;;
-;; Arguments:
+;; Parameters:
 ;; - p_l1: quantum register name.
 ;; - p_y1: qubit number.
 ;;
@@ -1284,9 +1403,10 @@
   (qcomg "hx" 1))
 
 
-;; hy - Gate hy, places an h gate followed by an y on element p_y1 of register p_l1.
+;; hy - Gate hy, places an h gate followed by an y on element p_y1 of register
+;; p_l1.
 ;;
-;; Arguments:
+;; Parameters:
 ;; - p_l1: quantum register name.
 ;; - p_y1: qubit number.
 ;;
@@ -1300,7 +1420,7 @@
 ;; hz - Gate hz, places an h gate followed by an z on element p_y1 of register
 ;; p_l1.
 ;;
-;; Arguments:
+;; Parameters:
 ;; - p_l1: quantum register name.
 ;; - p_y1: qubit number.
 ;;
@@ -1314,7 +1434,7 @@
 ;; hs - Gate hs, places an h gate followed by an s on element p_y1 of register
 ;; p_l1.
 ;;
-;; Arguments:
+;; Parameters:
 ;; - p_l1: quantum register name.
 ;; - p_y1: qubit number.
 ;;
@@ -1328,7 +1448,7 @@
 ;; hsdg - Gate hsdg, places an h gate followed by an sdag on element p_y1 of
 ;; register p_l1.
 ;;
-;; Arguments:
+;; Parameters:
 ;; - p_l1: quantum register name.
 ;; - p_y1: qubit number.
 ;;
@@ -1342,7 +1462,7 @@
 ;; ht - Gate ht, places an h gate followed by a t on element p_y1 of register
 ;; p_l1.
 ;;
-;; Arguments:
+;; Parameters:
 ;; - p_l1: quantum register name.
 ;; - p_y1: qubit number.
 ;;
@@ -1356,7 +1476,7 @@
 ;; htdg - Gate htdg, places an h gate followed by a tdag on element p_y1 of
 ;; register p_l1.
 ;;
-;; Arguments:
+;; Parameters:
 ;; - p_l1: quantum register name.
 ;; - p_y1: qubit number.
 ;;

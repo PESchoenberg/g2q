@@ -20,7 +20,7 @@
 ;;
 ;;   This program is distributed in the hope that it will be useful,
 ;;   but WITHOUT ANY WARRANTY; without even the implied warranty of
-;;   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+;;   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 ;;   GNU Lesser General Public License for more details.
 ;;
 ;;   You should have received a copy of the GNU Lesser General Public License
@@ -34,6 +34,7 @@
 
 
 (define-module (g2q g2q1)
+  #:use-module (grsp grsp0)  
   #:export (g2q-version
 	    g2q-ibm-config
 	    g2q-qre-config
@@ -49,7 +50,7 @@
     res))
 
 
-;; g2q-ibm-config - TODO : configuration for using IBM Q series machines;
+;; g2q-ibm-config - TODO: configuration for using IBM Q series machines;
 ;; equivalent to functions found on Qiskit IDE. (Deprecated).
 ;;
 ;; List elements:
@@ -58,7 +59,9 @@
 ;; - 3: subdir to post https execution requests.
 ;;
 (define (g2q-ibm-config)
-  (let ((conf (list "https://quantumexperience.ng.bluemix.net/api" "your-token-goes-here" "/codes/execute")))
+  (let ((conf (list "https://quantumexperience.ng.bluemix.net/api"
+		    "your-token-goes-here"
+		    "/codes/execute")))
     
     conf))
 
@@ -74,82 +77,87 @@
 ;; - 6: secondary remote qpu.
 ;;
 (define (g2q-qre-config)
-  (let ((conf (list "data/json/" "data/sqlite3/" "qlib_simulator" "ibmqx_simulator" "qx_simulator" "ibmqx_real")))
+  (let ((conf (list "data/json/"
+		    "data/sqlite3/"
+		    "qlib_simulator"
+		    "ibmqx_simulator"
+		    "qx_simulator"
+		    "ibmqx_real")))
     
     conf))
 
 
-;; g2q-select-qpu - Menu for selecting a qpu to be used.
+;; g2q-select-qpu - Menu for selecting the qpu that is to be used.
 ;;
 ;; Output:
 ;; - String containing the name of the selected qpu. Defaults to qlib_simulator.
 ;;
 (define (g2q-select-qpu)
   (let ((res1 3)
-	(res ""))
+	(res2 ""))
     
     (newline)
-    (display "Select qpu:")
-    (newline)
-    (display "0 - None (exit).")
-    (newline)
-    (display "1 - qlib_simulator.")
-    (newline)
-    (display "2 - qx_simulator.")
-    (newline)
-    (display "3 - ibmqx_simulator.")
-    (newline)
-    (display "4 - ibmqx_real.")
-    (newline)
+    (grsp-dl "Select qpu:")
+    (grsp-dl "0 - None (exit).")
+    (grsp-dl "1 - qlib_simulator.")
+    (grsp-dl "2 - qx_simulator.")
+    (grsp-dl "3 - ibmqx_simulator.")
+    (grsp-dl "4 - ibmqx_real.")
     (set! res1 (read))
 
     ;; Not elegant, but works for now (needs to be reworked).
     (if (< res1 0)
 	(set! res1 0))
+    
     (if (> res1 4)
 	(set! res1 0))
-    (if (= res1 0)
-	(set! res "none"))
-    (if (= res1 1)
-	(set! res (car(cdr(cdr(g2q-qre-config))))))    
-    (if (= res1 2)
-	(set! res (car(cdr(cdr(cdr(cdr(g2q-qre-config))))))))    
-    (if (= res1 4)
-	(set! res (car(cdr(cdr(cdr(cdr(cdr(g2q-qre-config)))))))))
-    (if (= res1 3)
-	(set! res (car(cdr(cdr(cdr(g2q-qre-config)))))))
     
-    res))
+    (if (= res1 0)
+	(set! res2 "none"))
+    
+    (if (= res1 1)
+	(set! res2 (car(cdr(cdr(g2q-qre-config))))))
+    
+    (if (= res1 2)
+	(set! res2 (car(cdr(cdr(cdr(cdr(g2q-qre-config))))))))
+    
+    (if (= res1 4)
+	(set! res2 (car(cdr(cdr(cdr(cdr(cdr(g2q-qre-config)))))))))
+    
+    (if (= res1 3)
+	(set! res2 (car(cdr(cdr(cdr(g2q-qre-config)))))))
+    
+    res2))
 
 
 ;; g2q-txt - Defines some string constants that are intrinsic to g2q.
 ;;
-;; Arguments:
-;; - p_n: string number.
+;; Parameters:
+;; - p_n1: string number.
 ;;
-(define (g2q-txt p_n)
-  (let ((res ""))
+(define (g2q-txt p_n1)
+  (let ((res1 ""))
     
-    (cond ((= p_n 0)
-	   (set! res "];")))
-    (cond ((= p_n 1)
-	   (set! res "\n")))
-    (cond ((= p_n 2)
-	   (set! res ";\n")))
-    (cond ((= p_n 3)
-	   (set! res "];\n")))
-    (cond ((= p_n 4)
-	   (set! res ") ")))
-    (cond ((= p_n 5)
-	   (set! res "if(")))
-    (cond ((= p_n 6)
-	   (set! res "// ")))
-    (cond ((= p_n 7)
-	   (set! res "charset=utf-8")))
-    (cond ((= p_n 8)
-	   (set! res "application/x-www-form-urlencoded;")))
-    (cond ((= p_n 9)
-	   (set! res "na")))
+    (cond ((= p_n1 0)
+	   (set! res1 "];"))
+	  ((= p_n1 1)
+	   (set! res1 "\n"))
+	  ((= p_n1 2)
+	   (set! res1 ";\n"))
+	  ((= p_n1 3)
+	   (set! res1 "];\n"))
+	  ((= p_n1 4)
+	   (set! res1 ") "))
+	  ((= p_n1 5)
+	   (set! res1 "if("))
+	  ((= p_n1 6)
+	   (set! res1 "// "))
+	  ((= p_n1 7)
+	   (set! res1 "charset=utf-8"))
+	  ((= p_n1 8)
+	   (set! res1 "application/x-www-form-urlencoded;"))
+	  ((= p_n1 9)
+	   (set! res1 "na")))
     
-    res))
+    res1))
 

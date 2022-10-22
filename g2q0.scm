@@ -136,7 +136,7 @@
   (strings-append (list p_l1 "[" (grsp-n2s p_y1) "]") 0))
 
 
-;;;; qbg - Basic gate structure .
+;;;; qbg - Basic gate structure.
 ;;
 ;; Parameters:
 ;; - p_g1: gate name.
@@ -313,6 +313,7 @@
 ;;
 (define (qcond1 p_c1 p_y1 p_y2)
   (let ((qsen " "))
+    
     (cond ((equal? (qvalid-conditional p_c1) #t)
 	   (set! qsen (strings-append (list (g2q-txt 5)
 					    p_y1
@@ -320,6 +321,7 @@
 					    (grsp-n2s p_y2)
 					    (g2q-txt 4))
 				      0))))
+    
     (display qsen)))
 
 
@@ -344,6 +346,7 @@
 					    (grsp-n2s p_y2)
 					    (g2q-txt 4))
 				      0))))
+    
     (display qsen)))
 
 
@@ -388,7 +391,7 @@
 ;; sections when complex gates are compiled into QASM2 code.
 ;;
 ;; Parameters:
-;; - p_g1: string (gate name).
+;; - p_g1: string, gate name.
 ;; - p_v1: value indicating the kind of gate comment.
 ;;   - 0: begin block.
 ;;   - 1: end block.
