@@ -108,7 +108,7 @@
 
 ;;;; qmain-loop - This is the main loop of the program. It will be repeated p_qx
 ;; times. Note this function will remove the json files holding the results
-;; returned by the QPU in order to keep clean the ddir folder .
+;; returned by the QPU in order to keep clean the ddir folder.
 ;;
 ;; Parameters:
 ;; - p_clean: "y" to clean data folder.
@@ -128,13 +128,31 @@
 ;; - p_rf: results function.
 ;;
 (define (qmain-loop p_clean p_fname p_fnameo p_qver p_ddir p_qpu p_qf p_q p_c p_qn p_cn p_mc p_qx p_v p_rf)
-  (let ((res 0))    
+  (let ((res1 0))
+    
     (let loop ((i p_qx))
       (if (= i 0)
 	  (begin (if (equal? p_clean "y")
-		     (system (strings-append (list "rm " p_ddir p_fname "_*") 0)))
-		 res)
-	  (begin (set! res (+ res (qcompile-and-run p_fname p_fnameo p_qver p_ddir p_qpu p_qf p_q p_c p_qn p_cn p_mc i p_v p_rf)))
+		     (system (strings-append (list "rm "
+						   p_ddir
+						   p_fname
+						   "_*")
+					     0)))
+		 res1)
+	  (begin (set! res1 (+ res1 (qcompile-and-run p_fname
+						      p_fnameo
+						      p_qver
+						      p_ddir
+						      p_qpu
+						      p_qf
+						      p_q
+						      p_c
+						      p_qn
+						      p_cn
+						      p_mc
+						      i
+						      p_v
+						      p_rf)))
 		 (loop (- i 1)))))))
 
 

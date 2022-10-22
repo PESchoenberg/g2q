@@ -43,7 +43,7 @@
   #:export (qrand1))
 
 
-;; qrand1 - 4 x 1 universal random quantum circuit .
+;; qrand1 - 4 x 1 universal random quantum circuit.
 ;;
 ;; Parameters:
 ;; - p_l1: quantum register name.
