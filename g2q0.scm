@@ -210,8 +210,8 @@
 ;;;; qin - Increment the value of a variable p_v by p_s.
 ;;
 ;; Parameters:
-;; - p_v: variable to increment.
-;; - p_s: increment step.
+;; - p_v1: variable to increment.
+;; - p_t1: increment step.
 ;;
 (define (qin p_v1 p_t1)
   (set! p_v1 (+ p_v1 p_t1)))
@@ -312,17 +312,17 @@
 ;; - p_y2: number to compare p_y1 to.
 ;;
 (define (qcond1 p_c1 p_y1 p_y2)
-  (let ((qsen " "))
+  (let ((res1 " "))
     
     (cond ((equal? (qvalid-conditional p_c1) #t)
-	   (set! qsen (strings-append (list (g2q-txt 5)
+	   (set! res1 (strings-append (list (g2q-txt 5)
 					    p_y1
 					    p_c1
 					    (grsp-n2s p_y2)
 					    (g2q-txt 4))
 				      0))))
     
-    (display qsen)))
+    (display res1)))
 
 
 ;;;; qcond2 - Quantum conditional 2.
@@ -334,10 +334,10 @@
 ;; - p_y3: classical bit vector item.
 ;;
 (define (qcond2 p_c1 p_y1 p_y3 p_y2)
-  (let ((qsen " "))
+  (let ((res1 " "))
     
     (cond ((equal? (qvalid-conditional p_c1) #t)
-	   (set! qsen (strings-append (list (g2q-txt 5)
+	   (set! res1 (strings-append (list (g2q-txt 5)
 					    p_y1
 					    "["
 					    (grsp-n2s p_y3)
@@ -347,7 +347,7 @@
 					    (g2q-txt 4))
 				      0))))
     
-    (display qsen)))
+    (display res1)))
 
 
 ;;;; qvalid-string - Validate a string.
@@ -397,13 +397,12 @@
 ;;   - 1: end block.
 ;;
 (define (qcomg p_g1 p_v1)
-  (let ((s ""))
+  (let ((res1 ""))
     
     (cond ((eq? p_v1 0)
-	   (set! s (strings-append (list (g2q-txt 6) "Begin " p_g1 ";") 0)))
+	   (set! res1 (strings-append (list (g2q-txt 6) "Begin " p_g1 ";") 0)))
 	  ((eq? p_v1 1)
-	   (set! s (strings-append (list (g2q-txt 6) "End " p_g1 ";") 0))))
+	   (set! res1 (strings-append (list (g2q-txt 6) "End " p_g1 ";") 0))))
     
-    (display s)
-    (newline)))
+    (grsp-dl res1)))
 
