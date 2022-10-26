@@ -45,46 +45,46 @@
 ;; g2q-version - Returns the current version of the compiler.
 ;;
 (define (g2q-version)
-  (let ((res "g2q - v1.2.9"))
+  (let ((res1 "g2q - v1.2.9"))
     
-    res))
+    res1))
 
 
 ;; g2q-ibm-config - TODO: configuration for using IBM Q series machines;
 ;; equivalent to functions found on Qiskit IDE. (Deprecated).
 ;;
 ;; List elements:
-;; - 1: base uri for online access.
-;; - 2: token.
-;; - 3: subdir to post https execution requests.
+;; - 0: base uri for online access.
+;; - 1: token.
+;; - 2: subdir to post https execution requests.
 ;;
 (define (g2q-ibm-config)
-  (let ((conf (list "https://quantumexperience.ng.bluemix.net/api"
+  (let ((res1 (list "https://quantumexperience.ng.bluemix.net/api"
 		    "your-token-goes-here"
 		    "/codes/execute")))
     
-    conf))
+    res1))
 
 
 ;; g2q-qre-config - Configuration for using qre.
 ;;
 ;; Elements:
-;; - 1: json subdir.
-;; - 2: sqlite3 subdir.
-;; - 3: primary local (default) qpu.
-;; - 4: secondary local qpu.
-;; - 5: primary remote qpu.
-;; - 6: secondary remote qpu.
+;; - 0: json subdir.
+;; - 1: sqlite3 subdir.
+;; - 2: primary local (default) qpu.
+;; - 3: secondary local qpu.
+;; - 4: primary remote qpu.
+;; - 5: secondary remote qpu.
 ;;
 (define (g2q-qre-config)
-  (let ((conf (list "data/json/"
+  (let ((res1 (list "data/json/"
 		    "data/sqlite3/"
 		    "qlib_simulator"
 		    "ibmqx_simulator"
 		    "qx_simulator"
 		    "ibmqx_real")))
     
-    conf))
+    res1))
 
 
 ;; g2q-select-qpu - Menu for selecting the qpu that is to be used.

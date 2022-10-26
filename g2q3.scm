@@ -69,7 +69,7 @@
 	(fget "")
 	(fsave "")
 	(fnamei "")
-	(res 0)
+	(res1 0)
 	(pqn (- p_qn 1))
 	(pcn (- p_cn 1)))
 
@@ -95,15 +95,22 @@
     (close porto2)
 
     ;; This is a system call to invoke  qre. 
-    (system (strings-append (list "./qre" p_fnameo "post" p_v p_qpu "1" fget) 1))
+    (system (strings-append (list "./qre"
+				  p_fnameo
+				  "post"
+				  p_v
+				  p_qpu
+				  "1"
+				  fget)
+			    1))
     
     ;; Now get the data from the QPU. Here we use again a first order function,
     ;; which is passed as an argument to p_rf.
     (set! a (read-file-as-string fnamei))
-    (set! res (p_rf (qfclvr a)))
+    (set! res1 (p_rf (qfclvr a)))
     (grsp-save-to-file a fsave "a")
     
-    res))
+    res1))
     
 
 ;;;; qmain-loop - This is the main loop of the program. It will be repeated p_qx
