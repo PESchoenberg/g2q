@@ -70,16 +70,16 @@
 ;;
 ;; Parameters:
 ;; - p_s1: program name.
-;; - p_v1: Open QASM version number.
+;; - p_n1: Open QASM version number.
 ;;
-(define (qhead p_s1 p_v1)
+(define (qhead p_s1 p_n1)
   (qstr (strings-append (list (g2q-txt 6) p_s1 ";") 0))
   (qstr (strings-append (list (g2q-txt 6)
 			      "Compiled with "
 			      (g2q-version)
 			      ";")
 			0))
-  (qstr (strings-append (list "OPENQASM " (grsp-n2s p_v1) ";") 0))
+  (qstr (strings-append (list "OPENQASM " (grsp-n2s p_n1) ";") 0))
   (qstr "include \"qelib1.inc\";"))
   
 
@@ -129,48 +129,48 @@
 ;;;; qbgna - Constructs an array item.
 ;;
 ;; Parameters:
-;; - p_l1: array name.
+;; - p_r1: array name.
 ;; - p_y1: item number.
 ;;
-(define (qbgna p_l1 p_y1)
-  (strings-append (list p_l1 "[" (grsp-n2s p_y1) "]") 0))
+(define (qbgna p_r1 p_y1)
+  (strings-append (list p_r1 "[" (grsp-n2s p_y1) "]") 0))
 
 
 ;;;; qbg - Basic gate structure.
 ;;
 ;; Parameters:
 ;; - p_g1: gate name.
-;; - p_l1: quantum or conventional register name (q or c).
+;; - p_r1: quantum or conventional register name (q or c).
 ;; - p_y1: qubit ordinal number.
 ;;
-(define (qbg p_g1 p_l1 p_y1)
-  (string-append (qbgns p_g1) (qbgna p_l1 p_y1)))
+(define (qbg p_g1 p_r1 p_y1)
+  (string-append (qbgns p_g1) (qbgna p_r1 p_y1)))
 
 
 ;; qbgd - Display basic gate structure.
 ;;
 ;; Parameters:
 ;; - p_g1: gate name.
-;; - p_l1: quantum or conventional register name (q or c).
+;; - p_r1: quantum or conventional register name (q or c).
 ;; - p_y1: qubit ordinal number.
 ;;
-(define (qbgd p_g1 p_l1 p_y1)
-  (display (string-append (qbg p_g1 p_l1 p_y1) (g2q-txt 2))))
+(define (qbgd p_g1 p_r1 p_y1)
+  (display (string-append (qbg p_g1 p_r1 p_y1) (g2q-txt 2))))
 
 
 ;;;; qmeas - Measurement gate.
 ;;
 ;; Parameters:
-;; - p_l1: quantum register name 1.
-;; - p_x1: register ordinal of p_l1.
-;; - p_l2: quantum register name 2.
-;; - p_x2: register ordinal of p_l2.
+;; - p_r1: quantum register name 1.
+;; - p_x1: register ordinal of p_r1.
+;; - p_r2: quantum register name 2.
+;; - p_x2: register ordinal of p_r2.
 ;;
-(define (qmeas p_l1 p_x1 p_l2 p_x2)
+(define (qmeas p_r1 p_x1 p_r2 p_x2)
   (display (strings-append (list "measure "
-				 (qbgna p_l1 p_x1)
+				 (qbgna p_r1 p_x1)
 				 " -> "
-				 (qbgna p_l2 p_x2)
+				 (qbgna p_r2 p_x2)
 				 (g2q-txt 2))
 			   0)))
 
@@ -178,18 +178,18 @@
 ;;;; qcx - Gate cx.
 ;;
 ;; Parameters:
-;; - p_s1: item name.
-;; - p_l1: quantum register name 1. 
+;; - p_g1: item name.
+;; - p_r1: quantum register name 1. 
 ;; - p_y1: control qubit (dot).
-;; - p_l2: quantum register name 2. 
+;; - p_r2: quantum register name 2. 
 ;; - p_y2: target qubit (plus) 
 ;;
-(define (qcx p_s1 p_l1 p_y1 p_l2 p_y2)
-  (display (strings-append (list p_s1
+(define (qcx p_g1 p_r1 p_y1 p_r2 p_y2)
+  (display (strings-append (list p_g1
 				 " "
-				 (qbgna p_l1 p_y1)
+				 (qbgna p_r1 p_y1)
 				 ","
-				 (qbgna p_l2 p_y2)
+				 (qbgna p_r2 p_y2)
 				 (g2q-txt 2))
 			   0)))
 
@@ -197,35 +197,35 @@
 ;;;; qregdef - Register definitions.
 ;;
 ;; Parameters:
-;; - p_l1: quantum register name 1.
-;; - p_y1: number of items in p_l1.
-;; - p_l2: quantum register name 2.
-;; - p_y2: number of items in p_l2.
+;; - p_r1: quantum register name 1.
+;; - p_y1: number of items in p_r1.
+;; - p_r2: quantum register name 2.
+;; - p_y2: number of items in p_r2.
 ;;
-(define (qregdef p_l1 p_y1 p_l2 p_y2)
-  (qbgd "qreg" p_l1 p_y1)
-  (qbgd "creg" p_l2 p_y2))
+(define (qregdef p_r1 p_y1 p_r2 p_y2)
+  (qbgd "qreg" p_r1 p_y1)
+  (qbgd "creg" p_r2 p_y2))
 
 
 ;;;; qin - Increment the value of a variable p_v by p_s.
 ;;
 ;; Parameters:
-;; - p_v1: variable to increment.
-;; - p_t1: increment step.
+;; - p_n1: variable to increment.
+;; - p_n2: increment step.
 ;;
-(define (qin p_v1 p_t1)
-  (set! p_v1 (+ p_v1 p_t1)))
+(define (qin p_n1 p_n2)
+  (set! p_n1 (+ p_n1 p_n2)))
 
 
 ;;;; g1 - Fundamental gate using one qbit.
 ;;
 ;; Parameters:
 ;; - p_g1: gate name.
-;; - p_l1: quantum register name 1.
+;; - p_r1: quantum register name 1.
 ;; - p_y1: qubit 1.
 ;;
-(define (g1 p_g1 p_l1 p_y1)
-  (qbgd p_g1 p_l1 p_y1))  
+(define (g1 p_g1 p_r1 p_y1)
+  (qbgd p_g1 p_r1 p_y1))  
 
 
 ;;;; g2 - Fundamental quantum gates.
@@ -254,14 +254,14 @@
 ;;
 ;; Parameters:
 ;; - p_y1: first rotation.
-;; - p_l1: quantum register name 1.
+;; - p_r1: quantum register name 1.
 ;; - p_y2: qubit number.
 ;;
-(define (u1 p_y1 p_l1 p_y2)
+(define (u1 p_y1 p_r1 p_y2)
   (display (strings-append (list "u1("
 				 (grsp-n2s p_y1)
 				 (g2q-txt 4)
-				 (qbgna p_l1 p_y2)
+				 (qbgna p_r1 p_y2)
 				 (g2q-txt 2))
 			   0)))
 
@@ -271,15 +271,15 @@
 ;; Parameters:
 ;; - p_y1: angle 1, first rotation.
 ;; - p_y2: angle 2, second rotation.
-;; - p_l1: quantum register name 1.
+;; - p_r1: quantum register name 1.
 ;; - p_y3: qubit number.
 ;;
-(define (u2 p_y1 p_y2 p_l1 p_y3)
+(define (u2 p_y1 p_y2 p_r1 p_y3)
   (display (strings-append (list "u2("
 				 (qbgnc p_y1)
 				 (grsp-n2s p_y2)
 				 (g2q-txt 4)
-				 (qbgna p_l1 p_y3)
+				 (qbgna p_r1 p_y3)
 				 (g2q-txt 2))
 			   0)))
   
@@ -290,16 +290,16 @@
 ;; - p_y1: angle 1, first rotation.
 ;; - p_y2: angle 2, second rotation.
 ;; - p_y3: angle 3, third rotation.
-;; - p_l1: quantum register name 1.
+;; - p_r1: quantum register name 1.
 ;; - p_y4: qubit number.
 ;;
-(define (u3 p_y1 p_y2 p_y3 p_l1 p_y4)
+(define (u3 p_y1 p_y2 p_y3 p_r1 p_y4)
   (display (strings-append (list "u3("
 				 (qbgnc p_y1)
 				 (qbgnc p_y2)
 				 (grsp-n2s p_y3)
 				 (g2q-txt 4)
-				 (qbgna p_l1 p_y4)
+				 (qbgna p_r1 p_y4)
 				 (g2q-txt 2))
 			   0)))
   
@@ -372,36 +372,36 @@
 ;;;; swap - Gate swap expressed atomically.
 ;;
 ;; Parameters:
-;; - p_l1: quantum register name 1. 
+;; - p_r1: quantum register name 1. 
 ;; - p_y1: qubit 1.
 ;; - p_y2: qubit 2. 
 ;;
 ;; Sources:
 ;; - [1].
 ;;                                                                     
-(define (swap p_l1 p_y1 p_y2)
+(define (swap p_r1 p_y1 p_y2)
   (qcomg "swap" 0)
-  (qcx "cx" p_l1 p_y1 p_l1 p_y2)
-  (qcx "cx" p_l1 p_y2 p_l1 p_y1)
-  (qcx "cx" p_l1 p_y1 p_l1 p_y2)
+  (qcx "cx" p_r1 p_y1 p_r1 p_y2)
+  (qcx "cx" p_r1 p_y2 p_r1 p_y1)
+  (qcx "cx" p_r1 p_y1 p_r1 p_y2)
   (qcomg "swap" 1))
 
 
-;;;; qxomg - Comments for complex gates. Useful to identify various code
+;;;; qcomg - Comments for complex gates. Useful to identify various code
 ;; sections when complex gates are compiled into QASM2 code.
 ;;
 ;; Parameters:
 ;; - p_g1: string, gate name.
-;; - p_v1: value indicating the kind of gate comment.
+;; - p_p1: value indicating the kind of auto gate comment.
 ;;   - 0: begin block.
 ;;   - 1: end block.
 ;;
-(define (qcomg p_g1 p_v1)
+(define (qcomg p_g1 p_p1)
   (let ((res1 ""))
     
-    (cond ((eq? p_v1 0)
+    (cond ((eq? p_p1 0)
 	   (set! res1 (strings-append (list (g2q-txt 6) "Begin " p_g1 ";") 0)))
-	  ((eq? p_v1 1)
+	  ((eq? p_p1 1)
 	   (set! res1 (strings-append (list (g2q-txt 6) "End " p_g1 ";") 0))))
     
     (grsp-dl res1)))

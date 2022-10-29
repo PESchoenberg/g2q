@@ -47,31 +47,31 @@
 ;; qrand1 - 4 x 1 universal random quantum circuit.
 ;;
 ;; Parameters:
-;; - p_l1: quantum register name.
+;; - p_r1: quantum register name.
 ;; - p_y1: qubit number.
 ;;
 ;; Sources:
 ;; - [1][g2q2.[6]].
 ;;
-(define (qrand1 p_l1 p_y1)
+(define (qrand1 p_r1 p_y1)
   (let ((y1 p_y1)
 	(y2 (+ p_y1 1))
 	(y3 (+ p_y1 2))
 	(y4 (+ p_y1 3)))
 
     (qcomg "qrand1" 0)
-    (g1y "h" p_l1 y1 y4)
-    (cz p_l1 y2 p_l1 y3)
-    (g1y "t" p_l1 y2 y3)
-    (cz p_l1 y1 p_l1 y2)
-    (cz p_l1 y3 p_l1 y4)
-    (g1 "t" p_l1 y1)
-    (g1 "y" p_l1 y2)
-    (g1 "x" p_l1 y3)
-    (g1 "t" p_l1 y4)
-    (cz p_l1 y2 p_l1 y3)
-    (g1 "x" p_l1 y2)
-    (g1 "t" p_l1 y3)    	
-    (cz p_l1 y1 p_l1 y2)
+    (g1y "h" p_r1 y1 y4)
+    (cz p_r1 y2 p_r1 y3)
+    (g1y "t" p_r1 y2 y3)
+    (cz p_r1 y1 p_r1 y2)
+    (cz p_r1 y3 p_r1 y4)
+    (g1 "t" p_r1 y1)
+    (g1 "y" p_r1 y2)
+    (g1 "x" p_r1 y3)
+    (g1 "t" p_r1 y4)
+    (cz p_r1 y2 p_r1 y3)
+    (g1 "x" p_r1 y2)
+    (g1 "t" p_r1 y3)    	
+    (cz p_r1 y1 p_r1 y2)
     (qcomg "qrand1" 1)))
 
