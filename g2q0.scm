@@ -69,8 +69,8 @@
 ;;;; qhead - Defines a program name.
 ;;
 ;; Parameters:
-;; - p_s1: program name.
-;; - p_n1: Open QASM version number.
+;; - p_s1: string, program name.
+;; - p_n1: numeric, Open QASM version number.
 ;;
 (define (qhead p_s1 p_n1)
   (qstr (strings-append (list (g2q-txt 6) p_s1 ";") 0))
@@ -120,7 +120,7 @@
 ;; a string.
 ;;
 ;; Parameters:
-;; - p_n1: number.
+;; - p_n1: numeric.
 ;;
 (define (qbgnc p_n1)
   (string-append (grsp-n2s p_n1) ","))
@@ -139,7 +139,7 @@
 ;;;; qbg - Basic gate structure.
 ;;
 ;; Parameters:
-;; - p_g1: gate name.
+;; - p_g1: string, gate name.
 ;; - p_r1: quantum or conventional register name (q or c).
 ;; - p_y1: qubit ordinal number.
 ;;
@@ -150,7 +150,7 @@
 ;; qbgd - Display basic gate structure.
 ;;
 ;; Parameters:
-;; - p_g1: gate name.
+;; - p_g1: string, gate name.
 ;; - p_r1: quantum or conventional register name (q or c).
 ;; - p_y1: qubit ordinal number.
 ;;
@@ -162,9 +162,9 @@
 ;;
 ;; Parameters:
 ;; - p_r1: quantum register name 1.
-;; - p_x1: register ordinal of p_r1.
+;; - p_x1: numeric, register ordinal of p_r1.
 ;; - p_r2: quantum register name 2.
-;; - p_x2: register ordinal of p_r2.
+;; - p_x2: numeric, register ordinal of p_r2.
 ;;
 (define (qmeas p_r1 p_x1 p_r2 p_x2)
   (display (strings-append (list "measure "
@@ -220,7 +220,7 @@
 ;;;; g1 - Fundamental gate using one qbit.
 ;;
 ;; Parameters:
-;; - p_g1: gate name.
+;; - p_g1: string, gate name.
 ;; - p_r1: quantum register name 1.
 ;; - p_y1: qubit 1.
 ;;
@@ -231,7 +231,7 @@
 ;;;; g2 - Fundamental quantum gates.
 ;;
 ;; Parameters:
-;; - p_g1: gate name.
+;; - p_g1: string, gate name.
 ;; - p_r1: quantum register name 1.
 ;; - p_y1: control qubit 1.
 ;; - p_r2: quantum register name 2.
@@ -269,8 +269,8 @@
 ;;;; u2 - Gate u2.
 ;;
 ;; Parameters:
-;; - p_y1: angle 1, first rotation.
-;; - p_y2: angle 2, second rotation.
+;; - p_y1: numeric, angle 1, first rotation.
+;; - p_y2: numeric, angle 2, second rotation.
 ;; - p_r1: quantum register name 1.
 ;; - p_y3: qubit number.
 ;;
@@ -287,9 +287,9 @@
 ;;;; u3 - Gate u3.
 ;;
 ;; Parameters:
-;; - p_y1: angle 1, first rotation.
-;; - p_y2: angle 2, second rotation.
-;; - p_y3: angle 3, third rotation.
+;; - p_y1: numeric, angle 1, first rotation.
+;; - p_y2: numeric, angle 2, second rotation.
+;; - p_y3: numeric, angle 3, third rotation.
 ;; - p_r1: quantum register name 1.
 ;; - p_y4: qubit number.
 ;;
@@ -392,7 +392,7 @@
 ;;
 ;; Parameters:
 ;; - p_g1: string, gate name.
-;; - p_p1: value indicating the kind of auto gate comment.
+;; - p_p1: numeric value indicating the kind of auto gate comment.
 ;;   - 0: begin block.
 ;;   - 1: end block.
 ;;

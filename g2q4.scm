@@ -48,7 +48,7 @@
 ;;
 ;; Parameters:
 ;; - p_r1: quantum register name.
-;; - p_y1: qubit number.
+;; - p_y1: numeric, qubit number.
 ;;
 ;; Sources:
 ;; - [1][g2q2.[6]].

@@ -157,7 +157,7 @@
 ;; qconst - Sets the values of various required constants.
 ;;
 ;; Parameters:
-;; - p_s1: constant name, string.
+;; - p_s1: string, constant name.
 ;;
 ;; Output:
 ;; - Returns the value of p_s1 if it exists. Zero otherwise.
@@ -175,87 +175,87 @@
     res1))
 
 
-;; g1y - Repeats placement of gate p_g1 and group p_l1 by repeating the use of
+;; g1y - Repeats placement of gate p_g1 and group p_r1 by repeating the use of
 ;; qgate1 from qubit p_y1 to qubit p_y2 on y axis (vertically on graphical
 ;; representation).
 ;;
 ;; Parameters:
-;; - p_g1: gate name.
-;; - p_l1: quantum register name (i.e. q).
-;; - p_y1: ordinal of the initial qubit.
-;; - p_y2: ordinal of the last qubit.
+;; - p_g1: string, gate name.
+;; - p_r1: quantum register name (i.e. q).
+;; - p_y1: numeric, ordinal of the initial qubit.
+;; - p_y2: numeric, ordinal of the last qubit.
 ;;
-(define (g1y p_g1 p_l1 p_y1 p_y2)
+(define (g1y p_g1 p_r1 p_y1 p_y2)
   (qcomg "g1y" 0)
   
   (let loop ((i1 p_y1))
     (if (= i1 p_y2)
-	(g1 p_g1 p_l1 i1)
-	(begin (g1 p_g1 p_l1 i1)
+	(g1 p_g1 p_r1 i1)
+	(begin (g1 p_g1 p_r1 i1)
 	       (loop (+ i1 1)))))
   
   (qcomg "g1y" 1))
 
 
-;; g1x - Repeats placement of gate p_g1 and register p_l1 by repeating the use
+;; g1x - Repeats placement of gate p_g1 and register p_r1 by repeating the use
 ;; of qgate1 on regster element p_y1 p_x1 times on x axis.
 ;;
 ;; Parameters:
-;; - p_g1: gate name.
-;; - p_l1: quantum register name.
+;; - p_g1: string, gate name.
+;; - p_r1: quantum register name.
 ;; - p_y1: register element.
-;; - p_x1: number of iterations on x.
+;; - p_x1: numeric, number of iterations on x.
 ;;
-(define (g1x p_g1 p_l1 p_y1 p_x1)
+(define (g1x p_g1 p_r1 p_y1 p_x1)
   (qcomg "g1x" 0)
   
   (let loop ((i1 1))
     (if (= i1 p_x1)
-	(g1 p_g1 p_l1 p_y1)
-	(begin (g1 p_g1 p_l1 p_y1)
+	(g1 p_g1 p_r1 p_y1)
+	(begin (g1 p_g1 p_r1 p_y1)
 	       (loop (+ i1 1)))))
   
   (qcomg "g1x" 1))
 
 
-;; g1xy - Repeats placement of gate p_g1 and group p_l1 by repeating the use of
+;; g1xy - Repeats placement of gate p_g1 and group p_r1 by repeating the use of
 ;; qgate1 from qubit p_y1 to qubit p_y2 on y axis.
 ;;
 ;; Parameters:
-;; - p_g1: gate name.
-;; - p_l1: quantum register name.
+;; - p_g1: string, gate name.
+;; - p_r1: quantum register name.
 ;; - p_y1: ordinal of the initial qubit.
 ;; - p_y2: ordinal of the last qubit.
-;; - p_x1: number if iterations that g1y will be repeated along x axis of
-;;   sequence as a graph.
+;; - p_x1: numeric, number of iterations that g1y will be repeated along x
+;;   axis of sequence as a graph.
 ;;
-(define (g1xy p_g1 p_l1 p_y1 p_y2 p_x1)
+(define (g1xy p_g1 p_r1 p_y1 p_y2 p_x1)
   (qcomg "g1xy" 0)
   
   (let loop ((j1 1))
     (if (= j1 p_x1)
-	(g1y p_g1 p_l1 p_y1 p_y2)
-	(begin (g1y p_g1 p_l1 p_y1 p_y2)
+	(g1y p_g1 p_r1 p_y1 p_y2)
+	(begin (g1y p_g1 p_r1 p_y1 p_y2)
 	       (loop (+ j1 1)))))
   
   (qcomg "g1xy" 1))
 
 
-;; qmeasy - Performs measurements on group p_l1 to group p_l2 from p_y1 to p_y2.
+;; qmeasy - Performs measurements on group p_r1 to group p_r2 from p_y1 to p_y2.
 ;;
 ;; Parameters:
-;; - p_l1: quantum register name.
-;; - p_l2: conventional register name.
-;; - p_y1: ordinal of the initial qubit.
-;; - p_y2: ordinal of the last qubit.
+;; - p_r1: quantum register name.
+;; - p_r2: conventional register name.
+;; - p_y1: numeric, ordinal of the initial qubit.
+;; - p_y2: numeric, ordinal of the last qubit.
 ;;
-(define (qmeasy p_l1 p_l2 p_y1 p_y2)
+(define (qmeasy p_r1 p_r2 p_y1 p_y2)
   (qcomg "qmeasy" 0)
   
   (let loop ((i1 p_y1))
     (if (= i1 p_y2)
-	(qmeas p_l1 p_y2 p_l2 p_y2)
-	(begin (qmeas p_l1 i1 p_l2 i1)
+	(qmeas p_r1 p_y2 p_r2 p_y2)
+	(begin (qmeas p_r1 i1 p_r2 i1)
 	       (loop (+ i1 1)))))
   
   (qcomg "qmeasy" 1))
@@ -265,13 +265,13 @@
 ;; qubit is |1>. Leaves target qubit as it is otherwise.
 ;;
 ;; Parameters:
-;; - p_l1: quantum register name 1.
+;; - p_r1: quantum register name 1.
 ;; - p_y1: control qubit 1 (represented as a dot in a q diagram).
-;; - p_l2: quantum register name 2.
+;; - p_r2: quantum register name 2.
 ;; - p_y2: target qubit 2 (represented as a plus).
 ;;
-(define (cx p_l1 p_y1 p_l2 p_y2)
-  (g2 "cx" p_l1 p_y1 p_l2 p_y2))
+(define (cx p_r1 p_y1 p_r2 p_y2)
+  (g2 "cx" p_r1 p_y1 p_r2 p_y2))
 
 
 ;; cz - Gate cz, controlled phase expressed atomically. Gates expressed in
@@ -279,16 +279,16 @@
 ;; gates expressed in fast form.
 ;;
 ;; Parameters:
-;; - p_l1: quantum register name 1.
+;; - p_r1: quantum register name 1.
 ;; - p_y1: control qubit 1.
-;; - p_l2: quantum register name 2.
+;; - p_r2: quantum register name 2.
 ;; - p_y2: target qubit 2.
 ;;
-(define (cz p_l1 p_y1 p_l2 p_y2)
+(define (cz p_r1 p_y1 p_r2 p_y2)
   (qcomg "cz" 0)
-  (g1 "h" p_l1 p_y2)
-  (cx p_l1 p_y1 p_l2 p_y2)
-  (g1 "h" p_l2 p_y2)
+  (g1 "h" p_r1 p_y2)
+  (cx p_r1 p_y1 p_r2 p_y2)
+  (g1 "h" p_r2 p_y2)
   (qcomg "cz" 1))
 
 
@@ -297,127 +297,127 @@
 ;; compatible with all sorts and makes of qpu.
 ;;
 ;; Parameters:
-;; - p_l1: quantum register name 1.
+;; - p_r1: quantum register name 1.
 ;; - p_y1: control qubit 1.
-;; - p_l2: quantum register name 2.
+;; - p_r2: quantum register name 2.
 ;; - p_y2: target qubit 2.
 ;;
-(define (cz-fast p_l1 p_y1 p_l2 p_y2)
-  (g2 "cz-fast" p_l1 p_y1 p_l2 p_y2))
+(define (cz-fast p_r1 p_y1 p_r2 p_y2)
+  (g2 "cz-fast" p_r1 p_y1 p_r2 p_y2))
 
 
 ;; cy - Gate cy, controlled y expressed atomically.
 ;;
 ;; Parameters:
-;; - p_l1: quantum register name 1.
+;; - p_r1: quantum register name 1.
 ;; - p_y1: control qubit 1.
-;; - p_l2: quantum register name 2.
+;; - p_r2: quantum register name 2.
 ;; - p_y2: target qubit 2.
 ;;
-(define (cy p_l1 p_y1 p_l2 p_y2)
+(define (cy p_r1 p_y1 p_r2 p_y2)
   (qcomg "cy" 0)
-  (g1 "sdg" p_l2 p_y2)
-  (cx p_l1 p_y1 p_l2 p_y2)
-  (g1 "s" p_l2 p_y2)
+  (g1 "sdg" p_r2 p_y2)
+  (cx p_r1 p_y1 p_r2 p_y2)
+  (g1 "s" p_r2 p_y2)
   (qcomg "cy" 1))
 
 
 ;; cy-fast - Gate cy, controlled y in fast form.
 ;;
 ;; Parameters:
-;; - p_l1: quantum register name 1.
+;; - p_r1: quantum register name 1.
 ;; - p_y1: control qubit 1.
-;; - p_l2: quantum register name 2.
+;; - p_r2: quantum register name 2.
 ;; - p_y2: target qubit 2.
 ;;
-(define (cy-fast p_l1 p_y1 p_l2 p_y2)
-  (g2 "cy-fast" p_l1 p_y1 p_l2 p_y2))
+(define (cy-fast p_r1 p_y1 p_r2 p_y2)
+  (g2 "cy-fast" p_r1 p_y1 p_r2 p_y2))
 
 
 ;; ch - Gate ch, controlled h expressed atomically.
 ;;
 ;; Parameters:
-;; - p_l1: quantum register name 1.
+;; - p_r1: quantum register name 1.
 ;; - p_y1: control qubit 1.
-;; - p_l2: quantum register name 2.
+;; - p_r2: quantum register name 2.
 ;; - p_y2: target qubit 2.
 ;;
-(define (ch p_l1 p_y1 p_l2 p_y2)
+(define (ch p_r1 p_y1 p_r2 p_y2)
   (qcomg "ch" 0)
-  (g1 "h" p_l2 p_y2)
-  (g1 "sdg" p_l2 p_y2)
-  (cx p_l1 p_y1 p_l2 p_y2)
-  (ht p_l2 p_y2)
-  (cx p_l1 p_y1 p_l2 p_y2)
-  (g1 "t" p_l2 p_y2)
-  (hs p_l2 p_y2)
-  (g1 "x" p_l2 p_y2)
-  (g1 "s" p_l1 p_y1)
+  (g1 "h" p_r2 p_y2)
+  (g1 "sdg" p_r2 p_y2)
+  (cx p_r1 p_y1 p_r2 p_y2)
+  (ht p_r2 p_y2)
+  (cx p_r1 p_y1 p_r2 p_y2)
+  (g1 "t" p_r2 p_y2)
+  (hs p_r2 p_y2)
+  (g1 "x" p_r2 p_y2)
+  (g1 "s" p_r1 p_y1)
   (qcomg "ch" 1))
 
 
 ;; ch-fast - Gate ch, controlled h in fast form.
 ;;
 ;; Parameters:
-;; - p_l1: quantum register name 1.
+;; - p_r1: quantum register name 1.
 ;; - p_y1: control qubit 1.
-;; - p_l2: quantum register name 2.
+;; - p_r2: quantum register name 2.
 ;; - p_y2: target qubit 2.
 ;;
-(define (ch-fast p_l1 p_y1 p_l2 p_y2)
-  (g2 "ch-fast" p_l1 p_y1 p_l2 p_y2))
+(define (ch-fast p_r1 p_y1 p_r2 p_y2)
+  (g2 "ch-fast" p_r1 p_y1 p_r2 p_y2))
 
 
 ;; ccx - Gate ccx, Toffoli gate expressed atomically.
 ;;
 ;; Parameters:
-;; - p_l1: quantum register name 1.
+;; - p_r1: quantum register name 1.
 ;; - p_y1: control qubit 1 (dot).
-;; - p_l2: quantum register name 2.
+;; - p_r2: quantum register name 2.
 ;; - p_y2: control qubit 2 (dot).
-;; - p_l3: quantum register name 3.
+;; - p_r3: quantum register name 3.
 ;; - p_y3: target qubit 3 (plus).
 ;;
 ;; Sources:
 ;; - [1][2][3][4][5].
 ;;
-(define (ccx p_l1 p_y1 p_l2 p_y2 p_l3 p_y3)
+(define (ccx p_r1 p_y1 p_r2 p_y2 p_r3 p_y3)
   (qcomg "ccx" 0)
-  (g1 "h" p_l3 p_y3)
-  (cx p_l2 p_y2 p_l3 p_y3)
-  (g1 "tdg" p_l3 p_y3)
-  (cx p_l1 p_y1 p_l3 p_y3)
-  (g1 "t" p_l3 p_y3)
-  (cx p_l2 p_y2 p_l3 p_y3)
-  (g1 "tdg" p_l3 p_y3)
-  (cx p_l1 p_y1 p_l3 p_y3)
-  (g1 "t" p_l2 p_y2)
-  (g1 "t" p_l3 p_y3)
-  (g1 "h" p_l3 p_y3)
-  (cx p_l1 p_y1 p_l2 p_y2)
-  (g1 "t" p_l1 p_y1)
-  (g1 "tdg" p_l2 p_y2)
-  (cx p_l1 p_y1 p_l2 p_y2)
+  (g1 "h" p_r3 p_y3)
+  (cx p_r2 p_y2 p_r3 p_y3)
+  (g1 "tdg" p_r3 p_y3)
+  (cx p_r1 p_y1 p_r3 p_y3)
+  (g1 "t" p_r3 p_y3)
+  (cx p_r2 p_y2 p_r3 p_y3)
+  (g1 "tdg" p_r3 p_y3)
+  (cx p_r1 p_y1 p_r3 p_y3)
+  (g1 "t" p_r2 p_y2)
+  (g1 "t" p_r3 p_y3)
+  (g1 "h" p_r3 p_y3)
+  (cx p_r1 p_y1 p_r2 p_y2)
+  (g1 "t" p_r1 p_y1)
+  (g1 "tdg" p_r2 p_y2)
+  (cx p_r1 p_y1 p_r2 p_y2)
   (qcomg "ccx" 1))
 
 
 ;; ccx-fast - Toffoli gate in fast form.
 ;;
 ;; Parameters:
-;; - p_l1: quantum register name 1.
+;; - p_r1: quantum register name 1.
 ;; - p_y1: control qubit 1 (dot).
-;; - p_l2: quantum register name 2.
+;; - p_r2: quantum register name 2.
 ;; - p_y2: control qubit 2 (dot).
-;; - p_l3: quantum register name 3.
+;; - p_r3: quantum register name 3.
 ;; - p_y3: target qubit 3 (plus).
 ;;
-(define (ccx-fast p_l1 p_y1 p_l2 p_y2 p_l3 p_y3)
+(define (ccx-fast p_r1 p_y1 p_r2 p_y2 p_r3 p_y3)
   (display (strings-append (list "ccx "
-				 (qbgna p_l1 p_y1)
+				 (qbgna p_r1 p_y1)
 				 ","
-				 (qbgna p_l1 p_y2)
+				 (qbgna p_r1 p_y2)
 				 ","
-				 (qbgna p_l3 p_y3)
+				 (qbgna p_r3 p_y3)
 				 (g2q-txt 2))
 			   0)))
   
@@ -425,28 +425,28 @@
 ;; rx - Gate rx, rotation around X-axis.
 ;;
 ;; Parameters:
-;; - p_t1: theta angle.
-;; - p_l1: quantum register name 1.
+;; - p_t1: numeric, theta angle.
+;; - p_r1: quantum register name 1.
 ;; - p_y1: qubit 1.
 ;;
-(define (rx p_t1 p_l1 p_y1)
+(define (rx p_t1 p_r1 p_y1)
   (let ((y2 (/ (qconst "Pi") 2)))
     
-    (u3 p_t1 (* y2 -1) y2 p_l1 p_y1)))
+    (u3 p_t1 (* y2 -1) y2 p_r1 p_y1)))
 
 
 ;; rx-fast - Gate rx, rotation around X-axis, in fast form.
 ;;
 ;; Parameters:
-;; - p_t1: theta angle; this is a dummy arument, left for consistency.
-;; - p_l1: quantum register name 1.
+;; - p_t1: numeric, theta angle; this is a dummy arument, left for consistency.
+;; - p_r1: quantum register name 1.
 ;; - p_y1: qubit 1.
 ;; 
-(define (rx-fast p_t1 p_l1 p_y1)
+(define (rx-fast p_t1 p_r1 p_y1)
   (display (strings-append (list "rx("
 				 (grsp-n2s (/ (qconst "Pi") 2))
 				 (g2q-txt 4)
-				 p_l1
+				 p_r1
 				 "["
 				 (grsp-n2s p_y1)
 				 (g2q-txt 3))
@@ -456,26 +456,26 @@
 ;; ry - Gate ry, rotation around Y-axis.
 ;;
 ;; Parameters:
-;; - p_t1: theta angle.
-;; - p_l1: quantum register name 1.
+;; - p_t1: numeric, theta angle.
+;; - p_r1: quantum register name 1.
 ;; - p_y1: qubit 1.
 ;;
-(define (ry p_t1 p_l1 p_y1)
-  (u3 p_t1 0 0 p_l1 p_y1))
+(define (ry p_t1 p_r1 p_y1)
+  (u3 p_t1 0 0 p_r1 p_y1))
 
 
 ;; ry-fast - Gate ry, rotation around Y-axis, in fast form.
 ;;
 ;; Parameters:
-;; - p_t1: angle (dummy, left for consistency with other functions).
-;; - p_l1: quantum register name 1.
+;; - p_t1: numeric, angle (dummy, left for consistency with other functions).
+;; - p_r1: quantum register name 1.
 ;; - p_y1: qubit 1.
 ;; 
-(define (ry-fast p_t1 p_l1 p_y1)
+(define (ry-fast p_t1 p_r1 p_y1)
   (display (strings-append (list "ry("
 				 (grsp-n2s (/ (qconst "Pi") 2))
 				 (g2q-txt 4)
-				 p_l1
+				 p_r1
 				 "["
 				 (grsp-n2s p_y1)
 				 (g2q-txt 3))
@@ -485,26 +485,27 @@
 ;; rz - Gate rz, rotation around Z-axis.
 ;;
 ;; Parameters:
-;; - p_t1: angle 1.
-;; - p_l1: quantum register name 1.
+;; - p_t1: numeric, angle 1.
+;; - p_r1: quantum register name 1.
 ;; - p_y1: qubit 1.
 ;;
-(define (rz p_t1 p_l1 p_y1)
-  (u1 p_t1 p_l1 p_y1))
+(define (rz p_t1 p_r1 p_y1)
+  (u1 p_t1 p_r1 p_y1))
 
 
 ;; rz-fast - Gate rz, rotation around Z-axis, in fast form.
 ;;
 ;; Parameters:
-;; - p_t1: angle; dummy argument left for consistency with other functions.
-;; - p_l1: quantum register name 1.
+;; - p_t1: numeric, angle; dummy argument left for consistency with other
+;;   functions.
+;; - p_r1: quantum register name 1.
 ;; - p_y1: qubit 1.
 ;; 
-(define (rz-fast p_t1 p_l1 p_y1)
+(define (rz-fast p_t1 p_r1 p_y1)
   (display (strings-append (list "rz("
 				 (grsp-n2s (/ (qconst "Pi") 2))
 				 (g2q-txt 4)
-				 p_l1
+				 p_r1
 				 "["
 				 (grsp-n2s p_y1)
 				 (g2q-txt 3))
@@ -514,41 +515,41 @@
 ;; crz - Gate crz, controlled rz expressed atomically.
 ;;
 ;; Parameters:
-;; - p_t1: angle 1.
-;; - p_l1: quantum register name 1.
+;; - p_t1: numeric, angle 1.
+;; - p_r1: quantum register name 1.
 ;; - p_y1: qubit 1.
-;; - p_l2: quantum register name 2.
+;; - p_r2: quantum register name 2.
 ;; - p_y2: qubit 2.
 ;;
-(define (crz p_t1 p_l1 p_y1 p_l2 p_y2)
+(define (crz p_t1 p_r1 p_y1 p_r2 p_y2)
   (let ((t1 (/ p_t1 2)))
 
     (qcomg "crz" 0)
-    (u1 t1 p_l2 p_y2)
-    (cx p_l1 p_y1 p_l2 p_y2)
-    (u1 (* -1.0 t1) p_l2 p_y2)
-    (cx p_l1 p_y1 p_l2 p_y2)
+    (u1 t1 p_r2 p_y2)
+    (cx p_r1 p_y1 p_r2 p_y2)
+    (u1 (* -1.0 t1) p_r2 p_y2)
+    (cx p_r1 p_y1 p_r2 p_y2)
     (qcomg "crz" 1)))
 
 
 ;; crz-fast - Gate crz, controlled rz expressed in fast form.
 ;;
 ;; Parameters:
-;; - p_t1: angle 1. Dummy for compat with gate crz.
-;; - p_l1: quantum register name 1.
+;; - p_t1: numeric, angle 1. Dummy for compat with gate crz.
+;; - p_r1: quantum register name 1.
 ;; - p_y1: qubit 1.
-;; - p_l2: quantum register name 2.
+;; - p_r2: quantum register name 2.
 ;; - p_y2: qubit 2.
 ;;
-(define (crz-fast p_t1 p_l1 p_y1 p_l2 p_y2)
+(define (crz-fast p_t1 p_r1 p_y1 p_r2 p_y2)
   (display (strings-append (list "crz("
 				 (grsp-n2s (/ (qconst "Pi") 2))
 				 (g2q-txt 4)
-				 p_l1
+				 p_r1
 				 "["
 				 (grsp-n2s p_y1)
 				 "],"
-				 p_l2
+				 p_r2
 				 "["
 				 (grsp-n2s p_y2)
 				 (g2q-txt 3))
@@ -558,45 +559,45 @@
 ;; cu1 - Gate cu1, controlled phase rotation expressed atomically.
 ;;
 ;; Parameters:
-;; - p_t1: angle 1.
-;; - p_l1: quantum register name 1.
+;; - p_t1: numeric, angle 1.
+;; - p_r1: quantum register name 1.
 ;; - p_y1: qubit 1.
-;; - p_l2: quantum register name 2.
+;; - p_r2: quantum register name 2.
 ;; - p_y2: qubit 2.
 ;;
 ;; Notes:
 ;; - TODO: check t1 and p_t1.
 ;;
-(define (cu1 p_t1 p_l1 p_y1 p_l2 p_y2)
+(define (cu1 p_t1 p_r1 p_y1 p_r2 p_y2)
   (let ((t1 (* p_y1 0.5))) ;; ***
 
     (qcomg "cu1" 0)
-    (u1 t1 p_l1 p_y1)
-    (cx p_l1 p_y1 p_l2 p_y2)
-    (u1 (* -1.0 t1) p_l2 p_y2)
-    (cx p_l1 p_y1 p_l2 p_y2)
-    (u1 t1 p_l1 p_y1)
+    (u1 t1 p_r1 p_y1)
+    (cx p_r1 p_y1 p_r2 p_y2)
+    (u1 (* -1.0 t1) p_r2 p_y2)
+    (cx p_r1 p_y1 p_r2 p_y2)
+    (u1 t1 p_r1 p_y1)
     (qcomg "cu1" 1)))
 
 
 ;; cu1-fast - Gate cu1, controlled phase rotation gate expressed in fast form.
 ;;
 ;; Parameters:
-;; - p_t1: angle 1.
-;; - p_l1: quantum register name 1.
+;; - p_t1: numeric, angle 1.
+;; - p_r1: quantum register name 1.
 ;; - p_y1: qubit 1.
-;; - p_l2: quantum register name 2.
+;; - p_r2: quantum register name 2.
 ;; - p_y2: qubit 2.
 ;;
-(define (cu1-fast p_t1 p_l1 p_y1 p_l2 p_y2)
+(define (cu1-fast p_t1 p_r1 p_y1 p_r2 p_y2)
   (display (strings-append (list "cu1("
 				 (grsp-n2s p_t1)
 				 (g2q-txt 4)
-				 p_l1
+				 p_r1
 				 "["
 				 (grsp-n2s p_y1)
 				 "],"
-				 p_l2
+				 p_r2
 				 "["
 				 (grsp-n2s p_y2)
 				 (g2q-txt 3))
@@ -606,35 +607,35 @@
 ;; cu3 - Gate cu3, controlled U gate expressed atomically.
 ;;
 ;; Parameters:
-;; - p_t1: angle 1.
-;; - p_t2: angle 2.
-;; - p_l1: quantum register name 1.
+;; - p_t1: numeric, angle 1.
+;; - p_t2: numeric, angle 2.
+;; - p_r1: quantum register name 1.
 ;; - p_y1: qubit 1.
-;; - p_l2: quantum register name 2.
+;; - p_r2: quantum register name 2.
 ;; - p_y2: qubit 2.
 ;;
-(define (cu3 p_t1 p_t2 p_l1 p_y1 p_l2 p_y2)
+(define (cu3 p_t1 p_t2 p_r1 p_y1 p_r2 p_y2)
   (qcomg "cu3" 0)
-  (u1 (* (- p_t1 p_t2) 0.5) p_l2 p_y2)
-  (cx p_l1 p_y1 p_l2 p_y2)
-  (u3 (* (* p_t1 0.5) -1.0) 0 (* (* (+ p_t2 p_t1) 0.5) -1.0) p_l2 p_y2)
-  (cx p_l1 p_y1 p_l2 p_y2)
-  (u3 (* p_t1 0.5) p_t2 0 p_l2 p_y2)
+  (u1 (* (- p_t1 p_t2) 0.5) p_r2 p_y2)
+  (cx p_r1 p_y1 p_r2 p_y2)
+  (u3 (* (* p_t1 0.5) -1.0) 0 (* (* (+ p_t2 p_t1) 0.5) -1.0) p_r2 p_y2)
+  (cx p_r1 p_y1 p_r2 p_y2)
+  (u3 (* p_t1 0.5) p_t2 0 p_r2 p_y2)
   (qcomg "cu3" 1))
 
 
 ;; cu3-fast - Gate cu3, controlled U gate expressed in fast form.
 ;;
 ;; Parameters:
-;; - p_t1: angle 1.
-;; - p_t2: angle 2.
-;; - p_t3: angle 3.
-;; - p_l1: quantum register name 1.
+;; - p_t1: numeric, angle 1.
+;; - p_t2: numeric, angle 2.
+;; - p_t3: numeric, angle 3.
+;; - p_r1: quantum register name 1.
 ;; - p_y1: qubit 1.
-;; - p_l2: quantum register name 2.
+;; - p_r2: quantum register name 2.
 ;; - p_y2: qubit 2.
 ;;
-(define (cu3-fast p_t1 p_t2 p_t3 p_l1 p_y1 p_l2 p_y2)
+(define (cu3-fast p_t1 p_t2 p_t3 p_r1 p_y1 p_r2 p_y2)
   (display (strings-append (list "cu3("
 				 (grsp-n2s p_t1)
 				 ","
@@ -642,11 +643,11 @@
 				 ","
 				 (grsp-n2s p_t3)
 				 (g2q-txt 4)
-				 p_l1
+				 p_r1
 				 "["
 				 (grsp-n2s p_y1)
 				 "],"
-				 p_l2
+				 p_r2
 				 "["
 				 (grsp-n2s p_y2)
 				 (g2q-txt 3))
@@ -656,16 +657,16 @@
 ;; g1cxg1 - Puts a set of gates in configuration g1 cx g1.
 ;;
 ;; Parameters:
-;; - p_g1: g1 gate name.
-;; - p_l1: quantum register name (i.e. q).
-;; - p_y1: qubit number 1 (control of cx).
-;; - p_y2: qubit number 2 (target of cx).
+;; - p_g1: string, g1 gate name.
+;; - p_r1: quantum register name (i.e. q).
+;; - p_y1: numeric, qubit number 1 (control of cx).
+;; - p_y2: numeric, qubit number 2 (target of cx).
 ;;
-(define (g1cxg1 p_g1 p_l1 p_y1 p_y2)
+(define (g1cxg1 p_g1 p_r1 p_y1 p_y2)
   (qcomg "g1cxg1" 0)
-  (g1 p_g1 p_l1 p_y2)
-  (cx p_l1 p_y1 p_l1 p_y2)
-  (g1 p_g1 p_l1 p_y2)
+  (g1 p_g1 p_r1 p_y2)
+  (cx p_r1 p_y1 p_r1 p_y2)
+  (g1 p_g1 p_r1 p_y2)
   (qcomg "g1cxg1" 1))
 
 
@@ -700,7 +701,7 @@
 ;; Arguments
 ;; - p_f1: name of .qasm file.
 ;; - p_f2: name of .qreg file.
-;; - p_p1: where results will be saved to:
+;; - p_p1: string, where results will be saved to:
 ;;   - "json" to save results to a json file.
 ;;   - "sqlite3" to save results to a sqlite3 database.
 ;; - p_d1: device.
@@ -784,47 +785,47 @@
 ;; qcnot1 - A cx based NOT gate expressed atomically.
 ;;
 ;; Parameters:
-;; - p_l1: gate group name 1.
+;; - p_r1: gate group name 1.
 ;; - p_y1: target qubit, normally p_y2 - 1.
-;; - p_l2: gate group name 2.
+;; - p_r2: gate group name 2.
 ;; - p_y2: control qubit, value to be inverted, 0 or 1.
 ;;
 ;; Output:
-;; - Inverse of p_l2[p_y2], on p_l1[p_y1].
+;; - Inverse of p_r2[p_y2], on p_r1[p_y1].
 ;;   - |0> -> |1>.
 ;;   - |1> -> |0>.
 ;;
-(define (qcnot1 p_l2 p_y2 p_l1 p_y1)
+(define (qcnot1 p_r2 p_y2 p_r1 p_y1)
   (qcomg "qcnot1" 0) 
-  (g1 "x" p_l1 p_y1)
-  (cx p_l2 p_y2 p_l1 p_y1)
+  (g1 "x" p_r1 p_y1)
+  (cx p_r2 p_y2 p_r1 p_y1)
   (qcomg "qcnot1" 1))
 
 
 ;; qxor1 - A qcnot1 based XOR gate expressed atomically.
 ;;
 ;; Parameters:
-;; - p_l1: quantum register name 1.
+;; - p_r1: quantum register name 1.
 ;; - p_y1: target qubit a, normally p_y2 - 1.
-;; - p_l2: quantum register name 2.
+;; - p_r2: quantum register name 2.
 ;; - p_y2: control qubit a.
-;; - p_l3: quantum register name 3.
+;; - p_r3: quantum register name 3.
 ;; - p_y3: target qubit b, normally p_y3 - 1.
-;; - p_l4: quantum register name 4.
+;; - p_r4: quantum register name 4.
 ;; - p_y4: control qubit b.
 ;;
 ;; Output:
-;; - On p_l1[p_y1].
+;; - On p_r1[p_y1].
 ;;   - |00> -> |0>.
 ;;   - |11> -> |0>.
 ;;   - |01> -> |1>.
 ;;   - |10> -> |1>.
 ;;
-(define (qxor1 p_l1 p_y1 p_l2 p_y2 p_l3 p_y3 p_l4 p_y4)
+(define (qxor1 p_r1 p_y1 p_r2 p_y2 p_r3 p_y3 p_r4 p_y4)
   (qcomg "qxor1" 0)
-  (qcnot1 p_l2 p_y2 p_l1 p_y1)
-  (qcnot1 p_l4 p_y4 p_l3 p_y3)
-  (qcnot1 p_l3 p_y3 p_l1 p_y1)
+  (qcnot1 p_r2 p_y2 p_r1 p_y1)
+  (qcnot1 p_r4 p_y4 p_r3 p_y3)
+  (qcnot1 p_r3 p_y3 p_r1 p_y1)
   (qcomg "qxor1" 1))
 
 
@@ -880,7 +881,7 @@
 ;;
 ;; Parameters:
 ;; - p_l1: list of results as obtained by applying qfclvr.
-;; - p_p1: choice between obtaining the max or min value.
+;; - p_p1: string, choice between obtaining the max or min value.
 ;;   - "max" for maximum value.
 ;;   - "min" to get the minimum value.
 ;;
@@ -922,44 +923,44 @@
 ;; swap-fast - Swap gate expressed in fast form.
 ;;
 ;; Parameters:
-;; - p_l1: quantum register name. 
+;; - p_r1: quantum register name. 
 ;; - p_y1: qubit 1.
 ;; - p_y2: qubit 2. 
 ;;
-(define (swap-fast p_l1 p_y1 p_y2)
+(define (swap-fast p_r1 p_y1 p_y2)
   (display (strings-append (list "swap "
-				 (qbgna p_l1 p_y1)
+				 (qbgna p_r1 p_y1)
 				 ","
-				 (qbgna p_l1 p_y2)
+				 (qbgna p_r1 p_y2)
 				 (g2q-txt 2))
 			   0)))
 
 
 ;; qftyn - Quantum Fourier Transformation for n qubits in the range
-;; [p_l1[p_y1] : p_l2[p_y2]]. Note that this function assumes that all qubits
+;; [p_r1[p_y1] : p_r2[p_y2]]. Note that this function assumes that all qubits
 ;; in the quantum register are  interconnected. In some QPU architectures this
 ;; may not be possible. Expressed atomically.
 ;;
 ;; Parameters:
-;; - p_l1: quantum register name 1.
+;; - p_r1: quantum register name 1.
 ;; - p_y1: qubit 1, min limit of the range.
-;; - p_l2: quantum register name 2.
+;; - p_r2: quantum register name 2.
 ;; - p_y2: qubit 2, max limit of the range.
 ;;
 ;; Sources:
 ;; - [6][7].
 ;;
-(define (qftyn p_l1 p_y1 p_l2 p_y2)
+(define (qftyn p_r1 p_y1 p_r2 p_y2)
   (let ((i1 p_y1)
 	(j1 0))
     
     (qcomg "qftyn" 0)    
     (while (<= i1 p_y2)
-	   (g1 "h" p_l1 i1)
+	   (g1 "h" p_r1 i1)
 	   
 	   (set! j1 (+ i1 1))
 	   (while (<= j1 p_y2)
-		  (cu1 (/ (qconst "Pi") (expt 2 (- j1 i1))) p_l1 j1 p_l2 i1)
+		  (cu1 (/ (qconst "Pi") (expt 2 (- j1 i1))) p_r1 j1 p_r2 i1)
 		  
 		  (set! j1 (+ j1 1)))
 	   
@@ -971,9 +972,9 @@
 ;; qftdgyn - Function qftyn dagger, expressed atomically.
 ;;
 ;; Parameters:
-;; - p_l1: quantum register name 1.
+;; - p_r1: quantum register name 1.
 ;; - p_y1: qubit 1, min limit of the range.
-;; - p_l2: quantum register name 2.
+;; - p_r2: quantum register name 2.
 ;; - p_y2: qubit 2, max limit of the range.
 ;;
 ;; Remarks:
@@ -982,7 +983,7 @@
 ;; Sources:
 ;; - [8].
 ;;
-(define (qftdgyn p_l1 p_y1 p_l2 p_y2)
+(define (qftdgyn p_r1 p_y1 p_r2 p_y2)
   (let ((i1 p_y1)
 	(j1 0)
 	(k1 0))
@@ -991,17 +992,17 @@
     (while (<= i1 p_y2)
 	   (set! j1 (- (- p_y2 1) i1))
 	   
-	   ;; PATCH: j does not behave well. Sometimes acquires -1 as value.
+	   ;; PATCH: j1 does not behave well. Sometimes acquires -1 as value.
 	   ;; this produces an error at least when using qx_simulator.
 	   (cond ((< j1 0)
 		  (set! j1 0)))
 	   
 	   (while (<= k1 j1)
-		  (cu1 (/ (qconst "Pi") (expt 2 (- j1 k1))) p_l1 j1 p_l2 k1)
+		  (cu1 (/ (qconst "Pi") (expt 2 (- j1 k1))) p_r1 j1 p_r2 k1)
 		  
 		  (set! k1 (+ k1 1)))
 	   
-	   (g1 "h" p_l1 j1)
+	   (g1 "h" p_r1 j1)
 	   (set! i1 (+ i1 1)))
     
   (qcomg "qftdgyn" 1)))
@@ -1011,168 +1012,168 @@
 ;; (controlled swap).
 ;;
 ;; Parameters:
-;; - p_l1: quantum register name 1.
+;; - p_r1: quantum register name 1.
 ;; - p_y1: qubit 1.
-;; - p_l2: quantum register name 2.
+;; - p_r2: quantum register name 2.
 ;; - p_y2: qubit 2.
-;; - p_l3: quantum register name 3.
+;; - p_r3: quantum register name 3.
 ;; - p_y3: qubit 3.
 ;;
 ;; Sources:
 ;; - [5][9].
 ;;
-(define (cswap p_l1 p_y1 p_l2 p_y2 p_l3 p_y3)
+(define (cswap p_r1 p_y1 p_r2 p_y2 p_r3 p_y3)
   (qcomg "cswap" 0)
-  (cx p_l3 p_y3 p_l2 p_y2)
-  (cx p_l1 p_y1 p_l2 p_y2)
-  (g1 "h" p_l3 p_y3)
-  (g1 "t" p_l1 p_y1)
-  (g1 "tdg" p_l2 p_y2)
-  (g1 "t" p_l3 p_y3)
-  (cx p_l3 p_y3 p_l2 p_y2)
-  (cx p_l1 p_y1 p_l3 p_y3)
-  (g1 "t" p_l2 p_y2)
-  (g1 "tdg" p_l3 p_y3)  
-  (cx p_l1 p_y1 p_l2 p_y2)
-  (g1 "tdg" p_l2 p_y2)
-  (cx p_l1 p_y1 p_l3 p_y3)
-  (cx p_l3 p_y3 p_l2 p_y2)
-  (g1 "t" p_l2 p_y2)
-  (g1 "h" p_l3 p_y3)
-  (cx p_l3 p_y3 p_l2 p_y2)  
+  (cx p_r3 p_y3 p_r2 p_y2)
+  (cx p_r1 p_y1 p_r2 p_y2)
+  (g1 "h" p_r3 p_y3)
+  (g1 "t" p_r1 p_y1)
+  (g1 "tdg" p_r2 p_y2)
+  (g1 "t" p_r3 p_y3)
+  (cx p_r3 p_y3 p_r2 p_y2)
+  (cx p_r1 p_y1 p_r3 p_y3)
+  (g1 "t" p_r2 p_y2)
+  (g1 "tdg" p_r3 p_y3)  
+  (cx p_r1 p_y1 p_r2 p_y2)
+  (g1 "tdg" p_r2 p_y2)
+  (cx p_r1 p_y1 p_r3 p_y3)
+  (cx p_r3 p_y3 p_r2 p_y2)
+  (g1 "t" p_r2 p_y2)
+  (g1 "h" p_r3 p_y3)
+  (cx p_r3 p_y3 p_r2 p_y2)  
   (qcomg "cswap" 1))
 
 
-;; cx-ladder - Creates a ladder of succesive cx gates from p_l1[p_y1] to
-;; p_l1[p_y2] according to :
+;; cx-ladder - Creates a ladder of succesive cx gates from p_r1[p_y1] to
+;; p_r1[p_y2] according to:
 ;; - If p_y1 < p_y2: ladder goes from lower element number to greater
 ;;   element number on the registry.
 ;; - If p_y1 = p_y2: the fuunction behaves as a single cx gate.
 ;; - if p_y1 > p_y2: the ladder goes from higher to lower registry element.
 ;;
 ;; Parameters:
-;; - p_l1: quantum register name.
+;; - p_r1: quantum register name.
 ;; - p_y1: qubit 1, control qubit of the cx gate where the ladder begins.
 ;; - p_y2: qubit 2, target qubit of the cx gate where the ladder ends.
-;; - p_p1: mode:
+;; - p_p1: numeric, mode:
 ;;   - 1: descending ladder, control qubit on top (p_y1).
 ;;   - 2: ascending ladder, control qubit on top (p_y1).
 ;;   - 3: descending ladder, control qubit on bottom (p_y2).
 ;;   - 4: ascending ladder, control qubit on bottom (p_y2).
 ;;
-(define (cx-ladder p_l1 p_y1 p_y2 p_p1)
+(define (cx-ladder p_r1 p_y1 p_y2 p_p1)
   (qcomg "cx-ladder" 0)
   (cond ((equal? p_y1 p_y2)
-	 (cx p_l1 p_y1 p_l1 p_y2))
+	 (cx p_r1 p_y1 p_r1 p_y2))
 	
         ;; Control qubit on top, descending.
 	((equal? p_p1 1)
 	 (begin (let loop ((i1 p_y1))
 		  (if (equal? i1 (- p_y2 1))
-		      (cx p_l1 i1 p_l1 p_y2)
-		      (begin (cx p_l1 i1 p_l1 (+ i1 1))
+		      (cx p_r1 i1 p_r1 p_y2)
+		      (begin (cx p_r1 i1 p_r1 (+ i1 1))
 			     (loop (+ i1 1)))))))
 	
         ;; Control qubit on top, ascending.
 	((equal? p_p1 2)
 	 (begin (let loop ((i1 (- p_y1 1)))
 		  (if (equal? i1 p_y2)
-		      (cx p_l1 p_y2 p_l1 (+ i1 1))
-		      (begin (cx p_l1 i1 p_l1 (+ i1 1))
+		      (cx p_r1 p_y2 p_r1 (+ i1 1))
+		      (begin (cx p_r1 i1 p_r1 (+ i1 1))
 			     (loop (- i1 1)))))))
 	
         ;; Control qubit on bottom, descending.
 	((equal? p_p1 3)
 	 (begin (let loop ((i1 p_y1))
 		  (if (equal? i1 (- p_y2 1))
-		      (cx p_l1 p_y2 p_l1 i1)
-		      (begin (cx p_l1 (+ i1 1) p_l1 i1)
+		      (cx p_r1 p_y2 p_r1 i1)
+		      (begin (cx p_r1 (+ i1 1) p_r1 i1)
 			     (loop (+ i1 1)))))))
 	
         ;; Control qubit on bottom, ascending.
 	((equal? p_p1 4)
 	 (begin (let loop ((i1 p_y1))
 		  (if (equal? i1 (+ p_y2 1))
-		      (cx p_l1 i1 p_l1 p_y2)
-		      (begin (cx p_l1 i1 p_l1 (- i1 1))
+		      (cx p_r1 i1 p_r1 p_y2)
+		      (begin (cx p_r1 i1 p_r1 (- i1 1))
 			     (loop (- i1 1))))))))
   
   (qcomg "cx-ladder" 1))
 
 
 ;; swap-fast-ladder - Creates a ladder of succesive swap-fast gates from
-;; p_l1[p_y1] to  p_l1[p_y2] according to:
+;; p_r1[p_y1] to p_r1[p_y2] according to:
 ;; - If p_y1 < p_y2: ladder goes from lower element number to greater
 ;;   element number on the registry.
 ;; - If p_y1 = p_y2: the fuunction behaves as a single swap-fast gate.
 ;; - if p_y1 > p_y2: the ladder goes from higher to lower registry element.
 ;;
 ;; Parameters:
-;; - p_l1: quantum register name.
+;; - p_r1: quantum register name.
 ;; - p_y1: qubit 1, lower registry number qubit where the ladder begins.
 ;; - p_y2: qubit 2, higher registry number qubit where the ladder ends.
-;; - p_p1: mode:
+;; - p_p1: numeric, mode:
 ;;   - 1: descending ladder.
 ;;   - 2: ascending ladder.
 ;;
-(define (swap-fast-ladder p_l1 p_y1 p_y2 p_p1)
+(define (swap-fast-ladder p_r1 p_y1 p_y2 p_p1)
   (qcomg "swap-fast-ladder" 0)
   (cond ((equal? p_y1 p_y2)
-	 (swap-fast p_l1 p_y1 p_y2))
+	 (swap-fast p_r1 p_y1 p_y2))
 	
         ;; Descending.
 	((equal? p_p1 1)
 	 (begin (let loop ((i1 p_y1))
 		  (if (equal? i1 (- p_y2 1))
-		      (swap-fast p_l1 i1 p_y2)
-		      (begin (swap-fast p_l1 i1 (+ i1 1))
+		      (swap-fast p_r1 i1 p_y2)
+		      (begin (swap-fast p_r1 i1 (+ i1 1))
 			     (loop (+ i1 1)))))))
 	
         ;; Ascending.
 	((equal? p_p1 2)
 	 (begin (let loop ((i1 (- p_y1 1)))
 		  (if (equal? i1 p_y2)
-		      (swap-fast p_l1 p_y2 (+ i1 1))
-		      (begin (swap-fast p_l1 i1 (+ i1 1))
+		      (swap-fast p_r1 p_y2 (+ i1 1))
+		      (begin (swap-fast p_r1 i1 (+ i1 1))
 			     (loop (- i1 1))))))))
   
   (qcomg "swap-fast-ladder" 1))
 
 
 ;; swap-ladder - Creates a ladder of succesive swap gates from
-;; p_l1[p_y1] to  p_l1[p_y2] according to :
+;; p_r1[p_y1] to p_r1[p_y2] according to :
 ;; - If p_y1 < p_y2: ladder goes from lower element number to greater
 ;;   element number on the registry.
 ;; - If p_y1 = p_y2: the fuunction behaves as a single swap gate.
 ;; - if p_y1 > p_y2: the ladder goes from higher to lower registry element.
 ;;
 ;; Parameters:
-;; - p_l1: quantum register name.
+;; - p_r1: quantum register name.
 ;; - p_y1: qubit 1, lower registry number qubit where the ladder begins.
 ;; - p_y2: qubit 2, higher registry number qubit where the ladder ends.
-;; - p_p1: mode:
+;; - p_p1: numeric, mode:
 ;;   - 1: descending ladder.
 ;;   - 2: ascending ladder.
 ;;
-(define (swap-ladder p_l1 p_y1 p_y2 p_p1)
+(define (swap-ladder p_r1 p_y1 p_y2 p_p1)
   (qcomg "swap-ladder" 0)
   (cond ((equal? p_y1 p_y2)
-	 (swap p_l1 p_y1 p_y2))
+	 (swap p_r1 p_y1 p_y2))
 	
         ;; Descending.
 	((equal? p_p1 1)
 	 (begin (let loop ((i1 p_y1))
 		  (if (equal? i1 (- p_y2 1))
-		      (swap p_l1 i1 p_y2)
-		      (begin (swap p_l1 i1 (+ i1 1))
+		      (swap p_r1 i1 p_y2)
+		      (begin (swap p_r1 i1 (+ i1 1))
 			     (loop (+ i1 1)))))))
 	
         ;; Ascending.
 	((equal? p_p1 2)
 	 (begin (let loop ((i1 (- p_y1 1)))
 		  (if (equal? i1 p_y2)
-		      (swap p_l1 p_y2 (+ i1 1))
-		      (begin (swap p_l1 i1 (+ i1 1))
+		      (swap p_r1 p_y2 (+ i1 1))
+		      (begin (swap p_r1 i1 (+ i1 1))
 			     (loop (- i1 1))))))))
   
   (qcomg "swap-ladder" 1))
@@ -1188,10 +1189,10 @@
 ;; Parameters:
 ;; - p_g1: quantum gate 1 (i.e. "h").
 ;; - p_g2: quantum gate 2 (i.e. "x").
-;; - p_l1: quantum register name (i.e. "q").
+;; - p_r1: quantum register name (i.e. q).
 ;; - p_y1: qubit 1, lower registry qubit of the GHZ array.
 ;; - p_y2: qubit 2, higher registry qubit of the GHZ array.
-;; - p_p1: mode:
+;; - p_p1: numeric, mode:
 ;;   - 1: descending order.
 ;;   - 2: ascending order.
 ;;
@@ -1204,7 +1205,7 @@
 ;; Sources:
 ;; - [9][10][11][12][13].
 ;;
-(define (ghzy p_g1 p_g2 p_l1 p_y1 p_y2 p_p1)
+(define (ghzy p_g1 p_g2 p_r1 p_y1 p_y2 p_p1)
   (let ((d1 (- p_y2 p_y1))
 	(y1 p_y1)
 	(y2 p_y2)
@@ -1220,37 +1221,37 @@
     (cond ((> d1 1)
 	   (begin (cond ((equal? p1 1)
 			 (begin (qcomg "ghzy ladder ascending" 0)
-				(g1y p_g1 p_l1 p_y1 (- p_y2 1))
-				(g1 p_g2 p_l1 p_y2)
+				(g1y p_g1 p_r1 p_y1 (- p_y2 1))
+				(g1 p_g2 p_r1 p_y2)
 
 				;; cx ascending ladder.
 				(let loop ((i1 y2))
 				  (if (equal? i1 (+ p_y1 1))
-				      (cx p_l1 p_y1 p_l1 p_y2)					  
-				      (begin (cx p_l1 (- i1 1) p_l1 p_y2)
+				      (cx p_r1 p_y1 p_r1 p_y2)					  
+				      (begin (cx p_r1 (- i1 1) p_r1 p_y2)
 					     (loop (- i1 1)))))))
 			
 			((equal? p1 2)
 			 (begin (qcomg "ghzy ladder descending" 0)
-				(g1 p_g2 p_l1 p_y1)
-				(g1y p_g1 p_l1 (+ p_y1 1) p_y2)
+				(g1 p_g2 p_r1 p_y1)
+				(g1y p_g1 p_r1 (+ p_y1 1) p_y2)
 				
 				;; cx descending ladder
 				(let loop ((i1 y1))
 				  (if (equal? i1 (- p_y2 1))
-				      (cx p_l1 p_y2 p_l1 p_y1)
-				      (begin (cx p_l1 (+ i1 1) p_l1 p_y1)
+				      (cx p_r1 p_y2 p_r1 p_y1)
+				      (begin (cx p_r1 (+ i1 1) p_r1 p_y1)
 					     (loop (+ i1 1)))))))))
 			       
 	   ;; Finish the structure.
 	   (qcomg "ghzy ladder" 1)  
-	   (g1y p_g1 p_l1 p_y1 p_y2)
-	   (g1y "barrier" p_l1 p_y1 p_y2)))
+	   (g1y p_g1 p_r1 p_y1 p_y2)
+	   (g1y "barrier" p_r1 p_y1 p_y2)))
     
     (qcomg "ghzy" 1)))
 
 
-;; g1yl - Places gates on y axis according to list p_l1. This allows you to set
+;; g1yl - Places gates on y axis according to list p_r1. This allows you to set
 ;; a complete array of gates at once. While setting gates at a given execution
 ;; step can be achieved by means of other functions, g1y1 is yet another
 ;; option that might be more convenient at times, for example, when you want
@@ -1259,8 +1260,8 @@
 ;; perform after a certain operation such as a GHZ state preparation.
 ;;
 ;; Parameters:
-;; - p_l1: quantum register name (.e. "q").
-;; - p_l2: list of strings defining the order on y axis of gates to be placed 
+;; - p_r1: quantum register name (.e. "q").
+;; - p_l1: list of strings defining the order on y axis of gates to be placed 
 ;;   (i.e. '("h" "h" "s") in the case of a three qubit system in which to place 
 ;;   h gates on the first and second, and an s gate on the third.
 ;; - p_y1: qubit 1, lower registry qubit
@@ -1271,15 +1272,15 @@
 ;;   your choice, you would have to place your barrier(s) using the appropriate
 ;;   function calls.
 ;;
-(define (g1yl p_l1 p_l2 p_y1)
-  (let ((l1 (length p_l2))
+(define (g1yl p_r1 p_l1 p_y1)
+  (let ((l1 (length p_l1))
 	(n1 0))
 
     (qcomg "g1y1" 0)
     (let loop ((i1 p_y1))
       (if (equal? i1 (- (+ l1 p_y1) 1))
-	  (g1 (list-ref p_l2 n1) p_l1 i1)
-	  (begin (g1 (list-ref p_l2 n1) p_l1 i1)
+	  (g1 (list-ref p_l1 n1) p_r1 i1)
+	  (begin (g1 (list-ref p_l1 n1) p_r1 i1)
 		 (set! n1 (+ n1 1))
 		 (loop (+ i1 1)))))
     
@@ -1290,7 +1291,7 @@
 ;; [p_y1, p_y1+2].
 ;;
 ;; Parameters:
-;; - p_l1: quantum register name 1.
+;; - p_r1: quantum register name 1.
 ;; - p_y1: qubit 1.
 ;;
 ;; Notes:
@@ -1299,29 +1300,29 @@
 ;; Sources:
 ;; - [14].
 ;;
-(define (ecc1 p_l1 p_y1)
+(define (ecc1 p_r1 p_y1)
   (let ((y1 p_y1)
 	(y2 (+ p_y1 1))
 	(y3 (+ p_y1 2)))
     
     (qcomg "ecc1" 0)
-    (g1y "h" p_l1 y1 y3)    
-    (g1 "t" p_l1 y2)
-    (g1x "h" p_l1 y2 2)    
-    (cx p_l1 y1 p_l1 y2)
-    (g1 "h" p_l1 y1)
-    (cx p_l1 y3 p_l1 y2)
-    (g1y "h" p_l1 y2 y3) 
+    (g1y "h" p_r1 y1 y3)    
+    (g1 "t" p_r1 y2)
+    (g1x "h" p_r1 y2 2)    
+    (cx p_r1 y1 p_r1 y2)
+    (g1 "h" p_r1 y1)
+    (cx p_r1 y3 p_r1 y2)
+    (g1y "h" p_r1 y2 y3) 
     (qcomg "ecc1" 1)))
   
 
 ;; ecc2 - Error correcting code. Reversible majority select by vote function for
 ;; decoding a selectable bit-flip gate passed as p_g1. Requres three qubits in
-;; array p_l1 and interval [p_y1, p_y1+2].
+;; array p_r1 and interval [p_y1, p_y1+2].
 ;;
 ;; Parameters:
-;; - p_g1: name of the gate to be tested.
-;; - p_l1: quantum register name 1.
+;; - p_g1: string, name of the gate to be tested.
+;; - p_r1: quantum register name 1.
 ;; - p_y1: qubit 1.
 ;;
 ;; Notes:
@@ -1330,38 +1331,38 @@
 ;; Sources:
 ;; [14][15].
 ;;
-(define (ecc2 p_g1 p_l1 p_y1)
+(define (ecc2 p_g1 p_r1 p_y1)
   (let ((y1 p_y1)
 	(y2 (+ p_y1 1))
 	(y3 (+ p_y1 2)))
     
     (qcomg "ecc2" 0)
-    (g1y "h" p_l1 y1 y3)
-    (g1 "h" p_l1 y2)
-    (cx p_l1 y1 p_l1 y2)
-    (g1 "h" p_l1 y1)
-    (cx p_l1 y3 p_l1 y2)
-    (g1 p_g1 p_l1 y1)
-    (g1y "h" p_l1 y2 y3)
-    (g1y p_g1 p_l1 y1 y3)
-    (g1y p_g1 p_l1 y1 y3)    
-    (g1 "h" p_l1 y1)
-    (g1y p_g1 p_l1 y2 y3)
-    (g1y "h" p_l1 y2 y3)
-    (cx p_l1 y3 p_l1 y2)
-    (cx p_l1 y1 p_l1 y2)    
-    (g1 "h" p_l1 y3)
-    (g1 "h" p_l1 y1)
-    (cx p_l1 y3 p_l1 y2)
-    (g1 "tdg" p_l1 y2)
-    (cx p_l1 y1 p_l1 y2)    
-    (g1 "t" p_l1 y2)
-    (cx p_l1 y3 p_l1 y2)
-    (g1 "tdg" p_l1 y2)
-    (cx p_l1 y1 p_l1 y2)    
-    (g1 "t" p_l1 y2)
-    (g1 "h" p_l1 y2)
-    (g1 "h" p_l1 y2) ; Check if this replaces (g1 "bloch" p_l1 y2) of the original buggy IBM's code.
+    (g1y "h" p_r1 y1 y3)
+    (g1 "h" p_r1 y2)
+    (cx p_r1 y1 p_r1 y2)
+    (g1 "h" p_r1 y1)
+    (cx p_r1 y3 p_r1 y2)
+    (g1 p_g1 p_r1 y1)
+    (g1y "h" p_r1 y2 y3)
+    (g1y p_g1 p_r1 y1 y3)
+    (g1y p_g1 p_r1 y1 y3)    
+    (g1 "h" p_r1 y1)
+    (g1y p_g1 p_r1 y2 y3)
+    (g1y "h" p_r1 y2 y3)
+    (cx p_r1 y3 p_r1 y2)
+    (cx p_r1 y1 p_r1 y2)    
+    (g1 "h" p_r1 y3)
+    (g1 "h" p_r1 y1)
+    (cx p_r1 y3 p_r1 y2)
+    (g1 "tdg" p_r1 y2)
+    (cx p_r1 y1 p_r1 y2)    
+    (g1 "t" p_r1 y2)
+    (cx p_r1 y3 p_r1 y2)
+    (g1 "tdg" p_r1 y2)
+    (cx p_r1 y1 p_r1 y2)    
+    (g1 "t" p_r1 y2)
+    (g1 "h" p_r1 y2)
+    (g1 "h" p_r1 y2) ; Check if this replaces (g1 "bloch" p_r1 y2) of the original buggy IBM's code.
     (qcomg "ecc2" 1)))
 
 
@@ -1369,7 +1370,7 @@
 ;; for qubits p_y1, p_y1+1, p_y1+4 using qubits [p_y1, p_y1+4].
 ;;
 ;; Parameters:
-;; - p_l1: quantum register name 1.
+;; - p_r1: quantum register name 1.
 ;; - p_y1: qubit 1.
 ;;
 ;; Notes:
@@ -1378,7 +1379,7 @@
 ;; Sources:
 ;; - [14].
 ;;
-(define (ecc3 p_l1 p_y1)
+(define (ecc3 p_r1 p_y1)
   (let ((y1 p_y1)
 	(y2 (+ p_y1 1))
 	(y3 (+ p_y1 2))
@@ -1386,121 +1387,121 @@
 	(y5 (+ p_y1 4)))
     
     (qcomg "ecc3" 0)
-    (g1y "h" p_l1 y1 y5)
-    (g1 "t" p_l1 y3)    
-    (g1x "h" p_l1 y3 2)
-    (cx p_l1 y2 p_l1 y3)
-    (cx p_l1 y1 p_l1 y3)
-    (g1y "h" p_l1 y1 y2)
-    (cx p_l1 y4 p_l1 y3)
-    (g1y "h" p_l1 y3 y4)
-    (cx p_l1 y4 p_l1 y3)
-    (cx p_l1 y1 p_l1 y3)   
-    (cx p_l1 y2 p_l1 y3)
-    (g1 "h" p_l1 y3)
-    (cx p_l1 y5 p_l1 y3)    
-    (g1 "h" p_l1 y3)
-    (g1 "h" p_l1 y5)
-    (cx p_l1 y5 p_l1 y3)
-    (cx p_l1 y2 p_l1 y3)    
-    (cx p_l1 y4 p_l1 y3)	
+    (g1y "h" p_r1 y1 y5)
+    (g1 "t" p_r1 y3)    
+    (g1x "h" p_r1 y3 2)
+    (cx p_r1 y2 p_r1 y3)
+    (cx p_r1 y1 p_r1 y3)
+    (g1y "h" p_r1 y1 y2)
+    (cx p_r1 y4 p_r1 y3)
+    (g1y "h" p_r1 y3 y4)
+    (cx p_r1 y4 p_r1 y3)
+    (cx p_r1 y1 p_r1 y3)   
+    (cx p_r1 y2 p_r1 y3)
+    (g1 "h" p_r1 y3)
+    (cx p_r1 y5 p_r1 y3)    
+    (g1 "h" p_r1 y3)
+    (g1 "h" p_r1 y5)
+    (cx p_r1 y5 p_r1 y3)
+    (cx p_r1 y2 p_r1 y3)    
+    (cx p_r1 y4 p_r1 y3)	
     (qcomg "ecc3" 1)))
 
 
 ;; hx - Gate hx, places an h gate followed by an x on element p_y1 of register
-;; p_l1.
+;; p_r1.
 ;;
 ;; Parameters:
-;; - p_l1: quantum register name.
+;; - p_r1: quantum register name.
 ;; - p_y1: qubit number.
 ;;
-(define (hx p_l1 p_y1)
+(define (hx p_r1 p_y1)
   (qcomg "hx" 0)
-  (g1 "h" p_l1 p_y1)
-  (g1 "x" p_l1 p_y1)
+  (g1 "h" p_r1 p_y1)
+  (g1 "x" p_r1 p_y1)
   (qcomg "hx" 1))
 
 
 ;; hy - Gate hy, places an h gate followed by an y on element p_y1 of register
-;; p_l1.
+;; p_r1.
 ;;
 ;; Parameters:
-;; - p_l1: quantum register name.
+;; - p_r1: quantum register name.
 ;; - p_y1: qubit number.
 ;;
-(define (hy p_l1 p_y1)
+(define (hy p_r1 p_y1)
   (qcomg "hy" 0)
-  (g1 "h" p_l1 p_y1)
-  (g1 "y" p_l1 p_y1)
+  (g1 "h" p_r1 p_y1)
+  (g1 "y" p_r1 p_y1)
   (qcomg "hy" 1))
 
 
 ;; hz - Gate hz, places an h gate followed by an z on element p_y1 of register
-;; p_l1.
+;; p_r1.
 ;;
 ;; Parameters:
-;; - p_l1: quantum register name.
+;; - p_r1: quantum register name.
 ;; - p_y1: qubit number.
 ;;
-(define (hz p_l1 p_y1)
+(define (hz p_r1 p_y1)
   (qcomg "hz" 0)
-  (g1 "h" p_l1 p_y1)
-  (g1 "z" p_l1 p_y1)
+  (g1 "h" p_r1 p_y1)
+  (g1 "z" p_r1 p_y1)
   (qcomg "hz" 1))
 
 
 ;; hs - Gate hs, places an h gate followed by an s on element p_y1 of register
-;; p_l1.
+;; p_r1.
 ;;
 ;; Parameters:
-;; - p_l1: quantum register name.
+;; - p_r1: quantum register name.
 ;; - p_y1: qubit number.
 ;;
-(define (hs p_l1 p_y1)
+(define (hs p_r1 p_y1)
   (qcomg "hs" 0)
-  (g1 "h" p_l1 p_y1)
-  (g1 "s" p_l1 p_y1)
+  (g1 "h" p_r1 p_y1)
+  (g1 "s" p_r1 p_y1)
   (qcomg "hs" 1))
 
 
 ;; hsdg - Gate hsdg, places an h gate followed by an sdag on element p_y1 of
-;; register p_l1.
+;; register p_r1.
 ;;
 ;; Parameters:
-;; - p_l1: quantum register name.
+;; - p_r1: quantum register name.
 ;; - p_y1: qubit number.
 ;;
-(define (hsdg p_l1 p_y1)
+(define (hsdg p_r1 p_y1)
   (qcomg "hsdg" 0)
-  (g1 "h" p_l1 p_y1)
-  (g1 "sdg" p_l1 p_y1)
+  (g1 "h" p_r1 p_y1)
+  (g1 "sdg" p_r1 p_y1)
   (qcomg "hsdg" 1))
 
 
 ;; ht - Gate ht, places an h gate followed by a t on element p_y1 of register
-;; p_l1.
+;; p_r1.
 ;;
 ;; Parameters:
-;; - p_l1: quantum register name.
+;; - p_r1: quantum register name.
 ;; - p_y1: qubit number.
 ;;
-(define (ht p_l1 p_y1)
+(define (ht p_r1 p_y1)
   (qcomg "ht" 0)
-  (g1 "h" p_l1 p_y1)
-  (g1 "t" p_l1 p_y1)
+  (g1 "h" p_r1 p_y1)
+  (g1 "t" p_r1 p_y1)
   (qcomg "ht" 1))
 
 
 ;; htdg - Gate htdg, places an h gate followed by a tdag on element p_y1 of
-;; register p_l1.
+;; register p_r1.
 ;;
 ;; Parameters:
-;; - p_l1: quantum register name.
+;; - p_r1: quantum register name.
 ;; - p_y1: qubit number.
 ;;
-(define (htdg p_l1 p_y1)
+(define (htdg p_r1 p_y1)
   (qcomg "htdg" 0)
-  (g1 "h" p_l1 p_y1)
-  (g1 "tdg" p_l1 p_y1)
+  (g1 "h" p_r1 p_y1)
+  (g1 "tdg" p_r1 p_y1)
   (qcomg "htdg" 1))
 
