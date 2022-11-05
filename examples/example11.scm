@@ -8,7 +8,32 @@
 ;;
 ;; Experiment to produce majoranas.
 ;;
-; Compilation (if you have g2q and qre in your system path):
+;; =============================================================================
+;;
+;; Copyright (C) 2018 - 2022 Pablo Edronkin (pablo.edronkin at yahoo.com)
+;;
+;;   This program is free software: you can redistribute it and/or modify
+;;   it under the terms of the GNU Lesser General Public License as published by
+;;   the Free Software Foundation, either version 3 of the License, or
+;;   (at your option) any later version.
+;;
+;;   This program is distributed in the hope that it will be useful, but
+;;   WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+;;   or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
+;;   License for more details.
+;;
+;;   You should have received a copy of the GNU Lesser General Public License
+;;   along with this program. If not, see <https://www.gnu.org/licenses/>.
+;;
+;; =============================================================================
+
+
+;;;; General notes:
+;;
+;; - Read sources for limitations on function parameters.
+;;
+;; Compilation (if you have g2q and qre in your system path):
+;;
 ;; - cd to your /examples folder.
 ;;
 ;; - Enter the following:
@@ -26,28 +51,10 @@
 ;;   guile example11.scm 
 ;;
 ;; Sources:
-;; - https://medium.com/@decodoku/an-experiment-i-did-and-why-you-should-care-9cbabe544cc7
-;; - https://arxiv.org/pdf/1609.07774.pdf
-;; - https://youtu.be/_xFOPmdjwCI
 ;;
-;; =============================================================================
-;;
-;; Copyright (C) 2018 - 2020  Pablo Edronkin (pablo.edronkin at yahoo.com)
-;;
-;;   This program is free software: you can redistribute it and/or modify
-;;   it under the terms of the GNU Lesser General Public License as published by
-;;   the Free Software Foundation, either version 3 of the License, or
-;;   (at your option) any later version.
-;;
-;;   This program is distributed in the hope that it will be useful,
-;;   but WITHOUT ANY WARRANTY; without even the implied warranty of
-;;   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-;;   GNU Lesser General Public License for more details.
-;;
-;;   You should have received a copy of the GNU Lesser General Public License
-;;   along with this program.  If not, see <https://www.gnu.org/licenses/>.
-;;
-;; =============================================================================
+;; - [1] https://medium.com/@decodoku/an-experiment-i-did-and-why-you-should-care-9cbabe544cc7
+;; - [2] https://arxiv.org/pdf/1609.07774.pdf
+;; - [3] https://youtu.be/_xFOPmdjwCI
 
 
 ;; Required modules.
@@ -127,7 +134,7 @@
 ;;
 (define (rf p_b)
   (let ((res 0))
-    (set! res (car (cdr (qfres p_b "max"))))
+    (set! res (car (cdr (qfres p_b "#max"))))
     
     res))
 

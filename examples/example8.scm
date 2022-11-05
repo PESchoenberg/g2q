@@ -9,38 +9,42 @@
 ;; This program shows how to use g2q as a just-in-time compiler generating
 ;; several QASM2 programs dynamically and running them on a QPU.
 ;;
-;; Compilation:
-;; - cd to your /examples folder.
-;;
-;; - Enter the following:
-;;
-;;   guile example8.scm
-;;
-;; Notes:
-;; - This program will only compile a .qasm file but not run it if you don't have
-;; qre installed on your system.
-;; - You should make sure that your PATH system variable points to the folder
-;; where you installed qre.
-;; - qre is available at https://github.com/PESchoenberg/qre
-;;
 ;; =============================================================================
 ;;
-;; Copyright (C) 2018 - 2020  Pablo Edronkin (pablo.edronkin at yahoo.com)
+;; Copyright (C) 2018 - 2022  Pablo Edronkin (pablo.edronkin at yahoo.com)
 ;;
 ;;   This program is free software: you can redistribute it and/or modify
 ;;   it under the terms of the GNU Lesser General Public License as published by
 ;;   the Free Software Foundation, either version 3 of the License, or
 ;;   (at your option) any later version.
 ;;
-;;   This program is distributed in the hope that it will be useful,
-;;   but WITHOUT ANY WARRANTY; without even the implied warranty of
-;;   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-;;   GNU Lesser General Public License for more details.
+;;   This program is distributed in the hope that it will be useful, but
+;;   WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+;;   or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
+;;   License for more details.
 ;;
 ;;   You should have received a copy of the GNU Lesser General Public License
-;;   along with this program.  If not, see <https://www.gnu.org/licenses/>.
+;;   along with this program. If not, see <https://www.gnu.org/licenses/>.
 ;;
 ;; =============================================================================
+
+
+;;;; General notes:
+;;
+;; - Read sources for limitations on function parameters.
+;; - This program will only compile a .qasm file but not run it if you don't
+;;   have qre installed on your system.
+;; - You should make sure that your PATH system variable points to the folder
+;;   where you installed qre.
+;; - qre is available at https://github.com/PESchoenberg/qre
+;;
+;; Compilation:
+;;
+;; - cd to your /examples folder.
+;;
+;; - Enter the following:
+;;
+;;   guile example8.scm
 
 
 ;; Required modules.
@@ -133,7 +137,7 @@
     ;; Now get the data from the QPU.
     (set! a (read-file-as-string fnamei))
     (set! b (qfclvr a))
-    (set! res (car (cdr (qfres b "max"))))
+    (set! res (car (cdr (qfres b "#max"))))
     
     res))
     

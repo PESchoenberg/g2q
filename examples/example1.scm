@@ -11,21 +11,9 @@
 ;; and functions you can write and how. Don't worry about the sense it doesn't 
 ;; make as a practical program.  
 ;;
-;; Compilation:
-;; - cd to your /examples folder.
-;;
-;; - Enter the following:
-;;
-;;   guile example1.scm 
-;;
-;; Note that quantum processors in practice may not have full connectivity
-;; and thus not all connections between qubits may work. You may need to modify
-;; qubit numbers or generate new gate sequences to work around  such limitations
-;; in this and other programs.
-;;
 ;; =============================================================================
 ;;
-;; Copyright (C) 2018 - 2020  Pablo Edronkin (pablo.edronkin at yahoo.com)
+;; Copyright (C) 2018 - 2022 Pablo Edronkin (pablo.edronkin at yahoo.com)
 ;;
 ;;   This program is free software: you can redistribute it and/or modify
 ;;   it under the terms of the GNU Lesser General Public License as published by
@@ -38,9 +26,25 @@
 ;;   GNU Lesser General Public License for more details.
 ;;
 ;;   You should have received a copy of the GNU Lesser General Public License
-;;   along with this program.  If not, see <https://www.gnu.org/licenses/>.
+;;   along with this program. If not, see <https://www.gnu.org/licenses/>.
 ;;
 ;; =============================================================================
+
+
+;;;; General notes:
+;; - Read sources for limitations on function parameters.
+;;
+;; Compilation:
+;; - cd to your /examples folder.
+;;
+;; - Enter the following:
+;;
+;;   guile example1.scm 
+;;
+;; Note that quantum processors in practice may not have full connectivity
+;; and thus not all connections between qubits may work. You may need to modify
+;; qubit numbers or generate new gate sequences to work around  such limitations
+;; in this and other programs.
 
 
 ;; Modules. These will be almost always required.

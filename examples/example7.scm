@@ -11,6 +11,35 @@
 ;; simulated remote quantum computers, or on local simulators, In this regard, 
 ;; g2q and qre act as a JIT compiler/runtime.
 ;;
+;; =============================================================================
+;;
+;; Copyright (C) 2018 - 2022 Pablo Edronkin (pablo.edronkin at yahoo.com)
+;;
+;;   This program is free software: you can redistribute it and/or modify
+;;   it under the terms of the GNU Lesser General Public License as published by
+;;   the Free Software Foundation, either version 3 of the License, or
+;;   (at your option) any later version.
+;;
+;;   This program is distributed in the hope that it will be useful, but
+;;   WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+;;   or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
+;;   License for more details.
+;;
+;;   You should have received a copy of the GNU Lesser General Public License
+;;   along with this program. If not, see <https://www.gnu.org/licenses/>.
+;;
+;; =============================================================================
+
+
+;;;; General notes:
+;;
+;; - Read sources for limitations on function parameters.
+;; - This program will only compile a .qasm file but not run it if you don't
+;;   have qre installed on your system.
+;; - You should make sure that your PATH system variable points to the folder
+;;   where you installed qre.
+;; - qre is available at https://github.com/PESchoenberg/qre
+;;
 ;; Compilation:
 ;;
 ;; - cd to your /examples folder.
@@ -18,32 +47,6 @@
 ;; - Enter the following:
 ;;
 ;;   guile example7.scm
-;;
-;; Notes:
-;; - This program will only compile a .qasm file but not run it if you don't have
-;; qre installed on your system.
-;; - You should make sure that your PATH system variable points to the folder
-;; where you installed qre.
-;; - qre is available at https://github.com/PESchoenberg/qre
-;;
-;; =============================================================================
-;;
-;; Copyright (C) 2018 - 2020  Pablo Edronkin (pablo.edronkin at yahoo.com)
-;;
-;;   This program is free software: you can redistribute it and/or modify
-;;   it under the terms of the GNU Lesser General Public License as published by
-;;   the Free Software Foundation, either version 3 of the License, or
-;;   (at your option) any later version.
-;;
-;;   This program is distributed in the hope that it will be useful,
-;;   but WITHOUT ANY WARRANTY; without even the implied warranty of
-;;   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-;;   GNU Lesser General Public License for more details.
-;;
-;;   You should have received a copy of the GNU Lesser General Public License
-;;   along with this program.  If not, see <https://www.gnu.org/licenses/>.
-;;
-;; =============================================================================
 
 
 ;; Required modules.
@@ -116,7 +119,7 @@
 (display (cadr b))
 (newlines 1)
 
-(define c (qfres b "max"))
+(define c (qfres b "#max"))
 (newlines 1)
 (display "Max value obtained: ")
 (display (car c))
@@ -124,7 +127,7 @@
 (display (cadr c))
 (newlines 1)
 
-(define c (qfres b "min"))
+(define c (qfres b "#min"))
 (newlines 1)
 (display "Min value obtained: ")
 (display (car c))

@@ -13,10 +13,10 @@
 ;;   the Free Software Foundation, either version 3 of the License, or
 ;;   (at your option) any later version.
 ;;
-;;   This program is distributed in the hope that it will be useful,
-;;   but WITHOUT ANY WARRANTY; without even the implied warranty of
-;;   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-;;   GNU Lesser General Public License for more details.
+;;   This program is distributed in the hope that it will be useful, but
+;;   WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+;;   or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
+;;   License for more details.
 ;;
 ;;   You should have received a copy of the GNU Lesser General Public License
 ;;   along with this program. If not, see <https://www.gnu.org/licenses/>.
@@ -25,6 +25,7 @@
 
 
 ;;;; General notes:
+;;
 ;; - Read sources for limitations on function parameters.
 
 
@@ -43,6 +44,7 @@
 ;; compilation and execution cycle.
 ;;
 ;; Parameters:
+;;
 ;; - p_fname: fname.
 ;; - p_fnameo: fnameo.
 ;; - p_qver: qver.
@@ -59,6 +61,7 @@
 ;; - p_rf: results function.
 ;;
 ;; Output:
+;;
 ;; - A result that consists of the maximum probability obtained from the 
 ;;   execution of the compiled quantum circuit.
 ;;
@@ -118,6 +121,7 @@
 ;; returned by the QPU in order to keep clean the ddir folder.
 ;;
 ;; Parameters:
+;;
 ;; - p_clean: "y" to clean data folder.
 ;; - p_fname: fname.
 ;; - p_fnameo: fnameo.
@@ -173,10 +177,12 @@
 ;; it.
 ;; 
 ;; Parameters:
+;;
 ;; - p_qpu: qpu for which the declaration is intended for.
 ;; - p_d: declaration in the form of a string.
 ;;
 ;; Output:
+;;
 ;; - A commented-out string that will be placed in compiled QADM2 code.
 ;;
 (define (qdeclare p_qpu p_d)

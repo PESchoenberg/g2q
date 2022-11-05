@@ -13,10 +13,10 @@
 ;;   the Free Software Foundation, either version 3 of the License, or
 ;;   (at your option) any later version.
 ;;
-;;   This program is distributed in the hope that it will be useful,
-;;   but WITHOUT ANY WARRANTY; without even the implied warranty of
-;;   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-;;   GNU Lesser General Public License for more details.
+;;   This program is distributed in the hope that it will be useful, but
+;;   WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+;;   or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
+;;   License for more details.
 ;;
 ;;   You should have received a copy of the GNU Lesser General Public License
 ;;   along with this program. If not, see <https://www.gnu.org/licenses/>.
@@ -25,14 +25,17 @@
 
 
 ;;;; General notes:
+;;
 ;; - Read sources for limitations on function parameters.
 ;; - Read at least the general notes of all scm files in this library before
 ;;   use.
 ;;
 ;; Compilation:
+;;
 ;; - (use-modules (g2q g2q0)(g2q g2q1)(g2q g2q2)(g2q g2q3)(g2q g2q4))
 ;;
 ;; Sources:
+;;
 ;; - [1] Gidney, C. (2019). Breaking Down the Quantum Swap. [online]
 ;;   Algassert.com. Available at: https://algassert.com/post/1717
 ;;   [Accessed 28 Sep. 2019].
@@ -69,6 +72,7 @@
 ;;;; qhead - Defines a program name.
 ;;
 ;; Parameters:
+;;
 ;; - p_s1: string, program name.
 ;; - p_n1: numeric, Open QASM version number.
 ;;
@@ -86,6 +90,7 @@
 ;;;; qstr - Displays or writes a literal statement.
 ;;
 ;; Parameters:
+;;
 ;; - p_s1: string containing the statement.
 ;;
 (define (qstr p_s1)
@@ -95,6 +100,7 @@
 ;;;; qcomm - Writes a comment.
 ;;
 ;; Parameters:
+;;
 ;; - p_s1: comment string.
 ;;
 (define (qcomm p_s1)
@@ -110,6 +116,7 @@
 ;;;; qbgns - Adds a trailing space to a string.
 ;;
 ;; Parameters:
+;;
 ;; - p_s1: string.
 ;;
 (define (qbgns p_s1)
@@ -120,6 +127,7 @@
 ;; a string.
 ;;
 ;; Parameters:
+;;
 ;; - p_n1: numeric.
 ;;
 (define (qbgnc p_n1)
@@ -129,6 +137,7 @@
 ;;;; qbgna - Constructs an array item.
 ;;
 ;; Parameters:
+;;
 ;; - p_r1: array name.
 ;; - p_y1: item number.
 ;;
@@ -139,6 +148,7 @@
 ;;;; qbg - Basic gate structure.
 ;;
 ;; Parameters:
+;;
 ;; - p_g1: string, gate name.
 ;; - p_r1: quantum or conventional register name (q or c).
 ;; - p_y1: qubit ordinal number.
@@ -150,6 +160,7 @@
 ;; qbgd - Display basic gate structure.
 ;;
 ;; Parameters:
+;;
 ;; - p_g1: string, gate name.
 ;; - p_r1: quantum or conventional register name (q or c).
 ;; - p_y1: qubit ordinal number.
@@ -161,6 +172,7 @@
 ;;;; qmeas - Measurement gate.
 ;;
 ;; Parameters:
+;;
 ;; - p_r1: quantum register name 1.
 ;; - p_x1: numeric, register ordinal of p_r1.
 ;; - p_r2: quantum register name 2.
@@ -178,6 +190,7 @@
 ;;;; qcx - Gate cx.
 ;;
 ;; Parameters:
+;;
 ;; - p_g1: item name.
 ;; - p_r1: quantum register name 1. 
 ;; - p_y1: control qubit (dot).
@@ -197,6 +210,7 @@
 ;;;; qregdef - Register definitions.
 ;;
 ;; Parameters:
+;;
 ;; - p_r1: quantum register name 1.
 ;; - p_y1: number of items in p_r1.
 ;; - p_r2: quantum register name 2.
@@ -210,6 +224,7 @@
 ;;;; qin - Increment the value of a variable p_v by p_s.
 ;;
 ;; Parameters:
+;;
 ;; - p_n1: variable to increment.
 ;; - p_n2: increment step.
 ;;
@@ -220,6 +235,7 @@
 ;;;; g1 - Fundamental gate using one qbit.
 ;;
 ;; Parameters:
+;;
 ;; - p_g1: string, gate name.
 ;; - p_r1: quantum register name 1.
 ;; - p_y1: qubit 1.
@@ -231,6 +247,7 @@
 ;;;; g2 - Fundamental quantum gates.
 ;;
 ;; Parameters:
+;;
 ;; - p_g1: string, gate name.
 ;; - p_r1: quantum register name 1.
 ;; - p_y1: control qubit 1.
@@ -253,6 +270,7 @@
 ;;;; u1 - Gate u1.
 ;;
 ;; Parameters:
+;;
 ;; - p_y1: first rotation.
 ;; - p_r1: quantum register name 1.
 ;; - p_y2: qubit number.
@@ -269,6 +287,7 @@
 ;;;; u2 - Gate u2.
 ;;
 ;; Parameters:
+;;
 ;; - p_y1: numeric, angle 1, first rotation.
 ;; - p_y2: numeric, angle 2, second rotation.
 ;; - p_r1: quantum register name 1.
@@ -287,6 +306,7 @@
 ;;;; u3 - Gate u3.
 ;;
 ;; Parameters:
+;;
 ;; - p_y1: numeric, angle 1, first rotation.
 ;; - p_y2: numeric, angle 2, second rotation.
 ;; - p_y3: numeric, angle 3, third rotation.
@@ -307,6 +327,7 @@
 ;;;; qcond1 - Quantum conditional 1.
 ;;
 ;; Parameters:
+;;
 ;; - p_c1: condition.
 ;; - p_y1: classical bit vector.
 ;; - p_y2: number to compare p_y1 to.
@@ -328,6 +349,7 @@
 ;;;; qcond2 - Quantum conditional 2.
 ;;
 ;; Parameters:
+;;
 ;; - p_c1: condition.
 ;; - p_y1: classical bits.
 ;; - p_y2: number to compare p_y1[pY3] to.
@@ -353,9 +375,11 @@
 ;;;; qvalid-string - Validate a string.
 ;;
 ;; Parameters:
+;;
 ;; - p_s1: string to validate.
 ;; 
 ;; Output:
+;;
 ;; - #t if the string is validated, #f otherwise.
 ;;
 (define (qvalid-conditional p_s1)
@@ -372,11 +396,13 @@
 ;;;; swap - Gate swap expressed atomically.
 ;;
 ;; Parameters:
+;;
 ;; - p_r1: quantum register name 1. 
 ;; - p_y1: qubit 1.
 ;; - p_y2: qubit 2. 
 ;;
 ;; Sources:
+;;
 ;; - [1].
 ;;                                                                     
 (define (swap p_r1 p_y1 p_y2)
@@ -391,6 +417,7 @@
 ;; sections when complex gates are compiled into QASM2 code.
 ;;
 ;; Parameters:
+;;
 ;; - p_g1: string, gate name.
 ;; - p_p1: numeric value indicating the kind of auto gate comment.
 ;;   - 0: begin block.

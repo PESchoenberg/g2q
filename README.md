@@ -11,9 +11,9 @@ that lets you write programs for QASM-based quantum computers using Scheme.
 
 ## Dependencies:
 
-* GNU Guile - v2.2.3 or later ( https://www.gnu.org/software/guile/ )
+* GNU Guile - v3.0.0 or later ( https://www.gnu.org/software/guile/ )
 
-* grsp - v1.0.7 or later ( https://github.com/PESchoenberg/grsp.git )
+* grsp - v1.1.7 or later ( https://github.com/PESchoenberg/grsp.git )
 
 
 ## Optional:

@@ -13,10 +13,10 @@
 ;;   the Free Software Foundation, either version 3 of the License, or
 ;;   (at your option) any later version.
 ;;
-;;   This program is distributed in the hope that it will be useful,
-;;   but WITHOUT ANY WARRANTY; without even the implied warranty of
-;;   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-;;   GNU Lesser General Public License for more details.
+;;   This program is distributed in the hope that it will be useful, but
+;;   WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+;;   or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
+;;   License for more details.
 ;;
 ;;   You should have received a copy of the GNU Lesser General Public License
 ;;   along with this program. If not, see <https://www.gnu.org/licenses/>.
@@ -25,9 +25,11 @@
 
 
 ;;;; General notes:
+;;
 ;; - Read sources for limitations on function parameters.
 ;;
 ;; Sources:
+;;
 ;; - [1] Roell, J., 2018. Demystifying Quantum Gates — One Qubit At A Time.
 ;;   [online] Medium. Available at:
 ;;   https://towardsdatascience.com/demystifying-quantum-gates-one-qubit-at-a-time-54404ed80640
@@ -47,10 +49,12 @@
 ;; qrand1 - 4 x 1 universal random quantum circuit.
 ;;
 ;; Parameters:
+;;
 ;; - p_r1: quantum register name.
 ;; - p_y1: numeric, qubit number.
 ;;
 ;; Sources:
+;;
 ;; - [1][g2q2.[6]].
 ;;
 (define (qrand1 p_r1 p_y1)

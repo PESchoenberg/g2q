@@ -6,9 +6,34 @@
 ;;
 ;; example14.scm
 ;;
-;; cx ladder.
+;; cx ladder. 
+;;
+;; =============================================================================
+;;
+;; Copyright (C) 2018 - 2022 Pablo Edronkin (pablo.edronkin at yahoo.com)
+;;
+;;   This program is free software: you can redistribute it and/or modify
+;;   it under the terms of the GNU Lesser General Public License as published by
+;;   the Free Software Foundation, either version 3 of the License, or
+;;   (at your option) any later version.
+;;
+;;   This program is distributed in the hope that it will be useful, but
+;;   WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+;;   or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
+;;   License for more details.
+;;
+;;   You should have received a copy of the GNU Lesser General Public License
+;;   along with this program. If not, see <https://www.gnu.org/licenses/>.
+;;
+;; =============================================================================
+
+
+;;;; General notes:
+;;
+;; - Read sources for limitations on function parameters.
 ;;
 ;; Compilation (if you have g2q and qre in your system path):
+;;
 ;; - cd to your /examples folder.
 ;;
 ;; - Enter the following:
@@ -18,30 +43,12 @@
 ;; Notice that you will need to have g2q and qre (see README.md for details)
 ;; installed on your system  and your system path variable set to point to both
 ;; in order for this program to work properly. Alternatively, you can:
+;;
 ;; - copy example14.scm to the main folder of your qre installation.
 ;; 
 ;; - Enter the following:
 ;;
-;;   guile example14.scm 
-;;
-;; =============================================================================
-;;
-;; Copyright (C) 2018 - 2020  Pablo Edronkin (pablo.edronkin at yahoo.com)
-;;
-;;   This program is free software: you can redistribute it and/or modify
-;;   it under the terms of the GNU Lesser General Public License as published by
-;;   the Free Software Foundation, either version 3 of the License, or
-;;   (at your option) any later version.
-;;
-;;   This program is distributed in the hope that it will be useful,
-;;   but WITHOUT ANY WARRANTY; without even the implied warranty of
-;;   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-;;   GNU Lesser General Public License for more details.
-;;
-;;   You should have received a copy of the GNU Lesser General Public License
-;;   along with this program.  If not, see <https://www.gnu.org/licenses/>.
-;;
-;; =============================================================================
+;;   guile example14.scm
 
 
 ;; Required modules.
@@ -114,7 +121,7 @@
 ;;
 (define (rf p_b)
   (let ((res 0))
-    (set! res (car (cdr (qfres p_b "max"))))
+    (set! res (car (cdr (qfres p_b "#max"))))
     res))
 
 
