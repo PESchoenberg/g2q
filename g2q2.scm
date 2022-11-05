@@ -6,17 +6,17 @@
 ;;
 ;; =============================================================================
 ;;
-;; Copyright (C) 2018 - 2020  Pablo Edronkin (pablo.edronkin at yahoo.com)
+;; Copyright (C) 2018 - 2022 Pablo Edronkin (pablo.edronkin at yahoo.com)
 ;;
 ;;   This program is free software: you can redistribute it and/or modify
 ;;   it under the terms of the GNU Lesser General Public License as published by
 ;;   the Free Software Foundation, either version 3 of the License, or
 ;;   (at your option) any later version.
 ;;
-;;   This program is distributed in the hope that it will be useful,
-;;   but WITHOUT ANY WARRANTY; without even the implied warranty of
-;;   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-;;   GNU Lesser General Public License for more details.
+;;   This program is distributed in the hope that it will be useful, but
+;;   WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+;;   or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
+;;   License for more details.
 ;;
 ;;   You should have received a copy of the GNU Lesser General Public License
 ;;   along with this program. If not, see <https://www.gnu.org/licenses/>.
@@ -25,11 +25,13 @@
 
 
 ;;;; General notes:
+;;
 ;; - Read sources for limitations on function parameters.
 ;; - Read at least the general notes of all scm files in this library before
 ;;   use.
 ;;
 ;; Sources:
+;;
 ;; - [1] Gidney, C. (2019). Breaking Down the Quantum Swap. [online]
 ;;   Algassert.com. Available at: https://algassert.com/post/1717
 ;;   [Accessed 28 Sep. 2019].
@@ -157,9 +159,11 @@
 ;; qconst - Sets the values of various required constants.
 ;;
 ;; Parameters:
+;;
 ;; - p_s1: string, constant name.
 ;;
 ;; Output:
+;;
 ;; - Returns the value of p_s1 if it exists. Zero otherwise.
 ;;
 (define (qconst p_s1)
@@ -180,6 +184,7 @@
 ;; representation).
 ;;
 ;; Parameters:
+;;
 ;; - p_g1: string, gate name.
 ;; - p_r1: quantum register name (i.e. q).
 ;; - p_y1: numeric, ordinal of the initial qubit.
@@ -201,6 +206,7 @@
 ;; of qgate1 on regster element p_y1 p_x1 times on x axis.
 ;;
 ;; Parameters:
+;;
 ;; - p_g1: string, gate name.
 ;; - p_r1: quantum register name.
 ;; - p_y1: register element.
@@ -222,6 +228,7 @@
 ;; qgate1 from qubit p_y1 to qubit p_y2 on y axis.
 ;;
 ;; Parameters:
+;;
 ;; - p_g1: string, gate name.
 ;; - p_r1: quantum register name.
 ;; - p_y1: ordinal of the initial qubit.
@@ -244,6 +251,7 @@
 ;; qmeasy - Performs measurements on group p_r1 to group p_r2 from p_y1 to p_y2.
 ;;
 ;; Parameters:
+;;
 ;; - p_r1: quantum register name.
 ;; - p_r2: conventional register name.
 ;; - p_y1: numeric, ordinal of the initial qubit.
@@ -265,6 +273,7 @@
 ;; qubit is |1>. Leaves target qubit as it is otherwise.
 ;;
 ;; Parameters:
+;;
 ;; - p_r1: quantum register name 1.
 ;; - p_y1: control qubit 1 (represented as a dot in a q diagram).
 ;; - p_r2: quantum register name 2.
@@ -279,6 +288,7 @@
 ;; gates expressed in fast form.
 ;;
 ;; Parameters:
+;;
 ;; - p_r1: quantum register name 1.
 ;; - p_y1: control qubit 1.
 ;; - p_r2: quantum register name 2.
@@ -297,6 +307,7 @@
 ;; compatible with all sorts and makes of qpu.
 ;;
 ;; Parameters:
+;;
 ;; - p_r1: quantum register name 1.
 ;; - p_y1: control qubit 1.
 ;; - p_r2: quantum register name 2.
@@ -309,6 +320,7 @@
 ;; cy - Gate cy, controlled y expressed atomically.
 ;;
 ;; Parameters:
+;;
 ;; - p_r1: quantum register name 1.
 ;; - p_y1: control qubit 1.
 ;; - p_r2: quantum register name 2.
@@ -325,6 +337,7 @@
 ;; cy-fast - Gate cy, controlled y in fast form.
 ;;
 ;; Parameters:
+;;
 ;; - p_r1: quantum register name 1.
 ;; - p_y1: control qubit 1.
 ;; - p_r2: quantum register name 2.
@@ -337,6 +350,7 @@
 ;; ch - Gate ch, controlled h expressed atomically.
 ;;
 ;; Parameters:
+;;
 ;; - p_r1: quantum register name 1.
 ;; - p_y1: control qubit 1.
 ;; - p_r2: quantum register name 2.
@@ -359,6 +373,7 @@
 ;; ch-fast - Gate ch, controlled h in fast form.
 ;;
 ;; Parameters:
+;;
 ;; - p_r1: quantum register name 1.
 ;; - p_y1: control qubit 1.
 ;; - p_r2: quantum register name 2.
@@ -371,6 +386,7 @@
 ;; ccx - Gate ccx, Toffoli gate expressed atomically.
 ;;
 ;; Parameters:
+;;
 ;; - p_r1: quantum register name 1.
 ;; - p_y1: control qubit 1 (dot).
 ;; - p_r2: quantum register name 2.
@@ -379,6 +395,7 @@
 ;; - p_y3: target qubit 3 (plus).
 ;;
 ;; Sources:
+;;
 ;; - [1][2][3][4][5].
 ;;
 (define (ccx p_r1 p_y1 p_r2 p_y2 p_r3 p_y3)
@@ -404,6 +421,7 @@
 ;; ccx-fast - Toffoli gate in fast form.
 ;;
 ;; Parameters:
+;;
 ;; - p_r1: quantum register name 1.
 ;; - p_y1: control qubit 1 (dot).
 ;; - p_r2: quantum register name 2.
@@ -425,6 +443,7 @@
 ;; rx - Gate rx, rotation around X-axis.
 ;;
 ;; Parameters:
+;;
 ;; - p_t1: numeric, theta angle.
 ;; - p_r1: quantum register name 1.
 ;; - p_y1: qubit 1.
@@ -438,6 +457,7 @@
 ;; rx-fast - Gate rx, rotation around X-axis, in fast form.
 ;;
 ;; Parameters:
+;;
 ;; - p_t1: numeric, theta angle; this is a dummy arument, left for consistency.
 ;; - p_r1: quantum register name 1.
 ;; - p_y1: qubit 1.
@@ -456,6 +476,7 @@
 ;; ry - Gate ry, rotation around Y-axis.
 ;;
 ;; Parameters:
+;;
 ;; - p_t1: numeric, theta angle.
 ;; - p_r1: quantum register name 1.
 ;; - p_y1: qubit 1.
@@ -467,6 +488,7 @@
 ;; ry-fast - Gate ry, rotation around Y-axis, in fast form.
 ;;
 ;; Parameters:
+;;
 ;; - p_t1: numeric, angle (dummy, left for consistency with other functions).
 ;; - p_r1: quantum register name 1.
 ;; - p_y1: qubit 1.
@@ -485,6 +507,7 @@
 ;; rz - Gate rz, rotation around Z-axis.
 ;;
 ;; Parameters:
+;;
 ;; - p_t1: numeric, angle 1.
 ;; - p_r1: quantum register name 1.
 ;; - p_y1: qubit 1.
@@ -496,6 +519,7 @@
 ;; rz-fast - Gate rz, rotation around Z-axis, in fast form.
 ;;
 ;; Parameters:
+;;
 ;; - p_t1: numeric, angle; dummy argument left for consistency with other
 ;;   functions.
 ;; - p_r1: quantum register name 1.
@@ -515,6 +539,7 @@
 ;; crz - Gate crz, controlled rz expressed atomically.
 ;;
 ;; Parameters:
+;;
 ;; - p_t1: numeric, angle 1.
 ;; - p_r1: quantum register name 1.
 ;; - p_y1: qubit 1.
@@ -535,6 +560,7 @@
 ;; crz-fast - Gate crz, controlled rz expressed in fast form.
 ;;
 ;; Parameters:
+;;
 ;; - p_t1: numeric, angle 1. Dummy for compat with gate crz.
 ;; - p_r1: quantum register name 1.
 ;; - p_y1: qubit 1.
@@ -559,6 +585,7 @@
 ;; cu1 - Gate cu1, controlled phase rotation expressed atomically.
 ;;
 ;; Parameters:
+;;
 ;; - p_t1: numeric, angle 1.
 ;; - p_r1: quantum register name 1.
 ;; - p_y1: qubit 1.
@@ -566,6 +593,7 @@
 ;; - p_y2: qubit 2.
 ;;
 ;; Notes:
+;;
 ;; - TODO: check t1 and p_t1.
 ;;
 (define (cu1 p_t1 p_r1 p_y1 p_r2 p_y2)
@@ -583,6 +611,7 @@
 ;; cu1-fast - Gate cu1, controlled phase rotation gate expressed in fast form.
 ;;
 ;; Parameters:
+;;
 ;; - p_t1: numeric, angle 1.
 ;; - p_r1: quantum register name 1.
 ;; - p_y1: qubit 1.
@@ -607,6 +636,7 @@
 ;; cu3 - Gate cu3, controlled U gate expressed atomically.
 ;;
 ;; Parameters:
+;;
 ;; - p_t1: numeric, angle 1.
 ;; - p_t2: numeric, angle 2.
 ;; - p_r1: quantum register name 1.
@@ -627,6 +657,7 @@
 ;; cu3-fast - Gate cu3, controlled U gate expressed in fast form.
 ;;
 ;; Parameters:
+;;
 ;; - p_t1: numeric, angle 1.
 ;; - p_t2: numeric, angle 2.
 ;; - p_t3: numeric, angle 3.
@@ -657,6 +688,7 @@
 ;; g1cxg1 - Puts a set of gates in configuration g1 cx g1.
 ;;
 ;; Parameters:
+;;
 ;; - p_g1: string, g1 gate name.
 ;; - p_r1: quantum register name (i.e. q).
 ;; - p_y1: numeric, qubit number 1 (control of cx).
@@ -679,10 +711,12 @@
 ;; qregex - Prepares a compiled qasm file as a string for passing to ibm q html
 ;; api.
 ;;
-;; Arguments
+;; Parameters:
+;;
 ;; - p_f1: name of .qasm file.
 ;;
-;; Output: 
+;; Output:
+;;
 ;; - It returns p_f1 as a single string variable without any \r or \n
 ;;   characters.
 ;;
@@ -698,7 +732,8 @@
 
 ;; qreq - Constructs a qreg file.
 ;;
-;; Arguments
+;; Parameters;
+;;
 ;; - p_f1: name of .qasm file.
 ;; - p_f2: name of .qreg file.
 ;; - p_p1: string, where results will be saved to:
@@ -710,6 +745,7 @@
 ;; - p_e1: seed.
 ;;
 ;; Sources:
+;;
 ;; - [16].
 ;;
 (define (qreq p_f1 p_f2 p_p1 p_d1 p_s6 p_m1 p_e1)
@@ -785,12 +821,14 @@
 ;; qcnot1 - A cx based NOT gate expressed atomically.
 ;;
 ;; Parameters:
+;;
 ;; - p_r1: gate group name 1.
 ;; - p_y1: target qubit, normally p_y2 - 1.
 ;; - p_r2: gate group name 2.
 ;; - p_y2: control qubit, value to be inverted, 0 or 1.
 ;;
 ;; Output:
+;;
 ;; - Inverse of p_r2[p_y2], on p_r1[p_y1].
 ;;   - |0> -> |1>.
 ;;   - |1> -> |0>.
@@ -805,6 +843,7 @@
 ;; qxor1 - A qcnot1 based XOR gate expressed atomically.
 ;;
 ;; Parameters:
+;;
 ;; - p_r1: quantum register name 1.
 ;; - p_y1: target qubit a, normally p_y2 - 1.
 ;; - p_r2: quantum register name 2.
@@ -815,6 +854,7 @@
 ;; - p_y4: control qubit b.
 ;;
 ;; Output:
+;;
 ;; - On p_r1[p_y1].
 ;;   - |00> -> |0>.
 ;;   - |11> -> |0>.
@@ -832,9 +872,11 @@
 ;; qfclvr - Find and construct label and value registers.
 ;;
 ;; Parameters:
+;;
 ;; - p_s1: string with results from qre.
 ;;
 ;; Output:
+;;
 ;; - A list contaning two lists:
 ;; - The first list contains labels.
 ;; - Second list contains results.
@@ -880,12 +922,14 @@
 ;; matches.
 ;;
 ;; Parameters:
+;;
 ;; - p_l1: list of results as obtained by applying qfclvr.
 ;; - p_p1: string, choice between obtaining the max or min value.
-;;   - "max" for maximum value.
-;;   - "min" to get the minimum value.
+;;   - "#max" for maximum value.
+;;   - "#min" to get the minimum value.
 ;;
 ;; Output:
+;;
 ;; - A list of two elements:
 ;;   - First element contains the label of the result.
 ;;   - Second element contains the max value obtained.
@@ -897,13 +941,21 @@
 	(dvm 0)
 	(dv (list ))
 	(n1 0)
+	(p1 "")
 	(slm (g2q-txt 9)))
 
+    ;; For backwards compatibility.
+    (set! p1 p_p1)
+    (cond ((equal? p1 "max")
+	   (set! p1 "#max"))
+	  ((equal? p1 "min")
+	   (set! p1 "#min")))
+    
     ;; Find value.
     (set! dv (map string->number sv))
-    (cond ((equal? p_p1 "max")
+    (cond ((equal? p1 "#max")
 	   (set! dvm (apply max dv)))
-	  ((equal? p_p1 "min")
+	  ((equal? p1 "#min")
 	   (set! dvm (apply min dv))))
     
     ;; Get the corresponding label.
@@ -912,7 +964,7 @@
 	   (if (= dvm (list-ref dv n1))
 	       (begin (set! slm (list-ref sl n1))
 		      (set! n1 0)))
-	   (set! n1 (- n1 1)))
+	   (set! n1 (de n1)))
 
     ;; Compose results.
     (set! res1 (list slm dvm))
@@ -923,6 +975,7 @@
 ;; swap-fast - Swap gate expressed in fast form.
 ;;
 ;; Parameters:
+;;
 ;; - p_r1: quantum register name. 
 ;; - p_y1: qubit 1.
 ;; - p_y2: qubit 2. 
@@ -942,12 +995,14 @@
 ;; may not be possible. Expressed atomically.
 ;;
 ;; Parameters:
+;;
 ;; - p_r1: quantum register name 1.
 ;; - p_y1: qubit 1, min limit of the range.
 ;; - p_r2: quantum register name 2.
 ;; - p_y2: qubit 2, max limit of the range.
 ;;
 ;; Sources:
+;;
 ;; - [6][7].
 ;;
 (define (qftyn p_r1 p_y1 p_r2 p_y2)
@@ -962,9 +1017,9 @@
 	   (while (<= j1 p_y2)
 		  (cu1 (/ (qconst "Pi") (expt 2 (- j1 i1))) p_r1 j1 p_r2 i1)
 		  
-		  (set! j1 (+ j1 1)))
+		  (set! j1 (in j1)))
 	   
-	   (set! i1 (+ i1 1)))
+	   (set! i1 (in i1)))
     
     (qcomg "qftyn" 1)))
 
@@ -972,15 +1027,18 @@
 ;; qftdgyn - Function qftyn dagger, expressed atomically.
 ;;
 ;; Parameters:
+;;
 ;; - p_r1: quantum register name 1.
 ;; - p_y1: qubit 1, min limit of the range.
 ;; - p_r2: quantum register name 2.
 ;; - p_y2: qubit 2, max limit of the range.
 ;;
 ;; Remarks:
+;;
 ;; - See the comments for qftyn.
 ;;
 ;; Sources:
+;;
 ;; - [8].
 ;;
 (define (qftdgyn p_r1 p_y1 p_r2 p_y2)
@@ -1000,10 +1058,10 @@
 	   (while (<= k1 j1)
 		  (cu1 (/ (qconst "Pi") (expt 2 (- j1 k1))) p_r1 j1 p_r2 k1)
 		  
-		  (set! k1 (+ k1 1)))
+		  (set! k1 (in k1)))
 	   
 	   (g1 "h" p_r1 j1)
-	   (set! i1 (+ i1 1)))
+	   (set! i1 (in i1 )))
     
   (qcomg "qftdgyn" 1)))
 
@@ -1012,6 +1070,7 @@
 ;; (controlled swap).
 ;;
 ;; Parameters:
+;;
 ;; - p_r1: quantum register name 1.
 ;; - p_y1: qubit 1.
 ;; - p_r2: quantum register name 2.
@@ -1020,6 +1079,7 @@
 ;; - p_y3: qubit 3.
 ;;
 ;; Sources:
+;;
 ;; - [5][9].
 ;;
 (define (cswap p_r1 p_y1 p_r2 p_y2 p_r3 p_y3)
@@ -1046,12 +1106,14 @@
 
 ;; cx-ladder - Creates a ladder of succesive cx gates from p_r1[p_y1] to
 ;; p_r1[p_y2] according to:
+;;
 ;; - If p_y1 < p_y2: ladder goes from lower element number to greater
 ;;   element number on the registry.
 ;; - If p_y1 = p_y2: the fuunction behaves as a single cx gate.
 ;; - if p_y1 > p_y2: the ladder goes from higher to lower registry element.
 ;;
 ;; Parameters:
+;;
 ;; - p_r1: quantum register name.
 ;; - p_y1: qubit 1, control qubit of the cx gate where the ladder begins.
 ;; - p_y2: qubit 2, target qubit of the cx gate where the ladder ends.
@@ -1103,12 +1165,14 @@
 
 ;; swap-fast-ladder - Creates a ladder of succesive swap-fast gates from
 ;; p_r1[p_y1] to p_r1[p_y2] according to:
+;;
 ;; - If p_y1 < p_y2: ladder goes from lower element number to greater
 ;;   element number on the registry.
 ;; - If p_y1 = p_y2: the fuunction behaves as a single swap-fast gate.
 ;; - if p_y1 > p_y2: the ladder goes from higher to lower registry element.
 ;;
 ;; Parameters:
+;;
 ;; - p_r1: quantum register name.
 ;; - p_y1: qubit 1, lower registry number qubit where the ladder begins.
 ;; - p_y2: qubit 2, higher registry number qubit where the ladder ends.
@@ -1142,12 +1206,14 @@
 
 ;; swap-ladder - Creates a ladder of succesive swap gates from
 ;; p_r1[p_y1] to p_r1[p_y2] according to :
+;;
 ;; - If p_y1 < p_y2: ladder goes from lower element number to greater
 ;;   element number on the registry.
 ;; - If p_y1 = p_y2: the fuunction behaves as a single swap gate.
 ;; - if p_y1 > p_y2: the ladder goes from higher to lower registry element.
 ;;
 ;; Parameters:
+;;
 ;; - p_r1: quantum register name.
 ;; - p_y1: qubit 1, lower registry number qubit where the ladder begins.
 ;; - p_y2: qubit 2, higher registry number qubit where the ladder ends.
@@ -1187,6 +1253,7 @@
 ;; from a basic three-qubit case.
 ;;
 ;; Parameters:
+;;
 ;; - p_g1: quantum gate 1 (i.e. "h").
 ;; - p_g2: quantum gate 2 (i.e. "x").
 ;; - p_r1: quantum register name (i.e. q).
@@ -1197,12 +1264,14 @@
 ;;   - 2: ascending order.
 ;;
 ;; Remarks:
+;;
 ;; - If p_p1 = 1, qubit p_y2 contains the non - Hadamard gate.
 ;; - If p_p1 = 2, qubit p_y1 contains the non - Hadamard gate.
 ;; - This function places a barrier on all involved qubits after its relevant
 ;;   code.
 ;;
 ;; Sources:
+;;
 ;; - [9][10][11][12][13].
 ;;
 (define (ghzy p_g1 p_g2 p_r1 p_y1 p_y2 p_p1)
@@ -1260,6 +1329,7 @@
 ;; perform after a certain operation such as a GHZ state preparation.
 ;;
 ;; Parameters:
+;;
 ;; - p_r1: quantum register name (.e. "q").
 ;; - p_l1: list of strings defining the order on y axis of gates to be placed 
 ;;   (i.e. '("h" "h" "s") in the case of a three qubit system in which to place 
@@ -1267,6 +1337,7 @@
 ;; - p_y1: qubit 1, lower registry qubit
 ;;
 ;; Notes:
+;;
 ;; - You might want to place a barrier on all qubits before or after calling
 ;;   this function. g1y1 does not place any barriers by itself, so if that is
 ;;   your choice, you would have to place your barrier(s) using the appropriate
@@ -1291,13 +1362,16 @@
 ;; [p_y1, p_y1+2].
 ;;
 ;; Parameters:
+;;
 ;; - p_r1: quantum register name 1.
 ;; - p_y1: qubit 1.
 ;;
 ;; Notes:
+;;
 ;; - Code adapted from sources.
 ;;
 ;; Sources:
+;;
 ;; - [14].
 ;;
 (define (ecc1 p_r1 p_y1)
@@ -1321,14 +1395,17 @@
 ;; array p_r1 and interval [p_y1, p_y1+2].
 ;;
 ;; Parameters:
+;;
 ;; - p_g1: string, name of the gate to be tested.
 ;; - p_r1: quantum register name 1.
 ;; - p_y1: qubit 1.
 ;;
 ;; Notes:
+;;
 ;; - Code adapted from sources.
 ;;
 ;; Sources:
+;;
 ;; [14][15].
 ;;
 (define (ecc2 p_g1 p_r1 p_y1)
@@ -1370,13 +1447,16 @@
 ;; for qubits p_y1, p_y1+1, p_y1+4 using qubits [p_y1, p_y1+4].
 ;;
 ;; Parameters:
+;;
 ;; - p_r1: quantum register name 1.
 ;; - p_y1: qubit 1.
 ;;
 ;; Notes:
+;;
 ;; - Code adapted from sources.
 ;;
 ;; Sources:
+;;
 ;; - [14].
 ;;
 (define (ecc3 p_r1 p_y1)
@@ -1412,6 +1492,7 @@
 ;; p_r1.
 ;;
 ;; Parameters:
+;;
 ;; - p_r1: quantum register name.
 ;; - p_y1: qubit number.
 ;;
@@ -1426,6 +1507,7 @@
 ;; p_r1.
 ;;
 ;; Parameters:
+;;
 ;; - p_r1: quantum register name.
 ;; - p_y1: qubit number.
 ;;
@@ -1440,6 +1522,7 @@
 ;; p_r1.
 ;;
 ;; Parameters:
+;;
 ;; - p_r1: quantum register name.
 ;; - p_y1: qubit number.
 ;;
@@ -1454,6 +1537,7 @@
 ;; p_r1.
 ;;
 ;; Parameters:
+;;
 ;; - p_r1: quantum register name.
 ;; - p_y1: qubit number.
 ;;
@@ -1468,6 +1552,7 @@
 ;; register p_r1.
 ;;
 ;; Parameters:
+;;
 ;; - p_r1: quantum register name.
 ;; - p_y1: qubit number.
 ;;
@@ -1482,6 +1567,7 @@
 ;; p_r1.
 ;;
 ;; Parameters:
+;;
 ;; - p_r1: quantum register name.
 ;; - p_y1: qubit number.
 ;;
@@ -1496,6 +1582,7 @@
 ;; register p_r1.
 ;;
 ;; Parameters:
+;;
 ;; - p_r1: quantum register name.
 ;; - p_y1: qubit number.
 ;;

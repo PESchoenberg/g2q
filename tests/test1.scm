@@ -12,6 +12,28 @@
 ;; in order for this to work, the gate must be one specified in the OpenQASM2
 ;; standard.
 ;;
+;; =============================================================================
+;;
+;; Copyright (C) 2018 - 2022 Pablo Edronkin (pablo.edronkin at yahoo.com)
+;;
+;;   This program is free software: you can redistribute it and/or modify
+;;   it under the terms of the GNU Lesser General Public License as published by
+;;   the Free Software Foundation, either version 3 of the License, or
+;;   (at your option) any later version.
+;;
+;;   This program is distributed in the hope that it will be useful, but
+;;   WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+;;   or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
+;;   License for more details.
+;;
+;;   You should have received a copy of the GNU Lesser General Public License
+;;   along with this program. If not, see <https://www.gnu.org/licenses/>.
+;;
+;; =============================================================================
+
+
+;;;; General notes:
+;;
 ;; Compilation (if you have g2q and qre in your system path):
 ;;
 ;; - cd to your /tests folder.
@@ -31,29 +53,11 @@
 ;;   guile test1.scm 
 ;;
 ;; Sources:
-;; - Andrew W. Cross, Lev S. Bishop, John A. Smolin, Jay M. Gambetta "Open 
+;;
+;; - [1] Andrew W. Cross, Lev S. Bishop, John A. Smolin, Jay M. Gambetta "Open 
 ;;   Quantum Assembly Language", https://arxiv.org/abs/1707.03429
-;; - https://en.wikipedia.org/wiki/OpenQASM
-;; - https://github.com/Qiskit/openqasm
-;;
-;; =============================================================================
-;;
-;; Copyright (C) 2018 - 2022 Pablo Edronkin (pablo.edronkin at yahoo.com)
-;;
-;;   This program is free software: you can redistribute it and/or modify
-;;   it under the terms of the GNU Lesser General Public License as published by
-;;   the Free Software Foundation, either version 3 of the License, or
-;;   (at your option) any later version.
-;;
-;;   This program is distributed in the hope that it will be useful,
-;;   but WITHOUT ANY WARRANTY; without even the implied warranty of
-;;   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-;;   GNU Lesser General Public License for more details.
-;;
-;;   You should have received a copy of the GNU Lesser General Public License
-;;   along with this program.  If not, see <https://www.gnu.org/licenses/>.
-;;
-;; =============================================================================
+;; - [2] https://en.wikipedia.org/wiki/OpenQASM
+;; - [3] https://github.com/Qiskit/openqasm
 
 
 ;; Required modules.

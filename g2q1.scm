@@ -4,24 +4,19 @@
 ;;
 ;; Additional configuration and machine-specific functions.
 ;;
-;; Sources:
-;; - Qiskit.org. (2019). Installing Qiskit — Qiskit 0.12.0 documentation.
-;;   [online] Available at: https://qiskit.org/documentation/install.html
-;;   [Accessed 7 Oct. 2019].
-;;
 ;; =============================================================================
 ;;
-;; Copyright (C) 2018 - 2020  Pablo Edronkin (pablo.edronkin at yahoo.com)
+;; Copyright (C) 2018 - 2022 Pablo Edronkin (pablo.edronkin at yahoo.com)
 ;;
 ;;   This program is free software: you can redistribute it and/or modify
 ;;   it under the terms of the GNU Lesser General Public License as published by
 ;;   the Free Software Foundation, either version 3 of the License, or
 ;;   (at your option) any later version.
 ;;
-;;   This program is distributed in the hope that it will be useful,
-;;   but WITHOUT ANY WARRANTY; without even the implied warranty of
-;;   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-;;   GNU Lesser General Public License for more details.
+;;   This program is distributed in the hope that it will be useful, but
+;;   WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+;;   or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
+;;   License for more details.
 ;;
 ;;   You should have received a copy of the GNU Lesser General Public License
 ;;   along with this program. If not, see <https://www.gnu.org/licenses/>.
@@ -29,8 +24,17 @@
 ;; =============================================================================
 
 
-;; Config for IBM Quantum Experience and Qiskit. This still needs development in
-;; but might be needed to test QASM programs on IBM Q processors.
+;;;; General notes:
+;;
+;; - Read sources for limitations on function parameters.
+;; - Config for IBM Quantum Experience and Qiskit. This still needs development
+;;   in but might be needed to test QASM programs on IBM Q processors.
+;;
+;; Sources:
+;;
+;; - [1] Qiskit.org. (2019). Installing Qiskit — Qiskit 0.12.0 documentation.
+;;   [online] Available at: https://qiskit.org/documentation/install.html
+;;   [Accessed 7 Oct. 2019].
 
 
 (define-module (g2q g2q1)
@@ -54,6 +58,7 @@
 ;; equivalent to functions found on Qiskit IDE. (Deprecated).
 ;;
 ;; List elements:
+;;
 ;; - 0: base uri for online access.
 ;; - 1: token.
 ;; - 2: subdir to post https execution requests.
@@ -69,6 +74,7 @@
 ;; g2q-qre-config - Configuration for using qre.
 ;;
 ;; Elements:
+;;
 ;; - 0: json subdir.
 ;; - 1: sqlite3 subdir.
 ;; - 2: primary local (default) qpu.
@@ -90,6 +96,7 @@
 ;; g2q-select-qpu - Menu for selecting the qpu that is to be used.
 ;;
 ;; Output:
+;;
 ;; - String containing the name of the selected qpu. Defaults to qlib_simulator.
 ;;
 (define (g2q-select-qpu)
@@ -133,6 +140,7 @@
 ;; g2q-txt - Defines some string constants that are intrinsic to g2q.
 ;;
 ;; Parameters:
+;;
 ;; - p_n1: string number.
 ;;
 (define (g2q-txt p_n1)
