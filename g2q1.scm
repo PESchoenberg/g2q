@@ -27,6 +27,8 @@
 ;;;; General notes:
 ;;
 ;; - Read sources for limitations on function parameters.
+;; - Read at least the general notes of all scm files in this library before
+;;   use. Consider these files as your main documentation for g2q.
 ;; - Config for IBM Quantum Experience and Qiskit. This still needs development
 ;;   in but might be needed to test QASM programs on IBM Q processors.
 ;;

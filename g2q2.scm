@@ -28,7 +28,7 @@
 ;;
 ;; - Read sources for limitations on function parameters.
 ;; - Read at least the general notes of all scm files in this library before
-;;   use.
+;;   use. Consider these files as your main documentation for g2q.
 ;;
 ;; Sources:
 ;;
@@ -186,7 +186,7 @@
 ;; Parameters:
 ;;
 ;; - p_g1: string, gate name.
-;; - p_r1: quantum register name (i.e. q).
+;; - p_r1: string, quantum register name.
 ;; - p_y1: numeric, ordinal of the initial qubit.
 ;; - p_y2: numeric, ordinal of the last qubit.
 ;;
@@ -208,7 +208,7 @@
 ;; Parameters:
 ;;
 ;; - p_g1: string, gate name.
-;; - p_r1: quantum register name.
+;; - p_r1: string, quantum register name.
 ;; - p_y1: register element.
 ;; - p_x1: numeric, number of iterations on x.
 ;;
@@ -230,7 +230,7 @@
 ;; Parameters:
 ;;
 ;; - p_g1: string, gate name.
-;; - p_r1: quantum register name.
+;; - p_r1: string, quantum register name.
 ;; - p_y1: ordinal of the initial qubit.
 ;; - p_y2: ordinal of the last qubit.
 ;; - p_x1: numeric, number of iterations that g1y will be repeated along x
@@ -252,7 +252,7 @@
 ;;
 ;; Parameters:
 ;;
-;; - p_r1: quantum register name.
+;; - p_r1: string, quantum register name.
 ;; - p_r2: conventional register name.
 ;; - p_y1: numeric, ordinal of the initial qubit.
 ;; - p_y2: numeric, ordinal of the last qubit.
@@ -274,9 +274,9 @@
 ;;
 ;; Parameters:
 ;;
-;; - p_r1: quantum register name 1.
+;; - p_r1: string, quantum register name 1.
 ;; - p_y1: control qubit 1 (represented as a dot in a q diagram).
-;; - p_r2: quantum register name 2.
+;; - p_r2: string, quantum register name 2.
 ;; - p_y2: target qubit 2 (represented as a plus).
 ;;
 (define (cx p_r1 p_y1 p_r2 p_y2)
@@ -289,9 +289,9 @@
 ;;
 ;; Parameters:
 ;;
-;; - p_r1: quantum register name 1.
+;; - p_r1: string, quantum register name 1.
 ;; - p_y1: control qubit 1.
-;; - p_r2: quantum register name 2.
+;; - p_r2: string, quantum register name 2.
 ;; - p_y2: target qubit 2.
 ;;
 (define (cz p_r1 p_y1 p_r2 p_y2)
@@ -308,9 +308,9 @@
 ;;
 ;; Parameters:
 ;;
-;; - p_r1: quantum register name 1.
+;; - p_r1: string, quantum register name 1.
 ;; - p_y1: control qubit 1.
-;; - p_r2: quantum register name 2.
+;; - p_r2: string, quantum register name 2.
 ;; - p_y2: target qubit 2.
 ;;
 (define (cz-fast p_r1 p_y1 p_r2 p_y2)
@@ -338,9 +338,9 @@
 ;;
 ;; Parameters:
 ;;
-;; - p_r1: quantum register name 1.
+;; - p_r1: string, quantum register name 1.
 ;; - p_y1: control qubit 1.
-;; - p_r2: quantum register name 2.
+;; - p_r2: string, quantum register name 2.
 ;; - p_y2: target qubit 2.
 ;;
 (define (cy-fast p_r1 p_y1 p_r2 p_y2)
@@ -351,9 +351,9 @@
 ;;
 ;; Parameters:
 ;;
-;; - p_r1: quantum register name 1.
+;; - p_r1: string, quantum register name 1.
 ;; - p_y1: control qubit 1.
-;; - p_r2: quantum register name 2.
+;; - p_r2: string, quantum register name 2.
 ;; - p_y2: target qubit 2.
 ;;
 (define (ch p_r1 p_y1 p_r2 p_y2)
@@ -374,9 +374,9 @@
 ;;
 ;; Parameters:
 ;;
-;; - p_r1: quantum register name 1.
+;; - p_r1: string, quantum register name 1.
 ;; - p_y1: control qubit 1.
-;; - p_r2: quantum register name 2.
+;; - p_r2: string, quantum register name 2.
 ;; - p_y2: target qubit 2.
 ;;
 (define (ch-fast p_r1 p_y1 p_r2 p_y2)
@@ -387,11 +387,11 @@
 ;;
 ;; Parameters:
 ;;
-;; - p_r1: quantum register name 1.
+;; - p_r1: string, quantum register name 1.
 ;; - p_y1: control qubit 1 (dot).
-;; - p_r2: quantum register name 2.
+;; - p_r2: string, quantum register name 2.
 ;; - p_y2: control qubit 2 (dot).
-;; - p_r3: quantum register name 3.
+;; - p_r3: string, quantum register name 3.
 ;; - p_y3: target qubit 3 (plus).
 ;;
 ;; Sources:
@@ -422,11 +422,11 @@
 ;;
 ;; Parameters:
 ;;
-;; - p_r1: quantum register name 1.
+;; - p_r1: string, quantum register name 1.
 ;; - p_y1: control qubit 1 (dot).
-;; - p_r2: quantum register name 2.
+;; - p_r2: string, quantum register name 2.
 ;; - p_y2: control qubit 2 (dot).
-;; - p_r3: quantum register name 3.
+;; - p_r3: string, quantum register name 3.
 ;; - p_y3: target qubit 3 (plus).
 ;;
 (define (ccx-fast p_r1 p_y1 p_r2 p_y2 p_r3 p_y3)
@@ -445,7 +445,7 @@
 ;; Parameters:
 ;;
 ;; - p_t1: numeric, theta angle.
-;; - p_r1: quantum register name 1.
+;; - p_r1: string, quantum register name 1.
 ;; - p_y1: qubit 1.
 ;;
 (define (rx p_t1 p_r1 p_y1)
@@ -459,7 +459,7 @@
 ;; Parameters:
 ;;
 ;; - p_t1: numeric, theta angle; this is a dummy arument, left for consistency.
-;; - p_r1: quantum register name 1.
+;; - p_r1: string, quantum register name 1.
 ;; - p_y1: qubit 1.
 ;; 
 (define (rx-fast p_t1 p_r1 p_y1)
@@ -478,7 +478,7 @@
 ;; Parameters:
 ;;
 ;; - p_t1: numeric, theta angle.
-;; - p_r1: quantum register name 1.
+;; - p_r1: string, quantum register name 1.
 ;; - p_y1: qubit 1.
 ;;
 (define (ry p_t1 p_r1 p_y1)
@@ -490,7 +490,7 @@
 ;; Parameters:
 ;;
 ;; - p_t1: numeric, angle (dummy, left for consistency with other functions).
-;; - p_r1: quantum register name 1.
+;; - p_r1: string, quantum register name 1.
 ;; - p_y1: qubit 1.
 ;; 
 (define (ry-fast p_t1 p_r1 p_y1)
@@ -509,7 +509,7 @@
 ;; Parameters:
 ;;
 ;; - p_t1: numeric, angle 1.
-;; - p_r1: quantum register name 1.
+;; - p_r1: string, quantum register name 1.
 ;; - p_y1: qubit 1.
 ;;
 (define (rz p_t1 p_r1 p_y1)
@@ -522,7 +522,7 @@
 ;;
 ;; - p_t1: numeric, angle; dummy argument left for consistency with other
 ;;   functions.
-;; - p_r1: quantum register name 1.
+;; - p_r1: string, quantum register name 1.
 ;; - p_y1: qubit 1.
 ;; 
 (define (rz-fast p_t1 p_r1 p_y1)
@@ -541,9 +541,9 @@
 ;; Parameters:
 ;;
 ;; - p_t1: numeric, angle 1.
-;; - p_r1: quantum register name 1.
+;; - p_r1: string, quantum register name 1.
 ;; - p_y1: qubit 1.
-;; - p_r2: quantum register name 2.
+;; - p_r2: string, quantum register name 2.
 ;; - p_y2: qubit 2.
 ;;
 (define (crz p_t1 p_r1 p_y1 p_r2 p_y2)
@@ -562,9 +562,9 @@
 ;; Parameters:
 ;;
 ;; - p_t1: numeric, angle 1. Dummy for compat with gate crz.
-;; - p_r1: quantum register name 1.
+;; - p_r1: string, quantum register name 1.
 ;; - p_y1: qubit 1.
-;; - p_r2: quantum register name 2.
+;; - p_r2: string, quantum register name 2.
 ;; - p_y2: qubit 2.
 ;;
 (define (crz-fast p_t1 p_r1 p_y1 p_r2 p_y2)
@@ -587,9 +587,9 @@
 ;; Parameters:
 ;;
 ;; - p_t1: numeric, angle 1.
-;; - p_r1: quantum register name 1.
+;; - p_r1: string, quantum register name 1.
 ;; - p_y1: qubit 1.
-;; - p_r2: quantum register name 2.
+;; - p_r2: string, quantum register name 2.
 ;; - p_y2: qubit 2.
 ;;
 ;; Notes:
@@ -613,9 +613,9 @@
 ;; Parameters:
 ;;
 ;; - p_t1: numeric, angle 1.
-;; - p_r1: quantum register name 1.
+;; - p_r1: string, quantum register name 1.
 ;; - p_y1: qubit 1.
-;; - p_r2: quantum register name 2.
+;; - p_r2: string, quantum register name 2.
 ;; - p_y2: qubit 2.
 ;;
 (define (cu1-fast p_t1 p_r1 p_y1 p_r2 p_y2)
@@ -639,9 +639,9 @@
 ;;
 ;; - p_t1: numeric, angle 1.
 ;; - p_t2: numeric, angle 2.
-;; - p_r1: quantum register name 1.
+;; - p_r1: string, quantum register name 1.
 ;; - p_y1: qubit 1.
-;; - p_r2: quantum register name 2.
+;; - p_r2: string, quantum register name 2.
 ;; - p_y2: qubit 2.
 ;;
 (define (cu3 p_t1 p_t2 p_r1 p_y1 p_r2 p_y2)
@@ -661,9 +661,9 @@
 ;; - p_t1: numeric, angle 1.
 ;; - p_t2: numeric, angle 2.
 ;; - p_t3: numeric, angle 3.
-;; - p_r1: quantum register name 1.
+;; - p_r1: string, quantum register name 1.
 ;; - p_y1: qubit 1.
-;; - p_r2: quantum register name 2.
+;; - p_r2: string, quantum register name 2.
 ;; - p_y2: qubit 2.
 ;;
 (define (cu3-fast p_t1 p_t2 p_t3 p_r1 p_y1 p_r2 p_y2)
@@ -690,7 +690,7 @@
 ;; Parameters:
 ;;
 ;; - p_g1: string, g1 gate name.
-;; - p_r1: quantum register name (i.e. q).
+;; - p_r1: string, quantum register name (i.e. q).
 ;; - p_y1: numeric, qubit number 1 (control of cx).
 ;; - p_y2: numeric, qubit number 2 (target of cx).
 ;;
@@ -713,7 +713,7 @@
 ;;
 ;; Parameters:
 ;;
-;; - p_f1: name of .qasm file.
+;; - p_f1: string, name of .qasm file.
 ;;
 ;; Output:
 ;;
@@ -734,8 +734,8 @@
 ;;
 ;; Parameters;
 ;;
-;; - p_f1: name of .qasm file.
-;; - p_f2: name of .qreg file.
+;; - p_f1: string, name of .qasm file.
+;; - p_f2: string, name of .qreg file.
 ;; - p_p1: string, where results will be saved to:
 ;;   - "json" to save results to a json file.
 ;;   - "sqlite3" to save results to a sqlite3 database.
@@ -822,9 +822,9 @@
 ;;
 ;; Parameters:
 ;;
-;; - p_r1: gate group name 1.
+;; - p_r1: string, gate group name 1.
 ;; - p_y1: target qubit, normally p_y2 - 1.
-;; - p_r2: gate group name 2.
+;; - p_r2: string, gate group name 2.
 ;; - p_y2: control qubit, value to be inverted, 0 or 1.
 ;;
 ;; Output:
@@ -844,13 +844,13 @@
 ;;
 ;; Parameters:
 ;;
-;; - p_r1: quantum register name 1.
+;; - p_r1: string, quantum register name 1.
 ;; - p_y1: target qubit a, normally p_y2 - 1.
-;; - p_r2: quantum register name 2.
+;; - p_r2: string, quantum register name 2.
 ;; - p_y2: control qubit a.
-;; - p_r3: quantum register name 3.
+;; - p_r3: string, quantum register name 3.
 ;; - p_y3: target qubit b, normally p_y3 - 1.
-;; - p_r4: quantum register name 4.
+;; - p_r4: string, quantum register name 4.
 ;; - p_y4: control qubit b.
 ;;
 ;; Output:
@@ -931,8 +931,8 @@
 ;; Output:
 ;;
 ;; - A list of two elements:
-;;   - First element contains the label of the result.
-;;   - Second element contains the max value obtained.
+;;   - Elem 0: contains the label of the result.
+;;   - Elem 1: contains the max value obtained.
 ;;
 (define (qfres p_l1 p_p1)
   (let ((res1 (list ))
@@ -976,7 +976,7 @@
 ;;
 ;; Parameters:
 ;;
-;; - p_r1: quantum register name. 
+;; - p_r1: string, quantum register name. 
 ;; - p_y1: qubit 1.
 ;; - p_y2: qubit 2. 
 ;;
@@ -996,9 +996,9 @@
 ;;
 ;; Parameters:
 ;;
-;; - p_r1: quantum register name 1.
+;; - p_r1: string, quantum register name 1.
 ;; - p_y1: qubit 1, min limit of the range.
-;; - p_r2: quantum register name 2.
+;; - p_r2: string, quantum register name 2.
 ;; - p_y2: qubit 2, max limit of the range.
 ;;
 ;; Sources:
@@ -1028,9 +1028,9 @@
 ;;
 ;; Parameters:
 ;;
-;; - p_r1: quantum register name 1.
+;; - p_r1: string, quantum register name 1.
 ;; - p_y1: qubit 1, min limit of the range.
-;; - p_r2: quantum register name 2.
+;; - p_r2: string, quantum register name 2.
 ;; - p_y2: qubit 2, max limit of the range.
 ;;
 ;; Remarks:
@@ -1071,11 +1071,11 @@
 ;;
 ;; Parameters:
 ;;
-;; - p_r1: quantum register name 1.
+;; - p_r1: string, quantum register name 1.
 ;; - p_y1: qubit 1.
-;; - p_r2: quantum register name 2.
+;; - p_r2: string, quantum register name 2.
 ;; - p_y2: qubit 2.
-;; - p_r3: quantum register name 3.
+;; - p_r3: string, quantum register name 3.
 ;; - p_y3: qubit 3.
 ;;
 ;; Sources:
@@ -1114,7 +1114,7 @@
 ;;
 ;; Parameters:
 ;;
-;; - p_r1: quantum register name.
+;; - p_r1: string, quantum register name.
 ;; - p_y1: qubit 1, control qubit of the cx gate where the ladder begins.
 ;; - p_y2: qubit 2, target qubit of the cx gate where the ladder ends.
 ;; - p_p1: numeric, mode:
@@ -1173,7 +1173,7 @@
 ;;
 ;; Parameters:
 ;;
-;; - p_r1: quantum register name.
+;; - p_r1: string, quantum register name.
 ;; - p_y1: qubit 1, lower registry number qubit where the ladder begins.
 ;; - p_y2: qubit 2, higher registry number qubit where the ladder ends.
 ;; - p_p1: numeric, mode:
@@ -1214,7 +1214,7 @@
 ;;
 ;; Parameters:
 ;;
-;; - p_r1: quantum register name.
+;; - p_r1: string, quantum register name.
 ;; - p_y1: qubit 1, lower registry number qubit where the ladder begins.
 ;; - p_y2: qubit 2, higher registry number qubit where the ladder ends.
 ;; - p_p1: numeric, mode:
@@ -1256,7 +1256,7 @@
 ;;
 ;; - p_g1: quantum gate 1 (i.e. "h").
 ;; - p_g2: quantum gate 2 (i.e. "x").
-;; - p_r1: quantum register name (i.e. q).
+;; - p_r1: string, quantum register name.
 ;; - p_y1: qubit 1, lower registry qubit of the GHZ array.
 ;; - p_y2: qubit 2, higher registry qubit of the GHZ array.
 ;; - p_p1: numeric, mode:
@@ -1330,7 +1330,7 @@
 ;;
 ;; Parameters:
 ;;
-;; - p_r1: quantum register name (.e. "q").
+;; - p_r1: string, quantum register name (.e. "q").
 ;; - p_l1: list of strings defining the order on y axis of gates to be placed 
 ;;   (i.e. '("h" "h" "s") in the case of a three qubit system in which to place 
 ;;   h gates on the first and second, and an s gate on the third.
@@ -1363,7 +1363,7 @@
 ;;
 ;; Parameters:
 ;;
-;; - p_r1: quantum register name 1.
+;; - p_r1: string, quantum register name 1.
 ;; - p_y1: qubit 1.
 ;;
 ;; Notes:
@@ -1397,7 +1397,7 @@
 ;; Parameters:
 ;;
 ;; - p_g1: string, name of the gate to be tested.
-;; - p_r1: quantum register name 1.
+;; - p_r1: string, quantum register name 1.
 ;; - p_y1: qubit 1.
 ;;
 ;; Notes:
@@ -1448,7 +1448,7 @@
 ;;
 ;; Parameters:
 ;;
-;; - p_r1: quantum register name 1.
+;; - p_r1: string, quantum register name 1.
 ;; - p_y1: qubit 1.
 ;;
 ;; Notes:
@@ -1493,7 +1493,7 @@
 ;;
 ;; Parameters:
 ;;
-;; - p_r1: quantum register name.
+;; - p_r1: string, quantum register name.
 ;; - p_y1: qubit number.
 ;;
 (define (hx p_r1 p_y1)
@@ -1508,7 +1508,7 @@
 ;;
 ;; Parameters:
 ;;
-;; - p_r1: quantum register name.
+;; - p_r1: string, quantum register name.
 ;; - p_y1: qubit number.
 ;;
 (define (hy p_r1 p_y1)
@@ -1523,7 +1523,7 @@
 ;;
 ;; Parameters:
 ;;
-;; - p_r1: quantum register name.
+;; - p_r1: string, quantum register name.
 ;; - p_y1: qubit number.
 ;;
 (define (hz p_r1 p_y1)
@@ -1538,7 +1538,7 @@
 ;;
 ;; Parameters:
 ;;
-;; - p_r1: quantum register name.
+;; - p_r1: string, quantum register name.
 ;; - p_y1: qubit number.
 ;;
 (define (hs p_r1 p_y1)
@@ -1553,7 +1553,7 @@
 ;;
 ;; Parameters:
 ;;
-;; - p_r1: quantum register name.
+;; - p_r1: string, quantum register name.
 ;; - p_y1: qubit number.
 ;;
 (define (hsdg p_r1 p_y1)
@@ -1568,7 +1568,7 @@
 ;;
 ;; Parameters:
 ;;
-;; - p_r1: quantum register name.
+;; - p_r1: string, quantum register name.
 ;; - p_y1: qubit number.
 ;;
 (define (ht p_r1 p_y1)
@@ -1583,7 +1583,7 @@
 ;;
 ;; Parameters:
 ;;
-;; - p_r1: quantum register name.
+;; - p_r1: string, quantum register name.
 ;; - p_y1: qubit number.
 ;;
 (define (htdg p_r1 p_y1)
