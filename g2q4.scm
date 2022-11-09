@@ -27,6 +27,8 @@
 ;;;; General notes:
 ;;
 ;; - Read sources for limitations on function parameters.
+;; - Read at least the general notes of all scm files in this library before
+;;   use. Consider these files as your main documentation for g2q.
 ;;
 ;; Sources:
 ;;
@@ -50,7 +52,7 @@
 ;;
 ;; Parameters:
 ;;
-;; - p_r1: quantum register name.
+;; - p_r1: string, quantum register name.
 ;; - p_y1: numeric, qubit number.
 ;;
 ;; Sources:

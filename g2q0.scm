@@ -28,11 +28,12 @@
 ;;
 ;; - Read sources for limitations on function parameters.
 ;; - Read at least the general notes of all scm files in this library before
-;;   use.
+;;   use. Consider these files as your main documentation for g2q.
 ;;
 ;; Compilation:
 ;;
-;; - (use-modules (g2q g2q0)(g2q g2q1)(g2q g2q2)(g2q g2q3)(g2q g2q4))
+;; - Within the GNU REPLT type;
+;;   (use-modules (g2q g2q0)(g2q g2q1)(g2q g2q2)(g2q g2q3)(g2q g2q4))
 ;;
 ;; Sources:
 ;;
@@ -150,7 +151,7 @@
 ;; Parameters:
 ;;
 ;; - p_g1: string, gate name.
-;; - p_r1: quantum or conventional register name (q or c).
+;; - p_r1: string, quantum or conventional register name.
 ;; - p_y1: qubit ordinal number.
 ;;
 (define (qbg p_g1 p_r1 p_y1)
@@ -162,7 +163,7 @@
 ;; Parameters:
 ;;
 ;; - p_g1: string, gate name.
-;; - p_r1: quantum or conventional register name (q or c).
+;; - p_r1: string, quantum or conventional register name.
 ;; - p_y1: qubit ordinal number.
 ;;
 (define (qbgd p_g1 p_r1 p_y1)
@@ -173,9 +174,9 @@
 ;;
 ;; Parameters:
 ;;
-;; - p_r1: quantum register name 1.
+;; - p_r1: string, quantum register name 1.
 ;; - p_x1: numeric, register ordinal of p_r1.
-;; - p_r2: quantum register name 2.
+;; - p_r2: string, quantum register name 2.
 ;; - p_x2: numeric, register ordinal of p_r2.
 ;;
 (define (qmeas p_r1 p_x1 p_r2 p_x2)
@@ -191,10 +192,10 @@
 ;;
 ;; Parameters:
 ;;
-;; - p_g1: item name.
-;; - p_r1: quantum register name 1. 
+;; - p_g1: string, item name.
+;; - p_r1: string, quantum register name 1. 
 ;; - p_y1: control qubit (dot).
-;; - p_r2: quantum register name 2. 
+;; - p_r2: string, quantum register name 2. 
 ;; - p_y2: target qubit (plus) 
 ;;
 (define (qcx p_g1 p_r1 p_y1 p_r2 p_y2)
@@ -211,9 +212,9 @@
 ;;
 ;; Parameters:
 ;;
-;; - p_r1: quantum register name 1.
+;; - p_r1: string, quantum register name 1.
 ;; - p_y1: number of items in p_r1.
-;; - p_r2: quantum register name 2.
+;; - p_r2: string, quantum register name 2.
 ;; - p_y2: number of items in p_r2.
 ;;
 (define (qregdef p_r1 p_y1 p_r2 p_y2)
@@ -221,12 +222,12 @@
   (qbgd "creg" p_r2 p_y2))
 
 
-;;;; qin - Increment the value of a variable p_v by p_s.
+;;;; qin - Increment the value of a variable p_m1 by p_n2.
 ;;
 ;; Parameters:
 ;;
 ;; - p_n1: variable to increment.
-;; - p_n2: increment step.
+;; - p_n2: incremental step.
 ;;
 (define (qin p_n1 p_n2)
   (set! p_n1 (+ p_n1 p_n2)))
@@ -237,7 +238,7 @@
 ;; Parameters:
 ;;
 ;; - p_g1: string, gate name.
-;; - p_r1: quantum register name 1.
+;; - p_r1: string, quantum register name 1.
 ;; - p_y1: qubit 1.
 ;;
 (define (g1 p_g1 p_r1 p_y1)
@@ -249,9 +250,9 @@
 ;; Parameters:
 ;;
 ;; - p_g1: string, gate name.
-;; - p_r1: quantum register name 1.
+;; - p_r1: string, quantum register name 1.
 ;; - p_y1: control qubit 1.
-;; - p_r2: quantum register name 2.
+;; - p_r2: string, quantum register name 2.
 ;; - p_y2: target qubit number 2. Set to zero in the case of gates with no
 ;;   target q quibt.
 ;;
@@ -272,7 +273,7 @@
 ;; Parameters:
 ;;
 ;; - p_y1: first rotation.
-;; - p_r1: quantum register name 1.
+;; - p_r1: string, quantum register name 1.
 ;; - p_y2: qubit number.
 ;;
 (define (u1 p_y1 p_r1 p_y2)
@@ -290,7 +291,7 @@
 ;;
 ;; - p_y1: numeric, angle 1, first rotation.
 ;; - p_y2: numeric, angle 2, second rotation.
-;; - p_r1: quantum register name 1.
+;; - p_r1: string, quantum register name 1.
 ;; - p_y3: qubit number.
 ;;
 (define (u2 p_y1 p_y2 p_r1 p_y3)
@@ -310,7 +311,7 @@
 ;; - p_y1: numeric, angle 1, first rotation.
 ;; - p_y2: numeric, angle 2, second rotation.
 ;; - p_y3: numeric, angle 3, third rotation.
-;; - p_r1: quantum register name 1.
+;; - p_r1: string, quantum register name 1.
 ;; - p_y4: qubit number.
 ;;
 (define (u3 p_y1 p_y2 p_y3 p_r1 p_y4)
@@ -397,7 +398,7 @@
 ;;
 ;; Parameters:
 ;;
-;; - p_r1: quantum register name 1. 
+;; - p_r1: string, quantum register name 1. 
 ;; - p_y1: qubit 1.
 ;; - p_y2: qubit 2. 
 ;;
