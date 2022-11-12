@@ -92,6 +92,7 @@
 ;;   experience and the quantum shell game. [online] IBM Developer. Available
 ;;   at: https://developer.ibm.com/tutorials/os-quantum-computing-shell-game/ 
 ;;   [Accessed 30 Sep. 2019].
+;; - [17] https://quantum-computing.ibm.com/composer/docs/iqx/operations_glossary#obs-ops
 
 
 (define-module (g2q g2q2)
@@ -313,6 +314,10 @@
 ;; - p_r2: string, quantum register name 2.
 ;; - p_y2: target qubit 2.
 ;;
+;; Notes:
+;;
+;; - Obsolete in IBM Quantum Composer, 2022, see [17].
+;;
 (define (cz-fast p_r1 p_y1 p_r2 p_y2)
   (g2 "cz-fast" p_r1 p_y1 p_r2 p_y2))
 
@@ -325,6 +330,10 @@
 ;; - p_y1: control qubit 1.
 ;; - p_r2: quantum register name 2.
 ;; - p_y2: target qubit 2.
+;;
+;; Notes:
+;;
+;; - Obsolete in IBM Quantum Composer, 2022, see [17].
 ;;
 (define (cy p_r1 p_y1 p_r2 p_y2)
   (qcomg "cy" 0)
@@ -356,6 +365,10 @@
 ;; - p_r2: string, quantum register name 2.
 ;; - p_y2: target qubit 2.
 ;;
+;; Notes:
+;;
+;; - Obsolete in IBM Quantum Composer, 2022, see [17].
+;;
 (define (ch p_r1 p_y1 p_r2 p_y2)
   (qcomg "ch" 0)
   (g1 "h" p_r2 p_y2)
@@ -383,7 +396,7 @@
   (g2 "ch-fast" p_r1 p_y1 p_r2 p_y2))
 
 
-;; ccx - Gate ccx, Toffoli gate expressed atomically.
+;; ccx - Gate ccx, Toffoli gate expressed atomically, double controlled NOT.
 ;;
 ;; Parameters:
 ;;
@@ -546,6 +559,10 @@
 ;; - p_r2: string, quantum register name 2.
 ;; - p_y2: qubit 2.
 ;;
+;; Notes:
+;;
+;; - Obsolete in IBM Quantum Composer, 2022, see [17].
+;;
 (define (crz p_t1 p_r1 p_y1 p_r2 p_y2)
   (let ((t1 (/ p_t1 2)))
 
@@ -595,6 +612,7 @@
 ;; Notes:
 ;;
 ;; - TODO: check t1 and p_t1.
+;; - Obsolete in IBM Quantum Composer, 2022, see [17].
 ;;
 (define (cu1 p_t1 p_r1 p_y1 p_r2 p_y2)
   (let ((t1 (* p_y1 0.5))) ;; ***
@@ -643,6 +661,10 @@
 ;; - p_y1: qubit 1.
 ;; - p_r2: string, quantum register name 2.
 ;; - p_y2: qubit 2.
+;;
+;; Notes:
+;;
+;; - Obsolete in IBM Quantum Composer, 2022, see [17].
 ;;
 (define (cu3 p_t1 p_t2 p_r1 p_y1 p_r2 p_y2)
   (qcomg "cu3" 0)
@@ -1077,6 +1099,10 @@
 ;; - p_y2: qubit 2.
 ;; - p_r3: string, quantum register name 3.
 ;; - p_y3: qubit 3.
+;;
+;; Notes:
+;;
+;; - Obsolete in IBM Quantum Composer, 2022, see [17].
 ;;
 ;; Sources:
 ;;

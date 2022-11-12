@@ -67,7 +67,14 @@
 	    qcond2
 	    qvalid-conditional
 	    swap
-	    qcomg))
+	    qcomg
+	    x
+	    id
+	    t
+	    s
+	    z
+	    tdg
+	    sdg))
 
 
 ;;;; qhead - Defines a program name.
@@ -188,7 +195,7 @@
 			   0)))
 
 
-;;;; qcx - Gate cx.
+;;;; qcx - Gate cx, controlled NOT gate, controlled x gate.
 ;;
 ;; Parameters:
 ;;
@@ -276,6 +283,11 @@
 ;; - p_r1: string, quantum register name 1.
 ;; - p_y2: qubit number.
 ;;
+;; Notes:
+;;
+;; - Obsolete in IBM Quantum Composer, renamed "phase gate", 2022, see
+;;   [g2q2.17].
+;;
 (define (u1 p_y1 p_r1 p_y2)
   (display (strings-append (list "u1("
 				 (grsp-n2s p_y1)
@@ -293,6 +305,10 @@
 ;; - p_y2: numeric, angle 2, second rotation.
 ;; - p_r1: string, quantum register name 1.
 ;; - p_y3: qubit number.
+;;
+;; Notes:
+;;
+;; - Obsolete in IBM Quantum Composer, 2022, see [g2q2.17].
 ;;
 (define (u2 p_y1 p_y2 p_r1 p_y3)
   (display (strings-append (list "u2("
@@ -313,6 +329,10 @@
 ;; - p_y3: numeric, angle 3, third rotation.
 ;; - p_r1: string, quantum register name 1.
 ;; - p_y4: qubit number.
+;;
+;; Notes:
+;;
+;; - Obsolete in IBM Quantum Composer, renamed U, 2022, see [g2q2.17].
 ;;
 (define (u3 p_y1 p_y2 p_y3 p_r1 p_y4)
   (display (strings-append (list "u3("
@@ -433,4 +453,137 @@
 	   (set! res1 (strings-append (list (g2q-txt 6) "End " p_g1 ";") 0))))
     
     (grsp-dl res1)))
+
+
+;; x - x, NOT pr Pauli x gate.
+;;
+;; Parameters:
+;;
+;; - p_r1: string, quantum register name.
+;; - p_y1: qubit number.
+;;
+;; Notes:
+;;
+;; - Convenience function def. added 2022.
+;;
+;; Sources:
+;;
+;; - [g2q2.17].
+;;
+(define (x p_r1 p_y1)
+  (g1 "x" p_r1 p_y1))
+
+
+;; id - identity gate.
+;;
+;; Parameters:
+;;
+;; - p_r1: string, quantum register name.
+;; - p_y1: qubit number.
+;;
+;; Notes:
+;;
+;; - Convenience function def. added 2022.
+;;
+;; Sources:
+;;
+;; - [g2q2.17].
+;;
+(define (id p_r1 p_y1)
+  (g1 "id" p_r1 p_y1))
+
+
+;; t - t gate.
+;;
+;; Parameters:
+;;
+;; - p_r1: string, quantum register name.
+;; - p_y1: qubit number.
+;;
+;; Notes:
+;;
+;; - Convenience function def. added 2022.
+;;
+;; Sources:
+;;
+;; - [g2q2.17].
+;;
+(define (t p_r1 p_y1)
+  (g1 "t" p_r1 p_y1))
+
+
+;; s - s gate.
+;;
+;; Parameters:
+;;
+;; - p_r1: string, quantum register name.
+;; - p_y1: qubit number.
+;;
+;; Notes:
+;;
+;; - Convenience function def. added 2022.
+;;
+;; Sources:
+;;
+;; - [g2q2.17].
+;;
+(define (s p_r1 p_y1)
+  (g1 "s" p_r1 p_y1))
+
+
+;; z - z gate.
+;;
+;; Parameters:
+;;
+;; - p_r1: string, quantum register name.
+;; - p_y1: qubit number.
+;;
+;; Notes:
+;;
+;; - Convenience function def. added 2022.
+;;
+;; Sources:
+;;
+;; - [g2q2.17].
+;;
+(define (z p_r1 p_y1)
+  (g1 "z" p_r1 p_y1))
+
+
+;; tdg - tdg gate.
+;;
+;; Parameters:
+;;
+;; - p_r1: string, quantum register name.
+;; - p_y1: qubit number.
+;;
+;; Notes:
+;;
+;; - Convenience function def. added 2022.
+;;
+;; Sources:
+;;
+;; - [g2q2.17].
+;;
+(define (tdg p_r1 p_y1)
+  (g1 "tdg" p_r1 p_y1))
+
+
+;; sdg - sdg gate.
+;;
+;; Parameters:
+;;
+;; - p_r1: string, quantum register name.
+;; - p_y1: qubit number.
+;;
+;; Notes:
+;;
+;; - Convenience function def. added 2022.
+;;
+;; Sources:
+;;
+;; - [g2q2.17].
+;;
+(define (sdg p_r1 p_y1)
+  (g1 "sdg" p_r1 p_y1))
 
