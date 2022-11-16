@@ -61,6 +61,7 @@
 	    g1
 	    g2
 	    u1
+	    p
 	    u2
 	    u3
 	    qcond1
@@ -74,7 +75,11 @@
 	    s
 	    z
 	    tdg
-	    sdg))
+	    sdg
+	    reset
+	    cmod
+	    qif
+	    h))
 
 
 ;;;; qhead - Defines a program name.
@@ -177,7 +182,7 @@
   (display (string-append (qbg p_g1 p_r1 p_y1) (g2q-txt 2))))
 
 
-;;;; qmeas - Measurement gate.
+;;;; qmeas - Measurement operation.
 ;;
 ;; Parameters:
 ;;
@@ -289,7 +294,23 @@
 ;;   [g2q2.17].
 ;;
 (define (u1 p_y1 p_r1 p_y2)
-  (display (strings-append (list "u1("
+  (p p_y1 p_r1 p_y2))
+
+
+;;;; p - Gate p, phase gate.
+;;
+;; Parameters:
+;;
+;; - p_y1: first rotation.
+;; - p_r1: string, quantum register name 1.
+;; - p_y2: qubit number.
+;;
+;; Notes:
+;;
+;; - This is the former u1 gate, renamed.
+;;
+(define (p p_y1 p_r1 p_y2)
+  (display (strings-append (list "p("
 				 (grsp-n2s p_y1)
 				 (g2q-txt 4)
 				 (qbgna p_r1 p_y2)
@@ -587,3 +608,73 @@
 (define (sdg p_r1 p_y1)
   (g1 "sdg" p_r1 p_y1))
 
+
+;; reset - reset operator. Returns a qubit to state |0>
+;;
+;; Parameters:
+;;
+;; - p_r1: string, quantum register name.
+;; - p_y1: qubit number.
+;;
+;; Notes:
+;;
+;; - Convenience function def. added 2022.
+;;
+;; Sources:
+;;
+;; - [g2q2.17].
+;;
+(define (reset p_r1 p_y1)
+  (g1 "reset" p_r1 p_y1))
+
+
+;; cmod - control modifier.
+;;
+;; Notes:
+;;
+;; - Convenience function def. added 2022.
+;;
+;; Sources:
+;;
+;; - [g2q2.17].
+;;
+(define (c)
+  (display "c"))
+
+
+;; qif - conditional.
+;;
+;; Parameters:
+;;
+;; - p_r2: string, classical register name.
+;; - p_y2: state of p_r2
+;;
+;; Notes:
+;;
+;; - Convenience function def. added 2022.
+;;
+;; Sources:
+;;
+;; - [g2q2.17].
+;;
+(define (qif p_r2 p_n2)
+  (display (strings-append (list "if (" p_r2 "==" (grsp-n2s p_n2) ") ") 0)))
+
+
+;; h - Hadamard gate.
+;;
+;; Parameters:
+;;
+;; - p_r1: string, quantum register name.
+;; - p_y1: qubit number.
+;;
+;; Notes:
+;;
+;; - Convenience function def. added 2022.
+;;
+;; Sources:
+;;
+;; - [g2q2.17].
+;;
+(define (h p_r1 p_y1)
+  (g1 "h" p_r1 p_y1))

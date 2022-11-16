@@ -154,7 +154,8 @@
 	    hs
 	    hsdg
 	    ht
-	    htdg))
+	    htdg
+	    barrier))
 
 
 ;; qconst - Sets the values of various required constants.
@@ -162,6 +163,14 @@
 ;; Parameters:
 ;;
 ;; - p_s1: string, constant name.
+;;   - "Pi".
+;;   - "Pi/2".
+;;   - "gr".
+;;   - "e".
+;;
+;; Notes:
+;; 
+;; - See [17] for more on default angle values for IBM Quantum Composer,
 ;;
 ;; Output:
 ;;
@@ -172,6 +181,8 @@
 
     (cond ((equal? p_s1 "Pi")
 	   (set! res1 (gconst "A000796")))
+	  ((equal? p_s1 "Pi/2")
+	   (set! res1 (/ (qconst "Pi") 2)))
 	  ((equal? p_s1 "gr")
 	   (set! res1 (gconst "gr"))) 
 	  ((equal? p_s1 "e")	   
@@ -521,32 +532,41 @@
 ;;
 ;; Parameters:
 ;;
-;; - p_t1: numeric, angle 1.
+;; - p_t1: numeric, angle 1 (default value should normally be (qconst "Pi/2")).
 ;; - p_r1: string, quantum register name 1.
 ;; - p_y1: qubit 1.
+;;
+;; Notes:
+;;
+;; - TODO: check p_t1
+;; - See [17] for more on default angle values for IBM Quantum Composer,
 ;;
 (define (rz p_t1 p_r1 p_y1)
-  (u1 p_t1 p_r1 p_y1))
-
-
-;; rz-fast - Gate rz, rotation around Z-axis, in fast form.
-;;
-;; Parameters:
-;;
-;; - p_t1: numeric, angle; dummy argument left for consistency with other
-;;   functions.
-;; - p_r1: string, quantum register name 1.
-;; - p_y1: qubit 1.
-;; 
-(define (rz-fast p_t1 p_r1 p_y1)
   (display (strings-append (list "rz("
-				 (grsp-n2s (/ (qconst "Pi") 2))
+				 (grsp-n2s p_t1)
 				 (g2q-txt 4)
 				 p_r1
 				 "["
 				 (grsp-n2s p_y1)
 				 (g2q-txt 3))
 			   0)))
+
+
+;; rz-fast - Gate rz, rotation around Z-axis, in fast form.
+;;
+;; Parameters:
+;;
+;; - p_t1: numeric, angle 1 (default value should normally be (qconst "Pi/2")).
+;; - p_r1: string, quantum register name 1.
+;; - p_y1: qubit 1.
+;;
+;; Notes:
+;;
+;; - Obsolete. Deprecated.
+;; - See [17] for more on default angle values for IBM Quantum Composer,
+;; 
+(define (rz-fast p_t1 p_r1 p_y1)
+  (rz p_t1 p_r1 p_y1))
 
 
 ;; crz - Gate crz, controlled rz expressed atomically.
@@ -1618,3 +1638,22 @@
   (g1 "tdg" p_r1 p_y1)
   (qcomg "htdg" 1))
 
+
+;; barrier - barrier operation.
+;;
+;; Parameters:
+;;
+;; - p_r1: string, quantum register name.
+;; - p_y1: qubit 1, lower registry qubit of the array.
+;; - p_y2: qubit 2, higher registry qubit of the array.
+;;
+;; Notes:
+;;
+;; - Convenience function def. added 2022.
+;;
+;; Sources:
+;;
+;; - [17].
+;;
+(define (barrier p_r1 p_y1 p_y2)
+  (g1y "barrier" p_r1 p_y1 p_y2))
