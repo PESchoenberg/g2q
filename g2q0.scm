@@ -64,6 +64,7 @@
 	    p
 	    u2
 	    u3
+	    u
 	    qcond1
 	    qcond2
 	    qvalid-conditional
@@ -79,7 +80,10 @@
 	    reset
 	    cmod
 	    qif
-	    h))
+	    h
+	    sx
+	    sxdg
+	    y))
 
 
 ;;;; qhead - Defines a program name.
@@ -356,7 +360,25 @@
 ;; - Obsolete in IBM Quantum Composer, renamed U, 2022, see [g2q2.17].
 ;;
 (define (u3 p_y1 p_y2 p_y3 p_r1 p_y4)
-  (display (strings-append (list "u3("
+  (u p_y1 p_y2 p_y3 p_r1 p_y4))
+
+
+;;;; u - Gate u.
+;;
+;; Parameters:
+;;
+;; - p_y1: numeric, angle 1, first rotation.
+;; - p_y2: numeric, angle 2, second rotation.
+;; - p_y3: numeric, angle 3, third rotation.
+;; - p_r1: string, quantum register name 1.
+;; - p_y4: qubit number.
+;;
+;; Notes:
+;;
+;; - Obsolete in IBM Quantum Composer, renamed U, 2022, see [g2q2.17].
+;;
+(define (u p_y1 p_y2 p_y3 p_r1 p_y4)
+  (display (strings-append (list "u("
 				 (qbgnc p_y1)
 				 (qbgnc p_y2)
 				 (grsp-n2s p_y3)
@@ -364,7 +386,7 @@
 				 (qbgna p_r1 p_y4)
 				 (g2q-txt 2))
 			   0)))
-  
+
 
 ;;;; qcond1 - Quantum conditional 1.
 ;;
@@ -658,7 +680,8 @@
 ;; - [g2q2.17].
 ;;
 (define (qif p_r2 p_n2)
-  (display (strings-append (list "if (" p_r2 "==" (grsp-n2s p_n2) ") ") 0)))
+  ;;(display (strings-append (list "if (" p_r2 "==" (grsp-n2s p_n2) ") ") 0)))
+  (qcond1 "==" p_r2 p_n2))
 
 
 ;; h - Hadamard gate.
@@ -678,3 +701,61 @@
 ;;
 (define (h p_r1 p_y1)
   (g1 "h" p_r1 p_y1))
+
+
+;; sx - Square root NOT gate.
+;;
+;; Parameters:
+;;
+;; - p_r1: string, quantum register name.
+;; - p_y1: qubit number.
+;;
+;; Notes:
+;;
+;; - Convenience function def. added 2022.
+;;
+;; Sources:
+;;
+;; - [g2q2.17].
+;;
+(define (sx p_r1 p_y1)
+  (g1 "sx" p_r1 p_y1))
+
+
+;; sxdg - Square root NOT dagger gate.
+;;
+;; Parameters:
+;;
+;; - p_r1: string, quantum register name.
+;; - p_y1: qubit number.
+;;
+;; Notes:
+;;
+;; - Convenience function def. added 2022.
+;;
+;; Sources:
+;;
+;; - [g2q2.17].
+;;
+(define (sxdg p_r1 p_y1)
+  (g1 "sxdg" p_r1 p_y1))
+
+
+;; y - y gate.
+;;
+;; Parameters:
+;;
+;; - p_r1: string, quantum register name.
+;; - p_y1: qubit number.
+;;
+;; Notes:
+;;
+;; - Convenience function def. added 2022.
+;;
+;; Sources:
+;;
+;; - [g2q2.17].
+;;
+(define (y p_r1 p_y1)
+  (g1 "y" p_r1 p_y1))
+

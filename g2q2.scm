@@ -155,7 +155,9 @@
 	    hsdg
 	    ht
 	    htdg
-	    barrier))
+	    barrier
+	    rxx
+	    rzz))
 
 
 ;; qconst - Sets the values of various required constants.
@@ -476,7 +478,7 @@
   (let ((y2 (/ (qconst "Pi") 2)))
     
     (u3 p_t1 (* y2 -1) y2 p_r1 p_y1)))
-
+  
 
 ;; rx-fast - Gate rx, rotation around X-axis, in fast form.
 ;;
@@ -494,6 +496,7 @@
 				 "["
 				 (grsp-n2s p_y1)
 				 (g2q-txt 3))
+			   
 			   0)))
 
 
@@ -1649,7 +1652,7 @@
 ;;
 ;; Notes:
 ;;
-;; - Convenience function def. added 2022.
+;; - Added 2022.
 ;;
 ;; Sources:
 ;;
@@ -1657,3 +1660,70 @@
 ;;
 (define (barrier p_r1 p_y1 p_y2)
   (g1y "barrier" p_r1 p_y1 p_y2))
+
+
+;; rxx - Gate rxx.
+;;
+;; Parameters:
+;;
+;; - p_t1: numeric, angle.
+;; - p_r1: string, quantum register name 1.
+;; - p_y1: qubit 1.
+;; - p_r2: string, quantum register name 2.
+;; - p_y2: qubit 2.
+;;
+;; Notes:
+;;
+;; - Added 2022.
+;;
+;; Sources:
+;;
+;; - [17].
+;;
+(define (rxx p_t1 p_r1 p_y1 p_r2 p_y2)
+  (display (strings-append (list "rxx("
+				 (grsp-n2s p_t1)
+				 (g2q-txt 4)
+				 p_r1
+				 "["
+				 (grsp-n2s p_y1)
+				 "] "
+				 p_r2
+				 "["
+				 (grsp-n2s p_y2)
+				 (g2q-txt 3))
+			   0)))
+
+
+;; rzz - Gate rzz.
+;;
+;; Parameters:
+;;
+;; - p_t1: numeric, angle (radians).
+;; - p_r1: string, quantum register name 1.
+;; - p_y1: qubit 1.
+;; - p_r2: string, quantum register name 2.
+;; - p_y2: qubit 2.
+;;
+;; Notes:
+;;
+;; - Added 2022.
+;;
+;; Sources:
+;;
+;; - [17].
+;;
+(define (rzz p_t1 p_r1 p_y1 p_r2 p_y2)
+  (display (strings-append (list "rxx("
+				 (grsp-n2s p_t1)
+				 (g2q-txt 4)
+				 p_r1
+				 "["
+				 (grsp-n2s p_y1)
+				 "] "
+				 p_r2
+				 "["
+				 (grsp-n2s p_y2)
+				 (g2q-txt 3))
+			   0)))
+
