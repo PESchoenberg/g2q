@@ -88,6 +88,10 @@
 
 ;;;; qhead - Defines a program name.
 ;;
+;; Keywords:
+;;
+;; - program, definition, construction, coding
+;;
 ;; Parameters:
 ;;
 ;; - p_s1: string, program name.
@@ -106,6 +110,10 @@
 
 ;;;; qstr - Displays or writes a literal statement.
 ;;
+;; Keywords:
+;;
+;; - display, line, string
+;;
 ;; Parameters:
 ;;
 ;; - p_s1: string containing the statement.
@@ -115,6 +123,10 @@
 
 
 ;;;; qcomm - Writes a comment.
+;;
+;; Keywords:
+;;
+;; - qaSM, comment
 ;;
 ;; Parameters:
 ;;
@@ -132,6 +144,10 @@
 
 ;;;; qbgns - Adds a trailing space to a string.
 ;;
+;; Keywords:
+;;
+;; - qasm, library, libraries
+;;
 ;; Parameters:
 ;;
 ;; - p_s1: string.
@@ -143,6 +159,10 @@
 ;;;; qbgns - Adds a trailing colon to a number after converting it into
 ;; a string.
 ;;
+;; Keywords:
+;;
+;; - separation, separators, csv
+;;
 ;; Parameters:
 ;;
 ;; - p_n1: numeric.
@@ -152,6 +172,10 @@
 
 
 ;;;; qbgna - Constructs an array item.
+;;
+;; Keywords:
+;;
+;; - quantum, array, elements, items
 ;;
 ;; Parameters:
 ;;
@@ -163,6 +187,10 @@
 
 
 ;;;; qbg - Basic gate structure.
+;;
+;; Keywords:
+;;
+;; - gate, structure, proto
 ;;
 ;; Parameters:
 ;;
@@ -176,6 +204,10 @@
 
 ;; qbgd - Display basic gate structure.
 ;;
+;; Keywords:
+;;
+;; - basic, gate, structure, display
+;;
 ;; Parameters:
 ;;
 ;; - p_g1: string, gate name.
@@ -187,6 +219,10 @@
 
 
 ;;;; qmeas - Measurement operation.
+;;
+;; Keywords:
+;;
+;; - measurement, gate, operator, operation, measuring
 ;;
 ;; Parameters:
 ;;
@@ -205,6 +241,10 @@
 
 
 ;;;; qcx - Gate cx, controlled NOT gate, controlled x gate.
+;;
+;; Keywords:
+;;
+;; - not, negative, negation, oepration
 ;;
 ;; Parameters:
 ;;
@@ -226,6 +266,10 @@
  
 ;;;; qregdef - Register definitions.
 ;;
+;; Keywords:
+;;
+;; - registers, definition, specification
+;;
 ;; Parameters:
 ;;
 ;; - p_r1: string, quantum register name 1.
@@ -240,6 +284,10 @@
 
 ;;;; qin - Increment the value of a variable p_m1 by p_n2.
 ;;
+;; Keywords:
+;;
+;; - counter, sincremental, summation
+;;
 ;; Parameters:
 ;;
 ;; - p_n1: variable to increment.
@@ -250,6 +298,10 @@
 
 
 ;;;; g1 - Fundamental gate using one qbit.
+;;
+;; Keywords:
+;;
+;; - indivitual, qubit, gate, operation, operator
 ;;
 ;; Parameters:
 ;;
@@ -262,6 +314,10 @@
 
 
 ;;;; g2 - Fundamental quantum gates.
+;;
+;; Keywords:
+;;
+;; - multiple, qubit, gate, operation, operator
 ;;
 ;; Parameters:
 ;;
@@ -286,6 +342,10 @@
 
 ;;;; u1 - Gate u1.
 ;;
+;; Keywords:
+;;
+;; - gate, angle, phase
+;;
 ;; Parameters:
 ;;
 ;; - p_y1: first rotation.
@@ -302,6 +362,10 @@
 
 
 ;;;; p - Gate p, phase gate.
+;;
+;; Keywords:
+;;
+;; - gate, angle, phase
 ;;
 ;; Parameters:
 ;;
@@ -323,6 +387,10 @@
 
 
 ;;;; u2 - Gate u2.
+;;
+;; Keywords:
+;;
+;; - gate, angles, rotations, multiple
 ;;
 ;; Parameters:
 ;;
@@ -347,6 +415,10 @@
 
 ;;;; u3 - Gate u3.
 ;;
+;; Keywords:
+;;
+;; - gate, angles, rotations, multiple
+;;
 ;; Parameters:
 ;;
 ;; - p_y1: numeric, angle 1, first rotation.
@@ -364,6 +436,10 @@
 
 
 ;;;; u - Gate u.
+;;
+;; Keywords:
+;;
+;; - gate, angles, rotations, multiple
 ;;
 ;; Parameters:
 ;;
@@ -390,11 +466,19 @@
 
 ;;;; qcond1 - Quantum conditional 1.
 ;;
+;; Keywords:
+;;
+;; - if, conditional, control
+;;
 ;; Parameters:
 ;;
 ;; - p_c1: condition.
 ;; - p_y1: classical bit vector.
 ;; - p_y2: number to compare p_y1 to.
+;;
+;; Notes:
+;;
+;; See qcond2, qif.
 ;;
 (define (qcond1 p_c1 p_y1 p_y2)
   (let ((res1 " "))
@@ -412,12 +496,20 @@
 
 ;;;; qcond2 - Quantum conditional 2.
 ;;
+;; Keywords:
+;;
+;; - if, conditionsl, 
+;;
 ;; Parameters:
 ;;
 ;; - p_c1: condition.
 ;; - p_y1: classical bits.
 ;; - p_y2: number to compare p_y1[pY3] to.
 ;; - p_y3: classical bit vector item.
+;;
+;; Notes:
+;;
+;; See qcond1, qif.
 ;;
 (define (qcond2 p_c1 p_y1 p_y3 p_y2)
   (let ((res1 " "))
@@ -437,6 +529,10 @@
 
 
 ;;;; qvalid-string - Validate a string.
+;;
+;; Keywords:
+;;
+;; - string, validation
 ;;
 ;; Parameters:
 ;;
@@ -459,6 +555,10 @@
 
 ;;;; swap - Gate swap expressed atomically.
 ;;
+;; Keywords:
+;;
+;; - swapping, exchange
+;;
 ;; Parameters:
 ;;
 ;; - p_r1: string, quantum register name 1. 
@@ -480,6 +580,10 @@
 ;;;; qcomg - Comments for complex gates. Useful to identify various code
 ;; sections when complex gates are compiled into QASM2 code.
 ;;
+;; Keywords:
+;;
+;; - qasm, comments, line. strings
+;;
 ;; Parameters:
 ;;
 ;; - p_g1: string, gate name.
@@ -498,7 +602,11 @@
     (grsp-dl res1)))
 
 
-;; x - x, NOT pr Pauli x gate.
+;; x - x, NOT or Pauli x gate.
+;;
+;; Keywords:
+;;
+;; - pauli, negation, not
 ;;
 ;; Parameters:
 ;;
@@ -519,6 +627,10 @@
 
 ;; id - identity gate.
 ;;
+;; Keywords:
+;;
+;; - identity
+;;
 ;; Parameters:
 ;;
 ;; - p_r1: string, quantum register name.
@@ -537,6 +649,10 @@
 
 
 ;; t - t gate.
+;;
+;; Keywords:
+;;
+;; - short, format, gate
 ;;
 ;; Parameters:
 ;;
@@ -557,6 +673,10 @@
 
 ;; s - s gate.
 ;;
+;; Keywords:
+;;
+;; - short, format, gate
+;;
 ;; Parameters:
 ;;
 ;; - p_r1: string, quantum register name.
@@ -576,6 +696,10 @@
 
 ;; z - z gate.
 ;;
+;; Keywords:
+;;
+;; - short, format, gate
+;;
 ;; Parameters:
 ;;
 ;; - p_r1: string, quantum register name.
@@ -593,7 +717,11 @@
   (g1 "z" p_r1 p_y1))
 
 
-;; tdg - tdg gate.
+;; tdg - tdg gate, t dagger.
+;;
+;; Keywords:
+;;
+;; - short, format, gate
 ;;
 ;; Parameters:
 ;;
@@ -612,7 +740,11 @@
   (g1 "tdg" p_r1 p_y1))
 
 
-;; sdg - sdg gate.
+;; sdg - sdg gate, s dagger.
+;;
+;; Keywords:
+;;
+;; - short, format, gate
 ;;
 ;; Parameters:
 ;;
@@ -633,6 +765,10 @@
 
 ;; reset - reset operator. Returns a qubit to state |0>
 ;;
+;; Keywords:
+;;
+;; - resetting, default, init
+;;
 ;; Parameters:
 ;;
 ;; - p_r1: string, quantum register name.
@@ -652,6 +788,10 @@
 
 ;; cmod - control modifier.
 ;;
+;; Keywords:
+;;
+;; - modification, control
+;;
 ;; Notes:
 ;;
 ;; - Convenience function def. added 2022.
@@ -665,6 +805,10 @@
 
 
 ;; qif - conditional.
+;;
+;; Keywords:
+;;
+;; - short, format, gate
 ;;
 ;; Parameters:
 ;;
@@ -680,11 +824,14 @@
 ;; - [g2q2.17].
 ;;
 (define (qif p_r2 p_n2)
-  ;;(display (strings-append (list "if (" p_r2 "==" (grsp-n2s p_n2) ") ") 0)))
   (qcond1 "==" p_r2 p_n2))
 
 
 ;; h - Hadamard gate.
+;;
+;; Keywords:
+;;
+;; - short, format, gate
 ;;
 ;; Parameters:
 ;;
@@ -705,6 +852,10 @@
 
 ;; sx - Square root NOT gate.
 ;;
+;; Keywords:
+;;
+;; - short, format, gate
+;;
 ;; Parameters:
 ;;
 ;; - p_r1: string, quantum register name.
@@ -723,6 +874,10 @@
 
 
 ;; sxdg - Square root NOT dagger gate.
+;;
+;; Keywords:
+;;
+;; - short, format, gate
 ;;
 ;; Parameters:
 ;;
@@ -743,6 +898,10 @@
 
 ;; y - y gate.
 ;;
+;; Keywords:
+;;
+;; - short, format, gate
+;;
 ;; Parameters:
 ;;
 ;; - p_r1: string, quantum register name.
@@ -751,6 +910,7 @@
 ;; Notes:
 ;;
 ;; - Convenience function def. added 2022.
+;; - See qcond1 and qcond2.
 ;;
 ;; Sources:
 ;;

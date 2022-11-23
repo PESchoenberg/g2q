@@ -45,6 +45,10 @@
 ;;;; qcompile-and-run - This function comprises an entire Scheme to QASM
 ;; compilation and execution cycle.
 ;;
+;; Keywords:
+;;
+;; -
+;;
 ;; Parameters:
 ;;
 ;; - p_fname: fname.
@@ -122,6 +126,10 @@
 ;; times. Note this function will remove the json files holding the results
 ;; returned by the QPU in order to keep clean the ddir folder.
 ;;
+;; Keywords:
+;;
+;; -
+;;
 ;; Parameters:
 ;;
 ;; - p_clean: "y" to clean data folder.
@@ -177,7 +185,11 @@
 ;; code itself. Currently you can use it for writing comments on your QASM2
 ;; code and for sending special instructions to the qx simulator if you use
 ;; it.
-;; 
+;;
+;; Keywords:
+;;
+;; -
+;;
 ;; Parameters:
 ;;
 ;; - p_qpu: qpu for which the declaration is intended for.

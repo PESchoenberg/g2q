@@ -50,6 +50,10 @@
 
 ;; qrand1 - 4 x 1 universal random quantum circuit.
 ;;
+;; Keywords:
+;;
+;; -
+;;
 ;; Parameters:
 ;;
 ;; - p_r1: string, quantum register name.
