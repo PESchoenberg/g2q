@@ -50,6 +50,10 @@
 
 ;; g2q-version - Returns the current version of the compiler.
 ;;
+;; Keywords:
+;;
+;; - configuration
+;;
 (define (g2q-version)
   (let ((res1 "g2q - v1.2.9"))
     
@@ -58,6 +62,10 @@
 
 ;; g2q-ibm-config - TODO: configuration for using IBM Q series machines;
 ;; equivalent to functions found on Qiskit IDE. (Deprecated).
+;;
+;; Keywords:
+;;
+;; - configuration
 ;;
 ;; List elements:
 ;;
@@ -74,6 +82,10 @@
 
 
 ;; g2q-qre-config - Configuration for using qre.
+;;
+;; Keywords:
+;;
+;; - configuration
 ;;
 ;; Elements:
 ;;
@@ -96,6 +108,10 @@
 
 
 ;; g2q-select-qpu - Menu for selecting the qpu that is to be used.
+;;
+;; Keywords:
+;;
+;; - configuration
 ;;
 ;; Output:
 ;;
@@ -140,6 +156,10 @@
 
 
 ;; g2q-txt - Defines some string constants that are intrinsic to g2q.
+;;
+;; Keywords:
+;;
+;; - configuration
 ;;
 ;; Parameters:
 ;;

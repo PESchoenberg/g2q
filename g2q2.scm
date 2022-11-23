@@ -157,10 +157,15 @@
 	    htdg
 	    barrier
 	    rxx
-	    rzz))
+	    rzz
+	    rccx))
 
 
 ;; qconst - Sets the values of various required constants.
+;;
+;; Keywords:
+;;
+;; - constants, invariant
 ;;
 ;; Parameters:
 ;;
@@ -197,6 +202,10 @@
 ;; qgate1 from qubit p_y1 to qubit p_y2 on y axis (vertically on graphical
 ;; representation).
 ;;
+;; Keywords:
+;;
+;; - multiple, gates
+;;
 ;; Parameters:
 ;;
 ;; - p_g1: string, gate name.
@@ -219,6 +228,10 @@
 ;; g1x - Repeats placement of gate p_g1 and register p_r1 by repeating the use
 ;; of qgate1 on regster element p_y1 p_x1 times on x axis.
 ;;
+;; Keywords:
+;;
+;; - multiple, gates
+;;
 ;; Parameters:
 ;;
 ;; - p_g1: string, gate name.
@@ -240,6 +253,10 @@
 
 ;; g1xy - Repeats placement of gate p_g1 and group p_r1 by repeating the use of
 ;; qgate1 from qubit p_y1 to qubit p_y2 on y axis.
+;;
+;; Keywords:
+;; 
+;; - multiple, gates
 ;;
 ;; Parameters:
 ;;
@@ -264,6 +281,10 @@
 
 ;; qmeasy - Performs measurements on group p_r1 to group p_r2 from p_y1 to p_y2.
 ;;
+;; Keywords:
+;;
+;; - multiple, measurement
+;;
 ;; Parameters:
 ;;
 ;; - p_r1: string, quantum register name.
@@ -286,6 +307,10 @@
 ;; cx - Gate cx, performs a NOT operation on the target qubit if the control 
 ;; qubit is |1>. Leaves target qubit as it is otherwise.
 ;;
+;; Keywords:
+;; 
+;; - conditional, operation, not
+;;
 ;; Parameters:
 ;;
 ;; - p_r1: string, quantum register name 1.
@@ -300,6 +325,10 @@
 ;; cz - Gate cz, controlled phase expressed atomically. Gates expressed in
 ;; this way are universally compatible but more error - prone than the same 
 ;; gates expressed in fast form.
+;;
+;; Keywords:
+;;
+;; - universally, compatible
 ;;
 ;; Parameters:
 ;;
@@ -320,6 +349,10 @@
 ;; less error - prone that atomic variants, but they might not be 
 ;; compatible with all sorts and makes of qpu.
 ;;
+;; Keywords:
+;;
+;; - error, free, less
+;;
 ;; Parameters:
 ;;
 ;; - p_r1: string, quantum register name 1.
@@ -336,6 +369,10 @@
 
 
 ;; cy - Gate cy, controlled y expressed atomically.
+;;
+;; Keywords:
+;;
+;; - atomic, controlled, gate
 ;;
 ;; Parameters:
 ;;
@@ -358,6 +395,10 @@
 
 ;; cy-fast - Gate cy, controlled y in fast form.
 ;;
+;; Keywords:
+;;
+;; - fast, controlled, gate
+;;
 ;; Parameters:
 ;;
 ;; - p_r1: string, quantum register name 1.
@@ -370,6 +411,10 @@
 
 
 ;; ch - Gate ch, controlled h expressed atomically.
+;;
+;; Keywords:
+;;
+;; - atomic, controlled, gate
 ;;
 ;; Parameters:
 ;;
@@ -398,6 +443,10 @@
 
 ;; ch-fast - Gate ch, controlled h in fast form.
 ;;
+;; Keywords:
+;;
+;; - controled, hadamard, gate
+;;
 ;; Parameters:
 ;;
 ;; - p_r1: string, quantum register name 1.
@@ -410,6 +459,10 @@
 
 
 ;; ccx - Gate ccx, Toffoli gate expressed atomically, double controlled NOT.
+;;
+;; Keywords:
+;;
+;; - atomic, toffoli
 ;;
 ;; Parameters:
 ;;
@@ -446,6 +499,10 @@
 
 ;; ccx-fast - Toffoli gate in fast form.
 ;;
+;; Keywords:
+;;
+;; - toffoli, fast, quick
+;;
 ;; Parameters:
 ;;
 ;; - p_r1: string, quantum register name 1.
@@ -468,6 +525,10 @@
 
 ;; rx - Gate rx, rotation around X-axis.
 ;;
+;; Keywords:
+;;
+;; - rotation, x, axial
+;;
 ;; Parameters:
 ;;
 ;; - p_t1: numeric, theta angle.
@@ -481,6 +542,10 @@
   
 
 ;; rx-fast - Gate rx, rotation around X-axis, in fast form.
+;;
+;; Keywords:
+;;
+;; - rotation, axial, fast, quick
 ;;
 ;; Parameters:
 ;;
@@ -502,6 +567,10 @@
 
 ;; ry - Gate ry, rotation around Y-axis.
 ;;
+;; Keywords:
+;;
+;; - rotation, axial
+;;
 ;; Parameters:
 ;;
 ;; - p_t1: numeric, theta angle.
@@ -513,6 +582,10 @@
 
 
 ;; ry-fast - Gate ry, rotation around Y-axis, in fast form.
+;;
+;; Keywords:
+;;
+;; - rotation, axial, fast
 ;;
 ;; Parameters:
 ;;
@@ -532,6 +605,10 @@
 
 
 ;; rz - Gate rz, rotation around Z-axis.
+;;
+;; Keywords:
+;;
+;; - rotation, axial
 ;;
 ;; Parameters:
 ;;
@@ -557,6 +634,10 @@
 
 ;; rz-fast - Gate rz, rotation around Z-axis, in fast form.
 ;;
+;; Keywords:
+;;
+;; - rotation, axial, fast
+;;
 ;; Parameters:
 ;;
 ;; - p_t1: numeric, angle 1 (default value should normally be (qconst "Pi/2")).
@@ -573,6 +654,10 @@
 
 
 ;; crz - Gate crz, controlled rz expressed atomically.
+;;
+;; Keywords:
+;;
+;; - controlled, axial, rotation, atomic
 ;;
 ;; Parameters:
 ;;
@@ -599,6 +684,10 @@
 
 ;; crz-fast - Gate crz, controlled rz expressed in fast form.
 ;;
+;; Keywords:
+;;
+;; - controlled, axial, rotation, fast
+;;
 ;; Parameters:
 ;;
 ;; - p_t1: numeric, angle 1. Dummy for compat with gate crz.
@@ -623,6 +712,10 @@
 
 
 ;; cu1 - Gate cu1, controlled phase rotation expressed atomically.
+;;
+;; Keywords:
+;;
+;; - phase, rotation, pivot, axial, atomic
 ;;
 ;; Parameters:
 ;;
@@ -651,6 +744,10 @@
 
 ;; cu1-fast - Gate cu1, controlled phase rotation gate expressed in fast form.
 ;;
+;; Keywords:
+;;
+;; - phase, rotation, pivot, axial, fast, controlled
+;;
 ;; Parameters:
 ;;
 ;; - p_t1: numeric, angle 1.
@@ -676,6 +773,10 @@
 
 ;; cu3 - Gate cu3, controlled U gate expressed atomically.
 ;;
+;; Keywords:
+;;
+;; - controlled, atomic, fast
+;;
 ;; Parameters:
 ;;
 ;; - p_t1: numeric, angle 1.
@@ -700,6 +801,10 @@
 
 
 ;; cu3-fast - Gate cu3, controlled U gate expressed in fast form.
+;;
+;; Keywords:
+;;
+;; - rotation, pivot, axial, fast
 ;;
 ;; Parameters:
 ;;
@@ -732,6 +837,10 @@
 
 ;; g1cxg1 - Puts a set of gates in configuration g1 cx g1.
 ;;
+;; Keywords:
+;;
+;; - setting, state, gates, array
+;;
 ;; Parameters:
 ;;
 ;; - p_g1: string, g1 gate name.
@@ -749,12 +858,20 @@
 
 ;; qendc - Prints a message stating that compilation has ended.
 ;;
+;; Keywords:
+;;
+;; - messaging, standard
+;;
 (define (qendc)
   (ptit "=" 60 2 "Compilation completed!"))
 
 
 ;; qregex - Prepares a compiled qasm file as a string for passing to ibm q html
 ;; api.
+;;
+;; Keywords:
+;;
+;; - compiler, preparation, processor, processing
 ;;
 ;; Parameters:
 ;;
@@ -776,6 +893,10 @@
 
 
 ;; qreq - Constructs a qreg file.
+;;
+;; Keywords:
+;;
+;; - file, creation
 ;;
 ;; Parameters;
 ;;
@@ -865,6 +986,10 @@
 
 ;; qcnot1 - A cx based NOT gate expressed atomically.
 ;;
+;; Keywords:
+;;
+;; - controlled, not, negation, atomic
+;;
 ;; Parameters:
 ;;
 ;; - p_r1: string, gate group name 1.
@@ -886,6 +1011,10 @@
 
 
 ;; qxor1 - A qcnot1 based XOR gate expressed atomically.
+;;
+;; Keywords:
+;;
+;; - exclusive, mutually, xor, negation, atomic
 ;;
 ;; Parameters:
 ;;
@@ -915,6 +1044,10 @@
 
 
 ;; qfclvr - Find and construct label and value registers.
+;;
+;; Keywords:
+;;
+;; - registers, label, value, construction
 ;;
 ;; Parameters:
 ;;
@@ -965,6 +1098,10 @@
 ;; qfres - Find max or min value among results. If more than one ocurrence
 ;; is found, it returns the last label corresponding to the last element that
 ;; matches.
+;;
+;; Keywords:
+;;
+;; - extremes, min, max
 ;;
 ;; Parameters:
 ;;
@@ -1019,6 +1156,10 @@
 
 ;; swap-fast - Swap gate expressed in fast form.
 ;;
+;; Keywords:
+;;
+;; - swapping, fast
+;;
 ;; Parameters:
 ;;
 ;; - p_r1: string, quantum register name. 
@@ -1036,8 +1177,12 @@
 
 ;; qftyn - Quantum Fourier Transformation for n qubits in the range
 ;; [p_r1[p_y1] : p_r2[p_y2]]. Note that this function assumes that all qubits
-;; in the quantum register are  interconnected. In some QPU architectures this
+;; in the quantum register are interconnected. In some QPU architectures this
 ;; may not be possible. Expressed atomically.
+;;
+;; Keywords:
+;;
+;; - fourier, transformations
 ;;
 ;; Parameters:
 ;;
@@ -1070,6 +1215,10 @@
 
 	  
 ;; qftdgyn - Function qftyn dagger, expressed atomically.
+;;
+;; Keywords:
+;;
+;; - dagger, atomic
 ;;
 ;; Parameters:
 ;;
@@ -1113,6 +1262,10 @@
 
 ;; cswap - Gate Fredkin in atomic form. Swaps p_y2 and p_y3 if p_y1 is |1> 
 ;; (controlled swap).
+;;
+;; Keywords:
+;;
+;; - fredkin, atomic, swapping
 ;;
 ;; Parameters:
 ;;
@@ -1160,6 +1313,10 @@
 ;;   element number on the registry.
 ;; - If p_y1 = p_y2: the fuunction behaves as a single cx gate.
 ;; - if p_y1 > p_y2: the ladder goes from higher to lower registry element.
+;;
+;; Keywords:
+;;
+;; - ladder, gates, stacked
 ;;
 ;; Parameters:
 ;;
@@ -1220,6 +1377,10 @@
 ;; - If p_y1 = p_y2: the fuunction behaves as a single swap-fast gate.
 ;; - if p_y1 > p_y2: the ladder goes from higher to lower registry element.
 ;;
+;; Keywords:
+;;
+;; - ladder, gates, swapping, array
+;;
 ;; Parameters:
 ;;
 ;; - p_r1: string, quantum register name.
@@ -1261,6 +1422,10 @@
 ;; - If p_y1 = p_y2: the fuunction behaves as a single swap gate.
 ;; - if p_y1 > p_y2: the ladder goes from higher to lower registry element.
 ;;
+;; Keywords:
+;;
+;; - swapping, ladder, array, sequence
+;;
 ;; Parameters:
 ;;
 ;; - p_r1: string, quantum register name.
@@ -1300,6 +1465,10 @@
 ;; measurement nor defines any measurement bases. You need to provide 
 ;; those steps separatedly. This function is a generalization to y qubits
 ;; from a basic three-qubit case.
+;;
+;; Keywords:
+;;
+;; - ghx, ghz
 ;;
 ;; Parameters:
 ;;
@@ -1377,6 +1546,10 @@
 ;; on certain factors such as the kind of reading that you might want to 
 ;; perform after a certain operation such as a GHZ state preparation.
 ;;
+;; Keywords:
+;;
+;; - listing, list, based, construction
+;;
 ;; Parameters:
 ;;
 ;; - p_r1: string, quantum register name (.e. "q").
@@ -1410,6 +1583,10 @@
 ;; ecc1 - Error correcting code. Encoder into bit flip code for qubits
 ;; [p_y1, p_y1+2].
 ;;
+;; Keywords:
+;;
+;; - error, handling, correction, correctors
+;;
 ;; Parameters:
 ;;
 ;; - p_r1: string, quantum register name 1.
@@ -1442,6 +1619,10 @@
 ;; ecc2 - Error correcting code. Reversible majority select by vote function for
 ;; decoding a selectable bit-flip gate passed as p_g1. Requres three qubits in
 ;; array p_r1 and interval [p_y1, p_y1+2].
+;;
+;; Keywords:
+;;
+;; - error, handling, correction, correctors, reversion, reversible
 ;;
 ;; Parameters:
 ;;
@@ -1495,6 +1676,10 @@
 ;; ecc3 - Error correcting code. Encoder into bit flip code with parity checks
 ;; for qubits p_y1, p_y1+1, p_y1+4 using qubits [p_y1, p_y1+4].
 ;;
+;; Keywords:
+;;
+;; - encoders, encoding, error, correcors, parity
+;;
 ;; Parameters:
 ;;
 ;; - p_r1: string, quantum register name 1.
@@ -1540,6 +1725,10 @@
 ;; hx - Gate hx, places an h gate followed by an x on element p_y1 of register
 ;; p_r1.
 ;;
+;; Keywords:
+;;
+;; - hadamard, pauli
+;;
 ;; Parameters:
 ;;
 ;; - p_r1: string, quantum register name.
@@ -1554,6 +1743,10 @@
 
 ;; hy - Gate hy, places an h gate followed by an y on element p_y1 of register
 ;; p_r1.
+;;
+;; Keywords:
+;;
+;; - hadamard
 ;;
 ;; Parameters:
 ;;
@@ -1570,6 +1763,10 @@
 ;; hz - Gate hz, places an h gate followed by an z on element p_y1 of register
 ;; p_r1.
 ;;
+;; Keywords:
+;;
+;; - hadamard
+;;
 ;; Parameters:
 ;;
 ;; - p_r1: string, quantum register name.
@@ -1584,6 +1781,10 @@
 
 ;; hs - Gate hs, places an h gate followed by an s on element p_y1 of register
 ;; p_r1.
+;;
+;; Keywords:
+;;
+;; - hadamard
 ;;
 ;; Parameters:
 ;;
@@ -1600,6 +1801,10 @@
 ;; hsdg - Gate hsdg, places an h gate followed by an sdag on element p_y1 of
 ;; register p_r1.
 ;;
+;; Keywords:
+;;
+;; - hadamard, dagger
+;;
 ;; Parameters:
 ;;
 ;; - p_r1: string, quantum register name.
@@ -1614,6 +1819,10 @@
 
 ;; ht - Gate ht, places an h gate followed by a t on element p_y1 of register
 ;; p_r1.
+;;
+;; Keywords:
+;;
+;; - hadamard
 ;;
 ;; Parameters:
 ;;
@@ -1630,6 +1839,10 @@
 ;; htdg - Gate htdg, places an h gate followed by a tdag on element p_y1 of
 ;; register p_r1.
 ;;
+;; Keywords:
+;;
+;; - hadamard, dagger
+;;
 ;; Parameters:
 ;;
 ;; - p_r1: string, quantum register name.
@@ -1643,6 +1856,10 @@
 
 
 ;; barrier - barrier operation.
+;;
+;; Keywords:
+;;
+;; - barriers, stop
 ;;
 ;; Parameters:
 ;;
@@ -1663,6 +1880,10 @@
 
 
 ;; rxx - Gate rxx.
+;;
+;; Keywords:
+;;
+;; - rotation, multiple
 ;;
 ;; Parameters:
 ;;
@@ -1697,6 +1918,10 @@
 
 ;; rzz - Gate rzz.
 ;;
+;; Keywords:
+;;
+;; - rotation, multiple
+;;
 ;; Parameters:
 ;;
 ;; - p_t1: numeric, angle (radians).
@@ -1727,3 +1952,33 @@
 				 (g2q-txt 3))
 			   0)))
 
+
+;; rxxx - Simplified Toffoli gate.
+;;
+;; Keywords:
+;;
+;; - toffoli, margolus.
+;;
+;; Parameters:
+;;
+;; - p_y1: qubit 1, control.
+;; - p_y2: qubit 2, control.
+;; - p_y3: qubit 3, target.
+;;
+;; Notes:
+;;
+;; - Added 2022.
+;;
+;; Sources:
+;;
+;; - [17].
+;;
+(define (rccx p_y1 p_y2 p_y3)
+  (display (strings-append (list "rccx "
+				 (grsp-n2s p_y1)
+				 ", "
+				 (grsp-n2s p_y2)
+				 ", "
+				 (grsp-n2s p_y3)
+				 (g2q-txt 2))
+			   9)))
