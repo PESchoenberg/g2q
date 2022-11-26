@@ -52,7 +52,7 @@
 ;;
 ;; Keywords:
 ;;
-;; - configuration
+;; - configuration, version
 ;;
 (define (g2q-version)
   (let ((res1 "g2q - v1.2.9"))
@@ -65,7 +65,7 @@
 ;;
 ;; Keywords:
 ;;
-;; - configuration
+;; - configuration, functions
 ;;
 ;; List elements:
 ;;
@@ -85,7 +85,7 @@
 ;;
 ;; Keywords:
 ;;
-;; - configuration
+;; - configuration, qre
 ;;
 ;; Elements:
 ;;
@@ -111,7 +111,7 @@
 ;;
 ;; Keywords:
 ;;
-;; - configuration
+;; - configuration, qpu
 ;;
 ;; Output:
 ;;
@@ -159,7 +159,7 @@
 ;;
 ;; Keywords:
 ;;
-;; - configuration
+;; - configuration, constants
 ;;
 ;; Parameters:
 ;;
@@ -187,7 +187,10 @@
 	  ((= p_n1 8)
 	   (set! res1 "application/x-www-form-urlencoded;"))
 	  ((= p_n1 9)
-	   (set! res1 "na")))
+	   (set! res1 "na"))
+	  ((= p_n1 10)
+	   (set! res1 ", ")))
     
     res1))
+
 
