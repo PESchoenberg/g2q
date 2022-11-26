@@ -158,14 +158,15 @@
 	    barrier
 	    rxx
 	    rzz
-	    rccx))
+	    rccx
+	    rc3x))
 
 
 ;; qconst - Sets the values of various required constants.
 ;;
 ;; Keywords:
 ;;
-;; - constants, invariant
+;; - constants, invariant, values, required, pi, euler, angular
 ;;
 ;; Parameters:
 ;;
@@ -204,7 +205,7 @@
 ;;
 ;; Keywords:
 ;;
-;; - multiple, gates
+;; - multiple, gates, base, array, graphic, vertical, representation, paradigm
 ;;
 ;; Parameters:
 ;;
@@ -230,7 +231,7 @@
 ;;
 ;; Keywords:
 ;;
-;; - multiple, gates
+;; - multiple, gates, cloning, horizontal, array, representation, paradigm
 ;;
 ;; Parameters:
 ;;
@@ -256,7 +257,7 @@
 ;;
 ;; Keywords:
 ;; 
-;; - multiple, gates
+;; - multiple, gates, cloning, vertical, horizontal, array, representation
 ;;
 ;; Parameters:
 ;;
@@ -283,7 +284,8 @@
 ;;
 ;; Keywords:
 ;;
-;; - multiple, measurement
+;; - multiple, measurement. observer, observation, vertical, array,
+;;   representation
 ;;
 ;; Parameters:
 ;;
@@ -328,7 +330,7 @@
 ;;
 ;; Keywords:
 ;;
-;; - universally, compatible
+;; - universally, compatible, atomic
 ;;
 ;; Parameters:
 ;;
@@ -351,7 +353,7 @@
 ;;
 ;; Keywords:
 ;;
-;; - error, free, less
+;; - error, free, less, fast, quick, brief
 ;;
 ;; Parameters:
 ;;
@@ -397,7 +399,7 @@
 ;;
 ;; Keywords:
 ;;
-;; - fast, controlled, gate
+;; - fast, controlled, gate, quick, brief
 ;;
 ;; Parameters:
 ;;
@@ -445,7 +447,7 @@
 ;;
 ;; Keywords:
 ;;
-;; - controled, hadamard, gate
+;; - controled, hadamard, gate, quick, brief
 ;;
 ;; Parameters:
 ;;
@@ -501,7 +503,7 @@
 ;;
 ;; Keywords:
 ;;
-;; - toffoli, fast, quick
+;; - toffoli, fast, quick, brief
 ;;
 ;; Parameters:
 ;;
@@ -527,7 +529,7 @@
 ;;
 ;; Keywords:
 ;;
-;; - rotation, x, axial
+;; - rotation, x, axial, rotor
 ;;
 ;; Parameters:
 ;;
@@ -545,7 +547,7 @@
 ;;
 ;; Keywords:
 ;;
-;; - rotation, axial, fast, quick
+;; - rotation, axial, fast, quick, rotor
 ;;
 ;; Parameters:
 ;;
@@ -569,7 +571,7 @@
 ;;
 ;; Keywords:
 ;;
-;; - rotation, axial
+;; - rotation, axial, rotor
 ;;
 ;; Parameters:
 ;;
@@ -585,7 +587,7 @@
 ;;
 ;; Keywords:
 ;;
-;; - rotation, axial, fast
+;; - rotation, axial, fast, rotor
 ;;
 ;; Parameters:
 ;;
@@ -608,7 +610,7 @@
 ;;
 ;; Keywords:
 ;;
-;; - rotation, axial
+;; - rotation, axial, rotor
 ;;
 ;; Parameters:
 ;;
@@ -636,7 +638,7 @@
 ;;
 ;; Keywords:
 ;;
-;; - rotation, axial, fast
+;; - rotation, axial, fast, rotor
 ;;
 ;; Parameters:
 ;;
@@ -657,7 +659,7 @@
 ;;
 ;; Keywords:
 ;;
-;; - controlled, axial, rotation, atomic
+;; - controlled, axial, rotation, atomic, rotor
 ;;
 ;; Parameters:
 ;;
@@ -686,7 +688,7 @@
 ;;
 ;; Keywords:
 ;;
-;; - controlled, axial, rotation, fast
+;; - controlled, axial, rotation, fast, rotor
 ;;
 ;; Parameters:
 ;;
@@ -715,7 +717,7 @@
 ;;
 ;; Keywords:
 ;;
-;; - phase, rotation, pivot, axial, atomic
+;; - phase, rotation, pivot, axial, atomic, rotor
 ;;
 ;; Parameters:
 ;;
@@ -746,7 +748,7 @@
 ;;
 ;; Keywords:
 ;;
-;; - phase, rotation, pivot, axial, fast, controlled
+;; - phase, rotation, pivot, axial, fast, controlled, rotor
 ;;
 ;; Parameters:
 ;;
@@ -775,7 +777,7 @@
 ;;
 ;; Keywords:
 ;;
-;; - controlled, atomic, fast
+;; - controlled, atomic, fast, unitary
 ;;
 ;; Parameters:
 ;;
@@ -804,7 +806,7 @@
 ;;
 ;; Keywords:
 ;;
-;; - rotation, pivot, axial, fast
+;; - rotation, pivot, axial, fast, rotor, unitary
 ;;
 ;; Parameters:
 ;;
@@ -839,7 +841,7 @@
 ;;
 ;; Keywords:
 ;;
-;; - setting, state, gates, array
+;; - setting, state, gates, array, batch
 ;;
 ;; Parameters:
 ;;
@@ -896,7 +898,7 @@
 ;;
 ;; Keywords:
 ;;
-;; - file, creation
+;; - file, creation, qreg
 ;;
 ;; Parameters;
 ;;
@@ -1158,7 +1160,7 @@
 ;;
 ;; Keywords:
 ;;
-;; - swapping, fast
+;; - swapping, fast, quick
 ;;
 ;; Parameters:
 ;;
@@ -1265,7 +1267,7 @@
 ;;
 ;; Keywords:
 ;;
-;; - fredkin, atomic, swapping
+;; - fredkin, atomic, swapping, controlled
 ;;
 ;; Parameters:
 ;;
@@ -1548,7 +1550,7 @@
 ;;
 ;; Keywords:
 ;;
-;; - listing, list, based, construction
+;; - listing, list, based, construction, ghz
 ;;
 ;; Parameters:
 ;;
@@ -1585,7 +1587,7 @@
 ;;
 ;; Keywords:
 ;;
-;; - error, handling, correction, correctors
+;; - error, handling, correction, correctors, encoding
 ;;
 ;; Parameters:
 ;;
@@ -1859,7 +1861,7 @@
 ;;
 ;; Keywords:
 ;;
-;; - barriers, stop
+;; - barriers, stop, blocking, halt
 ;;
 ;; Parameters:
 ;;
@@ -1957,7 +1959,7 @@
 ;;
 ;; Keywords:
 ;;
-;; - toffoli, margolus.
+;; - toffoli, margolus, quick, brief, simple
 ;;
 ;; Parameters:
 ;;
@@ -1976,9 +1978,49 @@
 (define (rccx p_y1 p_y2 p_y3)
   (display (strings-append (list "rccx "
 				 (grsp-n2s p_y1)
-				 ", "
+				 (g2q-txt 10)
 				 (grsp-n2s p_y2)
-				 ", "
+				 (g2q-txt 10)
 				 (grsp-n2s p_y3)
 				 (g2q-txt 2))
-			   9)))
+			   0)))
+
+
+
+;; rc3x - Gate rc3x.
+;;
+;; Keywords:
+;;
+;; - multiple
+;;
+;; Parameters:
+;;
+;; - p_r0: string, quantum register name 0.
+;; - p_y0: qubit 0.
+;; - p_r1: string, quantum register name 1.
+;; - p_y1: qubit 1.
+;; - p_r2: string, quantum register name 2.
+;; - p_y2: qubit 2.
+;; - p_r3: string, quantum register name 3.
+;; - p_y3: qubit 3.
+;;
+;; Notes:
+;;
+;; - Added 2022.
+;;
+;; Sources:
+;;
+;; - [17].
+;;
+(define (rc3x p_r0 p_y0 p_r1 p_y1 p_r2 p_y2 p_r3 p_y3)
+  (display (strings-append (list "rc3x "
+				 (qbgna p_r0 p_y0)
+				 (g2q-txt 10)				 
+				 (qbgna p_r1 p_y1)
+				 (g2q-txt 10)
+				 (qbgna p_r2 p_y2)
+				 (g2q-txt 10)
+				 (qbgna p_r3 p_y3)
+				 (g2q-txt 2))
+			   0)))
+  
